@@ -178,6 +178,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Numerical Quadrature and Differentiation
   </a>
@@ -384,7 +389,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="bisection-method">
 <span id="section2-2"></span><h1>2.2 Bisection method<a class="headerlink" href="#bisection-method" title="Permalink to this headline">#</a></h1>
-<p>Let’s recall the Intermediate Value Theorem (IVT), Theorem <a class="reference internal" href="bookchapter1-1.html#chap1_thm6">Theorem 4</a>: If a continuous
+<p>Let’s recall the Intermediate Value Theorem (IVT), <a class="reference internal" href="bookchapter1-1.html#chap1_thm6">Theorem 4</a>: If a continuous
 function <span class="math notranslate nohighlight">\(f\)</span> defined on <span class="math notranslate nohighlight">\([a,b]\)</span> satisfies <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0,\)</span> then
 there exists <span class="math notranslate nohighlight">\(p\in[a,b]\)</span> such that <span class="math notranslate nohighlight">\(f(p)=0.\)</span></p>
 <p>Here is the idea behind the method. At each iteration, divide the
@@ -535,7 +540,7 @@ b_{n}-a_{n}=\frac{1}{2}(b_{n-1}-a_{n-1})=\frac{1}{2^{2}}(b_{n-2}-a_{n-2})=...=\f
 </div>
 <p><strong>Finding the number of iterations to obtain a specified accuracy:</strong>  Can we find <span class="math notranslate nohighlight">\(n\)</span> that will ensure <span class="math notranslate nohighlight">\(|p_{n}-p|\leq10^{-L}\)</span>
 for some given <span class="math notranslate nohighlight">\(L\)</span>?</p>
-<p>We have, from the proof of the previous theorem (see <a class="reference internal" href="#chap2_thm28">Theorem 6</a>) : <span class="math notranslate nohighlight">\(|p_{n}-p|\leq \frac{1}{2^{n}}(b-a)\)</span>.
+<p>We have, from the proof of the previous theorem (see <a class="reference internal" href="#equation-bisection-bound">(5)</a>) : <span class="math notranslate nohighlight">\(|p_{n}-p|\leq \frac{1}{2^{n}}(b-a)\)</span>.
 Therefore, we can make <span class="math notranslate nohighlight">\(|p_{n}-p|\leq10^{-L}\)</span>, by choosing <span class="math notranslate nohighlight">\(n\)</span> large enough so that the upper bound <span class="math notranslate nohighlight">\(\frac{1}{2^{n}}(b-a)\)</span> is less than <span class="math notranslate nohighlight">\(10^{-L}:\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}

@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="bookchapter2-7.html" />
+    <link rel="next" title="2.7 High-order fixed-point iteration" href="bookchapter2-7.html" />
     <link rel="prev" title="2.5 Muller’s method" href="bookchapter2-5.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -175,6 +175,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
   </a>
  </li>
  <li class="toctree-l1">
@@ -424,8 +429,8 @@ Then</p>
 <section class="remark-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(g\)</span> be a differentiable function
 on <span class="math notranslate nohighlight">\([a,b]\)</span> such that <span class="math notranslate nohighlight">\(|g'(x)|\leq k\)</span> for all <span class="math notranslate nohighlight">\(x\in(a,b)\)</span> for some
-positive constant <span class="math notranslate nohighlight">\(k&lt;1\)</span>. Then the hypothesis of part 2 of Theorem
-\ref{thm:existence fixedpt} is satisfied with <span class="math notranslate nohighlight">\(\lambda=k.\)</span> Indeed,
+positive constant <span class="math notranslate nohighlight">\(k&lt;1\)</span>. Then the hypothesis of part 2 of
+<a class="reference internal" href="#chap2_thm38">Theorem 9</a> is satisfied with <span class="math notranslate nohighlight">\(\lambda=k.\)</span> Indeed,
 from the mean value theorem</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -743,17 +748,17 @@ convergence.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_26812</span><span class="o">/</span><span class="mf">3645725987.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_5620</span><span class="o">/</span><span class="mf">3645725987.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_26812/689667504.py</span> in <span class="ni">fixedpt</span><span class="nt">(g, pzero, eps, N)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_5620/689667504.py</span> in <span class="ni">fixedpt</span><span class="nt">(g, pzero, eps, N)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">while</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">6</span>         <span class="n">pone</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">pzero</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">pone</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_26812/3645725987.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_5620/3645725987.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 
 <span class="ne">OverflowError</span>: (34, &#39;Result too large&#39;)
@@ -855,7 +860,7 @@ supporting linear convergence.</p>
     <a class='right-next' id="next-link" href="bookchapter2-7.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">2.7 High-order fixed-point iteration</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
