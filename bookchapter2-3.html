@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2.3 Newton’s method &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.4 Secant method" href="bookchapter2-4.html" />
+    <link rel="prev" title="2.2 Bisection method" href="bookchapter2-2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter2-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter2-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-newton-s-method">
+   Python code for Newton’s method
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2.3 Newton’s method</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-newton-s-method">
+   Python code for Newton’s method
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="newton-s-method">
+<h1>2.3 Newton’s method<a class="headerlink" href="#newton-s-method" title="Permalink to this headline">#</a></h1>
+<p>Suppose <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> i.e., <span class="math notranslate nohighlight">\(f,f',f''\)</span> are continuous on <span class="math notranslate nohighlight">\([a,b].\)</span>
+Let <span class="math notranslate nohighlight">\(p_{0}\)</span> be a “good” approximation to <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(f'(p_{0})\neq0\)</span>
+and <span class="math notranslate nohighlight">\(|p-p_{0}|\)</span> is “small”. First Taylor polynomial for <span class="math notranslate nohighlight">\(f\)</span>
+at <span class="math notranslate nohighlight">\(p_{0}\)</span> with the remainder term is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x)=f(p_{0})+(x-p_{0})f'(p_{0})+\frac{(x-p_{0})^{2}}{2!}f''(\xi(x))
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi(x)\)</span> is a number between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p_{0}.\)</span> Substitute
+<span class="math notranslate nohighlight">\(x=p\)</span> and note <span class="math notranslate nohighlight">\(f(p)=0\)</span> to get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+0=f(p_{0})+(p-p_{0})f'(p_{0})+\frac{(p-p_{0})^{2}}{2!}f''(\xi(p))
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi(p)\)</span> is a number between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p_{0}.\)</span> Rearrange the
+equation to get</p>
+<div class="math notranslate nohighlight" id="equation-newton-s-iteration-w-error-part-1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-newton-s-iteration-w-error-part-1" title="Permalink to this equation">#</a></span>\[p=p_{0}-\frac{f(p_{0})}{f'(p_{0})}-\frac{(p-p_{0})^{2}}{2}\frac{f''(\xi(p))}{f'(p_{0})}.\label{eq:Newton's iteration w error part 1}\]</div>
+<p>If <span class="math notranslate nohighlight">\(|p-p_{0}|\)</span> is “small” then <span class="math notranslate nohighlight">\((p-p_{0})^{2}\)</span> is even smaller,
+and the error term can be dropped to obtain the following approximation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p\approx p_{0}-\frac{f(p_{0})}{f'(p_{0})}.
+\end{equation*}\]</div>
+<p>The idea in Newton’s method is to set the next iterate, <span class="math notranslate nohighlight">\(p_{1}\)</span>,
+to this approximation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{1}=p_{0}-\frac{f(p_{0})}{f'(p_{0})}.
+\end{equation*}\]</div>
+<p>Equation <a class="reference internal" href="#equation-newton-s-iteration-w-error-part-1">(6)</a> can be written as</p>
+<div class="math notranslate nohighlight" id="equation-newton-s-iteration-w-error">
+<span class="eqno">(7)<a class="headerlink" href="#equation-newton-s-iteration-w-error" title="Permalink to this equation">#</a></span>\[p=p_{1}-\frac{(p-p_{0})^{2}}{2}\frac{f''(\xi(p))}{f'(p_{0})}.\]</div>
+<p><strong>Summary:</strong> Start with an initial approximation <span class="math notranslate nohighlight">\(p_{0}\)</span> to <span class="math notranslate nohighlight">\(p\)</span>
+and generate the sequence <span class="math notranslate nohighlight">\(\{p_{n}\}_{n=1}^{\infty}\)</span> by</p>
+<div class="math notranslate nohighlight" id="equation-eq-newton">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-newton" title="Permalink to this equation">#</a></span>\[p_{n}=p_{n-1}-\frac{f(p_{n-1})}{f'(p_{n-1})},n\geq 1.\]</div>
+<p>This is called Newton’s method.</p>
+<p><strong>Graphical interpretation:</strong></p>
+<p>Start with <span class="math notranslate nohighlight">\(p_{0}.\)</span> Draw the tangent line at <span class="math notranslate nohighlight">\((p_{0},f(p_{0}))\)</span>
+and approximate <span class="math notranslate nohighlight">\(p\)</span> by the intercept <span class="math notranslate nohighlight">\(p_{1}\)</span> of the line:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(p_{0})=\frac{0-f(p_{0})}{p_{1}-p_{0}}\Rightarrow p_{1}-p_{0}=-\frac{f(p_{0})}{f'(p_{0})}\Rightarrow p_{1}=p_{0}-\frac{f(p_{0})}{f'(p_{0})}.
+\end{equation*}\]</div>
+<p>Now draw the tangent at <span class="math notranslate nohighlight">\((p_{1},f(p_{1}))\)</span> and continue.</p>
+<div class="proof remark admonition" id="chap2_rem31">
+<p class="admonition-title"><span class="caption-number">Remark 4 </span></p>
+<section class="remark-content" id="proof-content">
+<ul class="simple">
+<li><p>Clearly Newton’s method will fail if <span class="math notranslate nohighlight">\(f'(p_{n})=0\)</span> for some <span class="math notranslate nohighlight">\(n\)</span>.
+Graphically this means the tangent line is parallel to the <span class="math notranslate nohighlight">\(x\)</span>-axis
+so we cannot get the <span class="math notranslate nohighlight">\(x\)</span>-intercept.</p></li>
+<li><p>Newton’s method may fail to converge if the initial guess <span class="math notranslate nohighlight">\(p_{0}\)</span>
+is not close to <span class="math notranslate nohighlight">\(p.\)</span> In <a class="reference internal" href="#newton-div"><span class="std std-numref">Figure 3</span></a>, either choice for <span class="math notranslate nohighlight">\(p_{0}\)</span> results in a sequence that oscillates between two points.</p></li>
+</ul>
+<figure class="align-default" id="newton-div">
+<a class="reference internal image-reference" href="_images/Newton_div.png"><img alt="_images/Newton_div.png" src="_images/Newton_div.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-converging behavior for Newton’s method</span><a class="headerlink" href="#newton-div" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Newton’s method requires <span class="math notranslate nohighlight">\(f'(x)\)</span> is known explicitly.</p></li>
+</ul>
+</section>
+</div><p><strong>Exercise 2.3-1</strong></p>
+<p>Sketch the graph for <span class="math notranslate nohighlight">\(f(x)=x^2-1\)</span>. What are the roots of the equation <span class="math notranslate nohighlight">\(f(x)=0\)</span>?</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(p_0=1/2\)</span> and find the first two iterations <span class="math notranslate nohighlight">\(p_1,p_2\)</span> of Newton’s method by hand. Mark the iterates on the graph of <span class="math notranslate nohighlight">\(f\)</span> you sketched. Do you think the iterates will converge to a zero of <span class="math notranslate nohighlight">\(f\)</span>?</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(p_0=0\)</span> and find <span class="math notranslate nohighlight">\(p_1\)</span>. What are your conclusions about the convergence of the iterates?</p></li>
+</ol>
+<section id="python-code-for-newton-s-method">
+<h2>Python code for Newton’s method<a class="headerlink" href="#python-code-for-newton-s-method" title="Permalink to this headline">#</a></h2>
+<p>The Python code below is based on Equation <a class="reference internal" href="#equation-eq-newton">(8)</a>. The variable <em>pin</em> in the code corresponds to <span class="math notranslate nohighlight">\(p_{n-1}\)</span>, and <span class="math notranslate nohighlight">\(p\)</span> corresponds to <span class="math notranslate nohighlight">\(p_n\)</span>. The code overwrites these variables as the iteration continues. Also notice that the code has two functions as inputs; <span class="math notranslate nohighlight">\(f\)</span> and <em>fprime</em> (the derivative <span class="math notranslate nohighlight">\(f'\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fprime</span><span class="p">,</span> <span class="n">pin</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mf">0.</span> <span class="c1"># to ensure the value of p carries out of the while loop</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pin</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span><span class="o">/</span><span class="n">fprime</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">pin</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">pin</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Method did not converge. The last iteration gives &#39;</span><span class="p">,</span> 
+          <span class="n">p</span><span class="p">,</span> <span class="s1">&#39; with function value &#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s apply Newton’s method to find the root of (f(x)=x^5+2x^3-5x-2), a function we considered before. First, we plot the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter2-3_10_0.png" src="_images/bookchapter2-3_10_0.png" />
+</div>
+</div>
+<p>The derivative is <span class="math notranslate nohighlight">\(f'=5x^4+6x^2-5\)</span>, we set <span class="math notranslate nohighlight">\(\text{pin}=1\)</span>, <span class="math notranslate nohighlight">\(\text{eps}=\epsilon=10^{-4}\)</span>, and <span class="math notranslate nohighlight">\(N=20\)</span>, in the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p is  1.3196411672093726  and the iteration number is  6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that the bisection method required 16 iterations to approximate
+the root in <span class="math notranslate nohighlight">\([0,2]\)</span> as <span class="math notranslate nohighlight">\(p=1.31967\)</span>. (However, the stopping criterion
+used in bisection and Newton’s methods are slightly different.) 1.3196 is the rightmost root in the plot. But there are other roots of
+the function. Let’s run the code with pin = 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p is  -0.43641313299799755  and the iteration number is  4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we use pin = <span class="math notranslate nohighlight">\(-2.0\)</span> which will give the leftmost root.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p is  -1.0000000001014682  and the iteration number is  7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="proof theorem admonition" id="chap2_thm32">
+<p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b]\)</span> and assume
+<span class="math notranslate nohighlight">\(f(p)=0,f'(p)\neq0\)</span> for <span class="math notranslate nohighlight">\(p\in(a,b).\)</span> If <span class="math notranslate nohighlight">\(p_{0}\)</span> is chosen sufficiently
+close to <span class="math notranslate nohighlight">\(p,\)</span> then Newton’s method generates a sequence that converges
+to <span class="math notranslate nohighlight">\(p\)</span> with</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\frac{p-p_{n+1}}{(p-p_{n})^{2}}=-\frac{f''(p)}{2f'(p)}.
+\end{equation*}\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(f'\)</span> is continuous and <span class="math notranslate nohighlight">\(f'(p)\neq0,\)</span> there exists an interval
+<span class="math notranslate nohighlight">\(I=[p-\epsilon,p+\epsilon]\)</span> on which <span class="math notranslate nohighlight">\(f'\neq0.\)</span> Let</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+M=\frac{\max_{x\in I}|f''(x)|}{2\min_{x\in I}|f'(x)|}.
+\end{equation*}\]</div>
+<p>Pick <span class="math notranslate nohighlight">\(p_{0}\)</span> from the interval <span class="math notranslate nohighlight">\(I\)</span> (which means <span class="math notranslate nohighlight">\(|p-p_{0}|\leq\epsilon\)</span>), sufficiently close to <span class="math notranslate nohighlight">\(p\)</span> so that <span class="math notranslate nohighlight">\(M|p-p_{0}|&lt;1.\)</span> From Equation <a class="reference internal" href="#equation-newton-s-iteration-w-error">(7)</a>
+we have:</p>
+<div class="math notranslate nohighlight" id="equation-newtonpf">
+<span class="eqno">(9)<a class="headerlink" href="#equation-newtonpf" title="Permalink to this equation">#</a></span>\[|p-p_{1}|=\frac{|p-p_{0}||p-p_{0}|}{2}\left|\frac{f''(\xi(p))}{f'(p_{0})}\right|&lt;|p-p_{0}||p-p_{0}|M&lt;|p-p_{0}|\leq\epsilon.\]</div>
+<p>Multiply both sides of <span class="math notranslate nohighlight">\(|p-p_{1}|&lt;|p-p_{0}|\)</span> by <span class="math notranslate nohighlight">\(M\)</span> to get <span class="math notranslate nohighlight">\(M|p-p_{1}|&lt;M|p-p_{0}|&lt;1.\)</span>
+Therefore, we have obtained: <span class="math notranslate nohighlight">\(|p-p_{1}| &lt; \epsilon\)</span> and <span class="math notranslate nohighlight">\(M|p-p_{1}|&lt;1.\)</span> Repeating the same argument used in <a class="reference internal" href="#equation-newtonpf">(9)</a> to <span class="math notranslate nohighlight">\(|p-p_2|\)</span>, we can show <span class="math notranslate nohighlight">\(|p-p_{2}|&lt;\epsilon\)</span> and
+<span class="math notranslate nohighlight">\(M|p-p_{2}|&lt;1.\)</span> Therefore by induction <span class="math notranslate nohighlight">\(|p-p_{n}|&lt;\epsilon\)</span> and
+<span class="math notranslate nohighlight">\(M|p-p_{n}|&lt;1,\)</span> for all <span class="math notranslate nohighlight">\(n.\)</span> This implies that all the iterates
+<span class="math notranslate nohighlight">\(p_{n}\)</span> are in the interval <span class="math notranslate nohighlight">\(I\)</span> so <span class="math notranslate nohighlight">\(f'(p_{n})\)</span> is never zero in
+Newton’s iteration.</p>
+<p>If we replace <span class="math notranslate nohighlight">\(p_{1}\)</span> by <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, and <span class="math notranslate nohighlight">\(p_{0}\)</span> by <span class="math notranslate nohighlight">\(p_{n}\)</span>
+in Equation (eq}<code class="docutils literal notranslate"><span class="pre">Newton's</span> <span class="pre">iteration</span> <span class="pre">w</span> <span class="pre">error</span></code>, we get</p>
+<div class="math notranslate nohighlight" id="equation-newtonpf2">
+<span class="eqno">(10)<a class="headerlink" href="#equation-newtonpf2" title="Permalink to this equation">#</a></span>\[p-p_{n+1}=-\frac{(p-p_{n})^{2}}{2}\frac{f''(\xi(p))}{f'(p_{n})}.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\xi(p)\)</span> is a number between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p_{n}.\)</span> Since <span class="math notranslate nohighlight">\(\xi(p)\)</span>
+changes recursively with <span class="math notranslate nohighlight">\(n\)</span>, let’s update our notation as: <span class="math notranslate nohighlight">\(\xi(p)=\xi_{n}.\)</span>
+Then, Equation <a class="reference internal" href="#equation-newtonpf2">(10)</a> implies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|p-p_{n+1}|\leq M|p-p_{n}|^{2}\Rightarrow M|p-p_{n+1}|\leq\left(M|p-p_{n}|\right)^{2}.
+\end{equation*}\]</div>
+<p>Similarly, <span class="math notranslate nohighlight">\(|p-p_{n}|\leq M|p-p_{n-1}|^{2}\)</span>, or <span class="math notranslate nohighlight">\(M|p-p_{n}|\leq\left(M|p-p_{n-1}|\right)^{2}\)</span>,
+and thus <span class="math notranslate nohighlight">\(M|p-p_{n+1}|\leq\left(M|p-p_{n-1}|\right)^{2^{2}}.\)</span> By
+induction, we can show</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+M|p-p_{n}|\leq\left(M|p-p_{0}|\right)^{2^{n}}\Rightarrow|p-p_{n}|\leq\frac{1}{M}\left(M|p-p_{0}|\right)^{2^{n}}.
+\end{equation*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(M|p-p_{0}|&lt;1,\)</span> <span class="math notranslate nohighlight">\(|p-p_{n}|\rightarrow0\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow\infty.\)</span>
+Therefore <span class="math notranslate nohighlight">\(\lim_{n\rightarrow\infty}p_{n}=p.\)</span> Finally,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\frac{p-p_{n+1}}{(p-p_{n})^{2}}=\lim_{n\rightarrow\infty}-\frac{1}{2}\frac{f''(\xi_{n})}{f'(p_{n})},
+\end{equation*}\]</div>
+<p>and since <span class="math notranslate nohighlight">\(p_{n}\rightarrow p,\)</span> and <span class="math notranslate nohighlight">\(\xi_{n}\)</span> is between <span class="math notranslate nohighlight">\(p_{n}\)</span>
+and <span class="math notranslate nohighlight">\(p,\)</span> <span class="math notranslate nohighlight">\(\xi_{n}\rightarrow p\)</span>, and therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\frac{p-p_{n+1}}{(p-p_{n})^{2}}=-\frac{1}{2}\frac{f''(p)}{f'(p)}
+\end{equation*}\]</div>
+<p>proving the theorem.</p>
+</div>
+<div class="proof corollary admonition" id="chap2_cor33">
+<p class="admonition-title"><span class="caption-number">Corollary 2 </span></p>
+<section class="corollary-content" id="proof-content">
+<p>Newton’s method has quadratic convergence.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Newton’s method has quadratic convergence.
+Recall that quadratic convergence means</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|p_{n+1}-p| \leq C |p_n-p|^2,
+\end{equation*}\]</div>
+<p>for some constant <span class="math notranslate nohighlight">\(C&gt;0\)</span>. Taking the absolute values of the limit established in the previous theorem, we obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\left | \frac{p-p_{n+1}}{(p-p_{n})^{2}} \right |= \lim_{n\rightarrow\infty} \frac{|p_{n+1}-p|}{|p_{n}-p|^{2}}=\left | \frac{1}{2}\frac{f''(p)}{f'(p)} \right |.
+\end{equation*}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(C'=\left | \frac{1}{2}\frac{f''(p)}{f'(p)} \right |\)</span>. From the definition of limit of a sequence, for any <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>, there exists an integer <span class="math notranslate nohighlight">\(N&gt;0\)</span> such that <span class="math notranslate nohighlight">\( \frac{|p_{n+1}-p|}{|p_{n}-p|^{2}}  &lt;C'+\epsilon\)</span> whenever <span class="math notranslate nohighlight">\(n&gt;N.\)</span> Set <span class="math notranslate nohighlight">\(C=C'+\epsilon\)</span> to obtain <span class="math notranslate nohighlight">\(|p_{n+1}-p| \leq C |p_n-p|^2\)</span> for <span class="math notranslate nohighlight">\(n&gt;N\)</span>.</p>
+</div>
+<div class="proof example admonition" id="exa34">
+<p class="admonition-title"><span class="caption-number">Example 15 </span></p>
+<section class="example-content" id="proof-content">
+<p>The Black-Scholes-Merton (BSM) formula, for which Myron Scholes and Robert Merton were awarded the Nobel prize in economics in 1997, computes the fair price of a contract known as the <strong>European call option</strong>. This contract gives its owner the right to purchase the asset the contract is written on (for example, a stock), for a specific price denoted by <span class="math notranslate nohighlight">\(K\)</span> and called the strike price (or exercise price), at a future time denoted by <span class="math notranslate nohighlight">\(T\)</span> and called the expiry. The formula gives the value of the European call option, <span class="math notranslate nohighlight">\(C\)</span>, as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+C=S\phi(\mathbb{d_1})-Ke^{-rT}\phi(\mathbb{d_2})
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the price of the asset at the present time, <span class="math notranslate nohighlight">\(r\)</span> is the risk-free interest rate, and <span class="math notranslate nohighlight">\(\phi(x)\)</span> is the distribution function of the standard normal random variable, given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\phi(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^x e^{-t^2/2}dt.
+\end{equation*}\]</div>
+<p>The constants <span class="math notranslate nohighlight">\(\mathbb{d_1},\mathbb{d_2}\)</span> are obtained from</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\mathbb{d_1}=\frac{\log(S/K)+(r+\sigma^2/2)T}{\sigma \sqrt{T}}, \thinspace \mathbb{d_2}=\mathbb{d_1}-\sigma \sqrt{T}.
+\end{equation*}\]</div>
+<p>All the constants in the BSM formula can be observed, except for <span class="math notranslate nohighlight">\(\sigma\)</span>, which is called the volatility of the underlying asset. It has to be estimated from empirical data in some way. We want to concentrate on the relationship between <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, and think of <span class="math notranslate nohighlight">\(C\)</span> as a function of <span class="math notranslate nohighlight">\(\sigma\)</span> only. We rewrite the BSM formula emphasizing <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+C(\textcolor{red}{\sigma})=S\phi(\textcolor{red}{\mathbb{d_1}})-Ke^{-rT}\phi(\textcolor{red}{\mathbb{d_2}})
+\end{equation*}\]</div>
+<p>It may look like the independent variable <span class="math notranslate nohighlight">\(\sigma\)</span> is missing on the right hand side of the above formula, but it is not: the constants <span class="math notranslate nohighlight">\(\mathbb{d_1},\mathbb{d_2}\)</span> both depend on <span class="math notranslate nohighlight">\(\sigma\)</span>. We can also think about <span class="math notranslate nohighlight">\(\mathbb{d_1},\mathbb{d_2}\)</span> as functions of <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>There are two questions financial engineers are interested in:</p>
+<ul class="simple">
+<li><p>Compute the option price <span class="math notranslate nohighlight">\(C\)</span> based on an estimate of <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+<li><p>Observe the price of an option <span class="math notranslate nohighlight">\(\hat{C}\)</span> traded in the market, and find <span class="math notranslate nohighlight">\(\sigma^*\)</span> for which the BSM formula gives the output <span class="math notranslate nohighlight">\(\hat{C}\)</span>, i.e, <span class="math notranslate nohighlight">\(C(\sigma^*)=\hat{C}\)</span>. The volatility <span class="math notranslate nohighlight">\(\sigma^*\)</span> obtained in this way is called the <strong>implied volatility</strong>.</p></li>
+</ul>
+<p>The second question can be answered using a root-finding method, in particular, Newton’s method. To summarize, we want to solve the equation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+C(\sigma)-\hat{C}=0
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{C}\)</span> is a given constant, and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+C(\sigma)=S\phi(\mathbb{d_1})-Ke^{-rT}\phi(\mathbb{d_2}).
+\end{equation*}\]</div>
+<p>To use Newton’s method, we need <span class="math notranslate nohighlight">\(C'(\sigma)=\frac{dC}{d\sigma}\)</span>. Since <span class="math notranslate nohighlight">\(\mathbb{d_1},\mathbb{d_2}\)</span> are functions of <span class="math notranslate nohighlight">\(\sigma\)</span>, we have</p>
+<div class="math notranslate nohighlight" id="equation-bsm-der">
+<span class="eqno">(11)<a class="headerlink" href="#equation-bsm-der" title="Permalink to this equation">#</a></span>\[\frac{dC}{d\sigma}=S\frac{d\phi(\mathbb{d_1})}{d\sigma} - K e^{-rT} \frac{d\phi(\mathbb{d_2})}{d\sigma}.\]</div>
+<p>Let’s compute the derivatives on the right hand side of <a class="reference internal" href="#equation-bsm-der">(11)</a>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\phi(\mathbb{d_1})}{d\sigma}=\frac{d}{d\sigma} \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\mathbb{d_1}} e^{-t^2/2} dt \right)=\frac{1}{\sqrt{2\pi}} \left( \frac{d}{d\sigma}\underbrace{ \int_{-\infty}^{\mathbb{d_1}} e^{-t^2/2} dt}_{u} \right).
+\end{equation*}\]</div>
+<p>We will use the chain rule to compute the derivative <span class="math notranslate nohighlight">\(\frac{d}{d\sigma}\underbrace{ \int_{-\infty}^{\mathbb{d_1}} e^{-t^2/2} dt}_{u}=\frac{du}{d\sigma}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{du}{d\sigma}=\frac{du}{d\mathbb{d_1}}\frac{d\mathbb{d_1}}{d\sigma}.
+\end{equation*}\]</div>
+<p>The first derivative follows from the Fundamental Theorem of Calculus</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{du}{d\mathbb{d_1}}=e^{-\mathbb{d_1}^2/2},
+\end{equation*}\]</div>
+<p>and the second derivative is an application of the quotient rule of differentiation</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\mathbb{d_1}}{d\sigma}=\frac{d}{d\sigma}\left(\frac{\log(S/K)+(r+\sigma^2/2)T}{\sigma \sqrt{T}}\right)=\sqrt{T}-\frac{\log(S/K)+(r+\sigma^2/2)T}{\sigma^2 \sqrt{T}}.
+\end{equation*}\]</div>
+<p>Putting the pieces together, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\phi(\mathbb{d_1})}{d\sigma}=\frac{e^{-\mathbb{d_1}^2/2}}{\sqrt{2\pi}}  \left( \sqrt{T}-\frac{\log(S/K)+(r+\sigma^2/2)T}{\sigma^2 \sqrt{T}} \right).
+\end{equation*}\]</div>
+<p>Going back to the second derivative we need to compute in Equation <a class="reference internal" href="#equation-bsm-der">(11)</a>, we have:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\phi(\mathbb{d_2})}{d\sigma}=\frac{1}{\sqrt{2\pi}} \left( \frac{d}{d\sigma} \int_{-\infty}^{\mathbb{d_2}} e^{-t^2/2} dt \right).
+\end{equation*}\]</div>
+<p>Using the chain rule and the Fundamental Theorem of Calculus we obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\phi(\mathbb{d_2})}{d\sigma}=\frac{e^{-\mathbb{d_2}^2/2}}{\sqrt{2\pi}}\frac{d\mathbb{d_2}}{d\sigma}.
+\end{equation*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\mathbb{d_2}\)</span> is defined as <span class="math notranslate nohighlight">\(\mathbb{d_2}=\mathbb{d_1}-\sigma \sqrt{T}\)</span>, we can express <span class="math notranslate nohighlight">\(d\mathbb{d_2}/d\sigma\)</span> in terms of <span class="math notranslate nohighlight">\(d\mathbb{d_1}/d\sigma\)</span> as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d\mathbb{d_2}}{d\sigma}= \frac{d\mathbb{d_1}}{d\sigma}-\sqrt{T}.
+\end{equation*}\]</div>
+<p>Finally, we have the derivative we need:</p>
+<div class="math notranslate nohighlight" id="equation-call-deriv">
+<span class="eqno">(12)<a class="headerlink" href="#equation-call-deriv" title="Permalink to this equation">#</a></span>\[\frac{dC}{d\sigma}=\frac{Se^{-\frac{\mathbb{d_1}^2}{2}}}{\sqrt{2\pi}}  \left( \sqrt{T}-\frac{\log(\frac{S}{K})+(r+\frac{\sigma^2}{2})T}{\sigma^2 \sqrt{T}} \right)+ K \frac{e^{-(rT+\frac{\mathbb{d_2}^2}{2})} }{\sqrt{2\pi}} \left( \frac{\log(\frac{S}{K})+(r+\frac{\sigma^2}{2})T}{\sigma^2 \sqrt{T}} \right)\]</div>
+</section>
+</div><p>We are ready to apply Newton’s method to solve the equation <span class="math notranslate nohighlight">\(C(\sigma)-\hat{C}=0\)</span>. Now let’s find some data.</p>
+<p>The General Electric Company (GE) stock is $7.01 on Dec 8, 2018, and a European call option on this stock, expiring on Dec 14, 2018, is priced at $0.10. The option has strike price <span class="math notranslate nohighlight">\(K=\$7.5\)</span>. The risk-free interest rate is 2.25%. The expiry <span class="math notranslate nohighlight">\(T\)</span> is measured in years, and since there are 252 trading days in a year, <span class="math notranslate nohighlight">\(T=6/252\)</span>. We put this information in Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="mf">7.01</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mf">7.5</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0225</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">6</span><span class="o">/</span><span class="mi">252</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have not discussed how to compute the distribution function of the standard normal random variable <span class="math notranslate nohighlight">\(\phi(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^x e^{-t^2/2}dt\)</span>. In <a class="reference internal" href="bookchapter4-0.html#ch-integration"><span class="std std-ref">Chapter 4 Numerical Quadrature and Differentiation</span></a>, we will discuss how to compute integrals numerically, but for this example, we will use the built-in function Python has for <span class="math notranslate nohighlight">\(\phi(x)\)</span>. It is in a subpackage of SciPy called <strong>stats</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following defines <strong>stdnormal</strong> as the standard normal random variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stdnormal</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The member function <strong>cdf</strong>(x)of <strong>stdnormal</strong> computes the standard normal distribution function at <span class="math notranslate nohighlight">\(x\)</span>. We write a function <strong>phi</strong>(x) based on this member function, matching our notation <span class="math notranslate nohighlight">\(\phi(x)\)</span> for the distribution function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stdnormal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we define <span class="math notranslate nohighlight">\(C(\sigma)\)</span> and <span class="math notranslate nohighlight">\(C'(\sigma)\)</span>. In the Python code, we replace <span class="math notranslate nohighlight">\(\sigma\)</span> by <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span><span class="o">/</span><span class="n">K</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span><span class="o">*</span><span class="n">phi</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <strong>cprime</strong>(x) is based on equation <a class="reference internal" href="#equation-call-deriv">(12)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cprime</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span><span class="o">/</span><span class="n">K</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span><span class="o">/</span><span class="n">K</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">d1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">-</span><span class="n">A</span><span class="p">)</span> \
+    <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">+</span><span class="n">d2</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then load the <strong>newton</strong> function and run it to find the implied volatility which turns out to be 62%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">c</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">cprime</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p is  0.6231138483741047  and the iteration number is  3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter2-2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2.2 Bisection method</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter2-4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.4 Secant method</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

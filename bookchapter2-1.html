@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Preface &#8212; First Semester in Numerical Analysis with Python</title>
+    <title>2.1 Error analysis for iterative methods &#8212; First Semester in Numerical Analysis with Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 1 Introduction" href="bookchapter1-0.html" />
-    <link rel="prev" title="Welcome to First Semester in Numerical Analysis with Python" href="bookintro.html" />
+    <link rel="next" title="2.2 Bisection method" href="bookchapter2-2.html" />
+    <link rel="prev" title="Chapter 2 Solutions of equations: Root-finding" href="bookchapter2-0.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,8 +117,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
    Preface
   </a>
  </li>
@@ -147,8 +147,8 @@ const thebe_selector_output = ".output, .cell_output"
    Chapter 2 Solutions of equations: Root-finding
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-1.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    2.1 Error analysis for iterative methods
   </a>
  </li>
@@ -236,7 +236,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookpreface.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter2-1.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -279,7 +279,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/bookpreface.ipynb"
+        <a href="_sources/bookchapter2-1.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -328,7 +328,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Preface</h1>
+                <h1>2.1 Error analysis for iterative methods</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -340,29 +340,51 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="preface">
-<h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">#</a></h1>
-<p>The book is based on “First semester in Numerical Analysis with Julia”, written by Giray Okten <a class="footnote-reference brackets" href="#id3" id="id1">1</a>.  The contents of the original book are retained, while all the algorithms are implemented in Python (Version 3.9.7). Python is an open source (under OSI), interpreted, general-purpose programming language that has a large number of users around the world. Python is ranked the third in August 2020 by the TIOBE programming community index <a class="footnote-reference brackets" href="#id4" id="id2">2</a>, a measure of popularity of programming languages, and is the top-ranked interpreted language. We hope this book will better serve readers who are interested in a first course in Numerical Analysis, but are more familiar with Python for the implementation of the algorithms.</p>
-<p>The first chapter of the book has a self-contained tutorial for Python, including how to set up the computer environment. Anaconda, the open-source individual edition, is recommended for an easy installation of Python and effortless management of Python packages, and the Jupyter environment, a web-based interactive development environment for Python as well as many other programming languages, was used throughout the book and is recommended to the readers for easy code developement, graph visualization and reproducibility.</p>
-<p>The book was also inspired by a series of Open Educational Resources workshops at University of Colorado Denver and supported partially by the professional development funding thereof. Yaning Liu also thanks his students in his Numerical Analysis classes, who enjoyed using Python to implement the algorithms and motivated him to write a Numerical Analysis textbook with codes in Python.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="error-analysis-for-iterative-methods">
+<h1>2.1 Error analysis for iterative methods<a class="headerlink" href="#error-analysis-for-iterative-methods" title="Permalink to this headline">#</a></h1>
+<p>Assume we have an iterative method <span class="math notranslate nohighlight">\(\{p_{n}\}\)</span> that converges to the root <span class="math notranslate nohighlight">\(p\)</span> of some function. How can we assess the rate of convergence?</p>
+<div class="proof definition admonition" id="chap2_def24">
+<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(\{p_{n}\}\)</span> converges to <span class="math notranslate nohighlight">\(p\)</span>. If there are constants <span class="math notranslate nohighlight">\(C&gt;0\)</span> and <span class="math notranslate nohighlight">\(\alpha &gt;1\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-convorder">
+<span class="eqno">(3)<a class="headerlink" href="#equation-convorder" title="Permalink to this equation">#</a></span>\[|p_{n+1}-p| \leq C |p_{n}-p|^{\alpha},\]</div>
+<p>for <span class="math notranslate nohighlight">\(n\geq 1\)</span>, then we say <span class="math notranslate nohighlight">\(\{p_{n}\}\)</span> converges to <span class="math notranslate nohighlight">\(p\)</span> with order <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</section>
+</div><p><strong>Special cases:</strong></p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\alpha=1\)</span> and <span class="math notranslate nohighlight">\(C&lt;1\)</span>, we say the convergence is linear, and the rate of convergence is <span class="math notranslate nohighlight">\(C\)</span>. In this case, using induction, we can show
+Suppose <span class="math notranslate nohighlight">\(\{p_{n}\}\)</span> converges to <span class="math notranslate nohighlight">\(p\)</span>. If there are constants <span class="math notranslate nohighlight">\(C&gt;0\)</span> and <span class="math notranslate nohighlight">\(\alpha &gt;1\)</span> such that</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-linconv">
+<span class="eqno">(4)<a class="headerlink" href="#equation-linconv" title="Permalink to this equation">#</a></span>\[|p_{n+1}-p| \leq C^n |p_{1}-p|.\]</div>
+<p>There are some methods for which Equation <a class="reference internal" href="#equation-linconv">(4)</a> holds, but Equation <a class="reference internal" href="#equation-convorder">(3)</a> does not hold for any <span class="math notranslate nohighlight">\(C&lt;1\)</span>. We still call these methods to be of linear convergence. An example is the bisection method.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\alpha&gt;1\)</span>, we say the convergence is superlinear. In particular, the case <span class="math notranslate nohighlight">\(\alpha=2\)</span> is called quadratic convergence.</p></li>
+</ul>
+<div class="proof example admonition" id="chap2_exa25">
+<p class="admonition-title"><span class="caption-number">Example 12 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider the sequences defined by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{n+1}&amp;=0.7 p_n \text{  and  } p_1=1\\
+p_{n+1}&amp;=0.7 p^2_n \text{  and  } p_1=1.
+\end{align*}\]</div>
+<p>The first sequence converges to 0 linearly, and the second quadratically. Here are a few iterations of the sequences:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\begin{array}[l l l]
-\text{Yaning \, Liu}  &amp; &amp;  \text{Giray Okten}\\
-\text{August 2020}  &amp; &amp; \text{August 2020}\\
-\text{Denver, Colorado} &amp; &amp; \text{Tallahassee, Florida}
+\begin{array}{ccc}
+n &amp; \text{Linear} &amp; \text{Quadratic} \\
+\hline
+1 &amp; 0.7 &amp; 0.7\\
+4 &amp; 0.24 &amp; 4.75\times10^{-3}\\
+8 &amp; 5.76\times10^{-2} &amp; 3.16\times10^{-40}\\
 \end{array}
 \end{equation*}\]</div>
-<hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://open.umn.edu/opentextbooks/textbooks/first-semester-in-numerical-analysis-with-julia">https://open.umn.edu/opentextbooks/textbooks/first-semester-in-numerical-analysis-with-julia</a></p>
-</dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>(<a class="reference external" href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a>)</p>
-</dd>
-</dl>
+<p>Observe how fast quadratic convergence is compared to linear convergence.</p>
 </section>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
@@ -391,17 +413,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="bookintro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="bookchapter2-0.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to First Semester in Numerical Analysis with Python</p>
+            <p class="prev-next-title">Chapter 2 Solutions of equations: Root-finding</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="bookchapter1-0.html" title="next page">
+    <a class='right-next' id="next-link" href="bookchapter2-2.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 1 Introduction</p>
+        <p class="prev-next-title">2.2 Bisection method</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

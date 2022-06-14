@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2.4 Secant method &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Muller’s method" href="bookchapter2-5.html" />
+    <link rel="prev" title="2.3 Newton’s method" href="bookchapter2-3.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter2-4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter2-4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-the-secant-method">
+   Python code for the secant method
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2.4 Secant method</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-the-secant-method">
+   Python code for the secant method
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="secant-method">
+<h1>2.4 Secant method<a class="headerlink" href="#secant-method" title="Permalink to this headline">#</a></h1>
+<p>One drawback of Newton’s method is that we need to know <span class="math notranslate nohighlight">\(f'(x)\)</span> explicitly
+to evaluate <span class="math notranslate nohighlight">\(f'(p_{n-1})\)</span> in</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}=p_{n-1}-\frac{f(p_{n-1})}{f'(p_{n-1})},n\geq1.
+\end{equation*}\]</div>
+<p>If we do not know <span class="math notranslate nohighlight">\(f'(x)\)</span> explicitly, or if its computation is expensive, we might approximate <span class="math notranslate nohighlight">\(f'(p_{n-1})\)</span> by the finite difference</p>
+<div class="math notranslate nohighlight" id="equation-finite-diff">
+<span class="eqno">(13)<a class="headerlink" href="#equation-finite-diff" title="Permalink to this equation">#</a></span>\[\frac{f(p_{n-1}+h)-f(p_{n-1})}{h}\]</div>
+<p>for some small <span class="math notranslate nohighlight">\(h.\)</span> We then need to compute two values of <span class="math notranslate nohighlight">\(f\)</span> at
+each iteration to approximate <span class="math notranslate nohighlight">\(f'\)</span>. Determining <span class="math notranslate nohighlight">\(h\)</span> in this formula brings some difficulty, but there is a way to get around this. We will use the iterates themselves to rewrite the finite
+difference <a class="reference internal" href="#equation-finite-diff">(13)</a> as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{f(p_{n-1})-f(p_{n-2})}{p_{n-1}-p_{n-2}}.
+\end{equation*}\]</div>
+<p>Then, the recursion for <span class="math notranslate nohighlight">\(p_n\)</span> simplifies as</p>
+<div class="math notranslate nohighlight" id="equation-secant">
+<span class="eqno">(14)<a class="headerlink" href="#equation-secant" title="Permalink to this equation">#</a></span>\[p_{n}=p_{n-1}-\frac{f(p_{n-1})}{\frac{f(p_{n-1})-f(p_{n-2})}{p_{n-1}-p_{n-2}}}=p_{n-1}-f(p_{n-1})\frac{p_{n-1}-p_{n-2}}{f(p_{n-1})-f(p_{n-2})},n\geq2.\]</div>
+<p>This is called the secant method. Observe that</p>
+<ul class="simple">
+<li><p>No additional function evaluations are needed,</p></li>
+<li><p>The recursion requires two initial guesses <span class="math notranslate nohighlight">\(p_{0},p_{1}.\)</span></p></li>
+</ul>
+<p><strong>Geometric interpretation</strong>: The slope of the secant line through the points <span class="math notranslate nohighlight">\((p_{n-1},f(p_{n-1}))\)</span> and <span class="math notranslate nohighlight">\((p_{n-2},f(p_{n-2}))\)</span>  is <span class="math notranslate nohighlight">\(\frac{f(p_{n-1})-f(p_{n-2})}{p_{n-1}-p_{n-2}}\)</span>. The <span class="math notranslate nohighlight">\(x\)</span>-intercept
+of the secant line, which is set to <span class="math notranslate nohighlight">\(p_{n}\)</span>, is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{0-f(p_{n-1})}{p_{n}-p_{n-1}}=\frac{f(p_{n-1})-f(p_{n-2})}{p_{n-1}-p_{n-2}}\Rightarrow p_{n}=p_{n-1}-f(p_{n-1})\frac{p_{n-1}-p_{n-2}}{f(p_{n-1})-f(p_{n-2})}
+\end{equation*}\]</div>
+<p>which is the recursion of the secant method.</p>
+<p>The following theorem shows that if the initial guesses are “good”, the secant method has superlinear convergence. A proof can be found in <span id="id1">Atkinson [<a class="reference internal" href="#id8" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2 edition, 1989.">1989</a>]</span>.</p>
+<div class="proof theorem admonition" id="chap2_thm35">
+<p class="admonition-title"><span class="caption-number">Theorem 8 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b]\)</span> and assume <span class="math notranslate nohighlight">\(f(p)=0,f'(p)\neq0,\)</span> for <span class="math notranslate nohighlight">\(p\in(a,b).\)</span>
+If the initial guesses <span class="math notranslate nohighlight">\(p_{0},p_{1}\)</span> are sufficiently close to <span class="math notranslate nohighlight">\(p,\)</span>
+then the iterates of the secant method converge to <span class="math notranslate nohighlight">\(p\)</span> with</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\frac{|p-p_{n+1}|}{|p-p_{n}|^{r_{0}}}=\left|\frac{f''(p)}{2f'(p)}\right|^{r_{1}}
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_{0}=\frac{\sqrt{5}+1}{2}\approx1.62,r_{1}=\frac{\sqrt{5}-1}{2}\approx0.62\)</span>.</p>
+</section>
+</div><section id="python-code-for-the-secant-method">
+<h2>Python code for the secant method<a class="headerlink" href="#python-code-for-the-secant-method" title="Permalink to this headline">#</a></h2>
+<p>The following code is based on Equation <a class="reference internal" href="#equation-secant">(14)</a>; the recursion for the secant method. The initial guesses are called <em>pzero</em> and <em>pone</em> in the code. The same stopping criterion as in Newton’s method is used. Notice that once a new iterate <span class="math notranslate nohighlight">\(p\)</span> is computed, <em>pone</em> is updated as <span class="math notranslate nohighlight">\(p\)</span>, and <em>pzero</em> is updated as <em>pone</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">pzero</span><span class="p">,</span> <span class="n">pone</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mf">0.</span> <span class="c1"># to ensre the value of p carries out of the while loop</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pone</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">pone</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">pone</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">pzero</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">pone</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">pzero</span> <span class="o">=</span> <span class="n">pone</span>
+        <span class="n">pone</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Method did not converge. The last iteration gives &#39;</span><span class="p">,</span> 
+          <span class="n">p</span><span class="p">,</span> <span class="s1">&#39; with function value &#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s find the root of <span class="math notranslate nohighlight">\(f(x)=\cos x - x\)</span> using the secant method, using 0.5 and 1 as the initial guesses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">secant</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p is  0.739085132900112  and the iteration number is  4
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.4-1</strong></p>
+<p>Use the Python codes for the secant and Newton’s methods to find solutions
+for the equation <span class="math notranslate nohighlight">\(\sin x-e^{-x}=0\)</span> on <span class="math notranslate nohighlight">\(0\leq x\leq1\)</span>. Set tolerance
+to <span class="math notranslate nohighlight">\(10^{-4}\)</span>, and take <span class="math notranslate nohighlight">\(p_{0}=0\)</span> in Newton, and <span class="math notranslate nohighlight">\(p_{0}=0,p_{1}=1\)</span>
+in secant method. Do a visual inspection of the estimates and comment
+on the convergence rates of the methods.</p>
+<p><strong>Exercise 2.4-2</strong></p>
+<p>a. The function <span class="math notranslate nohighlight">\(y=\log x\)</span> has a root at <span class="math notranslate nohighlight">\(x=1\)</span>. Run the Python code for Newton’s method with <span class="math notranslate nohighlight">\(p_0=2, \epsilon=10^{-4},N=20\)</span>, and then try <span class="math notranslate nohighlight">\(p_0=3\)</span>. Does Newton’s method find the root in each case? If Python gives an error message, explain what the error is.</p>
+<p>b. One can combine the bisection method and Newton’s method to develop a hybrid method that converges for a wider range of starting values <span class="math notranslate nohighlight">\(p_0\)</span>, and has better convergence rate than the bisection method.</p>
+<p>Write a Python code for a bisection-Newton hybrid method, as described below. (You can use the Python codes for the bisection and Newton’s methods from the lecture notes.) Your code will input <span class="math notranslate nohighlight">\(f,f',a,b,\epsilon, N\)</span> where <span class="math notranslate nohighlight">\(f,f'\)</span> are the function and its derivative, <span class="math notranslate nohighlight">\((a,b)\)</span> is an interval that contains the root (i.e., <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>), and <span class="math notranslate nohighlight">\(\epsilon, N\)</span> are the tolerance and the maximum number of iterations. The code will use the same stopping criterion used in Newton’s method.</p>
+<p>The method will start with computing the midpoint of <span class="math notranslate nohighlight">\((a,b)\)</span>, call it <span class="math notranslate nohighlight">\(p_0\)</span>, and use Newton’s method with initial guess <span class="math notranslate nohighlight">\(p_0\)</span> to obtain <span class="math notranslate nohighlight">\(p_1\)</span>. It will then check whether <span class="math notranslate nohighlight">\(p_1\in (a,b)\)</span>. If <span class="math notranslate nohighlight">\(p_1\in (a,b)\)</span>, then the code will continue using Newton’s method to compute the next iteration <span class="math notranslate nohighlight">\(p_2\)</span>.  If <span class="math notranslate nohighlight">\(p_1\notin (a,b)\)</span>, then we will not accept <span class="math notranslate nohighlight">\(p_1\)</span> as the next iteration: instead the code will switch to the bisection method, determine which subinterval among <span class="math notranslate nohighlight">\((a,p_0),(p_0,b)\)</span> contains the root, updates the interval <span class="math notranslate nohighlight">\((a,b)\)</span> as the subinterval that contains the root, and sets <span class="math notranslate nohighlight">\(p_1\)</span> to the midpoint of this interval. Once <span class="math notranslate nohighlight">\(p_1\)</span> is obtained, the code will check if the stopping criterion is satisfied.  If it is satisfied, the code will return <span class="math notranslate nohighlight">\(p_1\)</span> and the iteration number, and terminate. If it is not satisfied, the code will use Newton’s method, with <span class="math notranslate nohighlight">\(p_1\)</span> as the initial guess, to compute <span class="math notranslate nohighlight">\(p_2\)</span>. Then it will check whether <span class="math notranslate nohighlight">\(p_2\in (a,b)\)</span>, and continue in this way. If the code does not terminate after <span class="math notranslate nohighlight">\(N\)</span> iterations, output an error message similar to Newton’s method.</p>
+<p>Apply the hybrid method to:</p>
+<ul class="simple">
+<li><p>a polynomial with a known root, and check if the method finds the correct root;</p></li>
+<li><p><span class="math notranslate nohighlight">\(y=\log x\)</span> with <span class="math notranslate nohighlight">\((a,b)=(0,6)\)</span>, for which Newton’s method failed in part (a).</p></li>
+</ul>
+<p>c. Do you think in general the hybrid method converges to the root, provided the initial interval <span class="math notranslate nohighlight">\((a,b)\)</span> contains the root, for any starting value <span class="math notranslate nohighlight">\(p_0\)</span>? Explain.</p>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
+<dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2 edition, 1989.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter2-3.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2.3 Newton’s method</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter2-5.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Muller’s method</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

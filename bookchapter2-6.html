@@ -1,0 +1,887 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2.6 Fixed-point iteration &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="bookchapter2-7.html" />
+    <link rel="prev" title="2.5 Muller’s method" href="bookchapter2-5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter2-6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter2-6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-fixed-point-iteration">
+   Python code for fixed-point iteration
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2.6 Fixed-point iteration</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-fixed-point-iteration">
+   Python code for fixed-point iteration
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="fixed-point-iteration">
+<h1>2.6 Fixed-point iteration<a class="headerlink" href="#fixed-point-iteration" title="Permalink to this headline">#</a></h1>
+<p>Many root-finding methods are based on the so-called fixed-point iteration, a method we discuss in this section.</p>
+<div class="proof definition admonition" id="chap2_def37">
+<p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A number <span class="math notranslate nohighlight">\(p\)</span> is a fixed-point for a function <span class="math notranslate nohighlight">\(g(x)\)</span> if <span class="math notranslate nohighlight">\(g(p)=p.\)</span></p>
+</section>
+</div><p>We have two problems that are related to each other:</p>
+<ul class="simple">
+<li><p><strong>Fixed-point problem</strong>: Find <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(g(p)=p.\)</span></p></li>
+<li><p><strong>Root-finding problem</strong>: Find <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(f(p)=0.\)</span></p></li>
+</ul>
+<p>We can formulate a root-finding problem as a fixed-point problem, and vice versa. For example, assume we want to solve the root finding problem, <span class="math notranslate nohighlight">\(f(p)=0.\)</span> Define <span class="math notranslate nohighlight">\(g(x)=x-f(x),\)</span> and observe that if <span class="math notranslate nohighlight">\(p\)</span> is a fixed-point of <span class="math notranslate nohighlight">\(g(x)\)</span>, that is, <span class="math notranslate nohighlight">\(g(p)=p-f(p)=p,\)</span> then <span class="math notranslate nohighlight">\(p\)</span> is a root of <span class="math notranslate nohighlight">\(f(x)\)</span>. Here the function <span class="math notranslate nohighlight">\(g\)</span> is not unique: there are many ways one can represent the root-finding problem <span class="math notranslate nohighlight">\(f(p)=0\)</span> as a fixed-point problem, and as we will learn later, not all will be useful to us in developing fixed-point iteration algorithms.</p>
+<p>The next theorem answers the following questions: When does a function <span class="math notranslate nohighlight">\(g\)</span> have a fixed-point? If it has a fixed-point, is it unique?</p>
+<div class="proof theorem admonition" id="chap2_thm38">
+<p class="admonition-title"><span class="caption-number">Theorem 9 </span></p>
+<section class="theorem-content" id="proof-content">
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(g\)</span> is a continuous function on <span class="math notranslate nohighlight">\([a,b]\)</span> and <span class="math notranslate nohighlight">\(g(x)\in[a,b]\)</span> for all <span class="math notranslate nohighlight">\(x\in[a,b]\)</span>, then <span class="math notranslate nohighlight">\(g\)</span> has at least one fixed-point in <span class="math notranslate nohighlight">\([a,b]\)</span>.</p></li>
+<li><p>If, in addition, <span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq\lambda|x-y|\)</span> for all <span class="math notranslate nohighlight">\(x,y\in[a,b]\)</span>
+where <span class="math notranslate nohighlight">\(0&lt;\lambda&lt;1,\)</span> then the fixed-point is unique.</p></li>
+</ol>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider <span class="math notranslate nohighlight">\(f(x)=g(x)-x\)</span>. Assume <span class="math notranslate nohighlight">\(g(a)\neq a\)</span> and <span class="math notranslate nohighlight">\(g(b)\neq b\)</span> (otherwise
+the proof is over.) Then <span class="math notranslate nohighlight">\(f(a)=g(a)-a&gt;0\)</span> since <span class="math notranslate nohighlight">\(g(a)\)</span> must be greater
+than <span class="math notranslate nohighlight">\(a\)</span> if it’s not equal to <span class="math notranslate nohighlight">\(a\)</span>. Similarly, <span class="math notranslate nohighlight">\(f(b)=g(b)-b&lt;0\)</span>. Then
+from IVT, there exists <span class="math notranslate nohighlight">\(p\in(a,b)\)</span> such that <span class="math notranslate nohighlight">\(f(p)=0\)</span>, or <span class="math notranslate nohighlight">\(g(p)=p\)</span>.
+To prove part 2, suppose there are two different fixed-points <span class="math notranslate nohighlight">\(p,q\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|p-q|=|g(p)-g(q)|\leq\lambda|p-q|&lt;|p-q|
+\end{equation*}\]</div>
+<p>which is a contradiction.</p>
+</div>
+<div class="proof remark admonition" id="chap2_rem39">
+<p class="admonition-title"><span class="caption-number">Remark 6 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g\)</span> be a differentiable function
+on <span class="math notranslate nohighlight">\([a,b]\)</span> such that <span class="math notranslate nohighlight">\(|g'(x)|\leq k\)</span> for all <span class="math notranslate nohighlight">\(x\in(a,b)\)</span> for some
+positive constant <span class="math notranslate nohighlight">\(k&lt;1\)</span>. Then the hypothesis of part 2 of Theorem
+\ref{thm:existence fixedpt} is satisfied with <span class="math notranslate nohighlight">\(\lambda=k.\)</span> Indeed,
+from the mean value theorem</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|g(x)-g(y)|=|g'(\xi)(x-y)|\leq k|x-y|
+\end{equation*}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(x,y\in[a,b].\)</span></p>
+</section>
+</div><p>The following theorem describes how we can find a fixed point.</p>
+<div class="proof theorem admonition" id="chap2_thm40">
+<p class="admonition-title"><span class="caption-number">Theorem 10 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(g\)</span> is a continuous function on <span class="math notranslate nohighlight">\([a,b]\)</span> satisfying the conditions</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(x)\in[a,b]\)</span> for all <span class="math notranslate nohighlight">\(x\in[a,b]\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq\lambda|x-y|\)</span>, for <span class="math notranslate nohighlight">\(x,y\in[a,b]\)</span> where <span class="math notranslate nohighlight">\(0&lt;\lambda&lt;1,\)</span>
+then the <strong>fixed-point iteration</strong></p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}=g(p_{n-1}),n\geq1
+\end{equation*}\]</div>
+<p>converges to <span class="math notranslate nohighlight">\(p,\)</span> the unique fixed-point of <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span>, for any
+starting point <span class="math notranslate nohighlight">\(p_{0}\in[a,b]\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(p_{0}\in[a,b]\)</span> and <span class="math notranslate nohighlight">\(g(x)\in[a,b]\)</span> for all <span class="math notranslate nohighlight">\(x\in[a,b\)</span>{]},
+all iterates <span class="math notranslate nohighlight">\(p_{n}\in[a,b]\)</span>. Observe that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|p-p_{n}|=|g(p)-g(p_{n-1})|\leq\lambda|p-p_{n-1}|.
+\end{equation*}\]</div>
+<p>Then by induction, <span class="math notranslate nohighlight">\(|p-p_{n}|\leq\lambda^{n}|p-p_{0}|\)</span>. Since <span class="math notranslate nohighlight">\(0&lt;\lambda&lt;1\)</span>,
+<span class="math notranslate nohighlight">\(\lambda^{n}\rightarrow0\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span>, and thus <span class="math notranslate nohighlight">\(p_{n}\rightarrow p\)</span>.</p>
+</div>
+<div class="proof remark admonition" id="chap2_rem41">
+<p class="admonition-title"><span class="caption-number">Remark 7 </span></p>
+<section class="remark-content" id="proof-content">
+<p><a class="reference internal" href="#chap2_thm40">Theorem 10</a> still
+holds if the second condition <span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq\lambda|x-y|\)</span>, is replaced
+by <span class="math notranslate nohighlight">\(|g'(x)|\leq k\)</span> for all <span class="math notranslate nohighlight">\(x\in[a,b]\)</span> where <span class="math notranslate nohighlight">\(0&lt;k&lt;1\)</span>. (See <a class="reference internal" href="#chap2_rem39">Remark 6</a>).</p>
+</section>
+</div><div class="proof corollary admonition" id="chap2_cor42">
+<p class="admonition-title"><span class="caption-number">Corollary 3 </span></p>
+<section class="corollary-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(g\)</span> satisfies the hypothesis of
+<a class="reference internal" href="#chap2_thm40">Theorem 10</a>, then the following error bounds hold.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(|p-p_{n}|\leq\frac{\lambda^{n}}{1-\lambda}|p_{1}-p_{0}|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|p-p_{n}|\leq\frac{1}{1-\lambda}|p_{n+1}-p_{n}|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|p-p_{n+1}|\leq\frac{\lambda}{1-\lambda}|p_{n+1}-p_{n}|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|p-p_{n}|\leq\lambda^{n}\max\{p_{0}-a,b-p_{0}\}\)</span></p></li>
+</ol>
+</section>
+</div><p><strong>Geometric interpretation of fixed-point iteration</strong></p>
+<p>In Figures <a class="reference internal" href="#fixedpt-conv"><span class="std std-numref">Figure 4</span></a> and <a class="reference internal" href="#fixedpt-div"><span class="std std-numref">Figure 5</span></a>, take a starting value <span class="math notranslate nohighlight">\(p_0\)</span> close to <span class="math notranslate nohighlight">\(p\)</span>, and mark the first few fixed-point iterations, <span class="math notranslate nohighlight">\(p_0,p_1,p_2\)</span>. Observe that the fixed-point iteration converges in the first graph, but diverges in the second one.</p>
+<figure class="align-default" id="fixedpt-conv">
+<a class="reference internal image-reference" href="_images/fixedpt_conv.png"><img alt="_images/fixedpt_conv.png" src="_images/fixedpt_conv.png" style="height: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Fixed-point iteration: <span class="math notranslate nohighlight">\(|g'(p)|&lt;1\)</span>.</span><a class="headerlink" href="#fixedpt-conv" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fixedpt-div">
+<a class="reference internal image-reference" href="_images/fixedpt_div.png"><img alt="_images/fixedpt_div.png" src="_images/fixedpt_div.png" style="height: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Fixed-point iteration: <span class="math notranslate nohighlight">\(|g'(p)|&gt;1\)</span>.</span><a class="headerlink" href="#fixedpt-div" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="proof example admonition" id="chap2_exa43">
+<p class="admonition-title"><span class="caption-number">Example 16 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider the root-finding problem <span class="math notranslate nohighlight">\(x^{3}-2x^{2}-1=0\)</span> on <span class="math notranslate nohighlight">\([1,3].\)</span></p>
+<ol class="simple">
+<li><p>Write the problem as a fixed-point problem, <span class="math notranslate nohighlight">\(g(x)=x\)</span>, for some <span class="math notranslate nohighlight">\(g\)</span>. Verify that the hypothesis of <a class="reference internal" href="#chap2_thm40">Theorem 10</a> (or <a class="reference internal" href="#chap2_rem41">Remark 7</a>) is satisfied so that the fixed-point iteration converges.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(p_{0}=1.\)</span> Use <a class="reference internal" href="#chap2_cor42">Corollary 3</a> to find <span class="math notranslate nohighlight">\(n\)</span> that ensures an estimate to <span class="math notranslate nohighlight">\(p\)</span> accurate to within <span class="math notranslate nohighlight">\(10^{-4}\)</span>.</p></li>
+</ol>
+</section>
+</div><p><strong>Solution</strong></p>
+<ol>
+<li><p>There are several ways we can write this problem as <span class="math notranslate nohighlight">\(g(x)=x:\)</span></p>
+<p>a. Let <span class="math notranslate nohighlight">\(f(x)=x^{3}-2x^{2}-1\)</span>, and <span class="math notranslate nohighlight">\(p\)</span> be its root, that is, <span class="math notranslate nohighlight">\(f(p)=0\)</span>. If we let <span class="math notranslate nohighlight">\(g(x)=x-f(x)\)</span>, then <span class="math notranslate nohighlight">\(g(p)=p-f(p)=p,\)</span> so <span class="math notranslate nohighlight">\(p\)</span> is a fixed-point of <span class="math notranslate nohighlight">\(g\)</span>. However, this choice for <span class="math notranslate nohighlight">\(g\)</span> will not be helpful, since <span class="math notranslate nohighlight">\(g\)</span> does not satisfy the first condition of <a class="reference internal" href="#chap2_thm40">Theorem 10</a>: <span class="math notranslate nohighlight">\(g(x)\notin[1,3]\)</span> for all <span class="math notranslate nohighlight">\(x\in[1,3]\)</span> (<span class="math notranslate nohighlight">\(g(3)=-5\notin[1,3]\)</span>).</p>
+<p>b. Since <span class="math notranslate nohighlight">\(p\)</span> is a root for <span class="math notranslate nohighlight">\(f\)</span>, we have <span class="math notranslate nohighlight">\(p^3=2p^2+1\)</span>, or <span class="math notranslate nohighlight">\(p=(2p^2+1)^{1/3}.\)</span> Therefore, <span class="math notranslate nohighlight">\(p\)</span> is the solution to the fixed-point problem <span class="math notranslate nohighlight">\(g(x)=x\)</span> where <span class="math notranslate nohighlight">\(g(x)=(2x^2+1)^{1/3}\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g\)</span> is increasing on <span class="math notranslate nohighlight">\([1,3]\)</span> and <span class="math notranslate nohighlight">\(g(1)=1.44,g(3)=2.67\)</span>, thus <span class="math notranslate nohighlight">\(g(x)\in[1,3]\)</span> for all <span class="math notranslate nohighlight">\(x\in[1,3]\)</span>. Therefore, <span class="math notranslate nohighlight">\(g\)</span> satisfies the first condition of <a class="reference internal" href="#chap2_thm40">Theorem 10</a>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g'(x)=\frac{4x}{3(2x^2+1)^{2/3}}\)</span> and <span class="math notranslate nohighlight">\(g'(1)=0.64,g'(3)=0.56\)</span> and <span class="math notranslate nohighlight">\(g'\)</span> is decreasing on <span class="math notranslate nohighlight">\([1,3]\)</span>. Therefore <span class="math notranslate nohighlight">\(g\)</span> satisfies the condition in <a class="reference internal" href="#chap2_rem41">Remark 7</a> with <span class="math notranslate nohighlight">\(\lambda=0.64\)</span>.</p></li>
+</ul>
+<p>Then, from <a class="reference internal" href="#chap2_thm40">Theorem 10</a> and  <a class="reference internal" href="#chap2_rem41">Remark 7</a>, the fixed-point iteration converges if <span class="math notranslate nohighlight">\(g(x)=(2x^2+1)^{1/3}\)</span>.</p>
+</li>
+<li><p>Take <span class="math notranslate nohighlight">\(\lambda=k=0.64\)</span> in <a class="reference internal" href="#chap2_cor42">Corollary 3</a> and use bound (4):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+   |p-p_{n}|\leq(0.64)^{n}\max\{1-1,3-1\}=2(0.64^{n}).
+   \end{equation*}\]</div>
+<p>We want <span class="math notranslate nohighlight">\(2(0.64^{n})&lt;10^{-4}\)</span>, which implies <span class="math notranslate nohighlight">\(n\log0.64&lt;-4\log10-\log 2\)</span>, or <span class="math notranslate nohighlight">\(n&gt;\frac{-4\log10-\log 2}   {\log0.64}\approx22.19\)</span>. Therefore <span class="math notranslate nohighlight">\(n=23\)</span> is the smallest number of iterations that ensures an absolute error of <span class="math notranslate nohighlight">\(10^{-4}\)</span>.</p>
+</li>
+</ol>
+<section id="python-code-for-fixed-point-iteration">
+<h2>Python code for fixed-point iteration<a class="headerlink" href="#python-code-for-fixed-point-iteration" title="Permalink to this headline">#</a></h2>
+<p>The following code starts with the initial guess <span class="math notranslate nohighlight">\(p_0\)</span> (<em>pzero</em> in the code), computes <span class="math notranslate nohighlight">\(p_1=g(p_0)\)</span>, and checks if the stopping criterion <span class="math notranslate nohighlight">\(|p_1-p_0|&lt;\epsilon\)</span> is satisfied. If it is satisfied the code terminates with the value <span class="math notranslate nohighlight">\(p_1\)</span>. Otherwise <span class="math notranslate nohighlight">\(p_1\)</span> is set to <span class="math notranslate nohighlight">\(p_0\)</span>, and the next iteration is computed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">fixedpt</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pzero</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">pone</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">pzero</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">pone</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">pzero</span> <span class="o">=</span> <span class="n">pone</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Did not converge. The last estimate is p = &#39;</span><span class="p">,</span> <span class="n">pzero</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s find the fixed-point of <span class="math notranslate nohighlight">\(g(x)=x\)</span> where <span class="math notranslate nohighlight">\(g(x)=(2x^2+1)^{1/3}\)</span>,
+with <span class="math notranslate nohighlight">\(p_0=1\)</span>. We studied this problem in <a class="reference internal" href="#chap2_exa43">Example 16</a> where we found that
+23 iterations guarantee an estimate accurate to within <span class="math notranslate nohighlight">\(10^{-4}\)</span>. We
+set <span class="math notranslate nohighlight">\(\epsilon=10^{-4}\)</span>, and <span class="math notranslate nohighlight">\(N=30\)</span>, in the above code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+p is  2.205472095330031  and the iteration number is  19
+</pre></div>
+</div>
+</div>
+</div>
+<p>The exact value of the fixed-point, equivalently the root of
+<span class="math notranslate nohighlight">\(x^3-2x^2-1\)</span>, is 2.20556943. Then the exact error is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">2.205472095330031</span><span class="o">-</span><span class="mf">2.20556943</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-9.733466996930673e-05
+</pre></div>
+</div>
+</div>
+</div>
+<p>A take home message and a word of caution:</p>
+<ul class="simple">
+<li><p>The exact error, <span class="math notranslate nohighlight">\(|p_n-p|\)</span>, is guaranteed to be less than <span class="math notranslate nohighlight">\(10^{-4}\)</span> after 23 iterations from <a class="reference internal" href="#chap2_cor42">Corollary 3</a>, but as we observed in this example, this could happen before 23 iterations.</p></li>
+<li><p>The stopping criterion used in the code is based on <span class="math notranslate nohighlight">\(|p_n-p_{n-1}|\)</span>, not <span class="math notranslate nohighlight">\(|p_n-p|\)</span>, so the iteration number that makes these quantities less than a tolerance <span class="math notranslate nohighlight">\(\epsilon\)</span> will not be the same in general.</p></li>
+</ul>
+<div class="proof theorem admonition" id="chap2_thm44">
+<p class="admonition-title"><span class="caption-number">Theorem 11 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Assume <span class="math notranslate nohighlight">\(p\)</span> is a solution of <span class="math notranslate nohighlight">\(g(x)=x\)</span>,
+and suppose <span class="math notranslate nohighlight">\(g(x)\)</span> is continuously differentiable in some interval
+about <span class="math notranslate nohighlight">\(p\)</span> with <span class="math notranslate nohighlight">\(|g'(p)|&lt;1\)</span>. Then the fixed-point iteration converges to <span class="math notranslate nohighlight">\(p\)</span>, provided <span class="math notranslate nohighlight">\(p_{0}\)</span> is chosen sufficiently close to <span class="math notranslate nohighlight">\(p\)</span>. Moreover, the convergence is linear if <span class="math notranslate nohighlight">\(g'(p)\neq 0\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(g'\)</span> is continuous
+and <span class="math notranslate nohighlight">\(|g'(p)| &lt; 1\)</span>, there exists an interval <span class="math notranslate nohighlight">\(I=[p-\epsilon,p+\epsilon]\)</span>
+such that <span class="math notranslate nohighlight">\(|g'(x)|\leq k\)</span> for all <span class="math notranslate nohighlight">\(x\in I\)</span>, for some <span class="math notranslate nohighlight">\(k&lt;1\)</span>. Then, from <a class="reference internal" href="#chap2_rem39">Remark 6</a>,
+we know <span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq k|x-y|\)</span> for all <span class="math notranslate nohighlight">\(x,y\in I\)</span>. Next, we argue
+that <span class="math notranslate nohighlight">\(g(x)\in I\)</span> if <span class="math notranslate nohighlight">\(x\in I\)</span>. Indeed, if <span class="math notranslate nohighlight">\(|x-p|&lt;\epsilon,\)</span> then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|g(x)-p|=|g(x)-g(p)|\leq|g'(\xi)||x-p|&lt;k\epsilon&lt;\epsilon
+\end{equation*}\]</div>
+<p>hence <span class="math notranslate nohighlight">\(g(x)\in I.\)</span> Now use <a class="reference internal" href="#chap2_thm40">Theorem 10</a>, setting
+<span class="math notranslate nohighlight">\([a,b]\)</span> to <span class="math notranslate nohighlight">\([p-\epsilon,p+\epsilon]\)</span>, to conclude the fixed-point iteration converges.</p>
+<p>To prove convergence is linear, we note</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|p_{n+1}-p|=|g(p_n)-g(p)| \leq |g'(\xi_n)| |p_n-p| \leq k |p_n-p|
+\end{equation*}\]</div>
+<p>which is the definition of linear convergence (with <span class="math notranslate nohighlight">\(k\)</span> being a positive constant less than 1).</p>
+<p>We can actually prove something more:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_{n}-p|} =\lim_{n\rightarrow\infty}\frac{|g(p_{n})-g(p)|}{|p_{n}-p|}=\lim_{n\rightarrow\infty}\frac{|g'(\xi_{n})||p_{n}-p|}{|p_{n}-p|} =\lim_{n\rightarrow\infty}|g'(\xi_{n})|=|g'(p)|.
+\end{equation*}\]</div>
+<p>The last equality follows since <span class="math notranslate nohighlight">\(g'\)</span> is continuous, and <span class="math notranslate nohighlight">\(\xi_{n}\rightarrow p\)</span>, which is a consequence of <span class="math notranslate nohighlight">\(\xi_{n}\)</span> being between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p_{n}\)</span>, and <span class="math notranslate nohighlight">\(p_{n}\rightarrow p\)</span>, as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span>.</p>
+</div>
+<div class="proof example admonition" id="chap2_exa45">
+<p class="admonition-title"><span class="caption-number">Example 17 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g(x)=x+c(x^{2}-2),\)</span> which has the fixed-point <span class="math notranslate nohighlight">\(p=\sqrt{2}\approx1.4142.\)</span>
+Pick a value for <span class="math notranslate nohighlight">\(c\)</span> to ensure the convergence of fixed-point iteration.
+For the picked value <span class="math notranslate nohighlight">\(c\)</span>, determine the interval of convergence <span class="math notranslate nohighlight">\(I=[a,b],\)</span>
+that is, the interval for which any <span class="math notranslate nohighlight">\(p_{0}\)</span> from the interval gives
+rise to a converging fixed-point iteration. Then write a Python code
+to test the results.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p><a class="reference internal" href="#chap2_thm44">Theorem 11</a> requires <span class="math notranslate nohighlight">\(|g'(p)|&lt;1.\)</span> We have
+<span class="math notranslate nohighlight">\(g'(x)=1+2xc,\)</span> and thus <span class="math notranslate nohighlight">\(g'(\sqrt{2})=1+2\sqrt{2}c\)</span>. Therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+|g'(\sqrt{2})| &amp; &lt;1\Rightarrow-1&lt;1+2\sqrt{2}c&lt;1\\
+ &amp; \Rightarrow-2&lt;2\sqrt{2}c&lt;0\\
+ &amp; \Rightarrow\frac{-1}{\sqrt{2}}&lt;c&lt;0.
+\end{align*}\]</div>
+<p>Any <span class="math notranslate nohighlight">\(c\)</span> from this interval works: let’s pick <span class="math notranslate nohighlight">\(c=-1/4\)</span>.</p>
+<p>Now we need to find an interval <span class="math notranslate nohighlight">\(I=[\sqrt{2}-\epsilon,\sqrt{2}+\epsilon]\)</span>
+such that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|g'(x)|=|1+2xc|=\left|1-\frac{x}{2} \right| \leq k
+\end{equation*}\]</div>
+<p>for some <span class="math notranslate nohighlight">\(k&lt;1,\)</span> for all <span class="math notranslate nohighlight">\(x\in I\)</span>. Plot <span class="math notranslate nohighlight">\(g'(x)\)</span> and observe that
+one choice is <span class="math notranslate nohighlight">\(\epsilon=0.1\)</span>, so that <span class="math notranslate nohighlight">\(I=[\sqrt{2}-0.1,\sqrt{2}+0.1]=[1.3142,1.5142]\)</span>.
+Since <span class="math notranslate nohighlight">\(g'(x)\)</span> is positive and decreasing on <span class="math notranslate nohighlight">\(I=[1.3142,1.5142]\)</span>, <span class="math notranslate nohighlight">\(|g'(x)|\leq1-\frac{1.3142}{2}=0.3429&lt;1\)</span>, for any <span class="math notranslate nohighlight">\(x\in I\)</span>. Then any starting value
+<span class="math notranslate nohighlight">\(x_{0}\)</span> from <span class="math notranslate nohighlight">\(I\)</span> gives convergence.</p>
+<p>For <span class="math notranslate nohighlight">\(c=-1/4\)</span>, the function becomes <span class="math notranslate nohighlight">\(g(x)=x-\frac{x^2-2}{4}\)</span>. Pick
+<span class="math notranslate nohighlight">\(p_0=1.5\)</span> as the starting point. Using the fixed-point iteration code of the previous example, we obtain:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+p is  1.414214788550556  and the iteration number is  9
+</pre></div>
+</div>
+</div>
+</div>
+<p>The absolute error is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">1.414214788550556</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mf">.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2261774609001463e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s experiment with other starting values. Although <span class="math notranslate nohighlight">\(p_0=2\)</span> is not in the
+interval of convergence <span class="math notranslate nohighlight">\(I\)</span>, we expect convergence since <span class="math notranslate nohighlight">\(g'(2)=0\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+p is  1.414214788550556  and the iteration number is  10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try <span class="math notranslate nohighlight">\(p_0=-5\)</span>. Note that this is not only outside the interval of
+convergence <span class="math notranslate nohighlight">\(I\)</span>, but <span class="math notranslate nohighlight">\(g'(-5)=3.5&gt;1\)</span>, so we do not expect
+convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_26812</span><span class="o">/</span><span class="mf">3645725987.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp/ipykernel_26812/689667504.py</span> in <span class="ni">fixedpt</span><span class="nt">(g, pzero, eps, N)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">while</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>         <span class="n">pone</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">pzero</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">pone</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp/ipykernel_26812/3645725987.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="ne">OverflowError</span>: (34, &#39;Result too large&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s verify the linear convergence of the fixed-point iteration numerically in this example. We write another version of the fixed-pointcode, <strong>fixedpt2</strong>, and we compute <span class="math notranslate nohighlight">\(\frac{p_n-\sqrt{2}}{p_{n-1}-\sqrt{2}}\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fixedpt2</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pzero</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">while</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">N</span> <span class="ow">and</span> <span class="n">error</span><span class="o">&gt;</span><span class="mf">1e-5</span><span class="p">:</span>
+        <span class="n">pone</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">pzero</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">pzero</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span><span class="p">))</span>
+        <span class="n">pzero</span> <span class="o">=</span> <span class="n">pone</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">arr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">fixedpt2</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1e-7</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">arr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27144661, 0.28707161, 0.291222  , 0.29240652, 0.29275091,
+       0.29285156, 0.29288102, 0.29288965, 0.29289217])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter2-6_36_0.png" src="_images/bookchapter2-6_36_0.png" />
+</div>
+</div>
+<p>The graph suggests the limit of
+<span class="math notranslate nohighlight">\(\frac{p_n-\sqrt{2}}{p_{n-1}-\sqrt{2}}\)</span> exists and it is around 0.295,
+supporting linear convergence.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter2-5.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2.5 Muller’s method</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter2-7.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
