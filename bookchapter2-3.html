@@ -184,7 +184,62 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
-   Chapter 4 Numerical Quadrature and Differentiation
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
   </a>
  </li>
 </ul>
@@ -731,7 +786,7 @@ C(\sigma)=S\phi(\mathbb{d_1})-Ke^{-rT}\phi(\mathbb{d_2}).
 </div>
 </div>
 </div>
-<p>We have not discussed how to compute the distribution function of the standard normal random variable <span class="math notranslate nohighlight">\(\phi(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^x e^{-t^2/2}dt\)</span>. In <a class="reference internal" href="bookchapter4-0.html#ch-integration"><span class="std std-ref">Chapter 4 Numerical Quadrature and Differentiation</span></a>, we will discuss how to compute integrals numerically, but for this example, we will use the built-in function Python has for <span class="math notranslate nohighlight">\(\phi(x)\)</span>. It is in a subpackage of SciPy called <strong>stats</strong>:</p>
+<p>We have not discussed how to compute the distribution function of the standard normal random variable <span class="math notranslate nohighlight">\(\phi(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^x e^{-t^2/2}dt\)</span>. In <a class="reference internal" href="bookchapter5-0.html#ch-integration"><span class="std std-ref">Chapter 5 Numerical Quadrature and Differentiation</span></a>, we will discuss how to compute integrals numerically, but for this example, we will use the built-in function Python has for <span class="math notranslate nohighlight">\(\phi(x)\)</span>. It is in a subpackage of SciPy called <strong>stats</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>

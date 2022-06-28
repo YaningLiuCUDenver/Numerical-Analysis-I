@@ -184,7 +184,62 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
-   Chapter 4 Numerical Quadrature and Differentiation
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
   </a>
  </li>
 </ul>
@@ -665,7 +720,7 @@ the bit by bit representation of a number, we can define the following function 
 This arrangement, all exponent bits set to zero, is reserved for
 <span class="math notranslate nohighlight">\(\pm 0.0\)</span> and <strong>subnormal numbers</strong>. Subnormal
 numbers are an exception to our normalized floating-point representation,
-an exception that is useful in various ways. For details see <span id="id1">[<a class="reference internal" href="#id13" title="D Goldberg. What every computer scientist should know about floating-point arithmetic. ACM Computing Surveys (CSUR), 23:5-48, 1991.">Goldberg, 1991</a>]</span>.</p>
+an exception that is useful in various ways. For details see <span id="id1">[<a class="reference internal" href="#id20" title="D Goldberg. What every computer scientist should know about floating-point arithmetic. ACM Computing Surveys (CSUR), 23:5-48, 1991.">Goldberg, 1991</a>]</span>.</p>
 <p>Here is how plus and minus infinity is represented in the computer:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -750,23 +805,38 @@ on how the numbers are spaced.</p>
 </div>
 <div class="docutils container" id="id2">
 <dl class="citation">
-<dt class="label" id="id8"><span class="brackets">Atk89</span></dt>
+<dt class="label" id="id3"><span class="brackets">AS91</span></dt>
+<dd><p>M. Abramowitz and I.A. Stegun. <em>Handbook of mathematical functions: with formulas, graphs, and mathematical tables</em>. Volume 55. Courier Corporation, 1991.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">Atk89</span></dt>
 <dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
 </dd>
-<dt class="label" id="id7"><span class="brackets">CM27</span></dt>
+<dt class="label" id="id4"><span class="brackets">BFB16</span></dt>
+<dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">CK96</span></dt>
+<dd><p>S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. <em>Journal of Computational Physics</em>, 123:267–273, 1996.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">CM27</span></dt>
 <dd><p>A.B. Chace and H.P. Manning. The rhind mathematical papyrus: british museum 10057 and 10058. <em>Mathematical Association of America</em>, 1927.</p>
 </dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id10">CGL83</a></span></dt>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id15">CGL83</a></span></dt>
 <dd><p>T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. <em>The American Statistician</em>, 37:242–247, 1983.</p>
 </dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id11">CK12</a></span></dt>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id16">CK12</a></span></dt>
 <dd><p>E.W. Cheney and D.R. Kincaid. <em>Numerical mathematics and computing</em>. Cengage Learning, 2012.</p>
 </dd>
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
+<dt class="label" id="id13"><span class="brackets">Gla13</span></dt>
+<dd><p>P. Glasserman. <em>Monte Carlo methods in Financial Engineering</em>. Springer, 2013.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
 <dd><p>D Goldberg. What every computer scientist should know about floating-point arithmetic. <em>ACM Computing Surveys (CSUR)</em>, 23:5–48, 1991.</p>
 </dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id9">Hig93</a></span></dt>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id14">Hig93</a></span></dt>
 <dd><p>N.J Higham. The accuracy of floating point summation. <em>SIAM Journal on Scientific Computing</em>, 14:783–799, 1993.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">IK66</span></dt>
+<dd><p>Isaacson, E. and H.B. Keller. <em>Analysis of Numerical Methods</em>. John Wiley &amp; Sons, 1966.</p>
 </dd>
 </dl>
 </div>
@@ -966,11 +1036,11 @@ on how the numbers are spaced.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_1136</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_30416</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
 <span class="ne">----&gt; </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_1136/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_30416/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -2419,7 +2489,7 @@ happens instead of one.</p>
 </div><div class="proof example admonition" id="chap1_exa20">
 <p class="admonition-title"><span class="caption-number">Example 8 </span></p>
 <section class="example-content" id="proof-content">
-<p>The simple procedure of adding numbers, even if they do not have mixed signs, can accumulate large errors due to rounding or chopping. Several sophisticated algorithms to add large lists of numbers with accumulated error smaller than straightforward addition exist in the literature (see, for example, <span id="id9">Higham [<a class="reference internal" href="#id14" title="N.J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14:783-799, 1993.">1993</a>]</span>).</p>
+<p>The simple procedure of adding numbers, even if they do not have mixed signs, can accumulate large errors due to rounding or chopping. Several sophisticated algorithms to add large lists of numbers with accumulated error smaller than straightforward addition exist in the literature (see, for example, <span id="id14">Higham [<a class="reference internal" href="#id21" title="N.J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14:783-799, 1993.">1993</a>]</span>).</p>
 <p>For a simple example, consider using four-digit arithmetic with rounding, and computing the average of two numbers, <span class="math notranslate nohighlight">\(\frac{a+b}{2}\)</span>. For <span class="math notranslate nohighlight">\(a=2.954\)</span> and <span class="math notranslate nohighlight">\(b=100.9\)</span>, the true average is <span class="math notranslate nohighlight">\(51.927\)</span>. However, four-digit arithmetic with rounding yields:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -2445,7 +2515,7 @@ fl\left( \frac{100.9+2.954}{2} \right) = fl\left( \frac{fl(103.854)}{2}\right)=f
 <li><p><span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \left[ \sum_{i=1}^n x_i^2 - \frac{1}{n} \left( \sum_{i=1}^n x_i \right)^2 \right]\)</span>,</p></li>
 <li><p>First compute <span class="math notranslate nohighlight">\(\bar{x}=\frac{1}{n} \sum_{i=1}^n x_i\)</span>, and then <span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})^2\)</span>.</p></li>
 </ol>
-<p>Both formulas can suffer from roundoff errors due to adding large lists of numbers if <span class="math notranslate nohighlight">\(n\)</span> is large, as mentioned in the previous example. However, the first formula is also prone to error due to cancellation of leading digits (see <span id="id10">Chan <em>et al.</em> [<a class="reference internal" href="#id15" title="T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. The American Statistician, 37:242-247, 1983.">1983</a>]</span> for details).</p>
+<p>Both formulas can suffer from roundoff errors due to adding large lists of numbers if <span class="math notranslate nohighlight">\(n\)</span> is large, as mentioned in the previous example. However, the first formula is also prone to error due to cancellation of leading digits (see <span id="id15">Chan <em>et al.</em> [<a class="reference internal" href="#id22" title="T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. The American Statistician, 37:242-247, 1983.">1983</a>]</span> for details).</p>
 <p>For an example, consider four-digit rounding arithmetic, and let the data be <span class="math notranslate nohighlight">\(1.253,2.411,3.174\)</span>. The sample variance from formula 1 and formula 2 are, 0.93 and 0.9355, respectively. The exact value, up to 6 digits, is 0.935562. Formula 2 is a numerically more stable choice for computing the variance than the first one.</p>
 </section>
 </div><div class="proof example admonition" id="chap1_exa22">
@@ -2598,7 +2668,7 @@ degree polynomial?</p>
 </section>
 </div><p><strong>Exercise 1.3-6</strong></p>
 <p>The following is from “Numerical mathematics and computing” by
-<span id="id11">Cheney and Kincaid [<a class="reference internal" href="#id16" title="E.W. Cheney and D.R. Kincaid. Numerical mathematics and computing. Cengage Learning, 2012.">2012</a>]</span>:</p>
+<span id="id16">Cheney and Kincaid [<a class="reference internal" href="#id23" title="E.W. Cheney and D.R. Kincaid. Numerical mathematics and computing. Cengage Learning, 2012.">2012</a>]</span>:</p>
 <p><em>In 1996, the Ariane 5 rocket launched by the European Space
 Agency exploded 40 seconds after lift-off from Kourou, French Guiana.
 An investigation determined that the horizontal velocity required
@@ -2609,18 +2679,18 @@ The rocket and its cargo were valued at $500 million</em>.</p>
 <p>Search online, or in the library, to find another example of computer
 arithmetic going very wrong! Write a short paragraph explaining the
 problem, and give a reference.</p>
-<div class="docutils container" id="id12">
+<div class="docutils container" id="id17">
 <dl class="citation">
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id10">CGL83</a></span></dt>
+<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id15">CGL83</a></span></dt>
 <dd><p>T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. <em>The American Statistician</em>, 37:242–247, 1983.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id11">CK12</a></span></dt>
+<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id16">CK12</a></span></dt>
 <dd><p>E.W. Cheney and D.R. Kincaid. <em>Numerical mathematics and computing</em>. Cengage Learning, 2012.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
 <dd><p>D Goldberg. What every computer scientist should know about floating-point arithmetic. <em>ACM Computing Surveys (CSUR)</em>, 23:5–48, 1991.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id9">Hig93</a></span></dt>
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id14">Hig93</a></span></dt>
 <dd><p>N.J Higham. The accuracy of floating point summation. <em>SIAM Journal on Scientific Computing</em>, 14:783–799, 1993.</p>
 </dd>
 </dl>

@@ -1,0 +1,1175 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4.4 Piecewise polynomials: spline interpolation &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 5 Numerical Quadrature and Differentiation" href="bookchapter5-0.html" />
+    <link rel="prev" title="4.3 Hermite interpolation" href="bookchapter4-3.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter4-4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter4-4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cubic-spline-interpolation">
+   Cubic spline interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-spline-interpolation">
+   Python code for spline interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arya-and-the-letter-nuh">
+   Arya and the letter NUH
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4.4 Piecewise polynomials: spline interpolation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cubic-spline-interpolation">
+   Cubic spline interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-spline-interpolation">
+   Python code for spline interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arya-and-the-letter-nuh">
+   Arya and the letter NUH
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="piecewise-polynomials-spline-interpolation">
+<h1>4.4 Piecewise polynomials: spline interpolation<a class="headerlink" href="#piecewise-polynomials-spline-interpolation" title="Permalink to this headline">#</a></h1>
+<p>As we observed in Section <a class="reference internal" href="bookchapter4-2.html#section4-2"><span class="std std-ref">4.2 High degree polynomial interpolation</span></a>, a polynomial interpolant of high degree can have large oscillations, and thus provide an overall poor approximation to the underlying function. Recall that the degree of the interpolating polynomial is directly linked to the number of data points: we do not have the freedom to choose the degree of the polynomial.</p>
+<p>In spline interpolation, we take a very different approach: instead of finding a single polynomial that fits the given data, we find one low-degree polynomial that fits every <strong>pair</strong> of data. This results in several polynomial pieces joined together, and we typically impose some smoothness conditions on different pieces. The term <strong>spline function</strong> means a function that consists of polynomial pieces
+joined together with some smoothness conditions.</p>
+<p>In <strong>linear spline interpolation</strong>, we simply join data points (the nodes), by line
+segments, that is, linear polynomials. For example, consider the following figure that plots three data points <span class="math notranslate nohighlight">\((x_{i-1},y_{i-1}),(x_i,y_i),(x_{i+1},y_{i+1})\)</span>. We fit a linear polynomial <span class="math notranslate nohighlight">\(P(x)\)</span> to the first pair of data points <span class="math notranslate nohighlight">\((x_{i-1},y_{i-1}),(x_i,y_i)\)</span>, and another linear polynomial <span class="math notranslate nohighlight">\(Q(x)\)</span> to the second pair of data points <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>.</p>
+<figure class="align-default" id="linear-spline">
+<a class="reference internal image-reference" href="_images/linear_spline_fig.png"><img alt="_images/linear_spline_fig.png" src="_images/linear_spline_fig.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Linear spline</span><a class="headerlink" href="#linear-spline" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let <span class="math notranslate nohighlight">\(P(x)=ax+b\)</span> and <span class="math notranslate nohighlight">\(Q(x)=cx+d\)</span>. We find the coefficients <span class="math notranslate nohighlight">\(a,b,c,d\)</span> by solving</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P(x_{i-1}) &amp; =y_{i-1}\\
+P(x_{i}) &amp; =y_{i}\\
+Q(x_{i}) &amp; =y_{i}\\
+Q(x_{i+1}) &amp; =y_{i+1}
+\end{align*}\]</div>
+<p>which is a system of four equations and four unknowns. We then repeat this procedure for all data points, <span class="math notranslate nohighlight">\((x_0,y_0),(x_1,y_1),...,(x_n,y_n)\)</span>, to determine all of the linear polynomials.</p>
+<p>One disadvantage
+of linear spline interpolation is the lack of smoothness. The first derivative of the
+spline is not continuous at the nodes (unless the data fall on a line). We can obtain better smoothness by increasing the degree of the piecewise polynomials. In <strong>quadratic spline interpolation</strong>, we connect the nodes via second
+degree polynomials.</p>
+<figure class="align-default" id="quadratic-spline">
+<a class="reference internal image-reference" href="_images/quadratic_spline_fig.png"><img alt="_images/quadratic_spline_fig.png" src="_images/quadratic_spline_fig.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Quadratic spline</span><a class="headerlink" href="#quadratic-spline" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let <span class="math notranslate nohighlight">\(P(x)=a_{0}+a_{1}x+a_{2}x^{2}\)</span> and <span class="math notranslate nohighlight">\(Q(x)=b_{0}+b_{1}x+b_{2}x^{2}.\)</span>
+There are six unknowns to determine, but only four equations from the interpolation conditions:
+<span class="math notranslate nohighlight">\(P(x_{i-1})=y_{i-1},P(x_{i})=y_{i},Q(x_{i})=y_{i},Q(x_{i+1})=y_{i+1}\)</span>.
+We can find extra two conditions by requiring some smoothness, <span class="math notranslate nohighlight">\(P'(x_{i})=Q'(x_{i})\)</span>,
+and another equation by requiring <span class="math notranslate nohighlight">\(P'\)</span> or <span class="math notranslate nohighlight">\(Q'\)</span> take a certain value at one
+of the end points.</p>
+<section id="cubic-spline-interpolation">
+<h2>Cubic spline interpolation<a class="headerlink" href="#cubic-spline-interpolation" title="Permalink to this headline">#</a></h2>
+<p>This is the most common spline
+interpolation. It uses cubic polynomials to connect the nodes. Consider the data</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+(x_0,y_0),(x_1,y_1),...,(x_n,y_n),
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_0&lt;x_1&lt;...&lt;x_n\)</span>. In the figure below, the cubic polynomials interpolating pairs of data are labeled as <span class="math notranslate nohighlight">\(S_{0},...,S_{n-1}\)</span> (we ignore the <span class="math notranslate nohighlight">\(y\)</span>-coordinates in the plot).</p>
+<figure class="align-default" id="cubic-spline">
+<a class="reference internal image-reference" href="_images/cubic_spline_fig.png"><img alt="_images/cubic_spline_fig.png" src="_images/cubic_spline_fig.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Cubic spline</span><a class="headerlink" href="#cubic-spline" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The polynomial <span class="math notranslate nohighlight">\(S_i\)</span> interpolates the nodes <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>. Let</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+S_{i}(x)=a_{i}+b_{i}x+c_{i}x^{2}+d_{i}x^{3}
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n-1.\)</span> There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns to determine: <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i\)</span>, as <span class="math notranslate nohighlight">\(i\)</span> takes on values from 0 to <span class="math notranslate nohighlight">\(n-1\)</span>. Let’s describe the
+equations <span class="math notranslate nohighlight">\(S_i\)</span> must satisfy. First, the interpolation conditions, that is, the requirement that <span class="math notranslate nohighlight">\(S_i\)</span> passes through the nodes <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_{i}(x_{i}) &amp; =y_{i}\\
+S_{i}(x_{i+1}) &amp; =y_{i+1}
+\end{align*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n-1\)</span>, which gives <span class="math notranslate nohighlight">\(2n\)</span> equations. The next group
+of equations are about smoothness:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S'_{i-1}(x_{i}) &amp; =S_{i}'(x_{i})\\
+S''_{i-1}(x_{i}) &amp; =S''_{i}(x_{i})
+\end{align*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=1,2,...,n-1\)</span>, which gives <span class="math notranslate nohighlight">\(2(n-1)=2n-2\)</span> equations. Last two
+equations are called the boundary conditions. There are two choices:</p>
+<ul class="simple">
+<li><p>Free or natural boundary: <span class="math notranslate nohighlight">\(S_{0}''(x_{0})=S_{n-1}''(x_{n})=0\)</span></p></li>
+<li><p>Clamped boundary: <span class="math notranslate nohighlight">\(S_{0}'(x_{0})=f'(x_{0})\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}'(x_{n})=f'(x_{n})\)</span></p></li>
+</ul>
+<p>Each boundary choice gives another two equations, bringing the total number of equations to <span class="math notranslate nohighlight">\(4n\)</span>. There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns as well. Do these systems of equations have a unique solution? The answer is yes, and a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The spline obtained from the first boundary choice is called a <strong>natural spline</strong>, and the other one is called a <strong>clamped spline</strong>.</p>
+<div class="proof example admonition" id="chap3_exa64">
+<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the natural cubic spline that interpolates the data <span class="math notranslate nohighlight">\((0,0),(1,1),(2,0)\)</span>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>We have two cubic polynomials to determine:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0(x)&amp;=a_0+b_0x+c_0x^2+d_0x^3\\
+S_1(x)&amp;=a_1+b_1x+c_1x^2+d_1x^3
+\end{align*}\]</div>
+<p>The interpolation equations are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0(0)=0 &amp;\Rightarrow a_0=0\\
+S_0(1)=1 &amp;\Rightarrow a_0+b_0+c_0+d_0=1\\
+S_1(1)=1 &amp;\Rightarrow a_1+b_1+c_1+d_1=1\\
+S_1(2)=0 &amp;\Rightarrow a_1+2b_1+4c_1+8d_1=0
+\end{align*}\]</div>
+<p>We need the derivatives of the polynomials for the other equations:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0'(x)&amp;=b_0+2c_0x+3d_0x^2\\
+S_1'(x)&amp;=b_1+2c_1x+3d_1x^2\\
+S_0''(x)&amp;=2c_0+6d_0x\\
+S_1''(x)&amp;=2c_1+6d_1x
+\end{align*}\]</div>
+<p>The smoothness conditions are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0'(1)=S_1'(1) &amp;\Rightarrow b_0+2c_0+3d_0=b_1+2c_1+3d_1\\
+S_0''(1)=S_1''(1) &amp;\Rightarrow 2c_0+6d_0=2c_1+6d_1
+\end{align*}\]</div>
+<p>The natural boundary conditions are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0''(0)=0 &amp;\Rightarrow 2c_0=0\\
+S_1''(2)=0 &amp;\Rightarrow 2c_1+12d_1=0
+\end{align*}\]</div>
+<p>There are eight equations and eight unknowns. However, <span class="math notranslate nohighlight">\(a_0=c_0=0\)</span>, so that reduces the number of equations and unknowns to six. We rewrite the equations below, substituting <span class="math notranslate nohighlight">\(a_0=c_0=0\)</span>, and simplifying when possible:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_0+d_0&amp;=1\\
+a_1+b_1+c_1+d_1&amp;=1\\
+a_1+2b_1+4c_1+8d_1&amp;=0\\
+b_0+3d_0&amp;=b_1+2c_1+3d_1\\
+3d_0&amp;=c_1+3d_1\\
+c_1+6d_1&amp;=0
+\end{align*}\]</div>
+<p>We will use Python to solve this system of equations. To do that, we first rewrite the system of equations as a matrix equation</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+Ax=v
+\end{equation*}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+A=\begin{bmatrix}
+1 &amp; 1&amp; 0&amp;0&amp;0&amp;0\\
+0&amp;0&amp;1&amp;1&amp;1&amp;1\\
+0 &amp; 0&amp; 1&amp;2&amp;4&amp;8\\
+1&amp;3&amp;0&amp;-1&amp;-2&amp;-3\\
+0&amp;3&amp;0&amp;0&amp;-1&amp;-3\\
+0&amp;0&amp;0&amp;0&amp;1&amp;6
+\end{bmatrix},
+x=\begin{bmatrix}
+b_0\\
+d_0\\
+a_1\\
+b_1\\
+c_1\\
+d_1
+\end{bmatrix},
+v=\begin{bmatrix}
+1\\
+1\\
+0\\
+0\\
+0\\
+0
+\end{bmatrix}.
+\end{equation*}\]</div>
+<p>We enter the matrices <span class="math notranslate nohighlight">\(A,v\)</span> in Python and solve the equation <span class="math notranslate nohighlight">\(Ax=v\)</span> using the command <span class="math notranslate nohighlight">\(np.linalg.solve\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  1,  0,  0,  0,  0],
+       [ 0,  0,  1,  1,  1,  1],
+       [ 0,  0,  1,  2,  4,  8],
+       [ 1,  3,  0, -1, -2, -3],
+       [ 0,  3,  0,  0, -1, -3],
+       [ 0,  0,  0,  0,  1,  6]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 0, 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.5, -0.5, -1. ,  4.5, -3. ,  0.5])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Therefore, the polynomials are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S_0(x)&amp;=1.5x-0.5x^3\\
+S_1(x)&amp;=-1+4.5x-3x^2+0.5x^3
+\end{align*}\]</div>
+<p>Solving the equations of a spline even for three data points can be tedious. Fortunately, there is a general approach to solving the equations for natural and clamped splines, for any number of data points. We will use this approach when we write Python codes for splines next.</p>
+<p><strong>Exercise 4.4-1</strong></p>
+<p>Find the natural cubic spline interpolant for the following
+data:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{cccc}
+x &amp; -1 &amp; 0 &amp; 1\\
+\hline
+y &amp; 1 &amp; 2 &amp; 0\\
+\end{array}
+\end{equation*}\]</div>
+<p><strong>Exercise 4.4-2</strong></p>
+<p>The following is a clamped cubic spline for a function <span class="math notranslate nohighlight">\(f\)</span> defined on <span class="math notranslate nohighlight">\([1,3]\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+s(x)=\begin{cases}
+s_{0}(x)=(x-1)+(x-1)^{2}-(x-1)^{3}, &amp; \text{if }1\leq x&lt;2\\
+s_{1}(x)=a+b(x-2)+c(x-2)^{2}+d(x-2)^{3} &amp; \text{if }2\leq x&lt;3.
+\end{cases}
+\end{equation*}\]</div>
+<p>Find <span class="math notranslate nohighlight">\(a,b,c,\)</span> and <span class="math notranslate nohighlight">\(d,\)</span> if <span class="math notranslate nohighlight">\(f'(1)=1\)</span> and <span class="math notranslate nohighlight">\(f'(3)=2\)</span>.</p>
+</section>
+<section id="python-code-for-spline-interpolation">
+<h2>Python code for spline interpolation<a class="headerlink" href="#python-code-for-spline-interpolation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <strong>CubicNatural</strong> takes the <span class="math notranslate nohighlight">\(x\)</span>- and
+<span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data as input, and computes the natural cubic
+spline interpolating the data, by solving the resulting matrix equation.
+The code is based on Algorithm 3.4 of <span id="id2">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The output is the coefficients of the <span class="math notranslate nohighlight">\(m-1\)</span> cubic
+polynomials, <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i,i=0,...,m-2\)</span> where <span class="math notranslate nohighlight">\(m\)</span> is the number of
+data points. These coefficients are stored in the arrays <span class="math notranslate nohighlight">\(a,b,c,d\)</span> and returned at the end of the function, so that we can access these arrays later to
+evaluate the spline for a given value <span class="math notranslate nohighlight">\(w\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CubicNatural</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># m is the number of data points</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">c</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">3</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the matrix equation is solved, and the coefficients of the cubic
+polynomials are computed by <strong>CubicNatural</strong>, the next step is
+to evaluate the spline at a given value. This is done by the following
+function <strong>CubicNaturalEval</strong>. The inputs are the value at
+which the spline is evaluated, <span class="math notranslate nohighlight">\(w\)</span>, the <span class="math notranslate nohighlight">\(x\)</span>-coordinates of the
+data and the coefficients computed by <strong>CubicNatural</strong>. The function first finds the interval <span class="math notranslate nohighlight">\([x_i,x_{i+1}],i=0,...,m-2,\)</span>
+<span class="math notranslate nohighlight">\(w\)</span> belongs to, and then evaluates the spline at <span class="math notranslate nohighlight">\(w\)</span> using the
+corresponding cubic polynomial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CubicNaturalEval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">coeff</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">if</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">w</span><span class="o">&gt;</span><span class="n">x</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error: spline evaluated outside its domain&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># p is the number of the subinterval w falls into, i.e., p=i means</span>
+    <span class="c1"># w falls into the ith subinterval $(x_i,x_{i+1}), and therefore</span>
+    <span class="c1"># the value of the spline at w is</span>
+    <span class="c1"># a_i+b_i*(w-x_i)+c_i*(w-x_i)^2+d_i*(w-x_i)^3.</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we will compare Newton and natural cubic spline interpolation when
+applied to Runge’s function. We import the functions for Newton
+interpolation first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1">#here m is the number of data points.</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)):</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="p">(</span><span class="n">j</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># here m is the number of data points, not the degree</span>
+    <span class="c1"># of the polynomial</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pr</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">pr</span> <span class="o">*=</span> <span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">pr</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the code that computes the cubic spline, Newton interpolation,
+and plot them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">runge</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
+<span class="n">naturalspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+<span class="n">interp</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span> <span class="c1"># Interpolating polynomial for</span>
+<span class="c1"># the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">runge</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$1/(1+x^2)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolating poly&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">naturalspline</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural cubic spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-4_29_0.png" src="_images/bookchapter4-4_29_0.png" />
+</div>
+</div>
+<p>The cubic spline gives an excellent fit to Runge’s function on this
+scale: we cannot visually separate it from the function itself.</p>
+<p>The following function <strong>CubicClamped</strong> computes the clamped
+cubic spline; the code is based on Algorithm 3.5 of <span id="id3">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The function
+<strong>CubicClampedEval</strong> evaluates the spline at a given value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CubicClamped</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yprime_left</span><span class="p">,</span> <span class="n">yprime_right</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># m is the number of data points</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">yprime_left</span>
+    <span class="n">u</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">yprime_right</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">C</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">3</span>
+        <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CubicClampedEval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">coeff</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">if</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">w</span><span class="o">&gt;</span><span class="n">x</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error: spline evaluated outside its domain&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">+</span><span class="n">B</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">+</span><span class="n">C</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">D</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">**</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the following, we use natural and clamped cubic splines to
+interpolate data coming from <span class="math notranslate nohighlight">\(\sin x\)</span> at the x-coordinates:
+<span class="math notranslate nohighlight">\(0,\pi,3 \pi/2, 2\pi\)</span>. The derivatives at the end points are both
+equal to 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">funct</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
+<span class="n">naturalspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicClamped</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">clampedspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicClampedEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">funct</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">naturalspline</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural cubic spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">clampedspline</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Clamped cubic spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-4_34_0.png" src="_images/bookchapter4-4_34_0.png" />
+</div>
+</div>
+<p>Especially on the interval <span class="math notranslate nohighlight">\((0,\pi)\)</span>, the clamped spline gives a much
+better approximation to <span class="math notranslate nohighlight">\(\sin x\)</span> than the natural spline. However,
+adding an extra data point between 0 and <span class="math notranslate nohighlight">\(\pi\)</span> removes the visual
+differences between the splines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">funct</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
+<span class="n">naturalspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicClamped</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">clampedspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicClampedEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">funct</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">naturalspline</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural cubic spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">clampedspline</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Clamped cubic spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-4_36_0.png" src="_images/bookchapter4-4_36_0.png" />
+</div>
+</div>
+</section>
+<section id="arya-and-the-letter-nuh">
+<h2>Arya and the letter NUH<a class="headerlink" href="#arya-and-the-letter-nuh" title="Permalink to this headline">#</a></h2>
+<p>Arya loves Dr. Seuss (who doesn’t?), and she is writing her term paper in an English class on <em>On Beyond Zebra!</em><a class="footnote-reference brackets" href="#id17" id="id4">1</a>. In this book Dr. Seuss invents new letters, one of which is called NUH. He writes:</p>
+<figure class="align-right">
+<a class="reference internal image-reference" href="_images/Seuss.png"><img alt="_images/Seuss.png" src="_images/Seuss.png" style="width: 234.6px; height: 403.8px;" /></a>
+</figure>
+<blockquote>
+<div><p>And NUH is the letter I use to spell Nutches</p>
+<p>Who live in small caves, known as Nitches, for hutches.</p>
+<p>These Nutches have troubles, the biggest of which is</p>
+<p>The fact there are many more Nutches than Nitches.</p>
+</div></blockquote>
+<p>What does this letter look like? Well, something like this.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/NUH_sketch.png"><img alt="_images/NUH_sketch.png" src="_images/NUH_sketch.png" style="width: 126.3px; height: 201.6px;" /></a>
+</figure>
+<p>What Arya wants is a digitized version of the sketch; a figure that is smooth and can be manipulated using graphics software. The letter NUH is a little complicated to apply a spline interpolation directly, since it has some cusps.   For such planar curves, we can use their parametric representation, and use a cubic spline interpolation for <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates separately. To this end, Arya picks eight points on the letter NUH, and labels them as <span class="math notranslate nohighlight">\(t=1,2,...,8\)</span>; see the figure below.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/NUHprime.png"><img alt="_images/NUHprime.png" src="_images/NUHprime.png" style="width: 157.2px; height: 272.7px;" /></a>
+</figure>
+<p>Then for each point she eyeballs the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>-coordinates with the help of a graph paper. The results are displayed in the table below.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{c|cccccccc}
+t &amp; 1 &amp; 2    &amp; 3     &amp; 4   &amp; 5   &amp; 6    &amp; 7   &amp; 8\\
+\hline
+x &amp; 0 &amp; 0    &amp; -0.05 &amp; 0.1 &amp; 0.4 &amp; 0.65 &amp; 0.7   &amp; 0.76\\
+\hline
+y &amp; 0 &amp; 1.25 &amp; 2.5     &amp; 1   &amp; 0.3 &amp; 0.9  &amp; 1.5 &amp; 0\\
+\end{array}
+\end{equation*}\]</div>
+<p>The next step is to fit a cubic spline to the data <span class="math notranslate nohighlight">\((t_1,x_1),...,(t_8,x_8)\)</span>, and another cubic spline to the data <span class="math notranslate nohighlight">\((t_1,y_1),...,(t_8,y_8)\)</span>. Let’s call these splines <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span>, respectively, since they represent the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates as  functions of the parameter <span class="math notranslate nohighlight">\(t\)</span>. Plotting <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span> will produce the letter NUH, as we can see in the following Python codes.</p>
+<p>First, load the NumPy and Matplotlib packages, and copy and evaluate the functions <strong>CubicNatural</strong> and <strong>CubicNaturalEval</strong> that we discussed earlier. Here is the letter NUH, obtained by spline interpolation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.65</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.76</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">2.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">taxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">xspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">taxis</span><span class="p">)))</span>
+    
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">yspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">taxis</span><span class="p">)))</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xspline</span><span class="p">,</span> <span class="n">yspline</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-4_43_0.png" src="_images/bookchapter4-4_43_0.png" />
+</div>
+</div>
+<p>This looks like it needs to be squeezed! Adjusting the aspect ratio
+gives a better image. In the following, we use the commands</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figaspect</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 288x576 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>to adjust the aspect ratio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.65</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.76</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">2.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">taxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">xspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">taxis</span><span class="p">)))</span>
+    
+<span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">yspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">taxis</span><span class="p">)))</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figaspect</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xspline</span><span class="p">,</span> <span class="n">yspline</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-4_47_0.png" src="_images/bookchapter4-4_47_0.png" />
+</div>
+</div>
+<p><strong>Exercise 4.4-3</strong></p>
+<p>Limacon is a curve, named after a French word for snail, which appears in the study of planetary motion. The polar equation for the curve is <span class="math notranslate nohighlight">\(r=1+c\sin\theta\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a constant. Below is a plot of the curve when <span class="math notranslate nohighlight">\(c=1\)</span>.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/limacon.png"><img alt="_images/limacon.png" src="_images/limacon.png" style="width: 440.8px; height: 332.8px;" /></a>
+</figure>
+<p>The <span class="math notranslate nohighlight">\(x,y\)</span> coordinates of the dots on the curve are displayed in the following table:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{c|ccccccccc}
+x &amp; 0 &amp; 0.5 &amp; 1 &amp; 1.3 &amp; 0 &amp; -1.3 &amp; -1 &amp;  -0.5 &amp; 0\\
+\hline
+y &amp; 0 &amp; -0.25 &amp; 0 &amp; 0.71 &amp; 2 &amp; 0.71 &amp; 0 &amp; -0.25 &amp; 0\\
+\end{array}
+\end{equation*}\]</div>
+<p>Recreate the limacon above, by applying the spline interpolation for plane curves approach used in <em>Arya and the letter NUH</em> example to the points given in the table.</p>
+<div class="docutils container" id="id5">
+<dl class="citation">
+<dt class="label" id="id7"><span class="brackets">BFB16</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
+</dd>
+</dl>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dd><p>Seuss, 1955. On Beyond Zebra! Random House for Young Readers.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter4-3.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">4.3 Hermite interpolation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter5-0.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 5 Numerical Quadrature and Differentiation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

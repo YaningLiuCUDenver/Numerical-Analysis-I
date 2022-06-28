@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5.2 Composite Newton-Cotes formulas &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.3 Gaussian quadrature" href="bookchapter5-3.html" />
+    <link rel="prev" title="5.1 Newton-Cotes formulas" href="bookchapter5-1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter5-2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter5-2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-codes-for-newton-cotes-formulas">
+   Python codes for Newton-Cotes formulas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapezoidal-rule">
+     Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simpson-s-rule">
+     Simpson’s rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composite-simpson-s-rule">
+     Composite Simpson’s rule
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-rules-and-roundoff-error">
+   Composite rules and roundoff error
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5.2 Composite Newton-Cotes formulas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-codes-for-newton-cotes-formulas">
+   Python codes for Newton-Cotes formulas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapezoidal-rule">
+     Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simpson-s-rule">
+     Simpson’s rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composite-simpson-s-rule">
+     Composite Simpson’s rule
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-rules-and-roundoff-error">
+   Composite rules and roundoff error
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="composite-newton-cotes-formulas">
+<h1>5.2 Composite Newton-Cotes formulas<a class="headerlink" href="#composite-newton-cotes-formulas" title="Permalink to this headline">#</a></h1>
+<p>If the interval <span class="math notranslate nohighlight">\([a,b]\)</span> in the quadrature is large, then the Newton-Cotes
+formulas will give poor approximations. The quadrature error depends
+on <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span> (closed formulas), and if <span class="math notranslate nohighlight">\(b-a\)</span> is large, then so
+is <span class="math notranslate nohighlight">\(h\)</span>, hence error. If we raise <span class="math notranslate nohighlight">\(n\)</span> to compensate for large interval,
+then we face a problem discussed earlier: error due to the oscillatory
+behavior of high-degree interpolating polynomials that use equally-spaced
+nodes. A solution is to break up the domain into smaller intervals
+and use a Newton-Cotes rule with a smaller <span class="math notranslate nohighlight">\(n\)</span> on each subinterval: this is known as a composite rule.</p>
+<div class="proof example admonition" id="chap4_exa74">
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let’s compute <span class="math notranslate nohighlight">\(\int_{0}^{2}e^{x}\sin xdx\)</span>. The antiderivative can be computed using integration by parts, and the true value of the integral to 6 digits
+is 5.39689. If we apply the Simpson’s rule we get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{2}e^{x}\sin xdx\approx\frac{1}{3}(e^{0}\sin 0+4e\sin 1+e^{2}\sin 2)=5.28942.
+\end{equation*}\]</div>
+<p>If we partition the integration domain <span class="math notranslate nohighlight">\((0,2)\)</span> into <span class="math notranslate nohighlight">\((0,1)\)</span> and <span class="math notranslate nohighlight">\((1,2)\)</span>, and apply Simpson’s
+rule to each domain separately, we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{0}^{2}e^{x}\sin xdx &amp; =\int_{0}^{1}e^{x}\sin xdx+\int_{1}^{2}e^{x}\sin xdx\\
+&amp;\approx  \frac{1}{6}(e^{0}\sin 0+4e^{0.5}\sin(0.5)+e\sin 1)+\frac{1}{6}(e\sin 1+4e^{1.5}\sin(1.5)+e^{2}\sin 2)\\
+&amp;=  5.38953,
+\end{align*}\]</div>
+<p>improving the accuracy significantly. Note that we have used five nodes, <span class="math notranslate nohighlight">\(0,0.5,1,1.5,2\)</span>, which split the domain <span class="math notranslate nohighlight">\((0,2)\)</span> into four subintervals.</p>
+</section>
+</div><p>The composite rules for midpoint, trapezoidal, and Simpson’s rule, with their error terms, are:</p>
+<ul class="simple">
+<li><p><strong>Composite Midpoint rule</strong></p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(n\)</span> be even, <span class="math notranslate nohighlight">\(h=\frac{b-a}{n+2},\)</span> and <span class="math notranslate nohighlight">\(x_{j}=a+(j+1)h\)</span>
+for <span class="math notranslate nohighlight">\(j=-1,0,...,n+1.\)</span> The composite Midpoint rule for <span class="math notranslate nohighlight">\(n+2\)</span> subintervals
+is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8da72f00-0f75-4f1b-a529-fd106002aee2">
+<span class="eqno">(21)<a class="headerlink" href="#equation-8da72f00-0f75-4f1b-a529-fd106002aee2" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_{a}^{b}f(x)dx=2h\sum_{j=0}^{n/2}f(x_{2j})+\frac{b-a}{6}h^{2}f''(\xi)
+\end{align}\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Composite Trapezoidal rule</strong>
+Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}\)</span>, and <span class="math notranslate nohighlight">\(x_{j}=a+jh\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n.\)</span>
+The composite Trapezoidal rule for <span class="math notranslate nohighlight">\(n\)</span> subintervals is</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-63cfe769-2646-4daf-b2a2-d47c84eb22fe">
+<span class="eqno">(22)<a class="headerlink" href="#equation-63cfe769-2646-4daf-b2a2-d47c84eb22fe" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_{a}^{b}f(x)dx=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_{j})+f(b)\right]-\frac{b-a}{12}h^{2}f''(\xi)
+\end{align}\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Composite Simpson’s rule</strong>
+Let <span class="math notranslate nohighlight">\(f\in C^{4}[a,b],\)</span> <span class="math notranslate nohighlight">\(n\)</span> be even, <span class="math notranslate nohighlight">\(h=\frac{b-a}{n},\)</span> and <span class="math notranslate nohighlight">\(x_{j}=a+jh\)</span>
+for <span class="math notranslate nohighlight">\(j=0,1,...,n.\)</span> The composite Simpson’s rule for <span class="math notranslate nohighlight">\(n\)</span> subintervals
+is</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-comps">
+<span class="eqno">(23)<a class="headerlink" href="#equation-comps" title="Permalink to this equation">#</a></span>\[\int_{a}^{b}f(x)dx=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{\frac{n}{2}-1}f(x_{2j})+4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{b-a}{180}h^{4}f^{(4)}(\xi)\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
+<p><strong>Exercise 4.2-1</strong></p>
+<p>Show that the quadrature rule in <a class="reference internal" href="#chap4_exa74">Example 29</a> corresponds to taking <span class="math notranslate nohighlight">\(n=4\)</span> in the composite Simpson’s formula <a class="reference internal" href="#equation-comps">(23)</a>.</p>
+<p><strong>Exercise 4.2-2</strong></p>
+<p>Show that the absolute error for the composite trapezoidal rule decays at the rate of <span class="math notranslate nohighlight">\(1/n^2\)</span>, and the absolute error for the composite Simpson’s rule decays at the rate of <span class="math notranslate nohighlight">\(1/n^4\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of subintervals.</p>
+<div class="proof example admonition" id="chap4_exa75">
+<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
+<section class="example-content" id="proof-content">
+<p>Determine <span class="math notranslate nohighlight">\(n\)</span> that ensures the composite Simpson’s rule approximates <span class="math notranslate nohighlight">\(\int_{1}^{2}x\log xdx\)</span> with an absolute error of at most <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>The error term for the composite Simpson’s rule is <span class="math notranslate nohighlight">\(\frac{b-a}{180}h^{4}f^{(4)}(\xi)\)</span>
+where <span class="math notranslate nohighlight">\(\xi\)</span> is some number between <span class="math notranslate nohighlight">\(a=1\)</span> and <span class="math notranslate nohighlight">\(b=2\)</span>, and <span class="math notranslate nohighlight">\(h=(b-a)/n.\)</span>
+Differentiate to get <span class="math notranslate nohighlight">\(f^{(4)}(x)=\frac{2}{x^{3}}.\)</span> Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{b-a}{180}h^{4}f^{(4)}(\xi)=\frac{1}{180}h^{4}\frac{2}{\xi^{3}}\leq\frac{h^{4}}{90}
+\end{equation*}\]</div>
+<p>where we used the fact that <span class="math notranslate nohighlight">\(\frac{2}{\xi^{3}}\leq\frac{2}{1}=2\)</span>
+when <span class="math notranslate nohighlight">\(\xi\in(1,2)\)</span>. Now make the upper bound less than <span class="math notranslate nohighlight">\(10^{-6}\)</span>,
+that is,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{h^{4}}{90}\leq10^{-6}\Rightarrow\frac{1}{n^{4}(90)}\leq10^{-6}\Rightarrow n^{4}\geq\frac{10^{6}}{90}\approx11111.11
+\end{equation*}\]</div>
+<p>which implies <span class="math notranslate nohighlight">\(n\geq 10.27.\)</span> Since <span class="math notranslate nohighlight">\(n\)</span> must be even for Simpson’s rule, this means the smallest value of <span class="math notranslate nohighlight">\(n\)</span> to ensure an error of at most <span class="math notranslate nohighlight">\(10^{-6}\)</span> is 12.</p>
+<p>Using the Python code for the composite Simpson’s rule that will be introduced next, we get 0.6362945608 as the estimate, using 10 digits. The correct integral to 10 digits is <span class="math notranslate nohighlight">\(0.6362943611\)</span>, which means
+an absolute error of <span class="math notranslate nohighlight">\(2\times10^{-7}\)</span>, better than the expected <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p>
+<section id="python-codes-for-newton-cotes-formulas">
+<h2>Python codes for Newton-Cotes formulas<a class="headerlink" href="#python-codes-for-newton-cotes-formulas" title="Permalink to this headline">#</a></h2>
+<p>We write codes for the trapezoidal and Simpson’s rules, and the composite Simpson’s rule. Coding trapezoidal and Simpson’s rule is straightforward.</p>
+<section id="trapezoidal-rule">
+<h3>Trapezoidal rule<a class="headerlink" href="#trapezoidal-rule" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s verify the calculations of <a class="reference internal" href="bookchapter5-1.html#chap4_exa72">Example 27</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42677669529663687
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simpson-s-rule">
+<h3>Simpson’s rule<a class="headerlink" href="#simpson-s-rule" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simpson</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">f</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4109013813880978
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that the degree of accuracy of Simpson’s rule is 3. This means
+the rule integrates polynomials <span class="math notranslate nohighlight">\(1, x, x^2,x^3\)</span> exactly, but not
+<span class="math notranslate nohighlight">\(x^4\)</span>. We can use this as a way to verify our code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.20833333333333334
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="composite-simpson-s-rule">
+<h3>Composite Simpson’s rule<a class="headerlink" href="#composite-simpson-s-rule" title="Permalink to this headline">#</a></h3>
+<p>Next we code the composite Simpson’s rule, and verify the result of <a class="reference internal" href="#chap4_exa75">Example 30</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compsimpson</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="mi">4</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compsimpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.636294560831306
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 4.2-3</strong></p>
+<p>Determine the value of <span class="math notranslate nohighlight">\(n\)</span> required to approximate</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{2}\frac{1}{x+1}dx
+\end{equation*}\]</div>
+<p>to within <span class="math notranslate nohighlight">\(10^{-4}\)</span>, and compute the approximation, using the composite
+trapezoidal and composite Simpson’s rule.</p>
+</section>
+</section>
+<section id="composite-rules-and-roundoff-error">
+<h2>Composite rules and roundoff error<a class="headerlink" href="#composite-rules-and-roundoff-error" title="Permalink to this headline">#</a></h2>
+<p>As we increase <span class="math notranslate nohighlight">\(n\)</span> in the composite rules to lower error, the number
+of function evaluations increases, and a natural question to ask would
+be whether roundoff error could accumulate and cause problems. Somewhat
+remarkably, the answer is no. Let’s assume the roundoff error associated
+with computing <span class="math notranslate nohighlight">\(f(x)\)</span> is bounded for all <span class="math notranslate nohighlight">\(x,\)</span> by some positive
+constant <span class="math notranslate nohighlight">\(\epsilon\)</span>. And let’s try to compute the roundoff error
+in composite Simpson rule. Since each function evaluation in the composite
+rule incorporates an error of (at most) <span class="math notranslate nohighlight">\(\epsilon\)</span>, the total error
+is bounded by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{h}{3}\left[\epsilon+2\sum_{j=1}^{\frac{n}{2}-1}\epsilon+4\sum_{j=1}^{n/2}\epsilon+\epsilon\right] &amp; \leq\frac{h}{3}\left[\epsilon+2\left(\frac{n}{2}-1\right)\epsilon+4\left(\frac{n}{2}\right)\epsilon+\epsilon\right]
+  =\frac{h}{3}(3n\epsilon)=hn\epsilon.
+\end{align*}\]</div>
+<p>However, since <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span>, the bound simplifies as <span class="math notranslate nohighlight">\(hn\epsilon=(b-a)\epsilon.\)</span>
+Therefore no matter how large <span class="math notranslate nohighlight">\(n\)</span> is, that is, how large the number
+of function evaluations is, the roundoff error is bounded by the same
+constant <span class="math notranslate nohighlight">\((b-a)\epsilon\)</span> which only depends on the size of the interval.</p>
+<p><strong>Exercise 4.2-4</strong></p>
+<p>(This problem shows that numerical quadrature is stable with respect to error in function
+values.) Assume the function values <span class="math notranslate nohighlight">\(f(x_{i})\)</span> are approximated by
+<span class="math notranslate nohighlight">\(\tilde{f}(x_{i})\)</span>, so that <span class="math notranslate nohighlight">\(|f(x_{i})-\tilde{f}(x_{i})|&lt;\epsilon\)</span>
+for any <span class="math notranslate nohighlight">\(x_{i}\in(a,b).\)</span> Find an upper bound on the error of numerical
+quadrature <span class="math notranslate nohighlight">\(\sum w_{i}f(x_{i})\)</span> when it is actually computed as <span class="math notranslate nohighlight">\(\sum w_{i}\tilde{f}(x_{i})\)</span>.</p>
+<span class="target" id="id1"></span></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter5-1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">5.1 Newton-Cotes formulas</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter5-3.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5.3 Gaussian quadrature</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

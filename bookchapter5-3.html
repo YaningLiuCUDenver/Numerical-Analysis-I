@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5.3 Gaussian quadrature &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.4 Multiple integrals" href="bookchapter5-4.html" />
+    <link rel="prev" title="5.2 Composite Newton-Cotes formulas" href="bookchapter5-2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter5-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter5-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-gauss-legendre-rule-with-five-nodes">
+   Python code for Gauss-Legendre rule with five nodes
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5.3 Gaussian quadrature</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-gauss-legendre-rule-with-five-nodes">
+   Python code for Gauss-Legendre rule with five nodes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-quadrature">
+<h1>5.3 Gaussian quadrature<a class="headerlink" href="#gaussian-quadrature" title="Permalink to this headline">#</a></h1>
+<p>Newton-Cotes formulas were obtained by integrating interpolating polynomials
+with equally-spaced nodes. The equal spacing is convenient in deriving
+simple expressions for the composite rules. However, this placement
+of nodes is not necessarily the optimal placement. For example, the
+trapezoidal rule approximates the integral by integrating a linear
+function that joins the endpoints of the function. The fact that this is not the optimal choice can be seen by sketching a simple parabola.</p>
+<p>The idea of Gaussian quadrature is the following: in the numerical
+quadrature rule</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx\approx\sum_{i=1}^{n}w_{i}f(x_{i})
+\end{equation*}\]</div>
+<p>choose <span class="math notranslate nohighlight">\(x_{i}\)</span> and <span class="math notranslate nohighlight">\(w_{i}\)</span> in such a way that the quadrature rule
+has the highest possible accuracy. Note that unlike Newton-Cotes formulas where we started labeling the nodes with <span class="math notranslate nohighlight">\(x_0\)</span>, in the Gaussian quadrature the first node is <span class="math notranslate nohighlight">\(x_1\)</span>. This difference in notation is common in the literature, and each choice makes the subsequent equations in the corresponding theory easier to read.</p>
+<div class="proof example admonition" id="chap4_exa76">
+<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((a,b)=(-1,1),\)</span> and <span class="math notranslate nohighlight">\(n=2.\)</span> Find the ``best’’ <span class="math notranslate nohighlight">\(x_{i}\)</span> and
+<span class="math notranslate nohighlight">\(w_{i}\)</span>.</p>
+<p>There are four parameters to determine: <span class="math notranslate nohighlight">\(x_{1},x_{2},w_{1},w_{2}.\)</span> We
+need four constraints. Let’s require the rule to integrate the following
+functions exactly: <span class="math notranslate nohighlight">\(f(x)=1,f(x)=x,f(x)=x^{2}\)</span>, and <span class="math notranslate nohighlight">\(f(x)=x^{3}\)</span>.</p>
+<p>If the rule integrates <span class="math notranslate nohighlight">\(f(x)=1\)</span> exactly, then <span class="math notranslate nohighlight">\(\int_{-1}^{1}dx=\sum_{i=1}^{2}w_{i}\)</span>,
+i.e., <span class="math notranslate nohighlight">\(w_{1}+w_{2}=2.\)</span> If the rule integrates <span class="math notranslate nohighlight">\(f(x)=x\)</span> exactly,
+then <span class="math notranslate nohighlight">\(\int_{-1}^{1}xdx=\sum_{i=1}^{2}w_{i}x_{i}\)</span>, i.e., <span class="math notranslate nohighlight">\(w_{1}x_{1}+w_{2}x_{2}=0.\)</span>
+Continuing this for <span class="math notranslate nohighlight">\(f(x)=x^{2}\)</span>, and <span class="math notranslate nohighlight">\(f(x)=x^{3},\)</span> we obtain the
+following equations:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+w_{1}+w_{2} &amp; =2\\
+w_{1}x_{1}+w_{2}x_{2} &amp; =0\\
+w_{1}x_{1}^{2}+w_{2}x_{2}^{2} &amp; =\frac{2}{3}\\
+w_{1}x_{1}^{3}+w_{2}x_{2}^{3} &amp; =0.
+\end{align*}\]</div>
+<p>Solving the equations gives: <span class="math notranslate nohighlight">\(w_{1}=w_{2}=1,x_{1}=\frac{-\sqrt{3}}{3},x_{2}=\frac{\sqrt{3}}{3}\)</span>.
+Therefore the quadrature rule is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{-1}^{1}f(x)dx\approx f\left(\frac{-\sqrt{3}}{3}\right)+f\left(\frac{\sqrt{3}}{3}\right).
+\end{equation*}\]</div>
+</section>
+</div><p>Observe that:</p>
+<ul class="simple">
+<li><p>The two nodes are not equally spaced on <span class="math notranslate nohighlight">\((-1,1)\)</span>.</p></li>
+<li><p>The accuracy of the rule is three, and it uses only two nodes. Recall that
+the accuracy of Simpson’s rule is also three but it uses three nodes. In general
+Gaussian quadrature gives a degree of accuracy of <span class="math notranslate nohighlight">\(2n-1\)</span> using only
+<span class="math notranslate nohighlight">\(n\)</span> nodes.</p></li>
+</ul>
+<p>We were able to solve for the nodes and weights in the simple example
+above; however, as the number of nodes increases, the resulting non-linear
+system of equations will be very difficult to solve. There is an alternative
+approach using the theory of orthogonal polynomials, a topic we will
+discuss in detail later. Here, we will use a particular set of orthogonal
+polynomials <span class="math notranslate nohighlight">\(\{L_{0}(x),L_{1}(x),...,L_{n}(x),...\}\)</span> called Legendre
+polynomials. We will give a definition of these polynomials in the next chapter. For this discussion, we just need the following properties of these polynomials:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_{n}(x)\)</span> is a monic polynomial of degree <span class="math notranslate nohighlight">\(n\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1}P(x)L_{n}(x)dx=0\)</span> for any polynomial <span class="math notranslate nohighlight">\(P(x)\)</span> of degree
+less than <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+<p>The first few Legendre polynomials are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L_{0}(x)  =1,L_{1}(x)=x,L_{2}(x)=x^{2}-\frac{1}{3}, L_{3}(x) =x^{3}-\frac{3}{5}x,L_{4}(x)=x^{4}-\frac{6}{7}x^{2}+\frac{3}{35}.
+\end{align*}\]</div>
+<p>How do these polynomials help with finding the nodes and the weights
+of the Gaussian quadrature rule? The answer is short: the <strong>roots</strong> of the Legendre
+polynomials are the <strong>nodes</strong> of the quadrature rule!</p>
+<p>To summarize, the <strong>Gauss-Legendre quadrature rule</strong> for the integral of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\((-1,1)\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{-1}^1 f(x)dx = \sum_{i=1}^n w_i f(x_i)
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_{1},x_{2},...,x_{n}\)</span> are the roots of the <span class="math notranslate nohighlight">\(n\)</span>th Legendre polynomial, and the weights are computed using the following theorem.</p>
+<div class="proof theorem admonition" id="chap4_thm77">
+<p class="admonition-title"><span class="caption-number">Theorem 24 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(x_{1},x_{2},...,x_{n}\)</span> are the roots of the <span class="math notranslate nohighlight">\(n\)</span>th
+Legendre polynomial <span class="math notranslate nohighlight">\(L_{n}(x)\)</span> and the weights are given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+w_{i}=\int_{-1}^{1}\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx.
+\end{equation*}\]</div>
+<p>Then the Gauss-Legendre quadrature rule has degree of accuracy <span class="math notranslate nohighlight">\(2n-1\)</span>. In other words, if <span class="math notranslate nohighlight">\(P(x)\)</span> is any polynomial of degree less than or equal to <span class="math notranslate nohighlight">\(2n-1\)</span>,
+then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{-1}^{1}P(x)dx=\sum_{i=1}^{n}w_{i}P(x_{i}).
+\end{equation*}\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let’s start with a polynomial <span class="math notranslate nohighlight">\(P(x)\)</span> with degree less than <span class="math notranslate nohighlight">\(n\)</span>.
+Construct the Lagrange interpolant for <span class="math notranslate nohighlight">\(P(x),\)</span> using the nodes as
+<span class="math notranslate nohighlight">\(x_{1},...,x_{n}\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P(x)=\sum_{i=1}^{n}P(x_{i})l_{i}(x)=\sum_{i=1}^{n}\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}P(x_{i}).
+\end{equation*}\]</div>
+<p>There is no error term above because the error term depends on the
+<span class="math notranslate nohighlight">\(n\)</span>th derivative of <span class="math notranslate nohighlight">\(P(x)\)</span>, but <span class="math notranslate nohighlight">\(P(x)\)</span> is a polynomial of degree
+less than <span class="math notranslate nohighlight">\(n\)</span>, so that derivative is zero. Integrate both sides to
+get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{-1}^{1}P(x)dx  =\int_{-1}^{1}\left[\sum_{i=1}^{n}\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}P(x_{i})\right]dx
+ &amp; =\int_{-1}^{1}\left[\sum_{i=1}^{n}P(x_{i})\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}\right]dx\\
+ &amp; =\sum_{i=1}^{n}\left[\int_{-1}^{1}P(x_{i})\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx\right]\\
+ &amp; =\sum_{i=1}^{n}\left[\int_{-1}^{1}\prod_{j=1,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx\right]P(x_{i})\\
+ &amp; =\sum_{i=1}^{n}w_{i}P(x_{i}).
+\end{align*}\]</div>
+<p>Therefore the theorem is correct for polynomials of degree less than <span class="math notranslate nohighlight">\(n\)</span>.
+Now let <span class="math notranslate nohighlight">\(P(x)\)</span> be a polynomial of degree greater than or equal to <span class="math notranslate nohighlight">\(n\)</span>, but less
+than or equal to <span class="math notranslate nohighlight">\(2n-1\)</span>. Divide <span class="math notranslate nohighlight">\(P(x)\)</span> by the Legendre polynomial
+<span class="math notranslate nohighlight">\(L_{n}(x)\)</span> to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P(x)=Q(x)L_{n}(x)+R(x).
+\end{equation*}\]</div>
+<p>Note that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P(x_{i})=Q(x_{i})L_{n}(x_{i})+R(x_{i})=R(x_{i})
+\end{equation*}\]</div>
+<p>since <span class="math notranslate nohighlight">\(L_{n}(x_{i})=0\)</span> , for <span class="math notranslate nohighlight">\(i=1,2,...,n.\)</span> Also observe the following
+facts:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1}Q(x)L_{n}(x)dx=0,\)</span> since <span class="math notranslate nohighlight">\(Q(x)\)</span> is a polynomial
+of degree less than <span class="math notranslate nohighlight">\(n,\)</span> and from the second property of Legendre polynomials.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1}R(x)dx=\sum_{i=1}^{n}w_{i}R(x_{i}),\)</span> since <span class="math notranslate nohighlight">\(R(x)\)</span>
+is a polynomial of degree less than <span class="math notranslate nohighlight">\(n,\)</span> and from the first part
+of the proof.</p></li>
+</ol>
+<p>Putting these facts together we get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{-1}^{1}P(x)dx=\int_{-1}^{1}\left[Q(x)L_{n}(x)+R(x)\right]dx=\int_{-1}^{1}R(x)dx=\sum_{i=1}^{n}w_{i}R(x_{i})=\sum_{i=1}^{n}w_{i}P(x_{i}).
+\end{equation*}\]</div>
+</div>
+<p><a class="reference internal" href="#legendre-roots"><span class="std std-numref">Table 1</span></a> displays the roots of the Legendre polynomials <span class="math notranslate nohighlight">\(L_2,L_3,L_4,L_5\)</span> and the corresponding weights.</p>
+<table class="table" id="legendre-roots">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Roots of Legendre polynomials <span class="math notranslate nohighlight">\(L_2\)</span> through <span class="math notranslate nohighlight">\(L_5\)</span></span><a class="headerlink" href="#legendre-roots" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head"><p>Roots</p></th>
+<th class="head"><p>Weights</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{3}}=0.5773502692\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><span class="math notranslate nohighlight">\(-\frac{1}{\sqrt{3}}=-0.5773502692\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-(\frac{3}{5})^{1/2}=-0.7745966692\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{5}{9}=0.5555555556\)</span></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><span class="math notranslate nohighlight">\(0.0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{8}{9}=0.8888888889\)</span></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><span class="math notranslate nohighlight">\((\frac{3}{5})^{1/2}=0.7745966692\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{5}{9}=0.5555555556\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.8611363116\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.3478548451\)</span></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><span class="math notranslate nohighlight">\(0.3399810436\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.6521451549\)</span></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><span class="math notranslate nohighlight">\(-0.3399810436\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.6521451549\)</span></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><span class="math notranslate nohighlight">\(-0.8611363116\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.3478548451\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.9061798459\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.2369268850\)</span></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><span class="math notranslate nohighlight">\(0.5384693101\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.4786286705\)</span></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><span class="math notranslate nohighlight">\(0.0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5688888889\)</span></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><span class="math notranslate nohighlight">\(-0.5384693101\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.4786286705\)</span></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><span class="math notranslate nohighlight">\(-0.9061798459\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.2369268850\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="proof example admonition" id="chap4_exa78">
+<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
+<section class="example-content" id="proof-content">
+<p>Approximate <span class="math notranslate nohighlight">\(\int_{-1}^1 \cos x dx\)</span> using Gauss-Legendre quadrature with <span class="math notranslate nohighlight">\(n=3\)</span> nodes.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>From <a class="reference internal" href="#legendre-roots"><span class="std std-numref">Table 1</span></a>, and using two-digit rounding, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{-1}^1 \cos x dx \approx 0.56 \cos (-0.77) + 0.89 \cos 0 + 0.56 \cos (0.77)=1.69
+\end{equation*}\]</div>
+<p>and the true solution is <span class="math notranslate nohighlight">\(\sin(1)-\sin(-1)=1.68\)</span>.</p>
+<p>So far we discussed integrating functions over the interval <span class="math notranslate nohighlight">\((-1,1).\)</span> What if we have a different integration domain? The answer is simple: change of variables! To compute <span class="math notranslate nohighlight">\(\int_{a}^{b}f(x)dx\)</span> for any <span class="math notranslate nohighlight">\(a&lt;b\)</span>, we use the following change of variables:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+t=\frac{2x-a-b}{b-a}\Leftrightarrow x=\frac{1}{2}\left[(b-a)t+a+b\right]
+\end{equation*}\]</div>
+<p>With this substitution, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_a^b f(x) dx = \frac{b-a}{2} \int_{-1}^1 f \left( \frac{1}{2}\left[(b-a)t+a+b\right] \right)dt.
+\end{equation*}\]</div>
+<p>Now we can approximate the integral on the right-hand side as before.</p>
+<div class="proof example admonition" id="chap4_exa79">
+<p class="admonition-title"><span class="caption-number">Example 33 </span></p>
+<section class="example-content" id="proof-content">
+<p>Approximate <span class="math notranslate nohighlight">\(\int_{0.5}^{1}x^x dx\)</span> using Gauss-Legendre quadrature
+with <span class="math notranslate nohighlight">\(n=2\)</span> nodes.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>Transform the integral using <span class="math notranslate nohighlight">\(x=\frac{1}{2}\left(0.5t+1.5\right)=\frac{1}{2}(\frac{t}{2}+\frac{3}{2})=\frac{t+3}{4},dx=\frac{dt}{4}\)</span> to get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0.5}^{1}x^x dx=\frac{1}{4}\int_{-1}^{1} \left(\frac{t+3}{4}\right)^{\frac{t+3}{4}}dt.
+\end{equation*}\]</div>
+<p>For <span class="math notranslate nohighlight">\(n=2\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{4}\int_{-1}^{1} \left(\frac{t+3}{4}\right)^{\frac{t+3}{4}}dt\approx \frac{1}{4} \left[ \left( \frac{1}{4\sqrt{3}}+\frac{3}{4}\right)^{\left( \frac{1}{4\sqrt{3}}+\frac{3}{4}\right)}+\left(- \frac{1}{4\sqrt{3}}+\frac{3}{4}\right)^{\left( -\frac{1}{4\sqrt{3}}+\frac{3}{4}\right)} \right]=0.410759,
+\end{align*}\]</div>
+<p>using six significant digits.
+We will next use Python for a five-node computation of the integral.</p>
+<section id="python-code-for-gauss-legendre-rule-with-five-nodes">
+<h2>Python code for Gauss-Legendre rule with five nodes<a class="headerlink" href="#python-code-for-gauss-legendre-rule-with-five-nodes" title="Permalink to this headline">#</a></h2>
+<p>The following code computes the Gauss-Legendre rule for <span class="math notranslate nohighlight">\(\int_{-1}^1 f(x)dx\)</span> using <span class="math notranslate nohighlight">\(n=5\)</span> nodes. The nodes and weights are from <a class="reference internal" href="#legendre-roots"><span class="std std-numref">Table 1</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.2369268851</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mf">0.9061798459</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2369268851</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mf">0.9061798459</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="mf">0.5688888889</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.4786286705</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mf">0.5384693101</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="mf">0.4786286705</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5384693101</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we compute <span class="math notranslate nohighlight">\(\frac{1}{4}\int_{-1}^{1} \left(\frac{t+3}{4}\right)^{\frac{t+3}{4}}dt\)</span> using the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.25</span><span class="o">*</span><span class="n">gauss</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">4</span><span class="o">+</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">4</span><span class="o">+</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.41081564812239885
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next theorem is about the error of the Gauss-Legendre rule. Its proof can be found in <span id="id1">Atkinson [<a class="reference internal" href="#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>. The theorem shows, in particular, that the degree of accuracy of the quadrature rule, using <span class="math notranslate nohighlight">\(n\)</span> nodes, is <span class="math notranslate nohighlight">\(2n-1\)</span>.</p>
+<div class="proof theorem admonition" id="chap4_thm80">
+<p class="admonition-title"><span class="caption-number">Theorem 25 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\in C^{2n}[-1,1].\)</span> The error of Gauss-Legendre rule satisfies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx-\sum_{i=1}^{n}w_{i}f(x_{i})=\textcolor{blue}{\frac{2^{2n+1}(n!)^{4}}{(2n+1)\left[(2n)!\right]^{2}}}\frac{f^{(2n)}(\xi)}{(2n)!}
+\end{equation*}\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\xi\in(-1,1)\)</span>.</p>
+</section>
+</div><p>Using Stirling’s formula <span class="math notranslate nohighlight">\(n! \sim e^{-n} n^n (2\pi n)^{1/2}\)</span>, where the symbol <span class="math notranslate nohighlight">\(\sim\)</span> means the ratio of the two sides converges to 1 as <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span>, it can be shown that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\textcolor{blue}{\frac{2^{2n+1}(n!)^{4}}{(2n+1)\left[(2n)!\right]^{2}}}\sim \frac{\pi}{4^{n}}.
+\end{equation*}\]</div>
+<p>This means the error of Gauss-Legendre rule decays at an exponential rate of
+<span class="math notranslate nohighlight">\(1/4^{n}\)</span> as opposed to, for example, the polynomial rate of <span class="math notranslate nohighlight">\(1/n^{4}\)</span> for composite Simpson’s
+rule.</p>
+<p><strong>Exercise 5.3-1</strong></p>
+<p>Prove that the sum of the weights in Gauss-Legendre quadrature is
+2, for any <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><strong>Exercise 5.3-2</strong></p>
+<p>Take <span class="math notranslate nohighlight">\(f(x)=1\)</span> in <span class="math notranslate nohighlight">\(\int_{-1}^1 f(x)dx=\sum_{i=1}^n w_i f(x_i)\)</span> (the error term is zero because the derivative of <span class="math notranslate nohighlight">\(f\)</span> is zero) to get <span class="math notranslate nohighlight">\(2=\sum_{i=1}^n w_i\)</span>.</p>
+<p><strong>Exercise 5.3-3</strong></p>
+<p>Approximate <span class="math notranslate nohighlight">\(\int_{1}^{1.5}x^{2}\log xdx\)</span> using Gauss-Legendre rule
+with <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(n=3\)</span>. Compare the approximations to the exact value
+of the integral.</p>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
+<dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter5-2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">5.2 Composite Newton-Cotes formulas</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter5-4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5.4 Multiple integrals</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

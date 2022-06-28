@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5.6 Numerical differentiation &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="5.5 Improper integrals" href="bookchapter5-5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter5-6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter5-6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numerical-differentiation-and-roundoff-error">
+   Numerical differentiation and roundoff error
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arya-and-the-mysterious-black-box">
+     Arya and the mysterious black box
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#theoretical-analysis">
+     Theoretical analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5.6 Numerical differentiation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numerical-differentiation-and-roundoff-error">
+   Numerical differentiation and roundoff error
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arya-and-the-mysterious-black-box">
+     Arya and the mysterious black box
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#theoretical-analysis">
+     Theoretical analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="numerical-differentiation">
+<span id="section5-6"></span><h1>5.6 Numerical differentiation<a class="headerlink" href="#numerical-differentiation" title="Permalink to this headline">#</a></h1>
+<p>The derivative of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x_{0}\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(x_{0})=\lim_{h\rightarrow0}\frac{f(x_{0}+h)-f(x_{0})}{h}.
+\end{equation*}\]</div>
+<p>This formula gives an obvious way to estimate the derivative by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(x_{0})\approx\frac{f(x_{0}+h)-f(x_{0})}{h}
+\end{equation*}\]</div>
+<p>for small <span class="math notranslate nohighlight">\(h\)</span>. What this formula lacks, however, is it does not give
+any information about the error of the approximation.</p>
+<p>We will try another approach. Similar to Newton-Cotes quadrature, we
+will construct the interpolating polynomial for <span class="math notranslate nohighlight">\(f\)</span>, and then use
+the derivative of the polynomial as an approximation for the derivative
+of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>Let’s assume <span class="math notranslate nohighlight">\(f\in C^{2}(a,b),x_{0}\in(a,b),\)</span> and <span class="math notranslate nohighlight">\(x_{0}+h\in(a,b).\)</span>
+Construct the linear Lagrange interpolating polynomial <span class="math notranslate nohighlight">\(p_{1}(x)\)</span>
+for the data <span class="math notranslate nohighlight">\((x_{0},f(x_{0})),(x_{1},f(x_{1}))=(x_{0}+h,f(x_{0}+h))\)</span>. From <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 15</a>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp; =\underbrace{\frac{x-x_{1}}{x_{0}-x_{1}}f(x_{0})+\frac{x-x_{0}}{x_{1}-x_{0}}f(x_{1})}_{p_1(x)}+\underbrace{\frac{f''(\xi(x))}{2!}(x-x_{0})(x-x_{1})}_{\text{interpolation error}}\\
+ &amp; =\frac{x-(x_{0}+h)}{x_{0}-(x_{0}+h)}f(x_{0})+\frac{x-x_{0}}{x_{0}+h-x_{0}}f(x_{0}+h)+\frac{f''(\xi(x))}{2!}(x-x_{0})(x-x_{0}-h)\\
+ &amp; =\frac{x-x_{0}-h}{-h}f(x_{0})+\frac{x-x_{0}}{h}f(x_{0}+h)+\frac{f''(\xi(x))}{2!}(x-x_{0})(x-x_{0}-h).
+\end{align*}\]</div>
+<p>Now let’s differentiate <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x)&amp;=-\frac{f(x_{0})}{h}+\frac{f(x_{0}+h)}{h}+f''(\xi(x))\frac{d}{dx}\left[\frac{(x-x_{0})(x-x_{0}-h)}{2}\right]\\
+&amp;+\frac{(x-x_{0})(x-x_{0}-h)}{2}\frac{d}{dx}\left[f''(\xi(x))\right]\\
+&amp;=\frac{f(x_{0}+h)-f(x_{0})}{h}+\frac{2x-2x_{0}-h}{2}f''(\xi(x))+\frac{(x-x_{0})(x-x_{0}-h)}{2}f'''(\xi(x))\xi'(x).
+\end{align*}\]</div>
+<p>In the above equation, we know <span class="math notranslate nohighlight">\(\xi\)</span> is between <span class="math notranslate nohighlight">\(x_{0}\)</span>
+and <span class="math notranslate nohighlight">\(x_{0}+h\)</span>; however, we have no knowledge about <span class="math notranslate nohighlight">\(\xi'(x)\)</span>, which appears in the last term. Fortunately,
+if we set <span class="math notranslate nohighlight">\(x=x_{0},\)</span> the term with <span class="math notranslate nohighlight">\(\xi'(x)\)</span> vanishes and we get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(x_{0})=\frac{f(x_{0}+h)-f(x_{0})}{h}-\frac{h}{2}f''(\xi(x_{0})).
+\end{equation*}\]</div>
+<p>This formula is called the <strong>forward-difference</strong> formula if <span class="math notranslate nohighlight">\(h&gt;0\)</span> and <strong>backward-difference</strong>
+formula if <span class="math notranslate nohighlight">\(h&lt;0\)</span>. Note that from this formula we can obtain a bound
+on the error</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left|f'(x_{0})-\frac{f(x_{0}+h)-f(x_{0})}{h}\right|\leq\frac{h}{2}\sup_{x\in(x_0,x_0+h)}f''(x).
+\end{equation*}\]</div>
+<p>To obtain the forward-difference and backward-difference formulas
+we started with a linear polynomial interpolant on two points. Using
+more points and a higher order interpolant gives more accuracy, but
+also increases the computing time and roundoff error. In general,
+let <span class="math notranslate nohighlight">\(f\in C^{n+1}[a,b]\)</span> and <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> are distinct
+numbers in <span class="math notranslate nohighlight">\([a,b]\)</span>. We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+f(x)=\sum_{k=0}^{n}f(x_{k})l_{k}(x)+f^{(n+1)}(\xi)\frac{(x-x_{0})(x-x_{1})\cdots(x-x_{n})}{(n+1)!}\\
+\Rightarrow f'(x)=\sum_{k=0}^{n}f(x_{k})l'_{k}(x)+f^{(n+1)}(\xi)\frac{d}{dx}\left[\frac{(x-x_{0})(x-x_{1})\cdots(x-x_{n})}{(n+1)!}\right]\\
++\frac{(x-x_{0})(x-x_{1})\cdots(x-x_{n})}{(n+1)!}\frac{d}{dx}(f^{(n+1)}(\xi)).
+\end{gather*}\]</div>
+<p>If <span class="math notranslate nohighlight">\(x=x_{j}\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n,\)</span> the last term vanishes, and using
+the following result</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{d}{dx}\left[(x-x_{0})(x-x_{1})\cdots(x-x_{n})\right]_{x=x_{j}}=\prod_{k=0,k\neq j}^{n}(x_{j}-x_{k})
+\end{equation*}\]</div>
+<p>we obtain</p>
+<div class="math notranslate nohighlight" id="equation-n-1-pt-formula">
+<span class="eqno">(29)<a class="headerlink" href="#equation-n-1-pt-formula" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f'(x_{j})=\sum_{k=0}^{n}f(x_{k})l'_{k}(x_{j})+\frac{f^{(n+1)}(\xi(x_{j}))}{(n+1)!}\prod_{k=0,k\neq j}^{n}(x_{j}-x_{k})
+\end{equation}\]</div>
+<p>which is called the <span class="math notranslate nohighlight">\((n+1)\)</span>-point formula to approximate <span class="math notranslate nohighlight">\(f'(x_{j})\)</span>.
+The most common formulas use <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(n=4.\)</span> Here we discuss <span class="math notranslate nohighlight">\(n=2\)</span>, that is, three-point formulas. The nodes are, <span class="math notranslate nohighlight">\(x_{0},x_{1},x_{2}\)</span>. The Lagrange basis polynomials and their derivatives are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+l_{0}(x) &amp; =\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}\Rightarrow l'_{0}(x)=\frac{2x-x_{1}-x_{2}}{(x_{0}-x_{1})(x_{0}-x_{2})}\\
+l_{1}(x) &amp; =\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}\Rightarrow l'_{1}(x)=\frac{2x-x_{0}-x_{2}}{(x_{1}-x_{0})(x_{1}-x_{2})}\\
+l_{2}(x) &amp; =\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}\Rightarrow l_{2}'(x)=\frac{2x-x_{0}-x_{1}}{(x_{2}-x_{0})(x_{2}-x_{1})}
+\end{align*}\]</div>
+<p>These derivatives can be substituted in <a class="reference internal" href="#equation-n-1-pt-formula">(29)</a>
+to obtain the three-point formula. We can simplify these formulas
+if the nodes are spaced equally, that is, <span class="math notranslate nohighlight">\(x_{1}=x_{0}+h,x_{2}=x_{1}+h=x_{0}+2h.\)</span>
+Then, we obtain</p>
+<div class="math notranslate nohighlight" id="equation-first-eq">
+<span class="eqno">(30)<a class="headerlink" href="#equation-first-eq" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f'(x_{0})  =\frac{1}{2h}\left[-3f(x_{0})+4f(x_{0}+h)-f(x_{0}+2h)\right]+\frac{h^{2}}{3}f^{(3)}(\xi_{0})
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-sec-eqn">
+<span class="eqno">(31)<a class="headerlink" href="#equation-sec-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f'(x_{0}+h)  =\frac{1}{2h}\left[-f(x_{0})+f(x_{0}+2h)\right]-\frac{h^{2}}{6}f^{(3)}(\xi_{1})
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-third-eqn">
+<span class="eqno">(32)<a class="headerlink" href="#equation-third-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f'(x_{0}+2h)  =\frac{1}{2h}\left[f(x_{0})-4f(x_{0}+h)+3f(x_{0}+2h)\right]+\frac{h^{2}}{3}f^{(3)}(\xi_{2})
+\end{equation}\]</div>
+<p>It turns out that the first and third equations <a class="reference internal" href="#equation-first-eq">(30)</a> and <a class="reference internal" href="#equation-third-eqn">(32)</a> are equivalent. To see this, first substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-2h\)</span> in the third equation to get (ignoring the error term)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(x_{0})  =\frac{1}{2h}\left[f(x_{0}-2h)-4f(x_{0}-h)+3f(x_{0})\right],
+\end{equation*}\]</div>
+<p>and then set <span class="math notranslate nohighlight">\(h\)</span> to <span class="math notranslate nohighlight">\(-h\)</span> in the right-hand side to get  <span class="math notranslate nohighlight">\(\frac{1}{2h}\left[-f(x_{0}+2h)+4f(x_{0}+h)-3f(x_{0})\right]\)</span>, which gives us the first equation.</p>
+<p>Therefore we have only two distinct equations, <a class="reference internal" href="#equation-first-eq">(30)</a> and <a class="reference internal" href="#equation-sec-eqn">(31)</a>. We rewrite these equations below with one modification: in <a class="reference internal" href="#equation-sec-eqn">(31)</a>, we substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-h\)</span>. We then obtain two different
+formulas for <span class="math notranslate nohighlight">\(f'(x_{0})\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_{0})  &amp;=\frac{-3f(x_{0})+4f(x_{0}+h)-f(x_{0}+2h)}{2h}+\frac{h^{2}}{3}f^{(3)}(\xi_{0})
+\rightarrow  \textcolor{blue}{\text{three-point endpoint formula}}\\
+f'(x_{0})  &amp;=\frac{f(x_{0}+h)-f(x_{0}-h)}{2h}-\frac{h^{2}}{6}f^{(3)}(\xi_{1}) \rightarrow \textcolor{blue}{\text{three-point midpoint formula}}
+\end{align*}\]</div>
+<p>The three-point midpoint formula has some advantages: it has half
+the error of the endpoint formula, and it has one less function evaluation.
+The endpoint formula is useful if one does not know the value of <span class="math notranslate nohighlight">\(f\)</span>
+on one side, a situation that may happen if <span class="math notranslate nohighlight">\(x_{0}\)</span> is close to
+an endpoint.</p>
+<div class="proof example admonition" id="chap4_exa84">
+<p class="admonition-title"><span class="caption-number">Example 37 </span></p>
+<section class="example-content" id="proof-content">
+<p>The following table gives the values of <span class="math notranslate nohighlight">\(f(x)=\sin x\)</span>. Estimate <span class="math notranslate nohighlight">\(f'(0.1),f'(0.3)\)</span>
+using an appropriate three-point formula.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(f(x)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>0.1</p></td>
+<td class="text-align:left"><p>0.09983</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>0.2</p></td>
+<td class="text-align:left"><p>0.19867</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>0.3</p></td>
+<td class="text-align:left"><p>0.29552</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>0.4</p></td>
+<td class="text-align:left"><p>0.38942</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>To estimate <span class="math notranslate nohighlight">\(f'(0.1),\)</span> we set <span class="math notranslate nohighlight">\(x_{0}=0.1,\)</span> and <span class="math notranslate nohighlight">\(h=0.1\)</span>. Note that
+we can only use the three-point endpoint formula.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(0.1)\approx\frac{1}{0.2}\left(-3(0.09983)+4(0.19867)-0.29552\right)=0.99835.
+\end{equation*}\]</div>
+<p>The correct answer is <span class="math notranslate nohighlight">\(\cos0.1=0.995004.\)</span></p>
+<p>To estimate <span class="math notranslate nohighlight">\(f'(0.3)\)</span> we can use the midpoint formula:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(0.3)\approx\frac{1}{0.2}\left(0.38942-0.19867\right)=0.95375.
+\end{equation*}\]</div>
+<p>The correct answer is <span class="math notranslate nohighlight">\(\cos0.3=0.955336\)</span> and thus the absolute error
+is <span class="math notranslate nohighlight">\(1.59\times10^{-3}.\)</span> If we use the endpoint formula to estimate
+<span class="math notranslate nohighlight">\(f'(0.3)\)</span> we set <span class="math notranslate nohighlight">\(h=-0.1\)</span> and compute</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(0.3)\approx\frac{1}{-0.2}\left(-3(0.29552)+4(0.19867)-0.09983\right)=0.95855
+\end{equation*}\]</div>
+<p>with an absolute error of <span class="math notranslate nohighlight">\(3.2\times10^{-3}.\)</span></p>
+<p><strong>Exercise 5.6-1</strong></p>
+<p>In some applications,  we want to estimate the derivative of an unknown function from empirical data. However, empirical data usually come with “noise”, that is, error due to data collection, data reporting, or some other reason. In this exercise we will investigate how stable the difference formulas are when there is noise in the data. Consider the following data obtained from <span class="math notranslate nohighlight">\(y=e^x\)</span>. The data is exact to six digits.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:center head"><p>1.00</p></th>
+<th class="text-align:center head"><p>1.01</p></th>
+<th class="text-align:center head"><p>1.02</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x)\)</span></p></td>
+<td class="text-align:center"><p>2.71828</p></td>
+<td class="text-align:center"><p>2.74560</p></td>
+<td class="text-align:center"><p>2.77319</p></td>
+</tr>
+</tbody>
+</table>
+<p>We estimate <span class="math notranslate nohighlight">\(f'(1.01)\)</span> using the three-point midpoint formula and obtain <span class="math notranslate nohighlight">\(f'(1.01)=\frac{2.77319-2.71828}{0.02}=2.7455\)</span>. The true value is <span class="math notranslate nohighlight">\(f'(1.01)=e^{1.01}=2.74560\)</span>, and the relative error due to rounding is <span class="math notranslate nohighlight">\(3.6\times 10^{-5}\)</span>.</p>
+<p>Next, we add some noise to the data: we increase 2.77319 by 10% to 3.050509, and decrease 2.71828 by 10% to
+2.446452. Here is the noisy data:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:center head"><p>1.00</p></th>
+<th class="text-align:center head"><p>1.01</p></th>
+<th class="text-align:center head"><p>1.02</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x)\)</span></p></td>
+<td class="text-align:center"><p><strong>2.446452</strong></p></td>
+<td class="text-align:center"><p>2.74560</p></td>
+<td class="text-align:center"><p><strong>3.050509</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>Estimate <span class="math notranslate nohighlight">\(f'(1.01)\)</span> using the noisy data, and compute its relative error. How does the relative error compare with the relative error for the non-noisy data?</p>
+<p>We next want to explore how to estimate the second derivative of <span class="math notranslate nohighlight">\(f\)</span>.
+A similar approach to estimating <span class="math notranslate nohighlight">\(f'\)</span> can be taken and the second
+derivative of the interpolating polynomial can be used as an approximation.
+Here we will discuss another approach, using Taylor expansions. Expand
+<span class="math notranslate nohighlight">\(f\)</span> about <span class="math notranslate nohighlight">\(x_{0}\)</span>, and evaluate it at <span class="math notranslate nohighlight">\(x_{0}+h\)</span> and <span class="math notranslate nohighlight">\(x_{0}-h\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x_{0}+h) &amp; =f(x_{0})+hf'(x_{0})+\frac{h^{2}}{2}f''(x_{0})+\frac{h^{3}}{6}f^{(3)}(x_{0})+\frac{h^{4}}{24}f^{(4)}(\xi_{+})\\
+f(x_{0}-h) &amp; =f(x_{0})-hf'(x_{0})+\frac{h^{2}}{2}f''(x_{0})-\frac{h^{3}}{6}f^{(3)}(x_{0})+\frac{h^{4}}{24}f^{(4)}(\xi_{-})
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi_{+}\)</span> is between <span class="math notranslate nohighlight">\(x_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{0}+h,\)</span> and <span class="math notranslate nohighlight">\(\xi_{-}\)</span>
+is between <span class="math notranslate nohighlight">\(x_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{0}-h.\)</span> Add the equations to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x_{0}+h)+f(x_{0}-h)=2f(x_{0})+h^{2}f''(x_{0})+\frac{h^{4}}{24}\left[f^{(4)}(\xi_{+})+f^{(4)}(\xi_{-})\right].
+\end{equation*}\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(f''(x_{0})\)</span> gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f''(x_{0})=\frac{f(x_{0}+h)-2f(x_{0})+f(x_{0}-h)}{h^{2}}-\frac{h^{2}}{24}\left[f^{(4)}(\xi_{+})+f^{(4)}(\xi_{-})\right].
+\end{equation*}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\frac{f^{(4)}(\xi_{+})+f^{(4)}(\xi_{-})}{2}\)</span> is a number
+between <span class="math notranslate nohighlight">\(f^{(4)}(\xi_{+})\text{ and }f^{(4)}(\xi_{-})\)</span>, so from the
+Intermediate Value <a class="reference internal" href="bookchapter1-1.html#chap1_thm6">Theorem 4</a>, we can conclude there exists some <span class="math notranslate nohighlight">\(\xi\)</span>
+between <span class="math notranslate nohighlight">\(\xi_{-}\)</span> and <span class="math notranslate nohighlight">\(\xi_{+}\)</span> so that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f^{(4)}(\xi)=\frac{f^{(4)}(\xi_{+})+f^{(4)}(\xi_{-})}{2}.
+\end{equation*}\]</div>
+<p>Then the above formula simplifies as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f''(x_{0})=\frac{f(x_{0}+h)-2f(x_{0})+f(x_{0}-h)}{h^{2}}-\frac{h^{2}}{12}f^{(4)}(\xi)
+\end{equation*}\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\xi\)</span> between <span class="math notranslate nohighlight">\(x_{0}-h\)</span> and <span class="math notranslate nohighlight">\(x_{0}+h\)</span>.</p>
+<section id="numerical-differentiation-and-roundoff-error">
+<h2>Numerical differentiation and roundoff error<a class="headerlink" href="#numerical-differentiation-and-roundoff-error" title="Permalink to this headline">#</a></h2>
+<section id="arya-and-the-mysterious-black-box">
+<h3>Arya and the mysterious black box<a class="headerlink" href="#arya-and-the-mysterious-black-box" title="Permalink to this headline">#</a></h3>
+<figure class="align-right">
+<a class="reference internal image-reference" href="_images/Arya_bbox_1.png"><img alt="_images/Arya_bbox_1.png" src="_images/Arya_bbox_1.png" style="width: 300.0px; height: 252.0px;" /></a>
+</figure>
+<p>College life is full of mysteries, and Arya faces one in an engineering class: a black box! What is a black box? It is a computer program, or some device, which produces an output when an input is provided. We do not know the inner workings of the system, and hence comes the name black box. Let’s think of the black box as a function <span class="math notranslate nohighlight">\(f\)</span>, and represent the input and output as <span class="math notranslate nohighlight">\(x,f(x)\)</span>. Of course, we do not have a formula for <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>What Arya’s engineering classmates want to do is compute the derivative information of the black box, that is, <span class="math notranslate nohighlight">\(f'(x)\)</span>, when <span class="math notranslate nohighlight">\(x=2.\)</span> (The input to this black box can be any real number.) Students want to use the three-point midpoint formula to estimate <span class="math notranslate nohighlight">\(f'(2)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(2)  \approx \frac{1}{2h}\left[f(2+h)-f(2-h)\right].
+\end{equation*}\]</div>
+<p>They argue how to pick <span class="math notranslate nohighlight">\(h\)</span> in this formula. One of them says they should make <span class="math notranslate nohighlight">\(h\)</span> as small as possible, like <span class="math notranslate nohighlight">\(10^{-8}\)</span>. Arya is skeptical. She mutters to herself, “I know I slept through some of my numerical analysis lectures, but not all!”</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/Arya_bbox_2.png"><img alt="_images/Arya_bbox_2.png" src="_images/Arya_bbox_2.png" style="width: 683.5px; height: 250.5px;" /></a>
+</figure>
+<p>She tells her classmates about the cancellation of leading digits phenomenon, and to make her point more convincing, she makes the following experiment: let <span class="math notranslate nohighlight">\(f(x)=e^x\)</span>, and suppose we want to compute <span class="math notranslate nohighlight">\(f'(2)\)</span> which is <span class="math notranslate nohighlight">\(e^2\)</span>. Arya uses the three-point midpoint formula above to estimate <span class="math notranslate nohighlight">\(f'(2)\)</span>, for various values of <span class="math notranslate nohighlight">\(h\)</span>, and for each case she computes the absolute value of the difference between the three-point midpoint estimate and the exact solution <span class="math notranslate nohighlight">\(e^2\)</span>. She tabulates her results in the table below. Clearly, smaller <span class="math notranslate nohighlight">\(h\)</span> does not result in smaller error. In this experiment, <span class="math notranslate nohighlight">\(h=10^{-6}\)</span> gives the smallest error.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(h\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(10^{-4}\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(10^{-5}\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(10^{-6}\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(10^{-7}\)</span></p></th>
+<th class="text-align:left head"><p><span class="math notranslate nohighlight">\(10^{-8}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Abs. error</p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(1.2\times 10^{-8}\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(1.9\times 10^{-10}\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(5.2\times 10^{-11}\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(7.5\times 10^{-9}\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(2.1\times 10^{-8}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="theoretical-analysis">
+<h3>Theoretical analysis<a class="headerlink" href="#theoretical-analysis" title="Permalink to this headline">#</a></h3>
+<p>Numerical differentiation
+is a numerically unstable problem. To reduce the truncation error, we need to
+decrease <span class="math notranslate nohighlight">\(h\)</span>, which in turn increases the roundoff error due to cancellation of significant digits in the function difference calculation. Let <span class="math notranslate nohighlight">\(e(x)\)</span> denote the roundoff error in computing <span class="math notranslate nohighlight">\(f(x)\)</span> so
+that <span class="math notranslate nohighlight">\(f(x)=\tilde{f}(x)+e(x),\)</span> where <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is the value computed
+by the computer. Consider the three-point midpoint formula:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\left|f'(x_{0})-\frac{\tilde{f}(x_{0}+h)-\tilde{f}(x_{0}-h)}{2h}\right|\\
+&amp;=\left|f'(x_{0})-\frac{f(x_{0}+h)-e(x_{0}+h)-f(x_{0}-h)+e(x_{0}-h)}{2h}\right|\\
+&amp;=\left|f'(x_{0})-\frac{f(x_{0}+h)-f(x_{0}-h)}{2h}+\frac{e(x_{0}-h)-e(x_{0}+h)}{2h}\right|\\
+&amp;=\left|-\frac{h^{2}}{6}f^{(3)}(\xi)+\frac{e(x_{0}-h)-e(x_{0}+h)}{2h}\right|
+\leq \textcolor{blue}{\frac{h^{2}}{6}M+\frac{\epsilon}{h}}
+\end{align*}\]</div>
+<p>where we assumed <span class="math notranslate nohighlight">\(|f^{(3)}(\xi)|\leq M\)</span> and <span class="math notranslate nohighlight">\(|e(x)|\leq\epsilon.\)</span>
+To reduce the truncation error <span class="math notranslate nohighlight">\(h^{2}M/6\)</span> one would decrease <span class="math notranslate nohighlight">\(h\)</span>,
+which would then result in an increase in the roundoff error <span class="math notranslate nohighlight">\(\epsilon/h\)</span>.
+An optimal value for <span class="math notranslate nohighlight">\(h\)</span> can be found with these assumptions using
+Calculus: find the value for <span class="math notranslate nohighlight">\(h\)</span> that minimizes the function <span class="math notranslate nohighlight">\(s(h)=\frac{Mh^{2}}{6}+\frac{\epsilon}{h}.\)</span>
+The answer is <span class="math notranslate nohighlight">\(h=\sqrt[3]{3\epsilon/M}.\)</span></p>
+<p>Let’s revisit the table Arya presented where <span class="math notranslate nohighlight">\(10^{-6}\)</span> was found to be the optimal value for <span class="math notranslate nohighlight">\(h\)</span>. The calculations were done using Python, which reports 15 digits when asked for <span class="math notranslate nohighlight">\(e^2\)</span>. Let’s assume all these digits are correct, and thus let <span class="math notranslate nohighlight">\(\epsilon = 10^{-16}\)</span>. Since <span class="math notranslate nohighlight">\(f^{(3)}(x)=e^x\)</span> and <span class="math notranslate nohighlight">\(e^2\approx 7.4\)</span>, let’s take <span class="math notranslate nohighlight">\(M=7.4\)</span>. Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+h=\sqrt[3]{3\epsilon/M}=\sqrt[3]{3\times 10^{-16}/7.4}\approx 3.4 \times 10^{-6}
+\end{equation*}\]</div>
+<p>which is in good agreement with the optimal value <span class="math notranslate nohighlight">\(10^{-6}\)</span> of Arya’s numerical results.</p>
+<p><strong>Exercise 5.6-2</strong></p>
+<p>Find the optimal value for <span class="math notranslate nohighlight">\(h\)</span> that will minimize the error for the
+formula</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'(x_{0})=\frac{f(x_{0}+h)-f(x_{0})}{h}-\frac{h}{2}f''(\xi)
+\end{equation*}\]</div>
+<p>in the presence of roundoff error, using the approach of Section <a class="reference internal" href="#section5-6"><span class="std std-ref">5.6 Numerical differentiation</span></a>.</p>
+<p>a) Consider estimating <span class="math notranslate nohighlight">\(f'(1)\)</span> where <span class="math notranslate nohighlight">\(f(x)=x^{2}\)</span> using the above formula.
+What is the optimal value for <span class="math notranslate nohighlight">\(h\)</span> for estimating <span class="math notranslate nohighlight">\(f'(1),\)</span> assuming
+that the roundoff error is bounded by <span class="math notranslate nohighlight">\(\epsilon=10^{-16}\)</span> (which
+is the machine epsilon <span class="math notranslate nohighlight">\(2^{-53}\)</span> in the 64-bit floating point representation).</p>
+<p>b) Use Python to compute</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f'_{n}(1)=\frac{f(1+10^{-n})-f(1)}{10^{-n}},
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(n=1,2,...,20,\)</span> and describe what happens.</p>
+<p>c) Discuss your findings in parts (a) and (b) and how they relate to each
+other.</p>
+<p><strong>Exercise 5.6-3</strong></p>
+<p>The function <span class="math notranslate nohighlight">\(\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt\)</span> is
+related to the distribution function of the standard normal random
+variable, a very important distribution in probability and statistics.
+Often times we want to solve equations like</p>
+<div class="math notranslate nohighlight" id="equation-invert">
+<span class="eqno">(33)<a class="headerlink" href="#equation-invert" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt=z
+\end{equation}\]</div>
+<p>for <span class="math notranslate nohighlight">\(x\)</span>, where <span class="math notranslate nohighlight">\(z\)</span> is some real number between 0 and 1. This can
+be done by using Newton’s method to solve the equation <span class="math notranslate nohighlight">\(f(x)=0\)</span> where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x)=\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt-z.
+\end{equation*}\]</div>
+<p>Note that from Fundamental Theorem of Calculus, <span class="math notranslate nohighlight">\(f'(x)=\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}.\)</span>
+Newton’s method will require the calculation of</p>
+<div class="math notranslate nohighlight" id="equation-quad">
+<span class="eqno">(34)<a class="headerlink" href="#equation-quad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_{0}^{p_{k}}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{k}\)</span> is a Newton iterate. This integral can be computed
+using numerical quadrature. Write a Python code that takes <span class="math notranslate nohighlight">\(z\)</span> as
+its input, and outputs <span class="math notranslate nohighlight">\(x,\)</span> such that Equation <a class="reference internal" href="#equation-invert">(33)</a>
+holds. In your code, use the Python codes for Newton’s method and the
+composite Simpson’s rule you were given in class. For Newton’s method
+set tolerance to <span class="math notranslate nohighlight">\(10^{-5}\)</span> and <span class="math notranslate nohighlight">\(p_{0}=0.5,\)</span> and for composite Simpson’s
+rule take <span class="math notranslate nohighlight">\(n=10\)</span>, when computing the integrals <a class="reference internal" href="#equation-quad">(34)</a> that
+appear in Newton iteration. Then run your code for <span class="math notranslate nohighlight">\(z=0.4\)</span> and <span class="math notranslate nohighlight">\(z=0.1\)</span>,
+and report your output.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter5-5.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">5.5 Improper integrals</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

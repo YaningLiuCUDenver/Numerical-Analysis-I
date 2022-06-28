@@ -1,0 +1,1394 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4.1 Polynomial interpolation &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.2 High degree polynomial interpolation" href="bookchapter4-2.html" />
+    <link rel="prev" title="Chapter 4 Interpolation" href="bookchapter4-0.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter4-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter4-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monomial-form-of-polynomial-interpolation">
+   Monomial form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lagrange-form-of-polynomial-interpolation">
+   Lagrange form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-form-of-polynomial-interpolation">
+   Newton’s form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-newton-interpolation">
+   Python code for Newton interpolation
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4.1 Polynomial interpolation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monomial-form-of-polynomial-interpolation">
+   Monomial form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lagrange-form-of-polynomial-interpolation">
+   Lagrange form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-form-of-polynomial-interpolation">
+   Newton’s form of polynomial interpolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-newton-interpolation">
+   Python code for Newton interpolation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="polynomial-interpolation">
+<h1>4.1 Polynomial interpolation<a class="headerlink" href="#polynomial-interpolation" title="Permalink to this headline">#</a></h1>
+<p>In polynomial interpolation, we pick polynomials as the family of functions in the interpolation problem.</p>
+<ul class="simple">
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span></p></li>
+<li><p>Family: Polynomials</p></li>
+</ul>
+<p>The space of polynomials up to degree <span class="math notranslate nohighlight">\(n\)</span> is a vector space. We will consider three choices for the basis for this vector space:</p>
+<ul class="simple">
+<li><p>Basis:</p>
+<ul>
+<li><p>Monomial basis: <span class="math notranslate nohighlight">\(\phi_{k}(x)=x^{k}\)</span></p></li>
+<li><p>Lagrange basis: <span class="math notranslate nohighlight">\(\phi_{k}(x)=\prod_{j=0,j\neq k}^{n}\left(\frac{x-x_{j}}{x_{k}-x_{j}}\right)\)</span></p></li>
+<li><p>Newton basis: <span class="math notranslate nohighlight">\(\phi_{k}(x)=\prod_{j=0}^{k-1}(x-x_{j})\)</span>
+where <span class="math notranslate nohighlight">\(k=0,1,...,n\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p>Once we decide on the basis, the interpolating polynomial can be written as a linear combination of the basis functions:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=\sum_{k=0}^{n}a_{k}\phi_{k}(x)
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n.\)</span></p>
+<p>Here is an important question. How do we know that <span class="math notranslate nohighlight">\(p_{n}\)</span>, a polynomial of degree at most <span class="math notranslate nohighlight">\(n\)</span> passing through the data points, actually exists? Or, equivalently,
+how do we know the system of equations <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n\)</span>, has a solution?</p>
+<p>The answer is given by the following theorem, which we will prove later in this section.</p>
+<div class="proof theorem admonition" id="chap3_thm47">
+<p class="admonition-title"><span class="caption-number">Theorem 13 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>If points <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span>
+are distinct, then for real values <span class="math notranslate nohighlight">\(y_{0},y_{1},...,y_{n},\)</span> there
+is a unique polynomial <span class="math notranslate nohighlight">\(p_{n}\)</span> of degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n.\)</span></p>
+</section>
+</div><p>We mentioned three families of basis functions for polynomials. The choice of a family of basis functions affects:</p>
+<ul class="simple">
+<li><p>The accuracy of the numerical methods to solve the system of linear equations <span class="math notranslate nohighlight">\(Aa=y\)</span>.</p></li>
+<li><p>The ease at which the resulting polynomial can be evaluated, differentiated, integrated, etc.</p></li>
+</ul>
+<section id="monomial-form-of-polynomial-interpolation">
+<h2>Monomial form of polynomial interpolation<a class="headerlink" href="#monomial-form-of-polynomial-interpolation" title="Permalink to this headline">#</a></h2>
+<p>Given data <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span>, we know from the previous theorem that there exists a polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> of degree at most <span class="math notranslate nohighlight">\(n\)</span>, that passes through the data points. To represent <span class="math notranslate nohighlight">\(p_n(x)\)</span>, we will use the monomial basis functions, <span class="math notranslate nohighlight">\(1,x,x^{2},...,x^{n}\)</span>, or written more succinctly,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\phi_{k}(x)=x^{k},k=0,1,...,n.
+\end{equation*}\]</div>
+<p>The interpolating polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> can be written as a linear combination of these basis functions as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=a_{0}+a_{1}x+a_{2}x^{2}+...+a_{n}x^{n}.
+\end{equation*}\]</div>
+<p>We will determine <span class="math notranslate nohighlight">\(a_{i}\)</span> using the fact that <span class="math notranslate nohighlight">\(p_n\)</span> is an interpolant for the data:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x_{i})=a_{0}+a_{1}x_{i}+a_{2}x_{i}^{2}+...+a_{n}x_{i}^{n}=y_{i}
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> Or, in matrix form, we want to solve</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\underbrace{\begin{bmatrix}1 &amp; x_{0} &amp; x_{0}^{2} &amp; ... &amp; x_{0}^{n}\\
+1 &amp; x_{1} &amp; x_{1}^{2} &amp;  &amp; x_{1}^{n}\\
+\vdots\\
+1 &amp; x_{n} &amp; x_{n}^{2} &amp;  &amp; x_{n}^{n}
+\end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
+a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}}_a=\underbrace{\begin{bmatrix}y_{0}\\
+y_{1}\\
+\vdots\\
+y_{n}
+\end{bmatrix}}_y
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}\)</span> where <span class="math notranslate nohighlight">\([\cdot]^T\)</span> stands for the transpose of the vector.
+\index{van der Monde matrix}
+The coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is known as the van der Monde matrix. This
+is usually an ill-conditioned matrix, which means solving the system of equations
+could result in large error in the coefficients <span class="math notranslate nohighlight">\(a_{i}.\)</span> An intuitive
+way to understand the ill-conditioning is to plot several basis monomials,
+and note how less distinguishable they are as the degree increases,
+making the columns of the matrix nearly linearly dependent.</p>
+<figure class="align-default" id="monomial-basis-functions">
+<a class="reference internal image-reference" href="_images/monbasis_plot.png"><img alt="_images/monbasis_plot.png" src="_images/monbasis_plot.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Monomial basis functions</span><a class="headerlink" href="#monomial-basis-functions" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Solving the matrix equation <span class="math notranslate nohighlight">\(Aa=b\)</span> could also be expensive. Using Gaussian elimination to solve the matrix equation for a general matrix <span class="math notranslate nohighlight">\(A\)</span> requires <span class="math notranslate nohighlight">\(O(n^3)\)</span> operations. This means the number of operations grows like <span class="math notranslate nohighlight">\(Cn^3\)</span>, where <span class="math notranslate nohighlight">\(C\)</span> is a positive constant.\footnote{The formal definition of the big O notation is as follows: We write <span class="math notranslate nohighlight">\(f(n)=O(g(n))\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span> if and only if there exists a positive constant <span class="math notranslate nohighlight">\(M\)</span> and a positive integer <span class="math notranslate nohighlight">\(n^*\)</span> such that <span class="math notranslate nohighlight">\(|f(n)|\leq M g(n)\)</span> for all <span class="math notranslate nohighlight">\(n\geq n^*\)</span>.} However, there are some advantages to the monomial form: evaluating the polynomial is very efficient using Horner’s method,
+which is the nested form discussed in Exercises 1.3-4, 1.3-5 of Chapter 1, requiring <span class="math notranslate nohighlight">\(O(n)\)</span> operations. Differentiation and integration are also relatively efficient.</p>
+</section>
+<section id="lagrange-form-of-polynomial-interpolation">
+<h2>Lagrange form of polynomial interpolation<a class="headerlink" href="#lagrange-form-of-polynomial-interpolation" title="Permalink to this headline">#</a></h2>
+<p>The ill-conditioning of the van der Monde matrix, as well as the high complexity of solving the resulting matrix equation in the monomial form of polynomial interpolation, motivate us to explore other basis functions for polynomials. As before, we start with data <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span>, and call our interpolating polynomial of degree at most <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(p_n(x)\)</span>. The Lagrange basis functions up to degree <span class="math notranslate nohighlight">\(n\)</span> (also called cardinal polynomials) are defined as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+l_{k}(x)=\prod_{j=0,j\neq k}^{n}\left(\frac{x-x_{j}}{x_{k}-x_{j}}\right),k=0,1,...,n.
+\end{equation*}\]</div>
+<p>We write the interpolating polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> as a linear combination of these basis functions as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=a_{0}l_{0}(x)+a_{1}l_{1}(x)+...+a_{n}l_{n}(x).
+\end{equation*}\]</div>
+<p>We will determine <span class="math notranslate nohighlight">\(a_{i}\)</span> from</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x_{i})=a_{0}l_{0}(x_{i})+a_{1}l_{1}(x_{i})+...+a_{n}l_{n}(x_{i})=y_{i}
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> Or, in matrix form, we want to solve</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\underbrace{\begin{bmatrix}l_{0}(x_{0}) &amp; l_{1}(x_{0}) &amp; ... &amp; l_{n}(x_{0})\\
+l_{0}(x_{1}) &amp; l_{1}(x_{1}) &amp;  &amp; l_{n}(x_{1})\\
+\vdots\\
+l_{0}(x_{n}) &amp; l_{1}(x_{n}) &amp;  &amp; l_{n}(x_{n})
+\end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
+a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}}_a=\underbrace{\begin{bmatrix}y_{0}\\
+y_{1}\\
+\vdots\\
+y_{n}
+\end{bmatrix}}_y
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}.\)</span></p>
+<p>Solving this matrix equation is trivial for the following reason.
+Observe that <span class="math notranslate nohighlight">\(l_{k}(x_{k})=1\)</span> and <span class="math notranslate nohighlight">\(l_{k}(x_{i})=0\)</span> for all <span class="math notranslate nohighlight">\(i\neq k.\)</span>
+Then the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> becomes the identity matrix, and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{k}=y_{k}\text{ for }k=0,1,...,n.
+\end{equation*}\]</div>
+<p>The interpolating polynomial becomes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=y_{0}l_{0}(x)+y_{1}l_{1}(x)+...+y_{n}l_{n}(x).
+\end{equation*}\]</div>
+<p>The main advantage of the Lagrange form of interpolation is that finding the interpolating polynomial is trivial: there is no need to solve a matrix equation. However, the evaluation, differentiation, and integration of the Lagrange form
+of a polynomial is more expensive than, for example, the monomial form.</p>
+<div class="proof example admonition" id="chap3_exa48">
+<p class="admonition-title"><span class="caption-number">Example 18 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the interpolating polynomial using the monomial basis and Lagrange
+basis functions for the data: <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6).\)</span></p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<ul class="simple">
+<li><p>Monomial basis: <span class="math notranslate nohighlight">\(p_{2}(x)=a_{0}+a_{1}x+a_{2}x^{2}\)</span></p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\underbrace{\left[\begin{array}{ccc}
+1 &amp; x_{0} &amp; x_{0}^{2}\\
+1 &amp; x_{1} &amp; x_{1}^{2}\\
+1 &amp; x_{2} &amp; x_{2}^{2}
+\end{array}\right]}_A \underbrace{\begin{bmatrix}a_{0}\\
+a_{1}\\
+a_{2}
+\end{bmatrix}}_a=\underbrace{\begin{bmatrix}y_{0}\\
+y_{1}\\
+y_{2}
+\end{bmatrix}}_y\Rightarrow\left[\begin{array}{ccc}
+1 &amp; -1 &amp; 1\\
+1 &amp; 1 &amp; 1\\
+1 &amp; 2 &amp; 4
+\end{array}\right]\begin{bmatrix}a_{0}\\
+a_{1}\\
+a_{2}
+\end{bmatrix}=\begin{bmatrix}-6\\
+0\\
+6
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>We can use Gaussian elimination to solve this matrix equation, or get help from Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1,  1],
+       [ 1,  1,  1],
+       [ 1,  2,  4]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-6,  0,  6])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-4.,  3.,  1.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the solution is <span class="math notranslate nohighlight">\(a=[-4,3,1]^{T},\)</span> we obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{2}(x)=-4+3x+x^{2}.
+\end{equation*}\]</div>
+<ul class="simple">
+<li><p>Lagrange basis: <span class="math notranslate nohighlight">\(p_{2}(x) =y_{0}l_{0}(x)+y_{1}l_{1}(x)+y_{2}l_{2}(x)=-6l_{0}(x)+0l_{1}(x)+6l_{2}(x)\)</span></p></li>
+</ul>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+l_{0}(x) &amp; =\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}=\frac{(x-1)(x-2)}{(-1-1)(-1-2)}=\frac{(x-1)(x-2)}{6}\\
+l_{2}(x) &amp; =\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}=\frac{(x+1)(x-1)}{(2+1)(2-1)}=\frac{(x+1)(x-1)}{3}
+\end{align*}\]</div>
+<p>therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{2}(x) &amp; =-6 \frac{(x-1)(x-2)}{6} +6 \frac{(x+1)(x-1)}{3}=-(x-1)(x-2)+2(x+1)(x-1).
+\end{align*}\]</div>
+<p>If we multiply out and collect the like terms, we obtain <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^{2}\)</span>, which is the polynomial we obtained from the monomial basis earlier.</p>
+<p><strong>Exercise 4.1-1</strong></p>
+<p>Prove that <span class="math notranslate nohighlight">\(\sum_{k=0}^{n}l_{k}(x)=1\)</span> for all <span class="math notranslate nohighlight">\(x,\)</span> where <span class="math notranslate nohighlight">\(l_{k}\)</span>
+are the Lagrange basis functions for <span class="math notranslate nohighlight">\(n+1\)</span> data points. (Hint. First
+verify the identity for <span class="math notranslate nohighlight">\(n=1\)</span> algebraically, for any two data points.
+For the general case, think about what special function’s interpolating
+polynomial in Lagrange form is <span class="math notranslate nohighlight">\(\sum_{k=0}^{n}l_{k}(x)\)</span> ).</p>
+</section>
+<section id="newton-s-form-of-polynomial-interpolation">
+<h2>Newton’s form of polynomial interpolation<a class="headerlink" href="#newton-s-form-of-polynomial-interpolation" title="Permalink to this headline">#</a></h2>
+<p>The Newton basis functions up to degree <span class="math notranslate nohighlight">\(n\)</span> are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\pi_{k}(x)=\prod_{j=0}^{k-1}(x-x_{j}), k=0,1,...,n
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_{0}(x)=\prod_{j=0}^{-1}(x-x_{j})\)</span> is interpreted as 1.
+The interpolating polynomial <span class="math notranslate nohighlight">\(p_n\)</span>, written as a linear combination of Newton basis functions, is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{n}(x) &amp; =a_{0}\pi_{0}(x)+a_{1}\pi_{1}(x)+...+a_{n}\pi_{n}(x)\\
+ &amp; =a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})\cdots(x-x_{n-1}).
+\end{align*}\]</div>
+<p>We will determine <span class="math notranslate nohighlight">\(a_{i}\)</span> from</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x_{i})=a_{0}+a_{1}(x_{i}-x_{0})+...+a_{n}(x_i-x_{0})\cdots(x_i-x_{n-1})=y_{i},
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> or in matrix form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\underbrace{\begin{bmatrix}1 &amp; 0 &amp; 0 &amp; \ldots &amp; 0\\
+1 &amp; (x_{1}-x_{0}) &amp; 0 &amp;  &amp; 0\\
+1 &amp; (x_{2}-x_{0}) &amp; (x_{2}-x_{0})(x_{2}-x_{1}) &amp;  &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp;  &amp; \vdots\\
+1 &amp; (x_{n}-x_{0}) &amp; (x_{n}-x_{0})(x_{n}-x_{1}) &amp; \ldots &amp; \prod_{i=0}^{n-1}(x_{n}-x_{i})
+\end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
+a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}}_a=\underbrace{\begin{bmatrix}y_{0}\\
+y_{1}\\
+\vdots\\
+y_{n}
+\end{bmatrix}}_y
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}.\)</span> Note that the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is
+lower-triangular, and <span class="math notranslate nohighlight">\(a\)</span> can be solved by forward substitution, which is shown in the next example, in
+<span class="math notranslate nohighlight">\(O(n^2)\)</span> operations.</p>
+<div class="proof example admonition" id="chap3_exa49">
+<p class="admonition-title"><span class="caption-number">Example 19 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the interpolating polynomial using Newton’s basis for the data:
+<span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>We have <span class="math notranslate nohighlight">\(p_{2}(x)=a_{0}+a_{1}\pi_{1}(x)+a_{2}\pi_{2}(x)=a_{0}+a_{1}(x+1)+a_{2}(x+1)(x-1).\)</span>
+Find <span class="math notranslate nohighlight">\(a_{0},a_{1},a_{2}\)</span> from</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_2(-1)=-6 &amp;\Rightarrow a_0+a_1(-1+1)+a_2(-1+1)(-1-1)=a_0=-6\\
+p_2(1)=0 &amp;\Rightarrow a_0+a_1(1+1)+a_2(1+1)(1-1)=a_0+2a_1=0\\
+p_2(2)=6 &amp;\Rightarrow a_0+a_1(2+1)+a_2(2+1)(2-1)=a_0+3a_1+3a_2=6
+\end{align*}\]</div>
+<p>or, in matrix form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}1 &amp; 0 &amp; 0\\
+1 &amp; 2 &amp; 0\\
+1 &amp; 3 &amp; 3
+\end{bmatrix}\begin{bmatrix}a_{0}\\
+a_{1}\\
+a_{2}
+\end{bmatrix}=\begin{bmatrix}-6\\
+0\\
+6
+\end{bmatrix}.
+\end{equation*}\]</div>
+<p>Forward substitution is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+a_{0}=-6\\
+a_{0}+2a_{1}=0\Rightarrow-6+2a_{1}=0\Rightarrow a_{1}=3\\
+a_{0}+3a_{1}+3a_{2}=6\Rightarrow-6+9+3a_{2}=6\Rightarrow a_{2}=1.
+\end{gather*}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(a=[-6,3,1]^{T}\)</span> and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{2}(x)=-6+3(x+1)+(x+1)(x-1).
+\end{equation*}\]</div>
+<p>Factoring out and simplifying gives <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^2\)</span>, which is the polynomial discussed in Example <a class="reference internal" href="#chap3_exa48">Example 18</a>.</p>
+<p><strong>Summary:</strong> The interpolating polynomial <span class="math notranslate nohighlight">\(p_2(x)\)</span> for the data, <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>, represented in three different basis functions is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{Monomial: } p_{2}(x) &amp; = -4+3x+x^{2}\\
+\text{Lagrange: } p_{2}(x)= &amp; -(x-1)(x-2)+2(x+1)(x-1)\\
+\text{Newton: } p_{2}(x)= &amp; -6+3(x+1)+(x+1)(x-1)
+\end{align*}\]</div>
+<p>Similar to the monomial form, a polynomial written in Newton’s form can be evaluated using the Horner’s method which has <span class="math notranslate nohighlight">\(O(n)\)</span> complexity:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{n}(x)&amp;=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})(x-x_{1})\cdots(x-x_{n-1})\\
+&amp;=a_{0}+(x-x_{0})(a_{1}+(x-x_{1})(a_{2}+...+(x-x_{n-2})(a_{n-1}+(x-x_{n-1})(a_{n}))\cdots))
+\end{align*}\]</div>
+<div class="proof example admonition" id="chap3_exa50">
+<p class="admonition-title"><span class="caption-number">Example 20 </span></p>
+<section class="example-content" id="proof-content">
+<p>Write <span class="math notranslate nohighlight">\(p_{2}(x)=-6+3(x+1)+(x+1)(x-1)\)</span> using the nested form.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p><span class="math notranslate nohighlight">\(-6+3(x+1)+(x+1)(x-1)=-6+(x+1)(2+x);\)</span> note that the left-hand side has 2 multiplications,
+and the right-hand side has 1.</p>
+<p><strong>Complexity of the three forms of polynomial interpolation:</strong> The number of multiplications required in solving the corresponding matrix equation in each polynomial basis is:</p>
+<ul class="simple">
+<li><p>Monomial <span class="math notranslate nohighlight">\(\rightarrow O(n^3)\)</span></p></li>
+<li><p>Lagrange <span class="math notranslate nohighlight">\(\rightarrow\)</span> trivial</p></li>
+<li><p>Newton <span class="math notranslate nohighlight">\(\rightarrow O(n^2)\)</span></p></li>
+</ul>
+<p>Evaluating the polynomials can be done efficiently using Horner’s method for monomial and Newton forms. A modified version of Lagrange form can also be evaluated using Horner’s method, but we do not discuss it here.</p>
+<p><strong>Exercise 4.1-2</strong></p>
+<p>Compute, by hand, the interpolating polynomial to the data <span class="math notranslate nohighlight">\((-1,0)\)</span>,
+<span class="math notranslate nohighlight">\((0.5,1)\)</span>, <span class="math notranslate nohighlight">\((1,0)\)</span> using the monomial, Lagrange, and Newton basis
+functions. Verify the three polynomials are identical.</p>
+<p>It’s time to discuss some theoretical results for polynomial interpolation. Let’s start with proving <a class="reference internal" href="#chap3_thm47">Theorem 13</a> which we stated earlier:</p>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 14 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>If points <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> are distinct, then for real values
+<span class="math notranslate nohighlight">\(y_{0},y_{1},...,y_{n},\)</span> there is a unique polynomial <span class="math notranslate nohighlight">\(p_{n}\)</span> of
+degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n.\)</span></p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have already established the existence of <span class="math notranslate nohighlight">\(p_{n}\)</span> without mentioning it! The Lagrange
+form of the interpolating polynomial constructs <span class="math notranslate nohighlight">\(p_{n}\)</span> directly:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=\sum_{k=0}^{n}y_{k}l_{k}(x)=\sum_{k=0}^{n}y_{k}\prod_{j=0,j\neq k}^{n}\frac{x-x_{j}}{x_{k}-x_{j}}.
+\end{equation*}\]</div>
+<p>Let’s prove uniqueness. Assume <span class="math notranslate nohighlight">\(p_{n},q_{n}\)</span> are two distinct polynomials
+satisfying the conclusion. Then <span class="math notranslate nohighlight">\(p_{n}-q_{n}\)</span> is a polynomial of
+degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\((p_{n}-q_{n})(x_{i})=0\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span>
+This means the non-zero polynomial <span class="math notranslate nohighlight">\((p_{n}-q_{n})\)</span> of degree at most
+<span class="math notranslate nohighlight">\(n,\)</span> has <span class="math notranslate nohighlight">\((n+1)\)</span> distinct roots, which is a contradiction.</p>
+</div>
+<p>The following theorem, which we state without proof, establishes the error of polynomial interpolation. Notice the similarities between this and Taylor’s <a class="reference internal" href="bookchapter1-1.html#chap1_thm7">Theorem 5</a>.</p>
+<div class="proof theorem admonition" id="chap3_thm51">
+<p class="admonition-title"><span class="caption-number">Theorem 15 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> be distinct
+numbers in the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and <span class="math notranslate nohighlight">\(f\in C^{n+1}[a,b].\)</span> Then for
+each <span class="math notranslate nohighlight">\(x\in[a,b],\)</span> there is a number <span class="math notranslate nohighlight">\(\xi\)</span> between <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> such that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x)-p_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})(x-x_{1})\cdots(x-x_{n}).
+\end{equation*}\]</div>
+</section>
+</div><p>The following lemma is useful in finding upper bounds for <span class="math notranslate nohighlight">\(|f(x)-p_{n}(x)|\)</span>
+using <a class="reference internal" href="#chap3_thm51">Theorem 15</a>, when the nodes <span class="math notranslate nohighlight">\(x_0,...,x_n\)</span> are <strong>equally spaced</strong>.</p>
+<div class="proof lemma admonition" id="chap3_lem52">
+<p class="admonition-title"><span class="caption-number">Lemma 2 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>Consider the partition of <span class="math notranslate nohighlight">\([a,b]\)</span> as <span class="math notranslate nohighlight">\(x_0=a,x_1=a+h,...,x_n=a+nh=b\)</span>. More succinctly, <span class="math notranslate nohighlight">\(x_{i}=a+ih\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n\)</span> and <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}.\)</span> Then for any <span class="math notranslate nohighlight">\(x\in[a,b]\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\prod_{i=0}^{n}|x-x_{i}|\leq\frac{1}{4}h^{n+1}n!
+\end{equation*}\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(x\in[a,b]\)</span>, it falls into one of the subintervals: let <span class="math notranslate nohighlight">\(x\in[x_{j},x_{j+1}].\)</span>
+Consider the product <span class="math notranslate nohighlight">\(|x-x_{j}||x-x_{j+1}|.\)</span> Put <span class="math notranslate nohighlight">\(s=|x-x_{j}|\)</span> and
+<span class="math notranslate nohighlight">\(t=|x-x_{j+1}|.\)</span> The maximum of <span class="math notranslate nohighlight">\(st\)</span> given <span class="math notranslate nohighlight">\(s+t=h,\)</span> using Calculus,
+can be found to be <span class="math notranslate nohighlight">\(h^{2}/4,\)</span> which is attained when <span class="math notranslate nohighlight">\(x\)</span> is the
+midpoint, and thus <span class="math notranslate nohighlight">\(s=t=h/2\)</span>. Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\prod_{i=0}^{n}|x-x_{i}| &amp; =|x-x_{0}|\cdots|x-x_{j-1}||x-x_{j}||x-x_{j+1}||x-x_{j+2}|\cdots|x-x_{n}|\\
+ &amp; \leq|x-x_{0}|\cdots|x-x_{j-1}|\frac{h^{2}}{4}|x-x_{j+2}|\cdots|x-x_{n}|\\
+ &amp; \leq|x_{j+1}-x_{0}|\cdots|x_{j+1}-x_{j-1}|\frac{h^{2}}{4}|x_{j}-x_{j+2}|\cdots|x_{j}-x_{n}|\\
+ &amp; \leq(j+1)h\cdots2h\left(\frac{h^{2}}{4}\right)(2h)\cdots(n-j)h\\
+ &amp; =h^{j}(j+1)!\frac{h^{2}}{4}(n-j)!h^{n-j-1}\\
+ &amp; \leq h^{n+1}\frac{n!}{4}.
+\end{align*}\]</div>
+</div>
+<div class="proof example admonition" id="chap3_exa53">
+<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find an upper bound for the absolute error when <span class="math notranslate nohighlight">\(f(x)=\cos x\)</span> is approximated by its interpolating polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> on <span class="math notranslate nohighlight">\([0,\pi/2]\)</span>. For the interpolating polynomial, use 5 equally spaced nodes (<span class="math notranslate nohighlight">\(n=4\)</span>) in <span class="math notranslate nohighlight">\([0,\pi/2]\)</span>, including the endpoints.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>From <a class="reference internal" href="#chap3_thm51">Theorem 15</a>,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|f(x)-p_{4}(x)|=\frac{|f^{(5)}(\xi)|}{5!}|(x-x_{0})\cdots(x-x_{4})|.
+\end{equation*}\]</div>
+<p>We have <span class="math notranslate nohighlight">\(|f^{(5)}(\xi)|\leq1.\)</span> The nodes are equally spaced with
+<span class="math notranslate nohighlight">\(h=(\pi/2-0)/4=\pi/8.\)</span> Then from the previous lemma,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|(x-x_{0})\cdots(x-x_{4})|\leq\frac{1}{4}\left(\frac{\pi}{8}\right)^{5}4!
+\end{equation*}\]</div>
+<p>and therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+|f(x)-p_{4}(x)|\leq\frac{1}{5!}\frac{1}{4}\left(\frac{\pi}{8}\right)^{5}4!=4.7\times10^{-4}.
+\end{equation*}\]</div>
+<p><strong>Exercise 4.1-3</strong></p>
+<p>Find an upper bound for the absolute error when <span class="math notranslate nohighlight">\(f(x)=\ln x\)</span> is approximated by an interpolating
+polynomial of degree five with six nodes equally spaced in the interval
+<span class="math notranslate nohighlight">\([1,2]\)</span>.</p>
+<p>We now revisit Newton’s form of interpolation, and learn an alternative method, known as \textbf{divided differences}, to compute the coefficients of the interpolating polynomial. This approach is  numerically more stable than the forward substitution approach we used earlier. Let’s recall the interpolation problem.</p>
+<ul class="simple">
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span></p></li>
+<li><p>Interpolant in Newton’s form:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{n}(x)=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})\cdots(x-x_{n-1})
+\end{equation*}\]</div>
+<p>Determine <span class="math notranslate nohighlight">\(a_{i}\)</span> from <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n\)</span>.</p>
+<p>Let’s think of the <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data, <span class="math notranslate nohighlight">\(y_{i}\)</span>, as values of an unknown function <span class="math notranslate nohighlight">\(f\)</span> evaluated at <span class="math notranslate nohighlight">\(x_i\)</span>, i.e., <span class="math notranslate nohighlight">\(f(x_{i})=y_{i}.\)</span> Substitute <span class="math notranslate nohighlight">\(x=x_{0}\)</span> in the interpolant to get:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{0}=f(x_{0}).
+\end{equation*}\]</div>
+<p>Substitute <span class="math notranslate nohighlight">\(x=x_{1}\)</span> to get <span class="math notranslate nohighlight">\(a_{0}+a_{1}(x_{1}-x_{0})=f(x_{1})\)</span>
+or,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{1}=\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}}.
+\end{equation*}\]</div>
+<p>Substitute <span class="math notranslate nohighlight">\(x=x_{2}\)</span> to get, after some algebra</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{2}=\frac{\frac{f(x_{2})-f(x_{0})}{x_{2}-x_{1}}-\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}}\frac{x_{2}-x_{0}}{x_{2}-x_{1}}}{x_{2}-x_{0}}
+\end{equation*}\]</div>
+<p>which can be further rewritten as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{2}=\frac{\frac{f(x_{2})-f(x_{1})}{x_{2}-x_{1}}-\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}}}{x_{2}-x_{0}}.
+\end{equation*}\]</div>
+<p>Inspecting the formulas for <span class="math notranslate nohighlight">\(a_{0},a_{1},a_{2}\)</span> suggests the following
+simplified new notation called <strong>divided differences</strong>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a_{0} &amp; =f(x_{0})=\textcolor{red}{f[x_{0}]}\longrightarrow\text{0th divided difference}\\
+a_{1} &amp; =\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}}=\textcolor{red}{f[x_{0},x_{1}]}\longrightarrow\text{1st divided difference}\\
+a_{2} &amp; =\frac{\frac{f(x_{2})-f(x_{1})}{x_{2}-x_{1}}-\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}}}{x_{2}-x_{0}}=\frac{f[x_{1},x_{2}]-f[x_{0},x_{1}]}{x_{2}-x_{0}} =\textcolor{red}{f[x_{0},x_{1},x_{2}]}\longrightarrow\text{2nd divided difference }
+\end{align*}\]</div>
+<p>And in general, <span class="math notranslate nohighlight">\(a_{k}\)</span> will be given by the <span class="math notranslate nohighlight">\(k\)</span>th divided difference:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_{k}=\textcolor{red}{f[x_{0},x_{1},...,x_{k}]}.
+\end{equation*}\]</div>
+<p>With this new notation, Newton’s interpolating polynomial can be written
+as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{n}(x)&amp;=f[x_{0}]+\sum_{k=1}^{n}f[x_{0},x_{1},...,x_{k}](x-x_{0})\cdots(x-x_{k-1})\\
+&amp;=f[x_{0}]+f[x_{0},x_{1}](x-x_{0})+f[x_{0},x_{1},x_{2}](x-x_{0})(x-x_{1})+\ldots\\
+&amp;+f[x_{0},x_{1},...,x_{n}](x-x_{0})(x-x_{1})\cdots(x-x_{n-1})
+\end{align*}\]</div>
+<p>Here is the formal definition of divided differences:</p>
+<div class="proof definition admonition" id="chap3_def54">
+<p class="admonition-title"><span class="caption-number">Definition 7 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Given data <span class="math notranslate nohighlight">\((x_{i},f(x_{i})),i=0,1,...,n,\)</span> the divided differences
+are defined recursively as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f[x_{0}] &amp; =f(x_{0})\\
+f[x_{0},x_{1},...,x_{k}] &amp; =\frac{f[x_{1},...,x_{k}]-f[x_{0},...,x_{k-1}]}{x_{k}-x_{0}}
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span></p>
+</section>
+</div><div class="proof theorem admonition" id="chap3_thm55">
+<p class="admonition-title"><span class="caption-number">Theorem 16 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The ordering of the data in constructing divided differences is not
+important, that is, the divided difference <span class="math notranslate nohighlight">\(f[x_{0},...,x_{k}]\)</span> is invariant
+under all permutations of the arguments <span class="math notranslate nohighlight">\(x_{0},...,x_{k}\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the data <span class="math notranslate nohighlight">\((x_{0},y_{0}),(x_{1},y_{1}),...,(x_{k},y_{k})\)</span>
+and let <span class="math notranslate nohighlight">\(p_{k}(x)\)</span> be its interpolating polynomial:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{k}(x) &amp; =f[x_{0}]+f[x_{0},x_{1}](x-x_{0})+f[x_{0},x_{1},x_{2}](x-x_{0})(x-x_{1})+...\\
+ &amp; +f[x_{0},...,x_{k}](x-x_{0})\cdots(x-x_{k-1}).
+\end{align*}\]</div>
+<p>Now let’s consider a permutation of the <span class="math notranslate nohighlight">\(x_{i};\)</span> let’s label them
+as <span class="math notranslate nohighlight">\(\tilde{x}_{0},\tilde{x}_{1},...,\tilde{x}_{k}.\)</span> The interpolating
+polynomial for the permuted data does not change, since the data <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{k}\)</span>
+(omitting the <span class="math notranslate nohighlight">\(y\)</span>-coordinates) is the same as <span class="math notranslate nohighlight">\(\tilde{x}_{0},\tilde{x}_{1},...,\tilde{x}_{k}\)</span>,
+just in different order. Therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{k}(x) &amp; =f[\tilde{x}_{0}]+f[\tilde{x}_{0},\tilde{x}_{1}](x-\tilde{x}_{0})+f[\tilde{x}_{0},\tilde{x}_{1},\tilde{x}_{2}](x-\tilde{x}_{0})(x-\tilde{x}_{1})+... \\
+&amp;+f[\tilde{x}_{0},...,\tilde{x}_{k}](x-\tilde{x}_{0})\cdots(x-\tilde{x}_{k-1}).
+\end{align*}\]</div>
+<p>The coefficient of the polynomial <span class="math notranslate nohighlight">\(p_{k}(x)\)</span> for the highest degree
+<span class="math notranslate nohighlight">\(x^{k}\)</span> is <span class="math notranslate nohighlight">\(f[x_{0},...,x_{k}]\)</span> in the first equation, and <span class="math notranslate nohighlight">\(f[\tilde{x}_{0},...,\tilde{x}_{k}]\)</span>
+in the second. Therefore they must be equal to each other.</p>
+</div>
+<div class="proof example admonition" id="chap3_exa56">
+<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the interpolating polynomial for the data <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>
+using Newton’s form and divided differences.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>We want to compute</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{2}(x)=f[x_{0}]+f[x_{0},x_{1}](x-x_{0})+f[x_{0},x_{1},x_{2}](x-x_{0})(x-x_{1}).
+\end{equation*}\]</div>
+<p>Here are the finite differences:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{cccc}
+x &amp; f[x] &amp; \text{First divided difference} &amp; \text{Second divided difference}\\
+\hline
+x_{0}=-1 &amp; f[x_{0}]=\color{blue}{-6} &amp;  &amp; \\
+ &amp;  &amp; f[x_{0},x_{1}]=\frac{f[x_{1}]-f[x_{0}]}{x_{1}-x_{0}}=\color{blue}{3} &amp; \\
+x_{1}=1 &amp; f[x_{1}]=0 &amp;  &amp; f[x_{0},x_{1},x_{2}]=\frac{f[x_{1},x_{2}]-f[x_{0},x_{1}]}{x_{2}-x_{0}}=\color{blue}{1}\\
+ &amp;  &amp; f[x_{1},x_{2}]=\frac{f[x_{2}]-f[x_{1}]}{x_{2}-x_{1}}=6 &amp; \\
+x_{2}=2 &amp; f[x_{2}]=6 &amp;  &amp; \\
+\hline
+\end{array}
+\end{equation*}\]</div>
+<p>Therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p_{2}(x)=\textcolor{blue}{-6}+\textcolor{blue}{3}(x+1)+\textcolor{blue}{1}(x+1)(x-1),
+\end{equation*}\]</div>
+<p>which is the same polynomial we had in <a class="reference internal" href="#chap3_exa49">Example 19</a>.</p>
+<p><strong>Exercise 4.1-4</strong></p>
+<p>Consider the function <span class="math notranslate nohighlight">\(f\)</span> given in the following table.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccccc}
+x &amp; 1 &amp; 2 &amp; 4 &amp; 6\\
+\hline
+f(x) &amp; 2 &amp; 3 &amp; 5 &amp; 9\\
+\end{array}
+\end{equation*}\]</div>
+<p>a) Construct a divided difference table for <span class="math notranslate nohighlight">\(f\)</span> by hand, and write the
+Newton form of the interpolating polynomial using the divided differences.</p>
+<p>b) Assume you are given a new data point for the function: <span class="math notranslate nohighlight">\(x=3,y=4.\)</span>
+Find the new interpolating polynomial. (Hint: Think about how to update
+the interpolating polynomial you found in part (a).)</p>
+<p>c) If you were working with the Lagrange form of the interpolating polynomial
+instead of the Newton form, and you were given an additional data
+point like in part (b), how easy would it be (compared to what you
+did in part (b)) to update your interpolating polynomial?</p>
+<div class="proof example admonition" id="chap3_exa57">
+<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
+<section class="example-content" id="proof-content">
+<p>Before the widespread availability of computers and mathematical software, the values of some often-used mathematical functions were disseminated to researchers and engineers via tables. The following table, taken from <span id="id1">[<a class="reference internal" href="#id3" title="M. Abramowitz and I.A. Stegun. Handbook of mathematical functions: with formulas, graphs, and mathematical tables. Volume 55. Courier Corporation, 1991.">Abramowitz and Stegun, 1991</a>]</span>, displays some values of the gamma function, <span class="math notranslate nohighlight">\(\Gamma(x)=\int_0^\infty t^{x-1} e^{-t}dt\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccccc}
+x &amp; 1.750 &amp; 1.755 &amp; 1.760 &amp; 1.765\\
+\hline
+\Gamma (x) &amp; 0.91906 &amp; 0.92021 &amp; 0.92137 &amp; 0.92256\\
+\end{array}
+\end{equation*}\]</div>
+<p>Use polynomial interpolation to estimate <span class="math notranslate nohighlight">\(\Gamma(1.761)\)</span>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>The finite differences, with five-digit rounding, are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{cccccc}
+i &amp; x_{i} &amp; f[x_{i}] &amp; f[x_{i},x_{i+1}] &amp; f[x_{i-1},x_{i},x_{i+1}] &amp; f[x_{0},x_{1},x_{2},x_{3}]\\
+\hline
+0 &amp; 1.750 &amp; \color{blue}{0.91906} &amp;  &amp;  &amp; \\
+ &amp;  &amp;  &amp; \color{blue}{0.23} &amp;  &amp; \\
+1 &amp; 1.755 &amp; 0.92021 &amp;  &amp; \color{blue}{0.2} &amp; \\
+ &amp;  &amp;  &amp; 0.232 &amp;  &amp; \color{blue}{26.667}\\
+2 &amp; 1.760 &amp; 0.92137 &amp;  &amp; 0.6 &amp; \\
+ &amp;  &amp;  &amp; 0.238&amp;  &amp; \\
+3 &amp; 1.765 &amp; 0.92256 &amp;  &amp;  &amp; \\
+\hline
+\end{array}
+\end{equation*}\]</div>
+<p>Here are various estimates for <span class="math notranslate nohighlight">\(\Gamma(1.761)\)</span> using interpolating polynomials
+of increasing degrees:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{1}(x)  &amp;=\textcolor{blue}{f[x_{0}]}+\textcolor{blue}{f[x_{0},x_{1}]}(x-x_{0})\Rightarrow p_{1}(1.761)=\textcolor{blue}{0.91906+0.23}(1.761-1.750)=0.92159\\
+p_{2}(x)  &amp;=f[x_{0}]+f[x_{0},x_{1}](x-x_{0})+\textcolor{blue}{f[x_{0},x_{1},x_{2}]}(x-x_{0})(x-x_{1})\\
+&amp;\Rightarrow  p_{2}(1.761)=0.92159+\textcolor{blue}{(0.2)}(1.761-1.750)(1.761-1.755)=0.9216\\
+p_{3}(x) &amp; =p_{2}(x)+\textcolor{blue}{f[x_{0},x_{1},x_{2},x_{3}]}(x-x_{0})(x-x_{1})(x-x_{2})\\
+&amp;\Rightarrow p_{3}(1.761)=0.9216+\textcolor{blue}{26.667}(1.761-1.750)(1.761-1.755)(1.761-1.760)=0.9216
+\end{align*}\]</div>
+<p>Next we will change the ordering of the data and repeat the calculations. We will list the data in decreasing order of the <span class="math notranslate nohighlight">\(x\)</span>-coordinates:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{cccccc}
+i &amp; x_{i} &amp; f[x_{i}] &amp; f[x_{i},x_{i+1}] &amp; f[x_{i-1},x_{i},x_{i+1}] &amp; f[x_{0},x_{1},x_{2},x_{3}]\\
+\hline
+0 &amp; 1.765 &amp; \color{blue}{0.92256} &amp;  &amp;  &amp; \\
+ &amp;  &amp;  &amp; \color{blue}{0.238} &amp;  &amp; \\
+1 &amp; 1.760 &amp; 0.92137 &amp;  &amp; \color{blue}{0.6} &amp; \\
+ &amp;  &amp;  &amp; 0.232 &amp;  &amp; \color{blue}{26.667}\\
+2 &amp; 1.755 &amp; 0.92021 &amp;  &amp; 0.2 &amp; \\
+ &amp;  &amp;  &amp; 0.23 &amp;  &amp; \\
+3 &amp; 1.750 &amp; 0.91906 &amp;  &amp;  &amp; \\
+\hline
+\end{array}
+\end{equation*}\]</div>
+<p>The polynomial evaluations are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p_{1}(1.761) &amp; =\textcolor{blue}{0.92256}+\textcolor{blue}{0.238}(1.761-1.765)=0.92161\\
+p_{2}(1.761) &amp; =0.92161+\textcolor{blue}{0.6}(1.761-1.765)(1.761-1.760)=0.92161\\
+p_{3}(1.761) &amp; =0.92161+\textcolor{blue}{26.667}(1.761-1.765)(1.761-1.760)(1.761-1.755)=0.92161
+\end{align*}\]</div>
+<p><strong>Summary of results:</strong></p>
+<p>The following table displays the results for each ordering of the data, together with the correct <span class="math notranslate nohighlight">\(\Gamma(1.761)\)</span> to 7 digits of accuracy.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccc}
+\hline
+\text{Ordering} &amp; (1.75,1.755,1.76,1.765) &amp; (1.765,1.76,1.755,1.75) \\
+\hline
+p_{1}(1.761) &amp; 0.92159 &amp; 0.92161\\
+
+p_{2}(1.761) &amp; 0.92160 &amp; 0.92161\\
+
+p_{3}(1.761) &amp; 0.92160 &amp; 0.92161\\
+\hline
+\Gamma(1.761) &amp; \color{red}{0.9216103} &amp; \color{red}{0.9216103}\\
+\hline
+\end{array}
+\end{equation*}\]</div>
+<p><strong>Exercise 4.1-5</strong></p>
+<p>Answer the following questions:</p>
+<p>a) <a class="reference internal" href="#chap3_thm55">Theorem 16</a> stated that the ordering of the data in divided differences
+does not matter. But we see differences in the two tables above. Is
+this a contradiction?</p>
+<p>b) <span class="math notranslate nohighlight">\(p_{1}(1.761)\)</span> is a better approximation to <span class="math notranslate nohighlight">\(\Gamma(1.761)\)</span> in the second ordering. Is this expected?</p>
+<p>c) <span class="math notranslate nohighlight">\(p_{3}(1.761)\)</span> is different in the two orderings, however, this difference is due to rounding error. In other words, if the calculations can be done exactly, <span class="math notranslate nohighlight">\(p_{3}(1.761)\)</span> will be the same in each ordering of the data. Why?</p>
+<p><strong>Exercise 4.1-6</strong></p>
+<p>Consider a function <span class="math notranslate nohighlight">\(f(x)\)</span> such that <span class="math notranslate nohighlight">\(f(2)=1.5713\)</span>, <span class="math notranslate nohighlight">\(f(3)=1.5719,f(5)=1.5738,\)</span>
+and <span class="math notranslate nohighlight">\(f(6)=1.5751.\)</span> Estimate <span class="math notranslate nohighlight">\(f(4)\)</span> using a second degree interpolating
+polynomial (interpolating the first three data points) and a third degree interpolating polynomial (interpolating the first four data points). Round the
+final results to four decimal places. Is there any advantage here
+in using a third degree interpolating polynomial?</p>
+</section>
+<section id="python-code-for-newton-interpolation">
+<h2>Python code for Newton interpolation<a class="headerlink" href="#python-code-for-newton-interpolation" title="Permalink to this headline">#</a></h2>
+<p>Consider the following finite difference table.</p>
+<div class="math notranslate nohighlight" id="equation-finitediff">
+<span class="eqno">(19)<a class="headerlink" href="#equation-finitediff" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{array}{cccc}
+x &amp; f(x) &amp; f[x_{i},x_{i+1}] &amp; f[x_{i-1},x_{i},x_{i+1}]\\
+\hline
+x_{0} &amp; \color{red}{y_{0}} &amp;  &amp; \\
+ &amp;  &amp; \color{red}{\frac{y_{1}-y_{0}}{x_{1}-x_{0}}=f[x_{0},x_{1}]} &amp; \\
+x_{1} &amp; y_{1} &amp;  &amp; \color{red}{\frac{f[x_{1},x_{2}]-f[x_{0},x_{1}]}{x_{2}-x_{0}}=f[x_0,x_1,x_2]}\\
+ &amp;  &amp; \frac{y_{2}-y_{1}}{x_{2}-x_{1}}=f[x_{1},x_{2}] &amp; \\
+x_{2} &amp; y_{2} &amp;  &amp; \\
+\hline
+\end{array}\end{split}\]</div>
+<p>There are <span class="math notranslate nohighlight">\(2+1=3\)</span> divided differences in the table, not counting the 0th divided differences. In general, the number of divided differences to compute is <span class="math notranslate nohighlight">\(1+...+n=n(n+1)/2\)</span>. However, to construct Newton’s form of the interpolating polynomial, we need only <span class="math notranslate nohighlight">\(n\)</span> divided differences and the 0th divided difference <span class="math notranslate nohighlight">\(y_0\)</span>. These numbers are displayed in red in Table <a class="reference internal" href="#equation-finitediff">(19)</a>. The important observation is, even though all the divided differences have to be computed in order to get the ones needed for Newton’s form, they do not have to be all stored. The following Python code is based on an efficient algorithm that goes through the divided difference calculations recursively, and stores an array of size <span class="math notranslate nohighlight">\(m=n+1\)</span> at any given time. In the final iteration, this array has the divided differences needed for Newton’s form.</p>
+<p>Let’s explain the idea of the algorithm using the simple example of Table <a class="reference internal" href="#equation-finitediff">(19)</a>. The code creates an array <span class="math notranslate nohighlight">\(a=(a_0,a_1,a_2)\)</span> of size <span class="math notranslate nohighlight">\(m=n+1\)</span>, which is three in our example, and sets</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_0=\textcolor{red}{y_0},a_1=y_1,a_2=y_2.
+\end{equation*}\]</div>
+<p>In the first iteration (for loop, <span class="math notranslate nohighlight">\(j=1\)</span>), <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> are updated:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_1:=\frac{a_1-a_0}{x_1-x_0}=\frac{y_1-y_0}{x_1-x_0}=\textcolor{red}{f[x_0,x_1]},a_2:=\frac{a_2-a_1}{x_2-x_1}=\frac{y_2-y_1}{x_2-x_1}.
+\end{equation*}\]</div>
+<p>In the last iteration (for loop, <span class="math notranslate nohighlight">\(j=2\)</span>), only <span class="math notranslate nohighlight">\(a_2\)</span> is updated:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a_2:=\frac{a_2-a_1}{x_2-x_0}=\frac{ \frac{y_2-y_1}{x_2-x_1}-\frac{y_1-y_0}{x_1-x_0} }{x_2-x_0}=\textcolor{red}{f[x_0,x_1,x_2]}.
+\end{equation*}\]</div>
+<p>The final array <span class="math notranslate nohighlight">\(a\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+a=(\color{red}{y_0,f[x_0,x_1],f[x_0,x_1,x_2]})
+\end{equation*}\]</div>
+<p>containing the divided differences needed to construct the Newton’s form of the polynomial.</p>
+<p>Here is the Python function <strong>diff</strong> that computes the divided differences. The code uses a function we have not used before: <strong>np.flip(np.arange(j,m))</strong>. An example illustrates what it does the best:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5, 4, 3, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code <strong>diff</strong> the inputs are the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data. The numbering of the indices starts at 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># here m is the number of data points.</span>
+    <span class="c1"># the degree of the polynomial is m-1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)):</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="p">(</span><span class="n">j</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa56">Example 22</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-6.,  3.,  1.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are the divided differences in the second ordering of the data in <a class="reference internal" href="#chap3_exa57">Example 23</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.765</span><span class="p">,</span><span class="mf">1.760</span><span class="p">,</span><span class="mf">1.755</span><span class="p">,</span><span class="mf">1.750</span><span class="p">]),</span>
+     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.92256</span><span class="p">,</span><span class="mf">0.92137</span><span class="p">,</span><span class="mf">0.92021</span><span class="p">,</span><span class="mf">0.91906</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.92256   ,  0.238     ,  0.6       , 26.66666667])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s write a code for the Newton form of polynomial interpolation. The
+inputs to the function <strong>newton</strong> are the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data, and where we want to evaluate the polynomial: <span class="math notranslate nohighlight">\(z\)</span>. The code uses the divided differences function <strong>diff</strong> discussed earlier to compute:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f[x_{0}]+f[x_{0},x_{1}](z-x_{0})+\ldots
++f[x_{0},x_{1},...,x_{n}](z-x_{0})(z-x_{1})\cdots(z-x_{n-1})
+\end{equation*}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># here m is the number of data points, not the degree</span>
+    <span class="c1"># of the polynomial</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pr</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">pr</span> <span class="o">*=</span> <span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">pr</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s verify the code by computing <span class="math notranslate nohighlight">\(p_3(1.761)\)</span> of <a class="reference internal" href="#chap3_exa57">Example 23</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.765</span><span class="p">,</span><span class="mf">1.760</span><span class="p">,</span><span class="mf">1.755</span><span class="p">,</span><span class="mf">1.750</span><span class="p">]),</span>
+       <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.92256</span><span class="p">,</span><span class="mf">0.92137</span><span class="p">,</span><span class="mf">0.92021</span><span class="p">,</span><span class="mf">0.91906</span><span class="p">]),</span> <span class="mf">1.761</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.92160496
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 4.1-7</strong></p>
+<p>This problem discusses inverse interpolation
+which gives another method to find the root of a function. Let <span class="math notranslate nohighlight">\(f\)</span> be a continuous function on <span class="math notranslate nohighlight">\([a,b]\)</span> with one root <span class="math notranslate nohighlight">\(p\)</span> in the interval. Also assume <span class="math notranslate nohighlight">\(f\)</span> has an inverse. Let <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> be <span class="math notranslate nohighlight">\(n+1\)</span> distinct numbers
+in <span class="math notranslate nohighlight">\([a,b]\)</span> with <span class="math notranslate nohighlight">\(f(x_{i})=y_{i},i=0,1,...,n.\)</span> Construct an interpolating
+polynomial <span class="math notranslate nohighlight">\(P_{n}\)</span> for <span class="math notranslate nohighlight">\(f^{-1}(x),\)</span> by taking your data points as
+<span class="math notranslate nohighlight">\((y_{i},x_{i}),i=0,1,...,n.\)</span> Observe that <span class="math notranslate nohighlight">\(f^{-1}(0)=p,\)</span> the root
+we are trying to find. Then, approximate the root <span class="math notranslate nohighlight">\(p\)</span>, by evaluating
+the interpolating polynomial for <span class="math notranslate nohighlight">\(f^{-1}\)</span> at 0, i.e., <span class="math notranslate nohighlight">\(P_{n}(0)\approx p.\)</span>
+Using this method, and the following data, find an approximation to the solution of <span class="math notranslate nohighlight">\(\log x=0.\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccccc}
+x &amp; 0.4 &amp; 0.8 &amp; 1.2 &amp; 1.6\\
+\hline
+\log x &amp; -0.92 &amp; -0.22 &amp; 0.18 &amp; 0.47\\
+\end{array}
+\end{equation*}\]</div>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">AS91</a></span></dt>
+<dd><p>M. Abramowitz and I.A. Stegun. <em>Handbook of mathematical functions: with formulas, graphs, and mathematical tables</em>. Volume 55. Courier Corporation, 1991.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter4-0.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 4 Interpolation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter4-2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.2 High degree polynomial interpolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

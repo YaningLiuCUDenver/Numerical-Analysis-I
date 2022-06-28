@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4.3 Hermite interpolation &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.4 Piecewise polynomials: spline interpolation" href="bookchapter4-4.html" />
+    <link rel="prev" title="4.2 High degree polynomial interpolation" href="bookchapter4-2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter4-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter4-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-the-hermite-polynomial">
+   Computing the Hermite polynomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-computing-hermite-interpolating-polynomial">
+   Python code for computing Hermite interpolating polynomial
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4.3 Hermite interpolation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-the-hermite-polynomial">
+   Computing the Hermite polynomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-computing-hermite-interpolating-polynomial">
+   Python code for computing Hermite interpolating polynomial
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="hermite-interpolation">
+<h1>4.3 Hermite interpolation<a class="headerlink" href="#hermite-interpolation" title="Permalink to this headline">#</a></h1>
+<p>In polynomial interpolation, our starting point has been the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates of some data we want to interpolate. Suppose, in addition, we know the derivative of the underlying function at these <span class="math notranslate nohighlight">\(x\)</span>-coordinates. Our new data set has the following form.</p>
+<p><strong>Data:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{0},y_{1},...,y_{n};\, y_{i}=f(x_{i})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{0}',y_{1}',...,y_{n}';\, y'_{i}=f'(x_{i})\)</span></p></li>
+</ul>
+<p>We seek a polynomial that fits the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> values, that is, we seek a polynomial <span class="math notranslate nohighlight">\(H(x)\)</span> such that <span class="math notranslate nohighlight">\(H(x_{i})=y_{i}\)</span> and <span class="math notranslate nohighlight">\(H'(x_{i})=y'_{i}\)</span>,
+<span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> This makes <span class="math notranslate nohighlight">\(2n+2\)</span> equations, and if we let</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+H(x)=a_{0}+a_{1}x+...+a_{2n+1}x^{2n+1},
+\end{equation*}\]</div>
+<p>then there are <span class="math notranslate nohighlight">\(2n+2\)</span> unknowns, <span class="math notranslate nohighlight">\(a_0,...,a_{2n+1}\)</span>, to solve for. The following theorem shows that there is a unique solution to this system of equations; a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
+<div class="proof theorem admonition" id="chap3_thm61">
+<p class="admonition-title"><span class="caption-number">Theorem 20 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f \in C^1[a,b]\)</span> and <span class="math notranslate nohighlight">\(x_{0},...,x_{n}\in[a,b]\)</span>
+are distinct, then there is a unique polynomial <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span>, of degree at most <span class="math notranslate nohighlight">\(2n+1\)</span>, agreeing with
+<span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> at <span class="math notranslate nohighlight">\(x_{0},...,x_{n}\)</span>. The polynomial can be written as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+H_{2n+1}(x)=\sum_{i=0}^{n}y_{i}h_{i}(x)+\sum_{i=0}^{n}y_{i}'\widetilde{h_{i}}(x)
+\end{equation*}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+h_{i}(x) &amp; =\left(1-2(x-x_{i})l'_{i}(x_{i})\right)(l_{i}(x))^{2}\\
+\widetilde{h}_{i}(x) &amp; =(x-x_{i})(l_{i}(x))^{2}.
+\end{align*}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(l_{i}(x)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th Lagrange basis function for the nodes
+<span class="math notranslate nohighlight">\(x_{0},...,x_{n}\)</span>, and <span class="math notranslate nohighlight">\(l'_{i}(x)\)</span> is its derivative. <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span> is called the Hermite interpolating
+polynomial.</p>
+</section>
+</div><p>The only difference between Hermite interpolation and polynomial interpolation is that in the former, we have the derivative information, which can go a long way in capturing the shape of the underlying function.</p>
+<div class="proof example admonition" id="chap3_exa62">
+<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<section class="example-content" id="proof-content">
+<p>We want to interpolate the following data:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+x \text{-coordinates}&amp;: -1.5, 1.6, 4.7\\
+y \text{-coordinates}&amp;: 0.071,-0.029,-0.012.
+\end{align*}\]</div>
+<p>The underlying function the data comes from is <span class="math notranslate nohighlight">\(\cos x\)</span>, but we pretend we do not know this. <a class="reference internal" href="#hermitecos1"><span class="std std-numref">Figure 7</span></a> plots the underlying function, the data, and the polynomial interpolant for the data. Clearly, the polynomial interpolant does not come close to giving a good approximation to the underlying function <span class="math notranslate nohighlight">\(\cos x\)</span>.</p>
+</section>
+</div><figure class="align-default" id="hermitecos1">
+<a class="reference internal image-reference" href="_images/hermite_cos1.png"><img alt="_images/hermite_cos1.png" src="_images/hermite_cos1.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">.</span><a class="headerlink" href="#hermitecos1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now let’s assume we know the derivative of the underlying function at these nodes:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+x \text{-coordinates}&amp;: -1.5, 1.6, 4.7\\
+y \text{-coordinates}&amp;: 0.071,-0.029,-0.012\\
+y' \text{-values}&amp;: 1, -1, 1.
+\end{align*}\]</div>
+<p>We then construct the Hermite interpolating polynomial, incorporating the derivative information. <a class="reference internal" href="#hermitecos2"><span class="std std-numref">Figure 8</span></a> plots the Hermite interpolating polynomial, together with the polynomial interpolant, and the underlying function.</p>
+<p>It is visually difficult to separate the Hermite interpolating polynomial from the underlying function <span class="math notranslate nohighlight">\(\cos x\)</span> in <a class="reference internal" href="#hermitecos2"><span class="std std-numref">Figure 8</span></a>. Going from polynomial interpolation to Hermite interpolation results in rather dramatic improvement in approximating the underlying function.</p>
+<figure class="align-default" id="hermitecos2">
+<a class="reference internal image-reference" href="_images/hermite_cos2.png"><img alt="_images/hermite_cos2.png" src="_images/hermite_cos2.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">.</span><a class="headerlink" href="#hermitecos2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="computing-the-hermite-polynomial">
+<h2>Computing the Hermite polynomial<a class="headerlink" href="#computing-the-hermite-polynomial" title="Permalink to this headline">#</a></h2>
+<p>We do not use <a class="reference internal" href="#chap3_thm61">Theorem 20</a> to compute the Hermite polynomial: there
+is a more efficient method using divided differences for this computation.</p>
+<p>We start with the data:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;x_{0},x_{1},...,x_{n}\\
+&amp;y_{0},y_{1},...,y_{n}; y_{i}=f(x_{i})\\
+&amp;y_{0}',y_{1}',...,y_{n}';y'_{i}=f'(x_{i})\\
+\end{align*}\]</div>
+<p>and define a sequence <span class="math notranslate nohighlight">\(z_{0},z_{1},...,z_{2n+1}\)</span> by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+z_{0} &amp; =x_{0},z_{2}=x_{1},z_{4}=x_{2},...,z_{2n}=x_{n}\\
+z_{1} &amp; =x_{0},z_{3}=x_{1},z_{5}=x_{2},...,z_{2n+1}=x_{n}
+\end{align*}\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(z_{2i}=z_{2i+1}=x_{i},\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
+<p>Then the Hermite polynomial can be written as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+H_{2n+1}(x) =&amp; f[z_{0}]+f[z_{0},z_{1}](x-z_{0})+f[z_{0},z_{1},z_{2}](x-z_{0})(x-z_{1})+\\
+ &amp; \ldots+f[z_{0},z_{1},...,z_{2n+1}](x-z_{0})\cdots(x-z_{2n})\\
+  =&amp;f[z_{0}]+\sum_{i=1}^{2n+1}f[z_{0},....,z_{i}](x-z_{0})(x-z_{1})\cdots(x-z_{i-1}).
+\end{align*}\]</div>
+<p>There is a little problem with some of the first divided differences above: they are undefined! Observe that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f[z_{0},z_{1}]=f[x_{0},x_{0}]=\frac{f(x_{0})-f(x_{0})}{x_{0}-x_{0}}
+\end{equation*}\]</div>
+<p>or, in general,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=\frac{f(x_{i})-f(x_{i})}{x_{i}-x_{i}}
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,...,n.\)</span></p>
+<p>From <a class="reference internal" href="bookchapter4-2.html#chap3_thm58">Theorem 17</a>, we know <span class="math notranslate nohighlight">\(f[x_{0},...,x_{n}]=\frac{f^{(n)}(\xi)}{n!}\)</span>
+for some <span class="math notranslate nohighlight">\(\xi\)</span> between the min and max of <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> From
+a classical result by Hermite &amp; Gennochi (see <span id="id2">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>, page 144), divided differences are
+continuous functions of their variables <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> This implies
+we can take the limit of the above result as <span class="math notranslate nohighlight">\(x_{i}\rightarrow x_{0}\)</span>
+for all <span class="math notranslate nohighlight">\(i,\)</span> which results in</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f[x_{0},...,x_{0}]=\frac{f^{(n)}(x_{0})}{n!}.
+\end{equation*}\]</div>
+<p>Therefore in the Hermite polynomial coefficient calculations, we will
+put</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=f'(x_{i})=y'_{i}
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
+<div class="proof example admonition" id="chap3_exa63">
+<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let’s compute the Hermite polynomial of <a class="reference internal" href="#chap3_exa62">Example 24</a>. The data is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{cccc}
+i &amp; x_{i} &amp; y_{i} &amp; y_{i}'\\
+0 &amp; -1.5 &amp; 0.071 &amp; 1\\
+1 &amp; 1.6 &amp; -0.029 &amp; -1\\
+2 &amp; 4.7 &amp; -0.012 &amp; 1\\
+\end{array}
+\end{equation*}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(n=2,\)</span> and <span class="math notranslate nohighlight">\(2n+1=5,\)</span> so the Hermite polynomial is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+H_{5}(x)=f[z_{0}]+\sum_{i=1}^{5}f[z_{0},...,z_{i}](x-z_{0})\cdots(x-z_{i-1}).
+\end{equation*}\]</div>
+<p>The divided differences are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccccccc}
+{\small{}z} &amp; {\small{}f(z)} &amp; {\small{}\text{1st diff}} &amp; {\small{}\text{2nd diff}} &amp; {\small{}\text{3rd diff}} &amp; {\small{}\text{4th diff}} &amp; {\small{}\text{5th diff}}\\
+\hline
+{\small{}z_{0}=-1.5} &amp; {\small{}\textcolor{blue}{0.071}} &amp;  &amp;  &amp;  &amp;  &amp; \\
+ &amp;  &amp; {\small{}f'(z_{0})=\textcolor{blue}{1}} &amp;  &amp;  &amp;  &amp; \\
+{\small{}z_{1}=-1.5} &amp; {\small{}0.071} &amp;  &amp; {\small{}\frac{-0.032-1}{1.6+1.5}=\textcolor{blue}{-0.33}} &amp;  &amp;  &amp; \\
+ &amp;  &amp; {\small{}f[z_{1},z_{2}]=-0.032} &amp;  &amp; {\small{}\textcolor{blue}{0.0065}} &amp;  &amp; \\
+{\small{}z_{2}=1.6} &amp; {\small{}-0.029} &amp;  &amp; {\small{}\frac{-1+0.032}{1.6+1.5}=-0.31} &amp;  &amp; {\small{}\textcolor{blue}{0.015}} &amp; \\
+ &amp;  &amp; {\small{}f'(z_{2})=-1} &amp;  &amp; {\small{}0.10} &amp;  &amp; {\small{}\textcolor{blue}{-0.005}}\\
+{\small{}z_{3}=1.6} &amp; {\small{}-0.029} &amp;  &amp; {\small{}\frac{0.0055+1}{4.7-1.6}=0.32} &amp;  &amp; {\small{}-0.016} &amp; \\
+ &amp;  &amp; {\small{}f[z_{3},z_{4}]=0.0055} &amp;  &amp; {\small{}0} &amp;  &amp; \\
+{\small{}z_{4}=4.7} &amp; {\small{}-0.012} &amp;  &amp; {\small{}\frac{1-0.0055}{4.7-1.6}=0.32} &amp;  &amp;  &amp; \\
+ &amp;  &amp; {\small{}f'(z_{4})=1} &amp;  &amp;  &amp;  &amp; \\
+{\small{}z_{5}=4.7} &amp; {\small{}-0.012} &amp;  &amp;  &amp;  &amp;  &amp; \\
+\hline
+\end{array}
+\end{equation*}\]</div>
+<p>Therefore, the Hermite polynomial is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+H_{5}(x) =&amp;\textcolor{blue}{0.071}+\textcolor{blue}{1}(x+1.5)\textcolor{blue}{-0.33}(x+1.5)^{2}+\textcolor{blue}{0.0065}(x+1.5)^{2}(x-1.6)+\\
+ &amp; +\textcolor{blue}{0.015}(x+1.5)^{2}(x-1.6)^{2}\textcolor{blue}{-0.005}(x+1.5)^{2}(x-1.6)^{2}(x-4.7).
+\end{align*}\]</div>
+</section>
+</div></section>
+<section id="python-code-for-computing-hermite-interpolating-polynomial">
+<h2>Python code for computing Hermite interpolating polynomial<a class="headerlink" href="#python-code-for-computing-hermite-interpolating-polynomial" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function <strong>hdiff</strong> computes the divided
+differences needed for Hermite interpolation. It is based on the
+function <strong>diff</strong> for computing divided differences for Newton
+interpolation. The inputs to <strong>hdiff</strong> are the <span class="math notranslate nohighlight">\(x\)</span>-coordinates,
+the <span class="math notranslate nohighlight">\(y\)</span>-coordinates, and the derivatives <strong>yprime}</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hdiff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yprime</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># here m is the number of data points. Note n=m-1</span>
+    <span class="c1"># and 2n+1=2m-1</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)):</span> <span class="c1"># computes the first divided</span>
+        <span class="c1"># differences using derivatives</span>
+        <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yprime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yprime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span> <span class="c1"># computes the rest of the divided differences</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">l</span><span class="p">)):</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa62">Example 24</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdiff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">]),</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.071</span><span class="p">,</span><span class="o">-</span><span class="mf">0.029</span><span class="p">,</span><span class="o">-</span><span class="mf">0.012</span><span class="p">]),</span> 
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.071     ,  1.        , -0.33298647,  0.00671344,  0.0154761 ,
+       -0.00519663])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that in the hand-calculations of <a class="reference internal" href="#chap3_exa63">Example 25</a>, where two-digit rounding
+was used, we obtained 0.0065 as the first third divided difference. In the
+Python output above, this divided difference is 0.0067.</p>
+<p>The following function computes the Hermite interpolating polynomial,
+using the divided differences obtained from <strong>hdiff</strong>, and then
+evaluates the polynomial at <span class="math notranslate nohighlight">\(w\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hermite</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yprime</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># here m is the number of data points. not the</span>
+    <span class="c1"># degree of the polynomial</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">hdiff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yprime</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pr</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">pr</span> <span class="o">*=</span> <span class="n">w</span><span class="o">-</span><span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">pr</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s recreate the Hermite interpolating polynomial plot of <a class="reference internal" href="#chap3_exa62">Example 24</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.071</span><span class="p">,</span><span class="o">-</span><span class="mf">0.029</span><span class="p">,</span><span class="o">-</span><span class="mf">0.012</span><span class="p">])</span>
+<span class="n">yprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">funct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+<span class="n">interp</span> <span class="o">=</span> <span class="n">hermite</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yprime</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hermite interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">funct</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cos(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter4-3_19_0.png" src="_images/bookchapter4-3_19_0.png" />
+</div>
+</div>
+<p><strong>Exercise 4.3-1</strong></p>
+<p>The following table gives the values of <span class="math notranslate nohighlight">\(y=f(x)\)</span> and <span class="math notranslate nohighlight">\(y'=f'(x)\)</span> where <span class="math notranslate nohighlight">\(f(x)=e^x+\sin 10x\)</span>. Compute the Hermite interpolating polynomial and the polynomial interpolant for the data in the table. Plot the two interpolating polynomials together with <span class="math notranslate nohighlight">\(f(x)=e^x+\sin 10x\)</span> on <span class="math notranslate nohighlight">\((0,3)\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccccccc}
+x &amp; 0 &amp; 0.4 &amp; 1 &amp; 2 &amp; 2.6 &amp; 3\\
+\hline
+y &amp; 1 &amp; 0.735 &amp; 2.17 &amp; 8.30 &amp; 14.2 &amp; 19.1\\
+\hline
+y' &amp; 11 &amp; -5.04 &amp; -5.67 &amp; 11.5 &amp; 19.9 &amp;21.6\\
+\end{array}
+\end{equation*}\]</div>
+<div class="docutils container" id="id3">
+<dl class="citation">
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id2">Atk89</a></span></dt>
+<dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
+<dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter4-2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">4.2 High degree polynomial interpolation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter4-4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.4 Piecewise polynomials: spline interpolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5.1 Newton-Cotes formulas &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.2 Composite Newton-Cotes formulas" href="bookchapter5-2.html" />
+    <link rel="prev" title="Chapter 5 Numerical Quadrature and Differentiation" href="bookchapter5-0.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter5-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter5-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5.1 Newton-Cotes formulas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="newton-cotes-formulas">
+<h1>5.1 Newton-Cotes formulas<a class="headerlink" href="#newton-cotes-formulas" title="Permalink to this headline">#</a></h1>
+<p>The idea is to construct the polynomial interpolant <span class="math notranslate nohighlight">\(P(x)\)</span> and compute
+<span class="math notranslate nohighlight">\(\int_{a}^{b}P(x)dx\)</span> as an approximation to <span class="math notranslate nohighlight">\(\int_{a}^{b}f(x)dx\)</span>. Given nodes <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span>,
+the Lagrange form of the interpolant is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{n}(x)=\sum_{i=0}^{n}f(x_{i})l_{i}(x)
+\end{equation*}\]</div>
+<p>and from the interpolation error formula <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 15</a>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x)=P_{n}(x)+(x-x_{0})\cdots(x-x_{n})\frac{f^{(n+1)}(\xi(x))}{(n+1)!},
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi(x)\in[a,b]\)</span>. (We have written <span class="math notranslate nohighlight">\(\xi(x)\)</span> instead of <span class="math notranslate nohighlight">\(\xi\)</span> to emphasize that <span class="math notranslate nohighlight">\(\xi\)</span> depends on the value of <span class="math notranslate nohighlight">\(x\)</span>.)</p>
+<p>Taking the integral of both sides yields</p>
+<div class="math notranslate nohighlight" id="equation-newtoncotes">
+<span class="eqno">(20)<a class="headerlink" href="#equation-newtoncotes" title="Permalink to this equation">#</a></span>\[\int_{a}^{b}f(x)dx  = \underbrace{\int_{a}^{b}P_{n}(x)dx}_{\text{quadrature rule}}+\underbrace{\frac{1}{(n+1)!}\int_{a}^{b}\prod_{i=0}^{n}(x-x_{i})f^{(n+1)}(\xi(x))dx.}_{\text{error term}}
+% &amp; =\sum_{i=0}^{n}\left(\underbrace{\int_{a}^{b}l_{i}(x)dx}_{w_i}\right) f(x_{i})+\text{&quot;error&quot;}\nonumber\]</div>
+<p>The first integral on the right-hand side gives the quadrature rule:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}P_{n}(x)dx=\int_a^b \left( \sum_{i=0}^{n}f(x_{i})l_{i}(x) \right) dx =\sum_{i=0}^{n}\left(\underbrace{\int_{a}^{b}l_{i}(x)dx}_{w_i}\right) f(x_{i})=\sum_{i=0}^n w_i f(x_i),
+\end{equation*}\]</div>
+<p>and the second integral gives the error term.</p>
+<p>We obtain different quadrature rules by taking different nodes, or number of
+nodes. The following result is useful in the theoretical analysis
+of Newton-Cotes formulas.</p>
+<div class="proof theorem admonition" id="chap4_thm65">
+<p class="admonition-title"><span class="caption-number">Theorem 21 </span> (Weighted mean value theorem for integrals)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f\in C^0[a,b],\)</span> the Riemann integral of <span class="math notranslate nohighlight">\(g(x)\)</span> exists on
+<span class="math notranslate nohighlight">\([a,b],\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> does not change sign on <span class="math notranslate nohighlight">\([a,b].\)</span> Then there
+exists <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span> with <span class="math notranslate nohighlight">\(\int_{a}^{b}f(x)g(x)dx=f(\xi)\int_{a}^{b}g(x)dx.\)</span></p>
+</section>
+</div><p>Two well-known numerical quadrature rules, trapezoidal rule and Simpson’s rule, are examples of Newton-Cotes formulas:</p>
+<ul class="simple">
+<li><p><strong>Trapezoidal rule</strong></p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(f\in C^2[a,b]\)</span>. Take two nodes, <span class="math notranslate nohighlight">\(x_{0}=a, x_{1}=b,\)</span> and use the linear
+Lagrange polynomial</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{1}(x)=\frac{x-x_{1}}{x_{0}-x_{1}}f(x_{0})+\frac{x-x_{0}}{x_{1}-x_{0}}f(x_{1})
+\end{equation*}\]</div>
+<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=1\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(20)</a> to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\int_{a}^{b}P_{1}(x)dx+\frac{1}{2}\int_{a}^{b}\prod_{i=0}^{1}(x-x_{i})f''(\xi(x))dx,
+\end{equation*}\]</div>
+<p>and then substitute for <span class="math notranslate nohighlight">\(P_1\)</span> to obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{a}^{b}f(x)dx &amp; =\int_{a}^{b}\frac{x-x_{1}}{x_{0}-x_{1}}f(x_{0})dx+\int_{a}^{b}\frac{x-x_{0}}{x_{1}-x_{0}}f(x_{1})dx +\frac{1}{2}\int_{a}^{b}(x-x_{0})(x-x_{1})f''(\xi(x))dx.
+\end{align*}\]</div>
+<p>The first two integrals on the right-hand side can be evaluated easily: the first integral is <span class="math notranslate nohighlight">\(\frac{h}{2}f(x_{0})\)</span> and the second one is
+<span class="math notranslate nohighlight">\(\frac{h}{2}f(x_{1})\)</span>, where <span class="math notranslate nohighlight">\(h=x_1-x_0=b-a\)</span>. Let’s evaluate</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}(x-x_{0})(x-x_{1})f''(\xi(x))dx.
+\end{equation*}\]</div>
+<p>We will use <a class="reference internal" href="#chap4_thm65">Theorem 21</a> for this computation. Note that the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)=(x-a)(x-b)\)</span> does not change sign on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and it is integrable: so this function serves the role of <span class="math notranslate nohighlight">\(g(x)\)</span> in <a class="reference internal" href="#chap4_thm65">Theorem 21</a>. The other term, <span class="math notranslate nohighlight">\(f''(\xi(x))\)</span>, serves the role of <span class="math notranslate nohighlight">\(f(x)\)</span>. Applying the theorem, we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}(x-a)(x-b)f''(\xi(x))dx=f''(\xi) \int_a^b (x-a)(x-b)dx
+\end{equation*}\]</div>
+<p>where we kept the same notation <span class="math notranslate nohighlight">\(\xi\)</span>, somewhat inappropriately, as we moved <span class="math notranslate nohighlight">\(f''(\xi(x))\)</span> from inside to the outside of the integral. Finally, observe that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_a^b (x-a)(x-b)dx=\frac{(a-b)^3}{6}=\frac{-h^3}{6},
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h=b-a\)</span>. Putting all the pieces together, we have obtained</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\frac{h}{2}\left[f(x_{0})+f(x_{1})\right]-\frac{h^{3}}{12}f''(\xi).
+\end{equation*}\]</div>
+<ul class="simple">
+<li><p><strong>Simpson’s rule</strong></p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(f\in C^4[a,b]\)</span>. Take three equally-spaced nodes, <span class="math notranslate nohighlight">\(x_{0}=a\)</span>, <span class="math notranslate nohighlight">\(x_{1}=a+h\)</span>, <span class="math notranslate nohighlight">\(x_{2}=b,\)</span>
+where <span class="math notranslate nohighlight">\(h=\frac{b-a}{2},\)</span> and use the second degree Lagrange polynomial</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{2}(x)=\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})+\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}f(x_{1})+\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}f(x_{2})
+\end{equation*}\]</div>
+<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=2\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(20)</a> to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\int_{a}^{b}P_{2}(x)dx+\frac{1}{3!}\int_{a}^{b}\prod_{i=0}^{2}(x-x_{i})f^{(3)}(\xi(x))dx,
+\end{equation*}\]</div>
+<p>and then substitute for <span class="math notranslate nohighlight">\(P_2\)</span> to obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{a}^{b}f(x)dx &amp; =\int_{a}^{b}\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})dx+\int_{a}^{b}\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}f(x_{1})dx+\\
+ &amp; +\int_{a}^{b}\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}f(x_{2})dx+\frac{1}{6}\int_{a}^{b}(x-x_{0})(x-x_{1})(x-x_{2})f^{(3)}(\xi(x))dx.
+\end{align*}\]</div>
+<p>The sum of the first three integrals on the right-hand side simplify as: <span class="math notranslate nohighlight">\(\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]\)</span>. The last integral cannot be evaluated using <a class="reference internal" href="#chap4_thm65">Theorem 21</a> directly, like in the trapezoidal rule, since the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)(x-x_2)\)</span> changes sign on <span class="math notranslate nohighlight">\([a,b]\)</span>. However, a clever application of integration by parts transforms the integral to an integral where  <a class="reference internal" href="#chap4_thm65">Theorem 21</a> is applicable (see <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span> for details), and the integral simplifies as <span class="math notranslate nohighlight">\(-\frac{h^{5}}{90}f^{(4)}(\xi)\)</span> for some <span class="math notranslate nohighlight">\(\xi \in (a,b)\)</span>. In summary, we obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]-\frac{h^{5}}{90}f^{(4)}(\xi)
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
+<p><strong>Exercise 5.1-1</strong></p>
+<p>Prove that the sum of the weights in Newton-Cotes rules is <span class="math notranslate nohighlight">\(b-a\)</span>, for any <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="proof definition admonition" id="chap4_def66">
+<p class="admonition-title"><span class="caption-number">Definition 8 </span></p>
+<section class="definition-content" id="proof-content">
+<p>The degree of accuracy, or precision, of a quadrature formula is the
+largest positive integer <span class="math notranslate nohighlight">\(n\)</span> such that the formula is exact for <span class="math notranslate nohighlight">\(f(x)=x^{k},\)</span>
+when <span class="math notranslate nohighlight">\(k=0,1,...,n,\)</span> or equivalently, for any polynomial of degree
+less than or equal to <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</section>
+</div><p>Observe that the trapezoidal and Simpson’s rules have degrees of accuracy
+of one and three. These two rules are examples of closed Newton-Cotes
+formulas; closed refers to the fact that the end points <span class="math notranslate nohighlight">\(a,b\)</span> of
+the interval are used as nodes in the quadrature rule. Here is the
+general definition.</p>
+<div class="proof definition admonition" id="chap4_def67">
+<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Closed Newton-Cotes)</p>
+<section class="definition-content" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\((n+1)\)</span>-point closed Newton-Cotes formula uses nodes <span class="math notranslate nohighlight">\(x_{i}=x_{0}+ih\)</span>,
+for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> where <span class="math notranslate nohighlight">\(x_{0}=a,x_{n}=b,h=\frac{b-a}{n},\)</span> and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+w_{i}=\int_{x_{0}}^{x_{n}}l_{i}(x)dx=\int_{x_{0}}^{x_{n}}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx.
+\end{equation*}\]</div>
+</section>
+</div><p>The following theorem provides an error formula for the closed Newton-Cotes formula. A proof can be found in <span id="id2">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
+<div class="proof theorem admonition" id="chap4_thm68">
+<p class="admonition-title"><span class="caption-number">Theorem 22 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>For the <span class="math notranslate nohighlight">\((n+1)\)</span>-point closed Newton-Cotes formula, we have:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(n\)</span> is even and <span class="math notranslate nohighlight">\(f\in C^{n+2}[a,b]\)</span></p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\sum_{i=0}^{n}w_{i}f(x_{i})+\frac{h^{n+3}f^{(n+2)}(\xi)}{(n+2)!}\int_{0}^{n}t^{2}(t-1)\cdots(t-n)dt,
+\end{equation*}\]</div>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(n\)</span> is odd and <span class="math notranslate nohighlight">\(f\in C^{n+1}[a,b]\)</span></p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\sum_{i=0}^{n}w_{i}f(x_{i})+\frac{h^{n+2}f^{(n+1)}(\xi)}{(n+1)!}\int_{0}^{n}t(t-1)\cdots(t-n)dt
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi\)</span> is some number in <span class="math notranslate nohighlight">\((a,b).\)</span></p>
+</section>
+</div><p>Some well known examples of closed Newton-Cotes formulas are the trapezoidal
+rule (<span class="math notranslate nohighlight">\(n=1)\)</span>, Simpson’s rule (<span class="math notranslate nohighlight">\(n=2)\)</span>, and Simpson’s three-eighth
+rule (<span class="math notranslate nohighlight">\(n=3)\)</span>. Observe that in the <span class="math notranslate nohighlight">\((n+1)\)</span>-point closed Newton-Cotes
+formula, if <span class="math notranslate nohighlight">\(n\)</span> is even, then the degree of accuracy is <span class="math notranslate nohighlight">\((n+1\)</span>),
+although the interpolating polynomial is of degree <span class="math notranslate nohighlight">\(n\)</span>.
+The open Newton-Cotes formulas exclude the end points of the interval.</p>
+<div class="proof definition admonition" id="chap4_def69">
+<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Open Newton-Cotes)</p>
+<section class="definition-content" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\((n+1)\)</span>-point open Newton-Cotes formula uses nodes <span class="math notranslate nohighlight">\(x_{i}=x_{0}+ih\)</span>,
+for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> where <span class="math notranslate nohighlight">\(x_{0}=a+h,x_{n}=b-h,h=\frac{b-a}{n+2}\)</span>
+and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+w_{i}=\int_{a}^{b}l_{i}(x)dx=\int_{a}^{b}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx.
+\end{equation*}\]</div>
+<p>We put <span class="math notranslate nohighlight">\(a=x_{-1}\)</span> and <span class="math notranslate nohighlight">\(b=x_{n+1}\)</span>.</p>
+</section>
+</div><p>The error formula for the open Newton-Cotes formula is given next; for a proof see Isaacson and <span id="id3">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
+<div class="proof theorem admonition" id="chap4_thm70">
+<p class="admonition-title"><span class="caption-number">Theorem 23 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>For the <span class="math notranslate nohighlight">\((n+1)\)</span>-point open Newton-Cotes formula, we have:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(n\)</span> is even and <span class="math notranslate nohighlight">\(f\in C^{n+2}[a,b]\)</span></p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\sum_{i=0}^{n}w_{i}f(x_{i})+\frac{h^{n+3}f^{(n+2)}(\xi)}{(n+2)!}\int_{-1}^{n+1}t^{2}(t-1)\cdots(t-n)dt,
+\end{equation*}\]</div>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(n\)</span> is odd and <span class="math notranslate nohighlight">\(f\in C^{n+1}[a,b]\)</span></p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=\sum_{i=0}^{n}w_{i}f(x_{i})+\frac{h^{n+2}f^{(n+1)}(\xi)}{(n+1)!}\int_{-1}^{n+1}t(t-1)\cdots(t-n)dt,
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi\)</span> is some number in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+</section>
+</div><p>The well-known midpoint rule is an example of open Newton-Cotes formula:</p>
+<ul class="simple">
+<li><p><strong>Midpoint rule</strong></p></li>
+</ul>
+<p>Take one node, <span class="math notranslate nohighlight">\(x_0=a+h\)</span>, which corresponds to <span class="math notranslate nohighlight">\(n=0\)</span> in the above theorem to obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}f(x)dx=2hf(x_{0})+\frac{h^{3}f''(\xi)}{3}
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h=(b-a)/2.\)</span> This rule interpolates <span class="math notranslate nohighlight">\(f\)</span> by
+a constant (the values of <span class="math notranslate nohighlight">\(f\)</span> at the midpoint), that is, a polynomial
+of degree 0, but it has degree of accuracy 1.</p>
+<div class="proof remark admonition" id="chap4_rem71">
+<p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Both closed and open Newton-Cotes formulas using odd number of nodes
+(<span class="math notranslate nohighlight">\(n\)</span> is even), gain an extra degree of accuracy beyond that of the
+polynomial interpolant on which they are based. This is due to cancellation
+of positive and negative error.</p>
+<p>There are some drawbacks of Newton-Cotes formulas:</p>
+<ul class="simple">
+<li><p>In general, these rules are not of the highest degree of accuracy possible
+for the number of nodes used.</p></li>
+<li><p>The use of large number of equally spaced nodes may incur the erratic
+behavior associated with high-degree polynomial interpolation. Weights
+for a high-order rule may be negative, potentially leading to loss
+of significance errors.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(I_{n}\)</span> denote the Newton-Cotes estimate of an integral based
+on <span class="math notranslate nohighlight">\(n\)</span> nodes. <span class="math notranslate nohighlight">\(I_{n}\)</span> may not converge to the true integral as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span>
+for perfectly well-behaved integrands.</p></li>
+</ul>
+</section>
+</div><div class="proof example admonition" id="chap4_exa72">
+<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<section class="example-content" id="proof-content">
+<p>Estimate <span class="math notranslate nohighlight">\(\int_{0.5}^1 x^x dx\)</span> using the midpoint, trapezoidal, and Simpson’s rules.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(f(x)=x^x\)</span>.
+The midpoint estimate for the integral is <span class="math notranslate nohighlight">\(2hf(x_{0})\)</span> where <span class="math notranslate nohighlight">\(h=(b-a)/2=1/4\)</span> and <span class="math notranslate nohighlight">\(x_{0}=0.75.\)</span>
+Then the midpoint estimate, using 6 digits, is <span class="math notranslate nohighlight">\(f(0.75)/2=0.805927/2=0.402964\)</span>.
+The trapezoidal estimate is <span class="math notranslate nohighlight">\(\frac{h}{2}\left[f(0.5)+f(1)\right]\)</span>
+where <span class="math notranslate nohighlight">\(h=1/2\)</span>, which results in <span class="math notranslate nohighlight">\(1.707107/4=0.426777.\)</span>
+Finally, for Simpson’s rule, <span class="math notranslate nohighlight">\(h=(b-a)/2=1/4,\)</span> and thus the estimate is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{h}{3}\left[f(0.5)+4f(0.75)+f(1)\right]=\frac{1}{12}\left[0.707107+4(0.805927)+1\right]=0.410901.
+\end{equation*}\]</div>
+<p>Here is a summary of the results:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{ccc}
+\text{Midpoint} &amp; \text{Trapezoidal} &amp; \text{Simpson's} \\
+\hline
+0.402964 &amp; 0.426777 &amp; 0.410901  \\
+\end{array}
+\end{equation*}\]</div>
+<div class="proof example admonition" id="chap4_exa73">
+<p class="admonition-title"><span class="caption-number">Example 28 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the constants <span class="math notranslate nohighlight">\(c_{0},c_{1},x_{1}\)</span> so that the quadrature formula</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{1}f(x)dx=c_{0}f(0)+c_{1}f(x_{1})
+\end{equation*}\]</div>
+<p>has the highest possible degree of accuracy.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>We will find how many of the polynomials <span class="math notranslate nohighlight">\(1,x,x^{2},...\)</span> the rule
+can integrate exactly. If <span class="math notranslate nohighlight">\(p(x)=1,\)</span> then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{1}p(x)dx=c_{0}p(0)+c_{1}p(x_{1})\Rightarrow1=c_{0}+c_{1}.
+\end{equation*}\]</div>
+<p>If <span class="math notranslate nohighlight">\(p(x)=x,\)</span> we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{1}p(x)dx=c_{0}p(0)+c_{1}p(x_{1})\Rightarrow\frac{1}{2}=c_{1}x_{1}
+\end{equation*}\]</div>
+<p>and <span class="math notranslate nohighlight">\(p(x)=x^{2}\)</span> implies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{1}p(x)dx=c_{0}p(0)+c_{1}p(x_{1})\Rightarrow\frac{1}{3}=c_{1}x_{1}^{2}.
+\end{equation*}\]</div>
+<p>We have three unknowns and three equations, so we have to stop here.
+Solving the three equations we get: <span class="math notranslate nohighlight">\(c_{0}=1/4,c_{1}=3/4,x_{1}=2/3.\)</span>
+So the quadrature rule is of precision two and it is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{0}^{1}f(x)dx=\frac{1}{4}f(0)+\frac{3}{4}f(\frac{2}{3}).
+\end{equation*}\]</div>
+<p><strong>Exercise 5.1-2</strong></p>
+<p>Find <span class="math notranslate nohighlight">\(c_{0},c_{1},c_{2}\)</span> so that the quadrature rule <span class="math notranslate nohighlight">\(\int_{-1}^{1}f(x)dx=c_{0}f(-1)+c_{1}f(0)+c_{2}f(1)\)</span>
+has degree of accuracy 2.</p>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
+<dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">IK66</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>Isaacson, E. and H.B. Keller. <em>Analysis of Numerical Methods</em>. John Wiley &amp; Sons, 1966.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter5-0.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 5 Numerical Quadrature and Differentiation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter5-2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5.2 Composite Newton-Cotes formulas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

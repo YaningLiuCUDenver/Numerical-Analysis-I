@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 4 Numerical Quadrature and Differentiation &#8212; First Semester in Numerical Analysis with Python</title>
+    <title>Chapter 4 Interpolation &#8212; First Semester in Numerical Analysis with Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="bookchapter2-7.html" />
+    <link rel="next" title="4.1 Polynomial interpolation" href="bookchapter4-1.html" />
+    <link rel="prev" title="2.7 High-order fixed-point iteration" href="bookchapter2-7.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -168,12 +169,77 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter2-5.html">
-   Muller’s method
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Chapter 4 Numerical Quadrature and Differentiation
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
   </a>
  </li>
 </ul>
@@ -327,7 +393,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Chapter 4 Numerical Quadrature and Differentiation</h1>
+                <h1>Chapter 4 Interpolation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -339,12 +405,54 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-4-numerical-quadrature-and-differentiation">
-<span id="ch-integration"></span><h1>Chapter 4 Numerical Quadrature and Differentiation<a class="headerlink" href="#chapter-4-numerical-quadrature-and-differentiation" title="Permalink to this headline">#</a></h1>
-<p>Estimating <span class="math notranslate nohighlight">\(\int_{a}^{b}f(x)dx\)</span> using sums of the form <span class="math notranslate nohighlight">\(\sum_{i=0}^{n}w_{i}f(x_{i})\)</span>
-is known as the quadrature problem. Here <span class="math notranslate nohighlight">\(w_{i}\)</span> are called weights,
-and <span class="math notranslate nohighlight">\(x_{i}\)</span> are called nodes. The objective is to determine the nodes
-and weights to minimize error.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-4-interpolation">
+<h1>Chapter 4 Interpolation<a class="headerlink" href="#chapter-4-interpolation" title="Permalink to this headline">#</a></h1>
+<p>In this chapter, we will study the following problem: given data <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span>,
+find a function <span class="math notranslate nohighlight">\(f\)</span> such that <span class="math notranslate nohighlight">\(f(x_{i})=y_{i}.\)</span> This problem is called the interpolation problem, and <span class="math notranslate nohighlight">\(f\)</span> is called
+the interpolating function, or interpolant, for the given data.</p>
+<p>Interpolation is used, for example, when we use mathematical software to plot a smooth curve through discrete data points, when we want to find the in-between values in a table, or when we differentiate or integrate black-box type functions.</p>
+<p>How do we choose <span class="math notranslate nohighlight">\(f\)</span>? Or, what kind of function do we want <span class="math notranslate nohighlight">\(f\)</span> to be? There are several options. Examples of functions used in interpolation are polynomials, piecewise polynomials, rational functions, trigonometric functions, and exponential functions. As we try to find a good choice for <span class="math notranslate nohighlight">\(f\)</span> for our data, some questions to consider are whether we want <span class="math notranslate nohighlight">\(f\)</span> to inherit the properties of the data (for example, if the data is periodic, should we use a trigonometric function as <span class="math notranslate nohighlight">\(f\)</span>?), and how we want <span class="math notranslate nohighlight">\(f\)</span> behave between data points. In general <span class="math notranslate nohighlight">\(f\)</span> should be easy to evaluate, and easy to integrate &amp; differentiate.</p>
+<p>Here is a general framework for the interpolation problem. We are given data, and we pick a family of functions from which the interpolant <span class="math notranslate nohighlight">\(f\)</span> will be chosen:</p>
+<ul class="simple">
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span></p></li>
+<li><p>Family: Polynomials, trigonometric functions, etc.</p></li>
+</ul>
+<p>Suppose the family of functions selected forms a vector space. Pick
+a basis for the vector space: <span class="math notranslate nohighlight">\(\phi_{0}(x),\phi_{1}(x),...,\phi_{n}(x).\)</span>
+Then the interpolating function can be written as a linear combination
+of the basis vectors (functions):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x)=\sum_{k=0}^{n}a_{k}\phi_{k}(x).
+\end{equation*}\]</div>
+<p>We want <span class="math notranslate nohighlight">\(f\)</span> to pass through the data points, that is, <span class="math notranslate nohighlight">\(f(x_i)=y_i\)</span>. Then determine <span class="math notranslate nohighlight">\(a_{k}\)</span> so that:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x_{i})=\sum_{k=0}^{n}a_{k}\phi_{k}(x_{i})=y_{i},i=0,1,...,n,
+\end{equation*}\]</div>
+<p>which is a system of <span class="math notranslate nohighlight">\(n+1\)</span> equations with <span class="math notranslate nohighlight">\(n+1\)</span> unknowns.
+Using matrices, the problem is to solve the matrix equation</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+Aa=y
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(a\)</span>,  where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+A=\begin{bmatrix}\phi_{0}(x_{0}) &amp; ... &amp; \phi_{n}(x_{0})\\
+\phi_{0}(x_{1}) &amp; ... &amp; \phi_{n}(x_{1})\\
+\vdots\\
+\phi_{0}(x_{n}) &amp; ... &amp; \phi_{n}(x_{n})
+\end{bmatrix},a=\begin{bmatrix}a_{0}\\
+a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix},y=\begin{bmatrix}y_{0}\\
+y_{1}\\
+\vdots\\
+y_{n}
+\end{bmatrix}.
+\end{equation*}\]</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -378,8 +486,15 @@ and weights to minimize error.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">&lt;no title&gt;</p>
+            <p class="prev-next-title">2.7 High-order fixed-point iteration</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter4-1.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.1 Polynomial interpolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

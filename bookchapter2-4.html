@@ -184,7 +184,62 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
-   Chapter 4 Numerical Quadrature and Differentiation
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
   </a>
  </li>
 </ul>
@@ -420,7 +475,7 @@ of the secant line, which is set to <span class="math notranslate nohighlight">\
 \frac{0-f(p_{n-1})}{p_{n}-p_{n-1}}=\frac{f(p_{n-1})-f(p_{n-2})}{p_{n-1}-p_{n-2}}\Rightarrow p_{n}=p_{n-1}-f(p_{n-1})\frac{p_{n-1}-p_{n-2}}{f(p_{n-1})-f(p_{n-2})}
 \end{equation*}\]</div>
 <p>which is the recursion of the secant method.</p>
-<p>The following theorem shows that if the initial guesses are “good”, the secant method has superlinear convergence. A proof can be found in <span id="id1">Atkinson [<a class="reference internal" href="#id8" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>.</p>
+<p>The following theorem shows that if the initial guesses are “good”, the secant method has superlinear convergence. A proof can be found in <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap2_thm35">
 <p class="admonition-title"><span class="caption-number">Theorem 8 </span></p>
 <section class="theorem-content" id="proof-content">
@@ -489,7 +544,7 @@ on the convergence rates of the methods.</p>
 <p>c. Do you think in general the hybrid method converges to the root, provided the initial interval <span class="math notranslate nohighlight">\((a,b)\)</span> contains the root, for any starting value <span class="math notranslate nohighlight">\(p_0\)</span>? Explain.</p>
 <div class="docutils container" id="id2">
 <dl class="citation">
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
 <dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
 </dd>
 </dl>
