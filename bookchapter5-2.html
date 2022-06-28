@@ -242,6 +242,26 @@ const thebe_selector_output = ".output, .cell_output"
    5.6 Numerical differentiation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-0.html">
+   Chapter 6 Approximation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-1.html">
+   6.1 Discrete least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-2.html">
+   Chapter 6–Approximation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-3.html">
+   Chapter 6–Approximation Theory
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -522,8 +542,8 @@ rule to each domain separately, we get</p>
 <p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(n\)</span> be even, <span class="math notranslate nohighlight">\(h=\frac{b-a}{n+2},\)</span> and <span class="math notranslate nohighlight">\(x_{j}=a+(j+1)h\)</span>
 for <span class="math notranslate nohighlight">\(j=-1,0,...,n+1.\)</span> The composite Midpoint rule for <span class="math notranslate nohighlight">\(n+2\)</span> subintervals
 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8da72f00-0f75-4f1b-a529-fd106002aee2">
-<span class="eqno">(21)<a class="headerlink" href="#equation-8da72f00-0f75-4f1b-a529-fd106002aee2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4dc1e953-57cf-48f7-8b43-e928c890a7fb">
+<span class="eqno">(21)<a class="headerlink" href="#equation-4dc1e953-57cf-48f7-8b43-e928c890a7fb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=2h\sum_{j=0}^{n/2}f(x_{2j})+\frac{b-a}{6}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
@@ -532,8 +552,8 @@ is</p>
 Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}\)</span>, and <span class="math notranslate nohighlight">\(x_{j}=a+jh\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n.\)</span>
 The composite Trapezoidal rule for <span class="math notranslate nohighlight">\(n\)</span> subintervals is</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-63cfe769-2646-4daf-b2a2-d47c84eb22fe">
-<span class="eqno">(22)<a class="headerlink" href="#equation-63cfe769-2646-4daf-b2a2-d47c84eb22fe" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-053b1142-4204-46d8-b9b1-800a2b8aedeb">
+<span class="eqno">(22)<a class="headerlink" href="#equation-053b1142-4204-46d8-b9b1-800a2b8aedeb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_{j})+f(b)\right]-\frac{b-a}{12}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>

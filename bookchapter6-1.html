@@ -1,0 +1,1515 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.1 Discrete least squares &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6.2–Continuous least squares" href="bookchapter6-2.html" />
+    <link rel="prev" title="Chapter 6 Approximation Theory" href="bookchapter6-0.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-0.html">
+   Chapter 6 Approximation Theory
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   6.1 Discrete least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-2.html">
+   6.2–Continuous least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-3.html">
+   Chapter 6–Approximation Theory
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter6-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter6-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arya-s-adventures-in-the-physics-lab">
+   Arya’s adventures in the physics lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-the-problem">
+   Analysis of the problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-least-squares-approximation">
+   Python code for least squares approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#least-squares-with-non-polynomials">
+   Least squares with non-polynomials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linearizing-data">
+   Linearizing data
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>6.1 Discrete least squares</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arya-s-adventures-in-the-physics-lab">
+   Arya’s adventures in the physics lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-the-problem">
+   Analysis of the problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-least-squares-approximation">
+   Python code for least squares approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#least-squares-with-non-polynomials">
+   Least squares with non-polynomials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linearizing-data">
+   Linearizing data
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="discrete-least-squares">
+<h1>6.1 Discrete least squares<a class="headerlink" href="#discrete-least-squares" title="Permalink to this headline">#</a></h1>
+<section id="arya-s-adventures-in-the-physics-lab">
+<h2>Arya’s adventures in the physics lab<a class="headerlink" href="#arya-s-adventures-in-the-physics-lab" title="Permalink to this headline">#</a></h2>
+<p>College life is expensive, and Arya is happy to land a job working at a physics lab for some extra cash. She does some experiments, some data analysis, and a little grading. In one experiment she conducted, where there is one independent variable <span class="math notranslate nohighlight">\(x\)</span>, and one dependent variable <span class="math notranslate nohighlight">\(y\)</span>, she was asked to plot <span class="math notranslate nohighlight">\(y\)</span> against <span class="math notranslate nohighlight">\(x\)</span> values. (There are a total of six data points.) She gets the following plot:</p>
+<figure class="align-default" id="id19">
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/scatter_plot.png"><img alt="_images/scatter_plot.png" class="bg-primary mb-1" src="_images/scatter_plot.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot of data</span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Arya’s professor thinks the relationship between the variables should be
+linear, but we do not see data falling on a perfect line because of
+measurement error. The professor is not happy, professors are usually not happy when lab results act up, and asks Arya to come up with a linear formula,
+something like <span class="math notranslate nohighlight">\(y=ax+b,\)</span> to explain the relationship. Arya first thinks about interpolation, but quickly realizes it is not a good idea. (Why?). Let’s help Arya with her problem.</p>
+</section>
+<section id="analysis-of-the-problem">
+<h2>Analysis of the problem<a class="headerlink" href="#analysis-of-the-problem" title="Permalink to this headline">#</a></h2>
+<p>Let’s try passing a line through the data points. <a class="reference internal" href="#data-with-line"><span class="std std-numref">Figure 17</span></a>
+plots one such line, <span class="math notranslate nohighlight">\(y=3x-0.5\)</span>, together with the data points.</p>
+<figure class="align-default" id="data-with-line">
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/scatter_plot_line.png"><img alt="_images/scatter_plot_line.png" class="bg-primary mb-1" src="_images/scatter_plot_line.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Data with an approximating line</span><a class="headerlink" href="#data-with-line" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are certainly many other choices we have for the line: we could increase or decrease the slope a little, change the intercept a bit, and obtain multiple lines that have a visually good fit to the data. The crucial question is, how can we decide which line is the “best” line, among all the possible lines? If we can quantify how good the fit of a given line is to the data, and come up with a notion for error, perhaps then we can find the line that minimizes this error.</p>
+<p>Let’s generalize the problem a little. We have:</p>
+<ul class="simple">
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),...,(x_{m},y_{m})\)</span></p></li>
+</ul>
+<p>and we want to find a line that gives the “best” approximation to the data:</p>
+<ul class="simple">
+<li><p>Linear approximation: <span class="math notranslate nohighlight">\(y=f(x)=ax+b\)</span></p></li>
+</ul>
+<p>The questions we want to answer are:</p>
+<ol class="simple">
+<li><p>What does “best” approximation mean?</p></li>
+<li><p>How do we find <span class="math notranslate nohighlight">\(a,b\)</span> that gives the line with the “best” approximation?</p></li>
+</ol>
+<p>Observe that for each <span class="math notranslate nohighlight">\(x_{i}\)</span>, there is the corresponding <span class="math notranslate nohighlight">\(y_{i}\)</span>
+of the data point, and <span class="math notranslate nohighlight">\(f(x_{i})=ax_{i}+b,\)</span> which is the predicted
+value by the linear approximation. We can measure error by considering
+the deviations between the actual <span class="math notranslate nohighlight">\(y\)</span> coordinates and the predicted
+values:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+(y_{1}-ax_{1}-b),(y_{2}-ax_{2}-b),...,(y_{m}-ax_{m}-b)
+\end{equation*}\]</div>
+<p>There are several ways we can form a measure of error using these
+deviations, and each approach gives a different line approximating the data. The best approximation means finding
+<span class="math notranslate nohighlight">\(a,b\)</span> that minimizes the error measured in one of the following ways:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E=\max_{i}\left\{ |y_{i}-ax_{i}-b|\right\} \)</span> ; minimax problem</p></li>
+<li><p><span class="math notranslate nohighlight">\(E=\sum_{i=1}^{m}|y_{i}-ax_{i}-b|\)</span>; absolute deviations</p></li>
+<li><p><span class="math notranslate nohighlight">\(E=\sum_{i=1}^{m}(y_{i}-ax_{i}-b)^{2}\)</span>; least squares problem</p></li>
+</ul>
+<p>In this chapter we will discuss the least squares problem, the simplest
+one among the three options. We want to minimize</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\sum_{i=1}^{m}(y_{i}-ax_{i}-b)^{2}
+\end{equation*}\]</div>
+<p>with respect to the parameters <span class="math notranslate nohighlight">\(a,b.\)</span> For a minimum to occur, we
+must have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{\partial E}{\partial a}=0\text{ and }\frac{\partial E}{\partial b}=0.
+\end{equation*}\]</div>
+<p>We have:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial E}{\partial a} &amp; =\sum_{i=1}^{m}\frac{\partial E}{\partial a}(y_{i}-ax_{i}-b)^{2}=\sum_{i=1}^{m}(-2x_{i})(y_{i}-ax_{i}-b)=0\\
+\frac{\partial E}{\partial b} &amp; =\sum_{i=1}^{m}\frac{\partial E}{\partial b}(y_{i}-ax_{i}-b)^{2}=\sum_{i=1}^{m}(-2)(y_{i}-ax_{i}-b)=0
+\end{align*}\]</div>
+<p>Using algebra, these equations can be simplified as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b\sum_{i=1}^{m}x_{i}+a\sum_{i=1}^{m}x_{i}^{2} &amp; =\sum_{i=1}^{m}x_{i}y_{i}\\
+bm+a\sum_{i=1}^{m}x_{i} &amp; =\sum_{i=1}^{m}y_{i},
+\end{align*}\]</div>
+<p>which are called the <strong>normal equations</strong>. The solution to this system
+of equations is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a  =\frac{m\sum_{i=1}^{m}x_{i}y_{i}-\sum_{i=1}^{m}x_{i}\sum_{i=1}^{m}y_{i}}{m\left(\sum_{i=1}^{m}x_{i}^{2}\right)-\left(\sum_{i=1}^{m}x_{i}\right)^{2}},
+b  =\frac{\sum_{i=1}^{m}x_{i}^{2}\sum_{i=1}^{m}y_{i}-\sum_{i=1}^{m}x_{i}y_{i}\sum_{i=1}^{m}x_{i}}{m\left(\sum_{i=1}^{m}x_{i}^{2}\right)-\left(\sum_{i=1}^{m}x_{i}\right)^{2}}.
+\end{align*}\]</div>
+<p>Let’s consider a slightly more general question. Given data</p>
+<ul class="simple">
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),...,(x_{m},y_{m})\)</span></p></li>
+</ul>
+<p>can we find the best polynomial approximation</p>
+<ul class="simple">
+<li><p>Polynomial approximation: <span class="math notranslate nohighlight">\(P_{n}(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+...+a_{0}\)</span></p></li>
+</ul>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> will be usually much larger than <span class="math notranslate nohighlight">\(n\)</span>.
+Similar to the above discussion, we want to minimize</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\sum_{i=1}^{m}(y_{i}-P_{n}(x_{i}))^{2}=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}
+\end{equation*}\]</div>
+<p>with respect to the parameters <span class="math notranslate nohighlight">\(a_{n},a_{n-1},...,a_{0}\)</span>. For a minimum
+to occur, the necessary conditions are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{\partial E}{\partial a_{k}}=0\Rightarrow-\sum_{i=1}^{m}y_{i}x_{i}^{k}+\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=0
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n\)</span>. (we are skipping some algebra here!) The <strong>normal
+equations</strong> for polynomial approximation are</p>
+<div class="math notranslate nohighlight" id="equation-discrete-normal">
+<span class="eqno">(35)<a class="headerlink" href="#equation-discrete-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=\sum_{i=1}^{m}y_{i}x_{i}^{k}
+\end{equation}\]</div>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> This is a system of <span class="math notranslate nohighlight">\((n+1)\)</span> equations and <span class="math notranslate nohighlight">\((n+1)\)</span>
+unknowns. We can write this system as a matrix equation</p>
+<div class="math notranslate nohighlight" id="equation-leastsqmatrixeq">
+<span class="eqno">(36)<a class="headerlink" href="#equation-leastsqmatrixeq" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A\boldsymbol{a}=\boldsymbol{b}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span> is the unknown vector we are trying to find, and <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> is the constant vector</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\boldsymbol{a}=\begin{bmatrix}
+a_0\\
+a_1\\
+\vdots \\
+a_n
+\end{bmatrix},
+\boldsymbol{b}=\begin{bmatrix}
+\sum_{i=1}^{m}y_{i}\\
+\sum_{i=1}^{m}y_{i}x_{i}\\
+\vdots\\
+\sum_{i=1}^{m}y_{i}x_{i}^{n}
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>and <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\((n+1)\)</span> by <span class="math notranslate nohighlight">\((n+1)\)</span> symmetric matrix with <span class="math notranslate nohighlight">\((k,j)\)</span>th entry <span class="math notranslate nohighlight">\(A_{kj}, k=1,...,n+1, j=1,2,...,n+1\)</span> given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+A_{kj}=\sum_{i=1}^m x_i^{k+j-2}.
+\end{equation*}\]</div>
+<p>The equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> has a unique solution if the <span class="math notranslate nohighlight">\(x_{i}\)</span> are distinct, and <span class="math notranslate nohighlight">\(n\leq m-1\)</span>. Solving this equation by computing the inverse matrix <span class="math notranslate nohighlight">\(A^{-1}\)</span> is not advisable, since there could be significant roundoff error. Next, we will write a Python code for least squares approximation, and use the Python function <span class="math notranslate nohighlight">\(np.linalg.solve(A, b)\)</span> to solve the matrix equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> for <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span>. The <span class="math notranslate nohighlight">\(np.linalg.solve\)</span> function in Python uses numerically optimized matrix factorizations based on the LAPACK routine to solve the matrix equation. More details on this topic can be found in <span id="id1">Heath [<a class="reference internal" href="#id16" title="M.T. Heath. Scientific Computing: An introductory survey. McGraw-Hill, 1997.">1997</a>]</span> (Chapter 3).</p>
+</section>
+<section id="python-code-for-least-squares-approximation">
+<h2>Python code for least squares approximation<a class="headerlink" href="#python-code-for-least-squares-approximation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <strong>leastsqfit</strong> takes the <span class="math notranslate nohighlight">\(x\)</span>- and
+<span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data, and the degree of the polynomial we want
+to use, <span class="math notranslate nohighlight">\(n\)</span>, as inputs. It solves the matrix Equation <a class="reference internal" href="#equation-leastsqmatrixeq">(36)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leastsqfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="c1"># number of data points</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span> <span class="c1"># number of coefficients to be determined</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="c1"># the linear system we want to solve is Ax=b</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="nb">sum</span> <span class="o">+=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="n">k</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span>
+    <span class="c1"># p[i] below is the sum of the ith power of the x coordinates</span>
+    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="nb">sum</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">**</span><span class="n">i</span>
+        <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span>    
+    <span class="c1"># We next compute the upper triangular part of the coefficient</span>
+    <span class="c1"># matrix A, and its diagonal</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">j</span><span class="p">]</span>
+    <span class="c1"># The lower triangular part of the matrix is defined using the</span>
+    <span class="c1"># fact the matrix is symmetric</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the data used to produce the first plot of the chapter: Arya’s
+data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">yd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">9.2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We fit a least squares line to the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.74666667,  3.15142857])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The polynomial is <span class="math notranslate nohighlight">\(-0.746667+3.15143x\)</span>. The next function
+<strong>poly(x,a)</strong> takes the output of <span class="math notranslate nohighlight">\(a=\textbf{leastsqfit}\)</span>,
+and evaluates the least squares polynomial at <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">poly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">i</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, if we want to compute the least squares line at 3.5, we
+call the following functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">poly</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.283333333333335
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next function computes the least squares error:
+<span class="math notranslate nohighlight">\(E=\sum_{i=1}^m(y_i-p_n(x_i))^2\)</span>. It takes the output of
+<span class="math notranslate nohighlight">\(a=\textbf{leastsqfit}\)</span>, and the data, as inputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leastsqerror</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">poly</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">a</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">leastsqerror</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6070476190476177
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we plot the least squares line and the data together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_25_0.png" src="_images/bookchapter6-1_25_0.png" />
+</div>
+</div>
+<p>We try a second degree polynomial in least squares approximation next.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_27_0.png" src="_images/bookchapter6-1_27_0.png" />
+</div>
+</div>
+<p>The corresponding error is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leastsqerror</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4869285714285714
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next polynomial is of degree three:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_31_0.png" src="_images/bookchapter6-1_31_0.png" />
+</div>
+</div>
+<p>The corresponding error is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leastsqerror</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2664285714285732
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next polynomial is of degree four:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_35_0.png" src="_images/bookchapter6-1_35_0.png" />
+</div>
+</div>
+<p>The least squares error is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leastsqerror</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.723214285714292
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we try a fifth degree polynomial. Recall that the normal
+equations have a unique solution when <span class="math notranslate nohighlight">\(x_i\)</span> are distinct, and
+<span class="math notranslate nohighlight">\(n\leq m-1\)</span>. Since <span class="math notranslate nohighlight">\(m=6\)</span> in this example, <span class="math notranslate nohighlight">\(n=5\)</span> is the largest
+degree with guaranteed unique solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">leastsqfit</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_39_0.png" src="_images/bookchapter6-1_39_0.png" />
+</div>
+</div>
+<p>The approximating polynomial of degree five is the interpolating
+polynomial! What is the least squares error?</p>
+</section>
+<section id="least-squares-with-non-polynomials">
+<h2>Least squares with non-polynomials<a class="headerlink" href="#least-squares-with-non-polynomials" title="Permalink to this headline">#</a></h2>
+<p>The method of least squares is not only for polynomials. For example, suppose we want to find the function</p>
+<div class="math notranslate nohighlight" id="equation-tempf">
+<span class="eqno">(37)<a class="headerlink" href="#equation-tempf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(t)=a+bt+c \sin(2\pi t/365)+d \cos (2\pi t/365)
+\end{equation}\]</div>
+<p>that has the best fit to some data <span class="math notranslate nohighlight">\((t_1,T_1),...,(t_m,T_m)\)</span> in the least-squares sense. This function is used in modeling weather temperature data, where <span class="math notranslate nohighlight">\(t\)</span> denotes time, and <span class="math notranslate nohighlight">\(T\)</span> denotes the temperature. The following figure plots the daily maximum temperature during a period of 1,056 days, from 2016 until November 21, 2018, as measured by a weather station at Melbourne airport, Australia<a class="footnote-reference brackets" href="#id17" id="id2">1</a>.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/tempdata.png"><img alt="_images/tempdata.png" src="_images/tempdata.png" style="width: 452.8px; height: 348.8px;" /></a>
+</figure>
+<p>To find the best fit function of the form <a class="reference internal" href="#equation-tempf">(37)</a>, we write the least squares error term</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\sum_{i=1}^m (f(t_i)-T_i)^2=\sum_{i=1}^m \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)^2,
+\end{equation*}\]</div>
+<p>and set its partial derivatives with respect to the unknowns <span class="math notranslate nohighlight">\(a,b,c,d\)</span> to zero to obtain the normal equations:</p>
+<div class="math notranslate nohighlight" id="equation-n1">
+<span class="eqno">(38)<a class="headerlink" href="#equation-n1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+\frac{\partial E}{\partial a}=0 &amp;\Rightarrow \sum_{i=1}^m 2\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
+&amp;\Rightarrow \sum_{i=1}^m \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-n2">
+<span class="eqno">(39)<a class="headerlink" href="#equation-n2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+\frac{\partial E}{\partial b}=0 &amp;\Rightarrow \sum_{i=1}^m (2t_i)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
+&amp;\Rightarrow \sum_{i=1}^m t_i\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-n3">
+<span class="eqno">(40)<a class="headerlink" href="#equation-n3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+\frac{\partial E}{\partial c}=0 &amp;\Rightarrow \sum_{i=1}^m \left(2\sin\left(\frac{2\pi t_i}{365}\right)\right)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
+&amp;\Rightarrow \sum_{i=1}^m \sin\left(\frac{2\pi t_i}{365}\right) \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-n4">
+<span class="eqno">(41)<a class="headerlink" href="#equation-n4" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+\frac{\partial E}{\partial d}=0 &amp;\Rightarrow \sum_{i=1}^m \left(2\cos\left(\frac{2\pi t_i}{365}\right)\right)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
+&amp;\Rightarrow \sum_{i=1}^m \cos\left(\frac{2\pi t_i}{365}\right) \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0.
+\end{align}\end{split}\]</div>
+<p>Rearranging terms in equations <a class="reference internal" href="#equation-n1">(38)</a>, <a class="reference internal" href="#equation-n2">(39)</a>, <a class="reference internal" href="#equation-n3">(40)</a>, <a class="reference internal" href="#equation-n4">(41)</a>, we get a system of four equations and four unknowns:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;am+b \sum_{i=1}^m t_i + c \sum_{i=1}^m \sin\left(\frac{2\pi t_i}{365}\right) + d \sum_{i=1}^m \cos \left(\frac{2\pi t_i}{365}\right)=\sum_{i=1}^m T_i\\
+&amp;a \sum_{i=1}^m t_i + b\sum_{i=1}^m t_i^2 + c\sum_{i=1}^m t_i \sin \left(\frac{2\pi t_i}{365}\right) + d \sum_{i=1}^m t_i \cos \left(\frac{2\pi t_i}{365}\right) = \sum_{i=1}^m T_i t_i\\
+&amp;a \sum_{i=1}^m \sin\left(\frac{2\pi t_i}{365}\right) + b \sum_{i=1}^m t_i \sin \left(\frac{2\pi t_i}{365}\right) +c \sum_{i=1}^m \sin^2 \left(\frac{2\pi t_i}{365}\right) + d \sum_{i=1}^m \sin \left(\frac{2\pi t_i}{365}\right) \cos \left(\frac{2\pi t_i}{365}\right)\\
+&amp;\hspace{5in}= \sum_{i=1}^m T_i \sin \left(\frac{2\pi t_i}{365}\right)\\
+&amp;a \sum_{i=1}^m \cos\left(\frac{2\pi t_i}{365}\right) +  b \sum_{i=1}^m t_i \cos \left(\frac{2\pi t_i}{365}\right) + c \sum_{i=1}^m \sin \left(\frac{2\pi t_i}{365}\right) \cos \left(\frac{2\pi t_i}{365}\right) + d \sum_{i=1}^m \cos^2 \left(\frac{2\pi t_i}{365}\right)\\
+&amp;\hspace{5in}= \sum_{i=1}^m T_i \cos \left(\frac{2\pi t_i}{365}\right)\\
+\end{align*}\]</div>
+<p>Using a short-hand notation where we suppress the argument <span class="math notranslate nohighlight">\(\left(\frac{2\pi t_i}{365}\right)\)</span> in the trigonometric functions, and the summation indices, we write the above equations as a matrix equation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\underbrace{
+\begin{bmatrix}
+m &amp;  \sum t_i &amp; \sum \sin(\cdot) &amp; \sum \cos(\cdot) \\
+ \sum t_i&amp;  \sum t_i^2&amp;  \sum t_i \sin(\cdot) &amp; \sum t_i \cos(\cdot)\\
+ \sum \sin(\cdot)&amp; \sum t_i \sin(\cdot)&amp; \sum \sin^2(\cdot)&amp; \sum \sin(\cdot) \cos(\cdot) \\
+ \sum \cos(\cdot) &amp; \sum t_i \cos(\cdot) &amp; \sum \sin(\cdot) \cos(\cdot)&amp; \sum \cos^2(\cdot)
+\end{bmatrix}}_{\mathbf{A}}
+\begin{bmatrix}
+a\\
+b\\
+c\\
+d
+\end{bmatrix}=
+\underbrace{
+\begin{bmatrix}
+\sum T_i\\
+\sum T_i t_i\\
+\sum T_i \sin(\cdot)\\
+\sum T_i \cos(\cdot)
+\end{bmatrix}}_{\mathbf{r}}
+\end{equation*}\]</div>
+<p>Next, we will use Python to load the data and define the matrices <span class="math notranslate nohighlight">\(A, \mathbf{r}\)</span>, and then solve the equation <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{r}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{x}=[a,b,c,d]^T\)</span>.</p>
+<p>We will use a package called pandas to import data. We import it in our notebook, along with NumPy and Matplotlib:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>We assume that the data which consists of temperatures is downloaded as
+a csv file in the same directory where the Python notebook is stored.
+Make sure the data has no missing entries. The function <strong>pd.read_csv</strong> imports the data into Python as a table (dataframe):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/WeatherData.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Temp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>28.7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>28.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25.6</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1051</th>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <th>1052</th>
+      <td>27.1</td>
+    </tr>
+    <tr>
+      <th>1053</th>
+      <td>31.0</td>
+    </tr>
+    <tr>
+      <th>1054</th>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>1055</th>
+      <td>22.7</td>
+    </tr>
+  </tbody>
+</table>
+<p>1056 rows × 1 columns</p>
+</div></div></div>
+</div>
+<p>The next step is to store the part of the data we need as an array. In our table there is only one column named <strong>Temp</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([28.7, 27.5, 28.2, ..., 31. , 27. , 22.7])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the type of <strong>temp</strong>, its first entry, and its length:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1056
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 1,056 temperature values. The <span class="math notranslate nohighlight">\(x\)</span>-coordinates are the days,
+numbered <span class="math notranslate nohighlight">\(t=1,2,...,1056\)</span>. Here is the array that stores these time
+values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1057</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we define the matrix <span class="math notranslate nohighlight">\(A\)</span>, taking advantage of the fact that
+the matrix is symmetric. The function <strong>np.sum(x)</strong> adds the entries of the array <strong>x</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1056</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">time</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">time</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">time</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.05600000e+03,  5.58096000e+05,  1.22956884e+01,
+        -3.62432800e+01],
+       [ 5.58096000e+05,  3.93085616e+08, -5.04581481e+04,
+        -3.84772834e+04],
+       [ 1.22956884e+01, -5.04581481e+04,  5.42338826e+02,
+         1.09944004e+01],
+       [-3.62432800e+01, -3.84772834e+04,  1.09944004e+01,
+         5.13661174e+02]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we define the vector <strong>r</strong>. The function <strong>np.dot(x,y)</strong> takes the dot product of the arrays <span class="math notranslate nohighlight">\(x,y\)</span>. For example, <strong>np.dot</strong><span class="math notranslate nohighlight">\(([1,2,3],[4,5,6])=1\times 4+2\times 5+ 3\times 6 = 32\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.18615000e+04],
+       [1.13803102e+07],
+       [1.74207707e+03],
+       [2.78776127e+03]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can solve the matrix equation now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.02897563e+01],
+       [1.16773021e-03],
+       [2.72116176e+00],
+       [6.88808561e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that these constants are the values of <span class="math notranslate nohighlight">\(a,b,c,d\)</span> in the
+definition of <span class="math notranslate nohighlight">\(f(t)\)</span>. Here is the best fitting function to the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">20.1393</span> <span class="o">+</span> <span class="mf">0.00144928</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mf">2.72174</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span> <span class="o">+</span> \
+<span class="mf">6.88460</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We next plot the data together with <span class="math notranslate nohighlight">\(f(t)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1057</span><span class="p">)</span>
+<span class="n">yvals</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">yvals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Least squares approximation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (T)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-1_68_0.png" src="_images/bookchapter6-1_68_0.png" />
+</div>
+</div>
+</section>
+<section id="linearizing-data">
+<h2>Linearizing data<a class="headerlink" href="#linearizing-data" title="Permalink to this headline">#</a></h2>
+<p>For another example of non-polynomial least squares, consider finding the
+function <span class="math notranslate nohighlight">\(f(x)=be^{ax}\)</span> with the best least squares fit to some data <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),...,(x_{m},y_{m})\)</span>.
+We need to find <span class="math notranslate nohighlight">\(a,b\)</span> that minimize</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\sum_{i=1}^{m}(y_{i}-be^{ax_{i}})^{2}.
+\end{equation*}\]</div>
+<p>The normal equations are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{\partial E}{\partial a}=0\text{ and }\frac{\partial E}{\partial b}=0,
+\end{equation*}\]</div>
+<p>however, unlike the previous example, this is not a system of linear equations in the unknowns <span class="math notranslate nohighlight">\(a,b\)</span>. In general, a root finding type method is needed to solve these equations.</p>
+<p>There is a simpler approach we can use when we suspect the data is
+exponentially related. Consider again the function we want to fit:</p>
+<div class="math notranslate nohighlight" id="equation-exp-fit">
+<span class="eqno">(42)<a class="headerlink" href="#equation-exp-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y=be^{ax}.
+\end{equation}\]</div>
+<p>Take the logarithm of both sides:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\log y=\log b+ax
+\end{equation*}\]</div>
+<p>and rename the variables as <span class="math notranslate nohighlight">\(Y=\log y,B=\log b\)</span>. Then we obtain the
+expression</p>
+<div class="math notranslate nohighlight" id="equation-lin-fit">
+<span class="eqno">(43)<a class="headerlink" href="#equation-lin-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Y=ax+B
+\end{equation}\]</div>
+<p>which is a linear equation in the transformed variable. In other words,
+if the original variable <span class="math notranslate nohighlight">\(y\)</span> is related to <span class="math notranslate nohighlight">\(x\)</span> via Equation <a class="reference internal" href="#equation-exp-fit">(42)</a>,
+then <span class="math notranslate nohighlight">\(Y=\log y\)</span> is related to <span class="math notranslate nohighlight">\(x\)</span> via a linear relationship given
+by Equation <a class="reference internal" href="#equation-lin-fit">(43)</a>. So, the new approach is to fit the
+least squares line <span class="math notranslate nohighlight">\(Y=ax+B\)</span> to the data</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+(x_{1},\log y_{1}),(x_{2},\log y_{2}),...,(x_{m},\log y_{m}).
+\end{equation*}\]</div>
+<p>However, it is important to realize that the least squares fit to
+the transformed data is not necessarily the same as the least squares
+fit to the original data. The reason is the deviations which least
+squares minimize are distorted in a non-linear way by the transformation.</p>
+<div class="proof example admonition" id="chap5_exa85">
+<p class="admonition-title"><span class="caption-number">Example 38 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider the following data</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:left head"><p>0</p></th>
+<th class="text-align:left head"><p>1</p></th>
+<th class="text-align:left head"><p>2</p></th>
+<th class="text-align:left head"><p>3</p></th>
+<th class="text-align:left head"><p>4</p></th>
+<th class="text-align:left head"><p>5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(y\)</span></p></td>
+<td class="text-align:left"><p>3</p></td>
+<td class="text-align:left"><p>5</p></td>
+<td class="text-align:left"><p>8</p></td>
+<td class="text-align:left"><p>12</p></td>
+<td class="text-align:left"><p>23</p></td>
+<td class="text-align:left"><p>37</p></td>
+</tr>
+</tbody>
+</table>
+<p>to which we will fit <span class="math notranslate nohighlight">\(y=be^{ax}\)</span> in the least-squares sense. The following table displays the data <span class="math notranslate nohighlight">\((x_i,\log y_i)\)</span>, using two-digits:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:left head"><p>0</p></th>
+<th class="text-align:left head"><p>1</p></th>
+<th class="text-align:left head"><p>2</p></th>
+<th class="text-align:left head"><p>3</p></th>
+<th class="text-align:left head"><p>4</p></th>
+<th class="text-align:left head"><p>5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(Y=\log y\)</span></p></td>
+<td class="text-align:left"><p>1.1</p></td>
+<td class="text-align:left"><p>1.6</p></td>
+<td class="text-align:left"><p>2.1</p></td>
+<td class="text-align:left"><p>2.5</p></td>
+<td class="text-align:left"><p>3.1</p></td>
+<td class="text-align:left"><p>3.6</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div><p>We use the Python code <strong>leastsqfit</strong> to fit a line to this data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leastsqfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.09047619, 0.49714286])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Therefore the least squares line, using two-digits, is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+Y=0.5x+1.1.
+\end{equation*}\]</div>
+<p>This equation corresponds to Equation <a class="reference internal" href="#equation-lin-fit">(43)</a>, with <span class="math notranslate nohighlight">\(a=0.5\)</span> and <span class="math notranslate nohighlight">\(B=1.1\)</span>. We want to obtain the corresponding exponential Equation <a class="reference internal" href="#equation-exp-fit">(42)</a>, where <span class="math notranslate nohighlight">\(b=e^B\)</span>. Since <span class="math notranslate nohighlight">\(e^{1.1}=3\)</span>, the best fitting exponential function to the data is <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span>. The following graph plots <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span> together with the data.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/expdata_exp.png"><img alt="_images/expdata_exp.png" src="_images/expdata_exp.png" style="width: 436.8px; height: 332.8px;" /></a>
+</figure>
+<p><strong>Exercise 6.1-1</strong></p>
+<p>Find the function of the form <span class="math notranslate nohighlight">\(y=ae^x+b \sin (4 x)\)</span> that best fits the data below in the least squares sense.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:left head"><p>1</p></th>
+<th class="text-align:left head"><p>2</p></th>
+<th class="text-align:left head"><p>3</p></th>
+<th class="text-align:left head"><p>4</p></th>
+<th class="text-align:left head"><p>5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(y\)</span></p></td>
+<td class="text-align:left"><p>-4</p></td>
+<td class="text-align:left"><p>6</p></td>
+<td class="text-align:left"><p>-1</p></td>
+<td class="text-align:left"><p>5</p></td>
+<td class="text-align:left"><p>20</p></td>
+</tr>
+</tbody>
+</table>
+<p>Plot the function and the data together.</p>
+<p><strong>Exercise 6.1-2</strong></p>
+<p>Power-law type relationships are observed in many empirical data. Two variables <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(x\)</span> are said to be related via a power-law if <span class="math notranslate nohighlight">\(y=kx^\alpha\)</span>, where <span class="math notranslate nohighlight">\(k,\alpha\)</span> are some constants. The following data<a class="footnote-reference brackets" href="#id18" id="id3">2</a> lists the top 10 family names in the order of occurrence according to Census 2000. Investigate whether relative frequency of occurrences and the rank of the name are related via a power-law, by</p>
+<p>a) Let <span class="math notranslate nohighlight">\(y\)</span> be the relative frequencies (number of occurrences divided by the total number of occurrences), and <span class="math notranslate nohighlight">\(x\)</span> be the rank, that is, 1 through 10.</p>
+<p>b) Use least squares to find a function of the form <span class="math notranslate nohighlight">\(y=kx^\alpha\)</span>. Use linearization.</p>
+<p>c) Plot the data together with the best fitting function found in part (b).</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Name</p></th>
+<th class="text-align:left head"><p>Number of Occurrences</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Smith</p></td>
+<td class="text-align:left"><p>2,376,206</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Johnson</p></td>
+<td class="text-align:left"><p>1,857,160</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Williams</p></td>
+<td class="text-align:left"><p>1,534,042</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Brown</p></td>
+<td class="text-align:left"><p>1,380,145</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Jones</p></td>
+<td class="text-align:left"><p>1,362,755</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Miller</p></td>
+<td class="text-align:left"><p>1,127,803</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Davis</p></td>
+<td class="text-align:left"><p>1,072,335</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Garcia</p></td>
+<td class="text-align:left"><p>858,289</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Rodriguez</p></td>
+<td class="text-align:left"><p>804,240</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Wilson</p></td>
+<td class="text-align:left"><p>783,051</p></td>
+</tr>
+</tbody>
+</table>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id1">Hea97</a></span></dt>
+<dd><p>M.T. Heath. <em>Scientific Computing: An introductory survey</em>. McGraw-Hill, 1997.</p>
+</dd>
+</dl>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p><a class="reference external" href="https://www.census.gov/topics/population/genealogy/data/2000_surnames.html">https://www.census.gov/topics/population/genealogy/data/2000_surnames.html</a></p>
+</dd>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p><a class="reference external" href="http://www.bom.gov.au/climate/data/">http://www.bom.gov.au/climate/data/</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter6-0.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 6 Approximation Theory</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter6-2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6.2–Continuous least squares</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

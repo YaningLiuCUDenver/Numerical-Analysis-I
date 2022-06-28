@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.7 High-order fixed-point iteration &#8212; First Semester in Numerical Analysis with Python</title>
+    <title>6.2–Continuous least squares &#8212; First Semester in Numerical Analysis with Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 4 Interpolation" href="bookchapter4-0.html" />
-    <link rel="prev" title="2.6 Fixed-point iteration" href="bookchapter2-6.html" />
+    <link rel="next" title="Chapter 6–Approximation Theory" href="bookchapter6-3.html" />
+    <link rel="prev" title="6.1 Discrete least squares" href="bookchapter6-1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -177,8 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
    2.6 Fixed-point iteration
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
    2.7 High-order fixed-point iteration
   </a>
  </li>
@@ -252,9 +252,9 @@ const thebe_selector_output = ".output, .cell_output"
    6.1 Discrete least squares
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   6.2–Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
@@ -321,7 +321,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter2-7.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter6-2.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -364,7 +364,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/bookchapter2-7.ipynb"
+        <a href="_sources/bookchapter6-2.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -401,60 +401,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-to-newton-s-method">
-   Application to Newton’s Method
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2.7 High-order fixed-point iteration</h1>
+                <h1>6.2–Continuous least squares</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-to-newton-s-method">
-   Application to Newton’s Method
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -462,108 +425,119 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="high-order-fixed-point-iteration">
-<h1>2.7 High-order fixed-point iteration<a class="headerlink" href="#high-order-fixed-point-iteration" title="Permalink to this headline">#</a></h1>
-<p>In the proof of <a class="reference internal" href="bookchapter2-6.html#chap2_thm44">Theorem 11</a>, we showed</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="continuous-least-squares">
+<h1>6.2–Continuous least squares<a class="headerlink" href="#continuous-least-squares" title="Permalink to this headline">#</a></h1>
+<p>In discrete least squares, our starting point was a set of data points.
+Here we will start with a continuous function <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> and
+answer the following question: how can we find the “best” polynomial
+<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}x^{j}\)</span> of degree at most <span class="math notranslate nohighlight">\(n\)</span> that
+approximates <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]?\)</span> As before, “best” polynomial will mean the
+polynomial that minimizes the least squares error:</p>
+<div class="math notranslate nohighlight" id="equation-least-sq-error">
+<span class="eqno">(44)<a class="headerlink" href="#equation-least-sq-error" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E=\int_{a}^{b}\left(f(x)-\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx.
+\end{equation}\]</div>
+<p>Compare this expression with that of the <strong>discrete least squares</strong>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_{n}-p|}=|g'(p)|
+E=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}.
 \end{equation*}\]</div>
-<p>which implied that the fixed-point iteration has linear convergence, if <span class="math notranslate nohighlight">\(g'(p)\neq 0\)</span>.</p>
-<p>If this limit were zero, then we would have</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_{n}-p|}=0,
-\end{equation*}\]</div>
-<p>which means the denominator is growing at a larger rate than the numerator.
-We could then ask if</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_{n}-p|^{\alpha}}=\text{nonzero constant}
-\end{equation*}\]</div>
-<p>for some <span class="math notranslate nohighlight">\(\alpha&gt;1\)</span>.</p>
-<div class="proof theorem admonition" id="chap2_thm46">
-<p class="admonition-title"><span class="caption-number">Theorem 12 </span></p>
-<section class="theorem-content" id="proof-content">
-<p>Assume <span class="math notranslate nohighlight">\(p\)</span> is a solution of <span class="math notranslate nohighlight">\(g(x)=x\)</span>
-where <span class="math notranslate nohighlight">\(g\in C^\alpha (I)\)</span> for some interval <span class="math notranslate nohighlight">\(I\)</span> that contains <span class="math notranslate nohighlight">\(p\)</span>, and for some <span class="math notranslate nohighlight">\(\alpha\geq2\)</span>. Furthermore assume</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-g'(p)=g''(p)=...=g^{(\alpha-1)}(p)=0,\text{ and }g^{(\alpha)}(p)\neq0.
-\end{equation*}\]</div>
-<p>Then if the initial guess <span class="math notranslate nohighlight">\(p_{0}\)</span> is sufficiently close to <span class="math notranslate nohighlight">\(p\)</span>,
-the fixed-point iteration <span class="math notranslate nohighlight">\(p_{n}=g(p_{n-1}),n\geq1\)</span>, will have order
-of convergence of <span class="math notranslate nohighlight">\(\alpha\)</span>, and</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{p_{n+1}-p}{(p_{n}-p)^{\alpha}}=\frac{g^{(\alpha)}(p)}{\alpha!}.
-\end{equation*}\]</div>
-</section>
-</div><div class="proof admonition" id="proof">
-<p>Proof. From Taylor’s theorem,</p>
+<p>To minimize <span class="math notranslate nohighlight">\(E\)</span> in <a class="reference internal" href="#equation-least-sq-error">(44)</a> we set <span class="math notranslate nohighlight">\(\frac{\partial E}{\partial a_{k}}=0\)</span>, for
+<span class="math notranslate nohighlight">\(k=0,1,...,n,\)</span> and observe</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-p_{n+1} &amp; =g(p_{n})=g(p)+(p_{n}-p)g'(p)+...+\frac{(p_{n}-p)^{\alpha-1}}{(\alpha-1)!}g^{(\alpha-1)}(p) +\frac{(p_{n}-p)^{\alpha}}{\alpha!}g^{(\alpha)}(\xi_{n})
+\frac{\partial E}{\partial a_{k}} &amp; =\frac{\partial}{\partial a_{k}}\left(\int_{a}^{b}f^{2}(x)dx-2\int_{a}^{b}f(x)\left(\sum_{j=0}^{n}a_{j}x^{j}\right)dx+\int_{a}^{b}\left(\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx\right)\\
+ &amp; =-2\int_{a}^{b}f(x)x^{k}dx+2\sum_{j=0}^na_{j}\int_{a}^{b}x^{j+k}dx=0,
 \end{align*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\xi_{n}\)</span> is a number between <span class="math notranslate nohighlight">\(p_{n}\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, and all numbers are in <span class="math notranslate nohighlight">\(I\)</span>. From the hypothesis,
-this simplifies as</p>
+<p>which gives the <span class="math notranslate nohighlight">\((n+1)\)</span> normal equations for the <strong>continuous
+least squares problem</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-cont-normal">
+<span class="eqno">(45)<a class="headerlink" href="#equation-cont-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{j=0}^{n}a_{j}\int_{a}^{b}x^{j+k}dx=\int_{a}^{b}f(x)x^{k}dx
+\end{equation}\]</div>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> Note that the only unknowns in these equations
+are the <span class="math notranslate nohighlight">\(a_{j}\)</span>’s; hence this is a linear system of equations. It
+is instructive to compare these normal equations with those of the
+<strong>discrete least squares problem</strong>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-p_{n+1}=p+\frac{(p_{n}-p)^{\alpha}}{\alpha!}g^{(\alpha)}(\xi_{n})\Rightarrow\frac{p_{n+1}-p}{(p_{n}-p)^{\alpha}}=\frac{g^{(\alpha)}(\xi_{n})}{\alpha!}.
+\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=\sum_{i=1}^{m}y_{i}x_{i}^{k}.
 \end{equation*}\]</div>
-<p>From <a class="reference internal" href="bookchapter2-6.html#chap2_thm44">Theorem 11</a>, if <span class="math notranslate nohighlight">\(p_{0}\)</span> is chosen sufficiently close to <span class="math notranslate nohighlight">\(p\)</span>, then <span class="math notranslate nohighlight">\(\lim_{n\rightarrow\infty}p_{n}=p\)</span>.
-The order
-of convergence is <span class="math notranslate nohighlight">\(\alpha\)</span> with</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_{n}-p|^{\alpha}}=\lim_{n\rightarrow\infty}\frac{|g^{(\alpha)}(\xi_{n})|}{\alpha!}=\frac{|g^{(\alpha)}(p)|}{\alpha!}\neq0.
-\end{equation*}\]</div>
-</div>
-<section id="application-to-newton-s-method">
-<h2>Application to Newton’s Method<a class="headerlink" href="#application-to-newton-s-method" title="Permalink to this headline">#</a></h2>
-<p>Recall Newton’s iteration</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-p_{n}=p_{n-1}-\frac{f(p_{n-1})}{f'(p_{n-1})}.
-\end{equation*}\]</div>
-<p>Put <span class="math notranslate nohighlight">\(g(x)=x-\frac{f(x)}{f'(x)}.\)</span> Then the fixed-point iteration <span class="math notranslate nohighlight">\(p_{n}=g(p_{n-1})\)</span>
-is Newton’s method. We have</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-g'(x)=1-\frac{[f'(x)]^{2}-f(x)f''(x)}{[f'(x)]^{2}}=\frac{f(x)f''(x)}{[f'(x)]^{2}}
-\end{equation*}\]</div>
-<p>and thus</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-g'(p)=\frac{f(p)f''(p)}{[f'(p)]^{2}}=0.
-\end{equation*}\]</div>
-<p>Similarly,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-g''(x)=\frac{\left(f'(x)f''(x)+f(x)f'''(x)\right)(f'(x))^{2}-f(x)f''(x)2f'(x)f''(x)}{[f'(x)]^{4}}
-\end{equation*}\]</div>
-<p>which implies</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-g''(p)=\frac{\left(f'(p)f''(p)\right)(f'(p))^{2}}{[f'(p)]^{4}}=\frac{f''(p)}{f'(p)}.
-\end{equation*}\]</div>
-<p>If <span class="math notranslate nohighlight">\(f''(p)\neq0\)</span>, then <a class="reference internal" href="#chap2_thm46">Theorem 12</a> implies
-Newton’s method has quadratic convergence with</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\lim_{n\rightarrow\infty}\frac{p_{n+1}-p}{(p_{n}-p)^{2}}=\frac{f''(p)}{2f'(p)}
-\end{equation*}\]</div>
-<p>which was proved earlier in <a class="reference internal" href="bookchapter2-3.html#chap2_thm32">Theorem 7</a>.</p>
-<p><strong>Exercise 2.7-1</strong></p>
-<p>Use <a class="reference internal" href="bookchapter2-6.html#chap2_thm38">Theorem 9</a> (and <a class="reference internal" href="bookchapter2-6.html#chap2_rem39">Remark 6</a>)
-to show that <span class="math notranslate nohighlight">\(g(x)=3^{-x}\)</span> has a unique fixed-point on <span class="math notranslate nohighlight">\([1/4,1]\)</span>.
-Use <a class="reference internal" href="bookchapter2-6.html#chap2_cor42">Corollary 3</a>, part (4), to find the number
-of iterations necessary to achieve <span class="math notranslate nohighlight">\(10^{-5}\)</span> accuracy. Then use the
-Python code to obtain an approximation, and compare the error with
-the theoretical estimate obtained from <a class="reference internal" href="bookchapter2-6.html#chap2_cor42">Corollary 3</a>.</p>
-<p><strong>Exercise 2.7-2</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(g(x)=2x-cx^{2}\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a positive constant. Prove that if the fixed-point iteration <span class="math notranslate nohighlight">\(p_n=g(p_{n-1})\)</span> converges to a non-zero limit, then the limit is <span class="math notranslate nohighlight">\(1/c\)</span>.</p>
+<div class="proof example admonition" id="chap5_exa86">
+<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the least squares polynomial approximation of degree 2 to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
+on <span class="math notranslate nohighlight">\((0,2)\)</span>.</p>
 </section>
+</div><p><strong>Solution.</strong></p>
+<p>The normal equations are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\sum_{j=0}^{2}a_{j}\int_{0}^{2}x^{j+k}dx=\int_{0}^{2}e^{x}x^{k}dx
+\end{equation*}\]</div>
+<p><span class="math notranslate nohighlight">\(k=0,1,2.\)</span> Here are the three equations:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a_{0}\int_{0}^{2}dx+a_{1}\int_{0}^{2}xdx+a_{2}\int_{0}^{2}x^{2}dx &amp; =\int_{0}^{2}e^{x}dx\\
+a_{0}\int_{0}^{2}xdx+a_{1}\int_{0}^{2}x^{2}dx+a_{2}\int_{0}^{2}x^{3}dx &amp; =\int_{0}^{2}e^{x}xdx\\
+a_{0}\int_{0}^{2}x^{2}dx+a_{1}\int_{0}^{2}x^{3}dx+a_{2}\int_{0}^{2}x^{4}dx &amp; =\int_{0}^{2}e^{x}x^{2}dx
+\end{align*}\]</div>
+<p>Computing the integrals we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2a_{0}+2a_{1}+\frac{8}{3}a_{2} &amp; =e^{2}-1\\
+2a_{0}+\frac{8}{3}a_{1}+4a_{2} &amp; =e^{2}+1\\
+\frac{8}{3}a_{0}+4a_{1}+\frac{32}{5}a_{2} &amp; =2e^{2}-2
+\end{align*}\]</div>
+<p>whose solution is <span class="math notranslate nohighlight">\(a_{0}=3(-7+e^{2})\)</span>, <span class="math notranslate nohighlight">\(a_{1}=-\frac{3}{2}(-37+5e^{2}),\)</span>
+<span class="math notranslate nohighlight">\(a_{2}=\frac{15}{4}(-7+e^{2}).\)</span> Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{2}(x)=1.17+0.08x+1.46x^{2}.
+\end{equation*}\]</div>
+<p>The solution method we have discussed for the least squares problem
+by solving the normal equations as a matrix equation has certain drawbacks:</p>
+<ul class="simple">
+<li><p>The integrals <span class="math notranslate nohighlight">\(\int_{a}^{b}x^{i+j}dx=\left(b^{i+j+1}-a^{i+j+1}\right)/(i+j+1)\)</span>
+in the coefficient matrix give rise to matrix equation that is prone
+to roundoff error.</p></li>
+<li><p>There is no easy way to go from <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> to <span class="math notranslate nohighlight">\(P_{n+1}(x)\)</span> (which
+we might want to do if we were not satisfied by the approximation
+provided by <span class="math notranslate nohighlight">\(P_{n}\)</span>).</p></li>
+</ul>
+<p>There is a better approach to solve the discrete and continuous least
+squares problem using the orthogonal polynomials we encountered in
+Gaussian quadrature. Both discrete and continuous least squares problem
+tries to find a polynomial <span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}x^{j}\)</span> that
+satisfies some properties. Notice how the polynomial is written in
+terms of the monomial basis functions <span class="math notranslate nohighlight">\(x^{j}\)</span> and recall how these
+basis functions caused numerical difficulties in interpolation. That
+was the reason we discussed different basis functions like Lagrange
+and Newton for the interpolation problem. So the idea is to write
+<span class="math notranslate nohighlight">\(P_{n}(x)\)</span> in terms of some other basis functions</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{n}(x)=\sum_{j=0}^{n}a_{j}\phi_{j}(x)
+\end{equation*}\]</div>
+<p>which would then update the normal equations for continuous least
+squares <a class="reference internal" href="#equation-cont-normal">(45)</a> as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\sum_{j=0}^{n}a_{j}\int_{a}^{b}\phi_{j}(x)\phi_{k}(x)dx=\int_{a}^{b}f(x)\phi_{k}(x)dx
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> The normal equations for the discrete least squares <a class="reference internal" href="bookchapter6-1.html#equation-discrete-normal">(35)</a>
+gets a similar update:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}\phi_{j}(x_{i})\phi_{k}(x_{i})\right)=\sum_{i=1}^{m}y_{i}\phi_{k}(x_{i}).
+\end{equation*}\]</div>
+<p>Going forward, the crucial observation is that the integral of the product of two
+functions <span class="math notranslate nohighlight">\(\int \phi_j(x) \phi_k(x) dx\)</span>, or the summation of the product of two functions evaluated
+at some discrete points, <span class="math notranslate nohighlight">\(\sum \phi_j(x_i)\phi_k(x_i)\)</span>, can be viewed as an inner product <span class="math notranslate nohighlight">\(\left\langle \phi_{j},\phi_{k}\right\rangle \)</span>
+of two vectors in a suitably defined vector space. And when the functions (vectors)
+<span class="math notranslate nohighlight">\(\phi_{j}\)</span> are <strong>orthogonal</strong>, the inner product <span class="math notranslate nohighlight">\(\left\langle \phi_{j},\phi_{k}\right\rangle \)</span>
+is 0 if <span class="math notranslate nohighlight">\(j\neq k\)</span>, which makes the normal equations trivial to solve.
+We will discuss details in the next section.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -593,17 +567,17 @@ the theoretical estimate obtained from <a class="reference internal" href="bookc
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="bookchapter2-6.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="bookchapter6-1.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2.6 Fixed-point iteration</p>
+            <p class="prev-next-title">6.1 Discrete least squares</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="bookchapter4-0.html" title="next page">
+    <a class='right-next' id="next-link" href="bookchapter6-3.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 4 Interpolation</p>
+        <p class="prev-next-title">Chapter 6–Approximation Theory</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -1,0 +1,1215 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.3 Orthogonal polynomials and least squares &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="6.2–Continuous least squares" href="bookchapter6-2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Chapter 5 Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-0.html">
+   Chapter 6 Approximation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-1.html">
+   6.1 Discrete least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-2.html">
+   6.2–Continuous least squares
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   6.3 Orthogonal polynomials and least squares
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter6-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter6-3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-orthogonal-polynomials">
+   Python code for orthogonal polynomials
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-legendre-polynomials">
+     Computing Legendre polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-using-legendre-polynomials">
+     Least-squares using Legendre polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-chebyshev-polynomials">
+     Computing Chebyshev polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-using-chebyshev-polynomials">
+     Least squares using Chebyshev polynomials
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>6.3 Orthogonal polynomials and least squares</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-code-for-orthogonal-polynomials">
+   Python code for orthogonal polynomials
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-legendre-polynomials">
+     Computing Legendre polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-using-legendre-polynomials">
+     Least-squares using Legendre polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-chebyshev-polynomials">
+     Computing Chebyshev polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-using-chebyshev-polynomials">
+     Least squares using Chebyshev polynomials
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="orthogonal-polynomials-and-least-squares">
+<h1>6.3 Orthogonal polynomials and least squares<a class="headerlink" href="#orthogonal-polynomials-and-least-squares" title="Permalink to this headline">#</a></h1>
+<p>Our discussion in this section will mostly center around the continuous
+least squares problem; however, the discrete problem can be approached
+similarly. Consider the set <span class="math notranslate nohighlight">\(C^0[a,b]\)</span>, the set of all continuous
+functions defined on <span class="math notranslate nohighlight">\([a,b],\)</span> and <span class="math notranslate nohighlight">\(\mathbf{P_n},\)</span> the set of all
+polynomials of degree at most <span class="math notranslate nohighlight">\(n\)</span> on <span class="math notranslate nohighlight">\([a,b].\)</span> These two sets are
+vector spaces, the latter a subspace of the former, under the usual
+operations of function addition and multiplying by a scalar. An inner
+product on this space is defined as follows: given <span class="math notranslate nohighlight">\(f,g\in C^0[a,b]\)</span></p>
+<div class="math notranslate nohighlight" id="equation-inner-pr-def">
+<span class="eqno">(46)<a class="headerlink" href="#equation-inner-pr-def" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left\langle f,g\right\rangle =\int_{a}^{b}w(x)f(x)g(x)dx
+\end{equation}\]</div>
+<p>and the norm of a vector under this inner product is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\Vert f\right\Vert =\left\langle f,f\right\rangle ^{1/2}=\left(\int_{a}^{b}w(x)f^{2}(x)dx\right)^{1/2}.
+\end{equation*}\]</div>
+<p>Let’s recall the definition of an inner product: it is a real valued
+function with the following properties:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\left\langle f,g\right\rangle =\left\langle g,f\right\rangle \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left\langle f,f\right\rangle \geq0,\)</span> with the equality only when <span class="math notranslate nohighlight">\(f\equiv0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left\langle \beta f,g\right\rangle =\beta\left\langle f,g\right\rangle \)</span> for all real numbers <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left\langle f_{1}+f_{2},g\right\rangle =\left\langle f_{1},g\right\rangle +\left\langle f_{2},g\right\rangle \)</span></p></li>
+</ol>
+<p>The mysterious function <span class="math notranslate nohighlight">\(w(x)\)</span> in <a class="reference internal" href="#equation-inner-pr-def">(46)</a> is called
+a <strong>weight function</strong>. Its job is to assign different importance to different
+regions of the interval <span class="math notranslate nohighlight">\([a,b]\)</span>. The weight function is not arbitrary;
+it has to satisfy some properties.</p>
+<div class="proof definition admonition" id="chap6_def87">
+<p class="admonition-title"><span class="caption-number">Definition 11 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A nonnegative function <span class="math notranslate nohighlight">\(w(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> is called a weight function
+if</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\int_{a}^{b}|x|^{n}w(x)dx\)</span> is integrable and finite for all <span class="math notranslate nohighlight">\(n\geq0\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\int_{a}^{b}w(x)g(x)dx=0\)</span> for some <span class="math notranslate nohighlight">\(g(x)\geq0,\)</span> then <span class="math notranslate nohighlight">\(g(x)\)</span> is identically zero on <span class="math notranslate nohighlight">\((a,b).\)</span></p></li>
+</ol>
+</section>
+</div><p>With our new terminology and set-up, we can write the least squares problem as follows:</p>
+<p><strong>Problem</strong> (Continuous least squares) Given <span class="math notranslate nohighlight">\(f\in C^0[a,b],\)</span> find
+a polynomial <span class="math notranslate nohighlight">\(P_n(x)\in\mathbf{P_n}\)</span> that minimizes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{a}^{b}w(x)(f(x)-P_n(x))^{2}dx=\left\langle f(x)-P_n(x),f(x)-P_n(x)\right\rangle.
+\end{equation*}\]</div>
+<p>We will see this inner product can be calculated easily if <span class="math notranslate nohighlight">\(P_n(x)\)</span>
+is written as a linear combination of orthogonal basis polynomials:
+<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}\phi_{j}(x)\)</span>.</p>
+<p>We need some definitions and theorems to continue with our quest.
+Let’s start with a formal definition of orthogonal functions.</p>
+<div class="proof definition admonition" id="chap6_def88">
+<p class="admonition-title"><span class="caption-number">Definition 12 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Functions <span class="math notranslate nohighlight">\(\{\phi_{0},\phi_{1},...,\phi_{n}\}\)</span> are orthogonal for
+the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and with respect to the weight function <span class="math notranslate nohighlight">\(w(x)\)</span>
+if</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle \phi_{j},\phi_{k}\right\rangle =\int_{a}^{b}w(x)\phi_{j}(x)\phi_{k}(x)dx=\begin{cases}
+0 &amp; \text{if }j\neq k\\
+\alpha_{j}&gt;0 &amp; \text{if }j=k
+\end{cases}
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_{j}\)</span> is some constant. If, in addition, <span class="math notranslate nohighlight">\(\alpha_{j}=1\)</span> for all <span class="math notranslate nohighlight">\(j\)</span>, then the functions
+are called orthonormal.</p>
+</section>
+</div><p>How can we find an orthogonal or orthonormal basis for our vector
+space? Gram-Schmidt process from linear algebra provides the answer.</p>
+<div class="proof theorem admonition" id="chap6_def89">
+<p class="admonition-title"><span class="caption-number">Theorem 26 </span> (Gram-Schmidt process)</p>
+<section class="theorem-content" id="proof-content">
+<p>Given a weight function <span class="math notranslate nohighlight">\(w(x)\)</span>, the Gram-Schmidt process constructs
+a unique set of polynomials <span class="math notranslate nohighlight">\(\phi_{0}(x),\phi_{1}(x),...,\phi_{n}(x)\)</span>
+where the degree of <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> is <span class="math notranslate nohighlight">\(i,\)</span> such that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle \phi_{j},\phi_{k}\right\rangle =\begin{cases}
+0 &amp; \text{if }j\neq k\\
+1 &amp; \text{if }j=k
+\end{cases}
+\end{equation*}\]</div>
+<p>and the coefficient of <span class="math notranslate nohighlight">\(x^{n}\)</span> in <span class="math notranslate nohighlight">\(\phi_{n}(x)\)</span> is positive.</p>
+</section>
+</div><p>Let’s discuss two orthogonal polynomials that can be obtained from
+the Gram-Schmidt process using different weight functions.</p>
+<div class="proof example admonition" id="chap6_exa90">
+<p class="admonition-title"><span class="caption-number">Example 40 </span> (Legendre Polynomials)</p>
+<section class="example-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(w(x)\equiv1\)</span> and <span class="math notranslate nohighlight">\([a,b]=[-1,1]\)</span>, the first four polynomials
+obtained from the Gram-Schmidt process, when the process is applied to the monomials <span class="math notranslate nohighlight">\(1,x,x^2,x^3,...\)</span>, are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\phi_{0}(x)=\sqrt{\frac{1}{2}},\phi_{1}(x)=\sqrt{\frac{3}{2}}x,\phi_{2}(x)=\frac{1}{2}\sqrt{\frac{5}{2}}(3x^{2}-1), \phi_{3}(x) = \frac{1}{2}\sqrt{\frac{7}{2}}(5x^3-3x).
+\end{equation*}\]</div>
+<p>Often these polynomials are written in its orthogonal form; that is, we
+drop the requirement <span class="math notranslate nohighlight">\(\left\langle \phi_{j},\phi_{j}\right\rangle =1\)</span>
+in the Gram-Schmidt process, and we scale the polynomials so that the value of each polynomial at 1 equals 1. The first four polynomials in that form
+are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+L_{0}(x)=1,L_{1}(x)=x,L_{2}(x)=\frac{3}{2}x^{2}-\frac{1}{2},L_{3}(x)=\frac{5}{2}x^{3}-\frac{3}{2}x.
+\end{equation*}\]</div>
+<p>These are the Legendre polynomials, polynomials we first discussed
+in Gaussian quadrature, Section <a class="reference internal" href="bookchapter5-3.html#section5-3"><span class="std std-ref">5.3 Gaussian quadrature</span></a><a class="footnote-reference brackets" href="#id2" id="id1">1</a>. They can be obtained from the following recursion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+L_{n+1}(x)=\frac{2n+1}{n+1}xL_{n}(x)-\frac{n}{n+1}L_{n-1}(x),
+\end{equation*}\]</div>
+<p><span class="math notranslate nohighlight">\(n=1,2,\ldots\)</span>, and they satisfy</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle L_{n},L_{n}\right\rangle =\frac{2}{2n+1}.
+\end{equation*}\]</div>
+</section>
+</div><p><strong>Exercise 6.3-1</strong></p>
+<p>Show, by direct integration, that the Legendre polynomials <span class="math notranslate nohighlight">\(L_1(x)\)</span> and <span class="math notranslate nohighlight">\(L_2(x)\)</span> are orthogonal.</p>
+<div class="proof example admonition" id="chap6_exa91">
+<p class="admonition-title"><span class="caption-number">Example 41 </span> (Chebyshev polynomials)</p>
+<section class="example-content" id="proof-content">
+<p>If we take <span class="math notranslate nohighlight">\(w(x)=(1-x^{2})^{-1/2}\)</span> and <span class="math notranslate nohighlight">\([a,b]=[-1,1]\)</span>, and again
+drop the orthonormal requirement in Gram-Schmidt, we obtain the following
+orthogonal polynomials:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+T_{0}(x)=1,T_{1}(x)=x,T_{2}(x)=2x^{2}-1,T_{3}(x)=4x^{3}-3x,...
+\end{equation*}\]</div>
+<p>These polynomials are called Chebyshev polynomials and satisfy a curious
+identity:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+T_{n}(x)=\cos(n\cos^{-1}x),n\geq0.
+\end{equation*}\]</div>
+<p>Chebyshev polynomials also satisfy the following recursion:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+T_{n+1}(x)=2xT_{n}(x)-T_{n-1}(x)
+\end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(n=1,2,\ldots\)</span>, and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle T_{j},T_{k}\right\rangle =\begin{cases}
+0 &amp; \text{if }j\neq k\\
+\pi &amp; \text{if }j=k=0\\
+\pi/2 &amp; \text{if }j=k&gt;0.
+\end{cases}
+\end{equation*}\]</div>
+</section>
+</div><p>If we take the first <span class="math notranslate nohighlight">\(n+1\)</span> Legendre or Chebyshev polynomials, call
+them <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n},\)</span> then these polynomials form a basis
+for the vector space <span class="math notranslate nohighlight">\(\mathbf{P_n}.\)</span> In other words, they form
+a linearly independent set of functions, and any polynomial from <span class="math notranslate nohighlight">\(\mathbf{P_n}\)</span>
+can be written as a unique linear combination of them. These statements
+follow from the following theorem, which we will leave unproved.</p>
+<div class="proof theorem admonition" id="chap6_thm92">
+<p class="admonition-title"><span class="caption-number">Theorem 27 </span></p>
+<section class="theorem-content" id="proof-content">
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\phi_{j}(x)\)</span> is a polynomial of degree <span class="math notranslate nohighlight">\(j\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n\)</span>, then <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are linearly independent.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are linearly independent in <span class="math notranslate nohighlight">\(\mathbf{P_n}\)</span>, then for any <span class="math notranslate nohighlight">\(q(x)\in\mathbf{P_n},\)</span> there exist unique constants <span class="math notranslate nohighlight">\(c_{0},...,c_{n}\)</span> such that <span class="math notranslate nohighlight">\(q(x)=\sum_{j=0}^{n}c_{j}\phi_{j}(x)\)</span>.</p></li>
+</ul>
+</section>
+</div><p><strong>Exercise 6.3-2</strong></p>
+<p>Prove that if <span class="math notranslate nohighlight">\(\{\phi_0,\phi_1,...,\phi_n\}\)</span> is a set of orthogonal functions, then they must be linearly independent.</p>
+<p>We have developed what we need to solve the least squares problem using orthogonal polynomials.
+Let’s go back to the problem statement:</p>
+<p>Given <span class="math notranslate nohighlight">\(f\in C^0[a,b],\)</span> find a polynomial <span class="math notranslate nohighlight">\(P_{n}(x)\in\mathbf{P_{n}}\)</span>
+that minimizes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\int_{a}^{b}w(x)(f(x)-P_{n}(x))^{2}dx=\left\langle f(x)-P_{n}(x),f(x)-P_{n}(x)\right\rangle
+\end{equation*}\]</div>
+<p>with <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> written as a linear combination of orthogonal basis
+polynomials: <span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}\phi_{j}(x)\)</span>. In the previous
+section, we solved this problem using calculus by taking the partial
+derivatives of <span class="math notranslate nohighlight">\(E\)</span> with respect to <span class="math notranslate nohighlight">\(a_{j}\)</span> and setting them equal
+to zero. Now we will use linear algebra:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+E  =\left\langle f-\sum_{j=0}^{n}a_{j}\phi_{j},f-\sum_{j=0}^{n}a_{j}\phi_{j}\right\rangle
+ &amp; =\left\langle f,f\right\rangle -2\sum_{j=0}^{n}a_{j}\left\langle f,\phi_{j}\right\rangle +\sum_{i}\sum_{j}a_{i}a_{j}\left\langle \phi_{i},\phi_{j}\right\rangle \\
+ &amp; =\left\Vert f\right\Vert ^{2}-2\sum_{j=0}^{n}a_{j}\left\langle f,\phi_{j}\right\rangle +\sum_{j=0}^{n}a_{j}^{2}\left\langle \phi_{j},\phi_{j}\right\rangle \\
+ &amp; =\left\Vert f\right\Vert ^{2}-2\sum_{j=0}^{n}a_{j}\left\langle f,\phi_{j}\right\rangle +\sum_{j=0}^{n}a_{j}^{2}\alpha_{j}\\
+ &amp; =\textcolor{blue}{\left\Vert f\right\Vert ^{2}-\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle ^{2}}{\alpha_{j}}}+\textcolor{red}{\sum_{j=0}^{n}\left[\frac{\left\langle f,\phi_{j}\right\rangle }{\sqrt{\alpha_{j}}}-a_{j}\sqrt{\alpha_{j}}\right]^{2}}.
+\end{align*}\]</div>
+<p>Minimizing this expression with respect to <span class="math notranslate nohighlight">\(a_{j}\)</span> is now obvious:
+simply choose <span class="math notranslate nohighlight">\(a_{j}=\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\)</span>
+so that the last summation in the above equation, <span class="math notranslate nohighlight">\(\textcolor{red}{\sum_{j=0}^{n}\left[\frac{\left\langle f,\phi_{j}\right\rangle }{\sqrt{\alpha_{j}}}-a_{j}\sqrt{\alpha_{j}}\right]^{2}}\)</span>, vanishes. Then we have
+solved the least squares problem! The polynomial that minimizes the
+error <span class="math notranslate nohighlight">\(E\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-least-sq-poly-orthonormal">
+<span class="eqno">(47)<a class="headerlink" href="#equation-least-sq-poly-orthonormal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)\label{eq:least sq poly orthonormal}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_{j}=\left\langle \phi_{j},\phi_{j}\right\rangle\)</span>.
+And the corresponding error is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E=\textcolor{blue}{\left\Vert f\right\Vert ^{2}-\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle ^{2}}{\alpha_{j}}}.
+\end{equation*}\]</div>
+<p>If the polynomials <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are orthonormal, then
+these equations simplify by setting <span class="math notranslate nohighlight">\(\alpha_{j}=1\)</span>.</p>
+<p>We will appreciate the ease at which <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> can be computed using
+this approach, via formula <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a>,
+as opposed to solving the normal equations of <a class="reference internal" href="bookchapter6-2.html#equation-cont-normal">(45)</a>
+when we discuss some examples. But first let’s see the other advantage
+of this approach: how <span class="math notranslate nohighlight">\(P_{n+1}(x)\)</span> can be computed from <span class="math notranslate nohighlight">\(P_{n}(x)\)</span>.
+In Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a>, replace <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n+1\)</span> to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P_{n+1}(x)  =\sum_{j=0}^{n+1}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)&amp;=\underbrace{\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)}_{P_n(x)}+\frac{\left\langle f,\phi_{n+1}\right\rangle }{\alpha_{n+1}}\phi_{n+1}(x)\\
+ &amp; =P_{n}(x)+\frac{\left\langle f,\phi_{n+1}\right\rangle }{\alpha_{n+1}}\phi_{n+1}(x),
+\end{align*}\]</div>
+<p>which is a simple recursion that links <span class="math notranslate nohighlight">\(P_{n+1}\)</span> to <span class="math notranslate nohighlight">\(P_{n}\)</span>.</p>
+<div class="proof example admonition" id="chap6_exa93">
+<p class="admonition-title"><span class="caption-number">Example 42 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the least squares polynomial approximation of degree three to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
+on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Legendre polynomials.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>Put <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a> and let <span class="math notranslate nohighlight">\(\phi_j\)</span> be <span class="math notranslate nohighlight">\(L_j\)</span> to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P_{3}(x)&amp;
+=\frac{\left\langle f,L_{0}\right\rangle }{\alpha_{0}}L_{0}(x)+\frac{\left\langle f,L_{1}\right\rangle }{\alpha_{1}}L_{1}(x)+\frac{\left\langle f,L_{2}\right\rangle }{\alpha_{2}}L_{2}(x)+\frac{\left\langle f,L_{3}\right\rangle }{\alpha_{3}}L_{3}(x)\\
+&amp;=\frac{\left\langle e^{x},1\right\rangle }{2}+\frac{\left\langle e^{x},x\right\rangle }{2/3}x+\frac{\left\langle e^{x},\frac{3}{2}x^{2}-\frac{1}{2}\right\rangle }{2/5}\left(\frac{3}{2}x^{2}-\frac{1}{2}\right)+\frac{\left\langle e^{x},\frac{5}{2}x^{3}-\frac{3}{2}x\right\rangle }{2/7}\left(\frac{5}{2}x^{3}-\frac{3}{2}x\right),
+\end{align*}\]</div>
+<p>where we used the fact that <span class="math notranslate nohighlight">\(\alpha_j=\langle L_j, L_j \rangle = \frac{2}{2n+1}\)</span> (see <a class="reference internal" href="#chap6_exa90">Example 40</a>). We will compute the inner products, which are definite integrals on
+<span class="math notranslate nohighlight">\((-1,1)\)</span>, using the five-node Gauss-Legendre quadrature we discussed in the
+previous chapter. The results rounded to four digits are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left\langle e^{x},1\right\rangle =\int_{-1}^{1}e^{x}dx=2.350\\
+\left\langle e^{x},x\right\rangle =\int_{-1}^{1}e^{x}xdx=0.7358\\
+\left\langle e^{x},\frac{3}{2}x^{2}-\frac{1}{2}\right\rangle =\int_{-1}^{1}e^{x}\left(\frac{3}{2}x^{2}-\frac{1}{2}\right)dx=0.1431\\
+\left\langle e^{x},\frac{5}{2}x^{3}-\frac{3}{2}x\right\rangle =\int_{-1}^{1}e^{x}\left(\frac{5}{2}x^{3}-\frac{3}{2}x\right)dx=0.02013.
+\end{gather*}\]</div>
+<p>Therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P_{3}(x) &amp; =\frac{2.35}{2}+\frac{3(0.7358)}{2}x+\frac{5(0.1431)}{2}\left(\frac{3}{2}x^{2}-\frac{1}{2}\right)+\frac{7(0.02013)}{2}\left(\frac{5}{2}x^{3}-\frac{3}{2}x\right)\\
+ &amp; =0.1761x^{3}+0.5366x^{2}+0.9980x+0.9961.
+\end{align*}\]</div>
+<div class="proof example admonition" id="chap6_exa94">
+<p class="admonition-title"><span class="caption-number">Example 43 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find the least squares polynomial approximation of degree three to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
+on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Chebyshev polynomials.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>As in the previous example solution, we take <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P_{3}(x)=\sum_{j=0}^{3}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x),
+\end{equation*}\]</div>
+<p>but now <span class="math notranslate nohighlight">\(\phi_j\)</span> and <span class="math notranslate nohighlight">\(\alpha_j\)</span> will be replaced by <span class="math notranslate nohighlight">\(T_j\)</span>, the Chebyshev polynomials, and its corresponding constant; see Example <a class="reference internal" href="#chap6_exa91">Example 41</a>. We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P_{3}(x)=
+\frac{\left\langle e^{x},T_{0}\right\rangle }{\pi}T_{0}(x)+\frac{\left\langle e^{x},T_{1}\right\rangle }{\pi/2}T_{1}(x)+\frac{\left\langle e^{x},T_{2}\right\rangle }{\pi/2}T_{2}(x)+\frac{\left\langle e^{x},T_{3}\right\rangle }{\pi/2}T_{3}(x).
+\end{align*}\]</div>
+<p>Consider one of the inner products,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle e^{x},T_{j}\right\rangle =\int_{-1}^{1}\frac{e^{x}T_{j}(x)}{\sqrt{1-x^{2}}}dx
+\end{equation*}\]</div>
+<p>which is an improper integral due to discontinuity at the end points.
+However, we can use the substitution <span class="math notranslate nohighlight">\(\theta=\cos^{-1}x\)</span> to rewrite
+the integral as (see Section <a class="reference internal" href="bookchapter5-5.html#section5-5"><span class="std std-ref">5.5 Improper integrals</span></a>)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left\langle e^{x},T_{j}\right\rangle =\int_{-1}^{1}\frac{e^{x}T_{j}(x)}{\sqrt{1-x^{2}}}dx=\int_{0}^{\pi}e^{\cos\theta}\cos(j\theta)d\theta.
+\end{equation*}\]</div>
+<p>The transformed integrand is smooth, and it is not improper, and hence we can use composite Simpson’s rule to estimate it.
+The following estimates are obtained by taking <span class="math notranslate nohighlight">\(n=20\)</span> in the composite
+Simpson’s rule:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left\langle e^{x},T_{0}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}d\theta &amp; =3.977\\
+\left\langle e^{x},T_{1}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}\cos\theta d\theta &amp; =1.775\\
+\left\langle e^{x},T_{2}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}\cos2\theta d\theta &amp; =0.4265\\
+\left\langle e^{x},T_{3}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}\cos3\theta d\theta &amp; =0.06964
+\end{align*}\]</div>
+<p>Therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+P_{3}(x) &amp; =\frac{3.977}{\pi}+\frac{3.55}{\pi}x+\frac{0.853}{\pi}(2x^{2}-1)+\frac{0.1393}{\pi}(4x^{3}-3x)\\
+ &amp; =0.1774x^{3}+0.5430x^{2}+0.9970x+0.9944.
+\end{align*}\]</div>
+<section id="python-code-for-orthogonal-polynomials">
+<h2>Python code for orthogonal polynomials<a class="headerlink" href="#python-code-for-orthogonal-polynomials" title="Permalink to this headline">#</a></h2>
+<section id="computing-legendre-polynomials">
+<h3>Computing Legendre polynomials<a class="headerlink" href="#computing-legendre-polynomials" title="Permalink to this headline">#</a></h3>
+<p>Legendre polynomials satisfy the following recursion:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+ L_{n+1}(x)=\frac{2n+1}{n+1}xL_n(x)-\frac{n}{n+1} L_{n-1}(x)
+ \end{equation*}\]</div>
+<p>for <span class="math notranslate nohighlight">\(n=1,2,\dotsc\)</span>, with <span class="math notranslate nohighlight">\(L_0(x)=1\)</span>, and <span class="math notranslate nohighlight">\(L_1(x)=x\)</span>.</p>
+<p>The Python code implements this recursion, with a little modification: the index <span class="math notranslate nohighlight">\(n+1\)</span> is shifted down to <span class="math notranslate nohighlight">\(n\)</span>, so the modified recursion is: <span class="math notranslate nohighlight">\(L_{n}(x)=\frac{2n-1}{n}xL_{n-1}(x)-\frac{n-1}{n} L_{n-2}(x)\)</span>, for <span class="math notranslate nohighlight">\(n=2,3,\dotsc\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is a plot of the first five Legendre polynomials:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">legzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+<span class="n">legone</span> <span class="o">=</span> <span class="n">leg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">legtwo</span> <span class="o">=</span> <span class="n">leg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">legthree</span> <span class="o">=</span> <span class="n">leg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">legfour</span> <span class="o">=</span> <span class="n">leg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">legzero</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$L_0(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">legone</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$L_1(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">legtwo</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$L_2(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">legthree</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$L_3(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">legfour</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$L_4(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_25_0.png" src="_images/bookchapter6-3_25_0.png" />
+</div>
+</div>
+</section>
+<section id="least-squares-using-legendre-polynomials">
+<h3>Least-squares using Legendre polynomials<a class="headerlink" href="#least-squares-using-legendre-polynomials" title="Permalink to this headline">#</a></h3>
+<p>In Example <a class="reference internal" href="#chap6_exa93">Example 42</a>, we computed the least squares
+approximation to <span class="math notranslate nohighlight">\(e^x\)</span> using Legendre polynomials. The inner products
+were computed using the five-node Gauss-Legendre rule below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.2369268851</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mf">0.9061798459</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2369268851</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mf">0.9061798459</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="mf">0.5688888889</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.4786286705</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="mf">0.5384693101</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="mf">0.4786286705</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5384693101</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The inner product,
+<span class="math notranslate nohighlight">\(\left\langle e^{x},\frac{3}{2}x^2-\frac{1}{2}\right\rangle =\int_{-1}^{1}e^{x}(\frac{3}{2}x^2-\frac{1}{2})dx\)</span>
+is computed as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gauss</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1431256282441218
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have a code <strong>leg(x,n)</strong> that generates the
+Legendre polynomials, we can do the above computation without explicitly
+specifying the Legendre polynomial. For example, since
+<span class="math notranslate nohighlight">\(\frac{3}{2}x^2-\frac{1}{2}=L_2\)</span>, we can apply the <strong>gauss</strong>
+function directly to <span class="math notranslate nohighlight">\(L_2(x)e^x\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gauss</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.14312562824412176
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function <strong>polyLegCoeff(f,n)</strong> computes the
+coefficients <span class="math notranslate nohighlight">\(\frac{\left\langle f,L_{j}\right\rangle }{\alpha_{j}}\)</span>
+of the least squares polynomial
+<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,L_{j}\right\rangle }{\alpha_{j}}L_{j}(x),j=0,1,...,n\)</span>,
+for any <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, where <span class="math notranslate nohighlight">\(L_j\)</span> are the Legendre polynomials.
+The coefficients are the outputs that are returned when the function is finished.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">polyLegCoeff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the coefficients are computed, evaluating the polynomial can be
+done efficiently by using the coefficients. The next function
+<strong>polyLeg(x,n,A)</strong> evaluates the least squares polynomial
+<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,L_{j}\right\rangle }{\alpha_{j}}L_{j}(x),j=0,1,...,n\)</span>,
+where the coefficients
+<span class="math notranslate nohighlight">\(\frac{\left\langle f,L_{j}\right\rangle }{\alpha_{j}}\)</span>, stored in <span class="math notranslate nohighlight">\(A\)</span>, are obtained
+from calling the function <strong>polyLegCoeff(f,n)</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">polyLeg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">leg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we plot <span class="math notranslate nohighlight">\(y=e^x\)</span> together with its least squares polynomial
+approximations of degree two and three, using Legendre polynomials. Note that
+every time the function <strong>polyLegCoeff</strong> is evaluated, a new
+coefficient array <strong>A</strong> is obtained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyLegCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">deg2</span> <span class="o">=</span> <span class="n">polyLeg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyLegCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">deg3</span> <span class="o">=</span> <span class="n">polyLeg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xaxis</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$e^x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">deg2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Legendre least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">deg3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Legendre least squares poly of degree 3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_38_0.png" src="_images/bookchapter6-3_38_0.png" />
+</div>
+</div>
+</section>
+<section id="computing-chebyshev-polynomials">
+<h3>Computing Chebyshev polynomials<a class="headerlink" href="#computing-chebyshev-polynomials" title="Permalink to this headline">#</a></h3>
+<p>The following function implements the recursion Chebyshev polynomials
+satisfy: <span class="math notranslate nohighlight">\(T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)\)</span>, for <span class="math notranslate nohighlight">\(n=1,2,...\)</span>, with
+<span class="math notranslate nohighlight">\(T_0(x)=1\)</span> and <span class="math notranslate nohighlight">\(T_1(x)=x\)</span>. Note that in the code the index is
+shifted from <span class="math notranslate nohighlight">\(n+1\)</span> to <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is a plot of the first five Chebyshev polynomials:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">chebzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
+<span class="n">chebone</span> <span class="o">=</span> <span class="n">cheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">chebtwo</span> <span class="o">=</span> <span class="n">cheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">chebthree</span> <span class="o">=</span> <span class="n">cheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">chebfour</span> <span class="o">=</span> <span class="n">cheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">chebzero</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_0(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">chebone</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_1(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">chebtwo</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_2(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">chebthree</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_3(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">chebfour</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_4(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_43_0.png" src="_images/bookchapter6-3_43_0.png" />
+</div>
+</div>
+</section>
+<section id="least-squares-using-chebyshev-polynomials">
+<h3>Least squares using Chebyshev polynomials<a class="headerlink" href="#least-squares-using-chebyshev-polynomials" title="Permalink to this headline">#</a></h3>
+<p>In <a class="reference internal" href="#chap6_exa94">Example 43</a>, we computed the least squares
+approximation to <span class="math notranslate nohighlight">\(e^x\)</span> using Chebyshev polynomials. The inner
+products, after a transformation, were computed using the composite
+Simpson rule. Below is the Python code for the composite Simpson rule we
+discussed in the previous chapter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compsimpson</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="mi">4</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The integrals in <a class="reference internal" href="#chap6_exa94">Example 43</a> were computed using the
+composite Simpson rule with <span class="math notranslate nohighlight">\(n=20\)</span>. For example, the second integral
+<span class="math notranslate nohighlight">\(\left\langle e^{x},T_{1}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}\cos\theta d\theta\)</span>
+is computed as:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compsimpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7754996892121808
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we write two functions, <strong>polyChebCoeff(f,n)</strong>
+and <strong>polyCheb(x,n,A)</strong>. The first function computes the
+coefficients <span class="math notranslate nohighlight">\(\frac{\left\langle f,T_{j}\right\rangle }{\alpha_{j}}\)</span>
+of the least squares polynomial
+<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,T_{j}\right\rangle }{\alpha_{j}}T_{j}(x),j=0,1,...,n\)</span>,
+for any <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, where <span class="math notranslate nohighlight">\(T_j\)</span> are the Chebyshev polynomials.
+The coefficients are returned as the output of the first function.</p>
+<p>The integral <span class="math notranslate nohighlight">\(\left\langle f,T_{j}\right\rangle\)</span> is transformed to the
+integral <span class="math notranslate nohighlight">\(\int_0^\pi f(\cos \theta)\cos(j\theta)d\theta\)</span>, similar to
+the derivation in <a class="reference internal" href="#chap6_exa94">Example 43</a>, and then the
+transformed integral is computed using the composite Simpson’s rule by
+<strong>polyChebCoeff</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">polyChebCoeff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">compsimpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">compsimpson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">polyCheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we plot <span class="math notranslate nohighlight">\(y=e^x\)</span> together with polynomial approximations of degree
+two and three using Chebyshev basis polynomials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyChebCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">deg2</span> <span class="o">=</span> <span class="n">polyCheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyChebCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">deg3</span> <span class="o">=</span> <span class="n">polyCheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xaxis</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$e^x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">deg2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chebyshev least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">deg3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chebyshev least squares poly of degree 3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_53_0.png" src="_images/bookchapter6-3_53_0.png" />
+</div>
+</div>
+<p>The cubic Legendre and Chebyshev approximations are difficult to
+distinguish from the function itself. Let’s compare the quadratic
+approximations obtained by Legendre and Chebyshev polynomials. Below,
+you can see visually that Chebyshev does a better approximation at the
+end points of the interval. Is this expected?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyChebCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cheb2</span> <span class="o">=</span> <span class="n">polyCheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyLegCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">leg2</span> <span class="o">=</span> <span class="n">polyLeg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xaxis</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$e^x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">cheb2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chebyshev least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">leg2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Legendre least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_55_0.png" src="_images/bookchapter6-3_55_0.png" />
+</div>
+</div>
+<p>In the following, we compare second degree least squares polynomial
+approximations for <span class="math notranslate nohighlight">\(f(x)=e^{x^2}\)</span>. Compare how good the Legendre and
+Chebyshev polynomial approximations are in the midinterval and toward
+the endpoints.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyChebCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cheb2</span> <span class="o">=</span> <span class="n">polyCheb</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">polyLegCoeff</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">leg2</span> <span class="o">=</span> <span class="n">polyLeg</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xaxis</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$e^{x^2}}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">cheb2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chebyshev least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">leg2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Legendre least squares poly of degree 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bookchapter6-3_57_0.png" src="_images/bookchapter6-3_57_0.png" />
+</div>
+</div>
+<p><strong>Exercise 6.3-3</strong></p>
+<p>Use Python to compute the least squares polynomial approximations <span class="math notranslate nohighlight">\(P_2(x),P_4(x),P_6(x)\)</span> to <span class="math notranslate nohighlight">\(\sin 4x\)</span> using Chebyshev basis polynomials. Plot the polynomials together with <span class="math notranslate nohighlight">\(\sin 4x\)</span>.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The Legendre polynomials in Section <a class="reference internal" href="bookchapter5-3.html#section5-3"><span class="std std-ref">5.3 Gaussian quadrature</span></a> differ from these by a constant factor. For example, in Section <a class="reference internal" href="bookchapter5-3.html#section5-3"><span class="std std-ref">5.3 Gaussian quadrature</span></a> the third polynomial was <span class="math notranslate nohighlight">\(L_2(x)=x^2-\frac{1}{3}\)</span>, but here it is <span class="math notranslate nohighlight">\(L_2(x)=\frac{3}{2} (x^2-\frac{1}{3})\)</span>. Observe that multiplying these polynomials by a constant does not change their roots (what we were interested in Gaussian quadrature), or their orthogonality.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter6-2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">6.2–Continuous least squares</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
