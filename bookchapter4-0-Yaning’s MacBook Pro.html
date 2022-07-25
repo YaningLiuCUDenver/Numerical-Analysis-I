@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6.2 Continuous least squares &#8212; First Semester in Numerical Analysis with Python</title>
+    <title>Chapter 5 Numerical Quadrature and Differentiation &#8212; First Semester in Numerical Analysis with Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6.3 Orthogonal polynomials and least squares" href="bookchapter6-3.html" />
-    <link rel="prev" title="6.1 Discrete least squares" href="bookchapter6-1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -116,7 +114,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="bookpreface.html">
    Preface
@@ -267,8 +265,8 @@ const thebe_selector_output = ".output, .cell_output"
    6.1 Discrete least squares
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-2.html">
    6.2 Continuous least squares
   </a>
  </li>
@@ -336,7 +334,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter6-2.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter4-0-Yaning’s MacBook Pro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +377,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/bookchapter6-2.ipynb"
+        <a href="_sources/bookchapter4-0-Yaning’s MacBook Pro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -428,7 +426,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>6.2 Continuous least squares</h1>
+                <h1>Chapter 5 Numerical Quadrature and Differentiation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -440,119 +438,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="continuous-least-squares">
-<h1>6.2 Continuous least squares<a class="headerlink" href="#continuous-least-squares" title="Permalink to this headline">#</a></h1>
-<p>In discrete least squares, our starting point was a set of data points.
-Here we will start with a continuous function <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> and
-answer the following question: how can we find the “best” polynomial
-<span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}x^{j}\)</span> of degree at most <span class="math notranslate nohighlight">\(n\)</span> that
-approximates <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]?\)</span> As before, “best” polynomial will mean the
-polynomial that minimizes the least squares error:</p>
-<div class="math notranslate nohighlight" id="equation-least-sq-error">
-<span class="eqno">(51)<a class="headerlink" href="#equation-least-sq-error" title="Permalink to this equation">#</a></span>\[\begin{equation}
-E=\int_{a}^{b}\left(f(x)-\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx.
-\end{equation}\]</div>
-<p>Compare this expression with that of the <strong>discrete least squares</strong>:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-E=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}.
-\end{equation*}\]</div>
-<p>To minimize <span class="math notranslate nohighlight">\(E\)</span> in <a class="reference internal" href="#equation-least-sq-error">(51)</a> we set <span class="math notranslate nohighlight">\(\frac{\partial E}{\partial a_{k}}=0\)</span>, for
-<span class="math notranslate nohighlight">\(k=0,1,...,n,\)</span> and observe</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-\frac{\partial E}{\partial a_{k}} &amp; =\frac{\partial}{\partial a_{k}}\left(\int_{a}^{b}f^{2}(x)dx-2\int_{a}^{b}f(x)\left(\sum_{j=0}^{n}a_{j}x^{j}\right)dx+\int_{a}^{b}\left(\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx\right)\\
- &amp; =-2\int_{a}^{b}f(x)x^{k}dx+2\sum_{j=0}^na_{j}\int_{a}^{b}x^{j+k}dx=0,
-\end{align*}\]</div>
-<p>which gives the <span class="math notranslate nohighlight">\((n+1)\)</span> normal equations for the <strong>continuous
-least squares problem</strong>:</p>
-<div class="math notranslate nohighlight" id="equation-cont-normal">
-<span class="eqno">(52)<a class="headerlink" href="#equation-cont-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\sum_{j=0}^{n}a_{j}\int_{a}^{b}x^{j+k}dx=\int_{a}^{b}f(x)x^{k}dx
-\end{equation}\]</div>
-<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> Note that the only unknowns in these equations
-are the <span class="math notranslate nohighlight">\(a_{j}\)</span>’s; hence this is a linear system of equations. It
-is instructive to compare these normal equations with those of the
-<strong>discrete least squares problem</strong>:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=\sum_{i=1}^{m}y_{i}x_{i}^{k}.
-\end{equation*}\]</div>
-<div class="proof example admonition" id="chap5_exa86">
-<p class="admonition-title"><span class="caption-number">Example 54 </span></p>
-<section class="example-content" id="proof-content">
-<p>Find the least squares polynomial approximation of degree 2 to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
-on <span class="math notranslate nohighlight">\((0,2)\)</span>.</p>
-</section>
-</div><p><strong>Solution.</strong></p>
-<p>The normal equations are:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\sum_{j=0}^{2}a_{j}\int_{0}^{2}x^{j+k}dx=\int_{0}^{2}e^{x}x^{k}dx
-\end{equation*}\]</div>
-<p><span class="math notranslate nohighlight">\(k=0,1,2.\)</span> Here are the three equations:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-a_{0}\int_{0}^{2}dx+a_{1}\int_{0}^{2}xdx+a_{2}\int_{0}^{2}x^{2}dx &amp; =\int_{0}^{2}e^{x}dx\\
-a_{0}\int_{0}^{2}xdx+a_{1}\int_{0}^{2}x^{2}dx+a_{2}\int_{0}^{2}x^{3}dx &amp; =\int_{0}^{2}e^{x}xdx\\
-a_{0}\int_{0}^{2}x^{2}dx+a_{1}\int_{0}^{2}x^{3}dx+a_{2}\int_{0}^{2}x^{4}dx &amp; =\int_{0}^{2}e^{x}x^{2}dx
-\end{align*}\]</div>
-<p>Computing the integrals we get</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-2a_{0}+2a_{1}+\frac{8}{3}a_{2} &amp; =e^{2}-1\\
-2a_{0}+\frac{8}{3}a_{1}+4a_{2} &amp; =e^{2}+1\\
-\frac{8}{3}a_{0}+4a_{1}+\frac{32}{5}a_{2} &amp; =2e^{2}-2
-\end{align*}\]</div>
-<p>whose solution is <span class="math notranslate nohighlight">\(a_{0}=3(-7+e^{2})\)</span>, <span class="math notranslate nohighlight">\(a_{1}=-\frac{3}{2}(-37+5e^{2}),\)</span>
-<span class="math notranslate nohighlight">\(a_{2}=\frac{15}{4}(-7+e^{2}).\)</span> Then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-P_{2}(x)=1.17+0.08x+1.46x^{2}.
-\end{equation*}\]</div>
-<p>The solution method we have discussed for the least squares problem
-by solving the normal equations as a matrix equation has certain drawbacks:</p>
-<ul class="simple">
-<li><p>The integrals <span class="math notranslate nohighlight">\(\int_{a}^{b}x^{i+j}dx=\left(b^{i+j+1}-a^{i+j+1}\right)/(i+j+1)\)</span>
-in the coefficient matrix give rise to matrix equation that is prone
-to roundoff error.</p></li>
-<li><p>There is no easy way to go from <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> to <span class="math notranslate nohighlight">\(P_{n+1}(x)\)</span> (which
-we might want to do if we were not satisfied by the approximation
-provided by <span class="math notranslate nohighlight">\(P_{n}\)</span>).</p></li>
-</ul>
-<p>There is a better approach to solve the discrete and continuous least
-squares problem using the orthogonal polynomials we encountered in
-Gaussian quadrature. Both discrete and continuous least squares problem
-tries to find a polynomial <span class="math notranslate nohighlight">\(P_{n}(x)=\sum_{j=0}^{n}a_{j}x^{j}\)</span> that
-satisfies some properties. Notice how the polynomial is written in
-terms of the monomial basis functions <span class="math notranslate nohighlight">\(x^{j}\)</span> and recall how these
-basis functions caused numerical difficulties in interpolation. That
-was the reason we discussed different basis functions like Lagrange
-and Newton for the interpolation problem. So the idea is to write
-<span class="math notranslate nohighlight">\(P_{n}(x)\)</span> in terms of some other basis functions</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-P_{n}(x)=\sum_{j=0}^{n}a_{j}\phi_{j}(x)
-\end{equation*}\]</div>
-<p>which would then update the normal equations for continuous least
-squares <a class="reference internal" href="#equation-cont-normal">(52)</a> as</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\sum_{j=0}^{n}a_{j}\int_{a}^{b}\phi_{j}(x)\phi_{k}(x)dx=\int_{a}^{b}f(x)\phi_{k}(x)dx
-\end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> The normal equations for the discrete least squares <a class="reference internal" href="bookchapter6-1.html#equation-discrete-normal">(42)</a>
-gets a similar update:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}\phi_{j}(x_{i})\phi_{k}(x_{i})\right)=\sum_{i=1}^{m}y_{i}\phi_{k}(x_{i}).
-\end{equation*}\]</div>
-<p>Going forward, the crucial observation is that the integral of the product of two
-functions <span class="math notranslate nohighlight">\(\int \phi_j(x) \phi_k(x) dx\)</span>, or the summation of the product of two functions evaluated
-at some discrete points, <span class="math notranslate nohighlight">\(\sum \phi_j(x_i)\phi_k(x_i)\)</span>, can be viewed as an inner product <span class="math notranslate nohighlight">\(\left\langle \phi_{j},\phi_{k}\right\rangle \)</span>
-of two vectors in a suitably defined vector space. And when the functions (vectors)
-<span class="math notranslate nohighlight">\(\phi_{j}\)</span> are <strong>orthogonal</strong>, the inner product <span class="math notranslate nohighlight">\(\left\langle \phi_{j},\phi_{k}\right\rangle \)</span>
-is 0 if <span class="math notranslate nohighlight">\(j\neq k\)</span>, which makes the normal equations trivial to solve.
-We will discuss details in the next section.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-numerical-quadrature-and-differentiation">
+<span id="ch-integration"></span><h1>Chapter 5 Numerical Quadrature and Differentiation<a class="headerlink" href="#chapter-5-numerical-quadrature-and-differentiation" title="Permalink to this headline">#</a></h1>
+<p>Estimating <span class="math notranslate nohighlight">\(\int_{a}^{b}f(x)dx\)</span> using sums of the form <span class="math notranslate nohighlight">\(\sum_{i=0}^{n}w_{i}f(x_{i})\)</span>
+is known as the quadrature problem. Here <span class="math notranslate nohighlight">\(w_{i}\)</span> are called weights,
+and <span class="math notranslate nohighlight">\(x_{i}\)</span> are called nodes. The objective is to determine the nodes
+and weights to minimize error.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -582,20 +473,6 @@ We will discuss details in the next section.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="bookchapter6-1.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">6.1 Discrete least squares</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="bookchapter6-3.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">6.3 Orthogonal polynomials and least squares</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

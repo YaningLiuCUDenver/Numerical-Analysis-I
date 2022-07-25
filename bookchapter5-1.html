@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5.2 Composite Newton-Cotes formulas" href="bookchapter5-2.html" />
-    <link rel="prev" title="Chapter 5 Numerical Quadrature and Differentiation" href="bookchapter5-0.html" />
+    <link rel="prev" title="4.4 Piecewise polynomials: spline interpolation" href="bookchapter4-4.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -183,6 +183,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -205,11 +225,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -254,12 +269,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+   6.2 Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-3.html">
-   Chapter 6–Approximation Theory
+   6.3 Orthogonal polynomials and least squares
   </a>
  </li>
 </ul>
@@ -434,7 +449,7 @@ the Lagrange form of the interpolant is</p>
 \[\begin{equation*}
 P_{n}(x)=\sum_{i=0}^{n}f(x_{i})l_{i}(x)
 \end{equation*}\]</div>
-<p>and from the interpolation error formula <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 15</a>, we have</p>
+<p>and from the interpolation error formula <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 22</a>, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 f(x)=P_{n}(x)+(x-x_{0})\cdots(x-x_{n})\frac{f^{(n+1)}(\xi(x))}{(n+1)!},
@@ -442,7 +457,7 @@ f(x)=P_{n}(x)+(x-x_{0})\cdots(x-x_{n})\frac{f^{(n+1)}(\xi(x))}{(n+1)!},
 <p>where <span class="math notranslate nohighlight">\(\xi(x)\in[a,b]\)</span>. (We have written <span class="math notranslate nohighlight">\(\xi(x)\)</span> instead of <span class="math notranslate nohighlight">\(\xi\)</span> to emphasize that <span class="math notranslate nohighlight">\(\xi\)</span> depends on the value of <span class="math notranslate nohighlight">\(x\)</span>.)</p>
 <p>Taking the integral of both sides yields</p>
 <div class="math notranslate nohighlight" id="equation-newtoncotes">
-<span class="eqno">(20)<a class="headerlink" href="#equation-newtoncotes" title="Permalink to this equation">#</a></span>\[\int_{a}^{b}f(x)dx  = \underbrace{\int_{a}^{b}P_{n}(x)dx}_{\text{quadrature rule}}+\underbrace{\frac{1}{(n+1)!}\int_{a}^{b}\prod_{i=0}^{n}(x-x_{i})f^{(n+1)}(\xi(x))dx.}_{\text{error term}}
+<span class="eqno">(27)<a class="headerlink" href="#equation-newtoncotes" title="Permalink to this equation">#</a></span>\[\int_{a}^{b}f(x)dx  = \underbrace{\int_{a}^{b}P_{n}(x)dx}_{\text{quadrature rule}}+\underbrace{\frac{1}{(n+1)!}\int_{a}^{b}\prod_{i=0}^{n}(x-x_{i})f^{(n+1)}(\xi(x))dx.}_{\text{error term}}
 % &amp; =\sum_{i=0}^{n}\left(\underbrace{\int_{a}^{b}l_{i}(x)dx}_{w_i}\right) f(x_{i})+\text{&quot;error&quot;}\nonumber\]</div>
 <p>The first integral on the right-hand side gives the quadrature rule:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -454,7 +469,7 @@ f(x)=P_{n}(x)+(x-x_{0})\cdots(x-x_{n})\frac{f^{(n+1)}(\xi(x))}{(n+1)!},
 nodes. The following result is useful in the theoretical analysis
 of Newton-Cotes formulas.</p>
 <div class="proof theorem admonition" id="chap4_thm65">
-<p class="admonition-title"><span class="caption-number">Theorem 21 </span> (Weighted mean value theorem for integrals)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 28 </span> (Weighted mean value theorem for integrals)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f\in C^0[a,b],\)</span> the Riemann integral of <span class="math notranslate nohighlight">\(g(x)\)</span> exists on
 <span class="math notranslate nohighlight">\([a,b],\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> does not change sign on <span class="math notranslate nohighlight">\([a,b].\)</span> Then there
@@ -470,7 +485,7 @@ Lagrange polynomial</p>
 \[\begin{equation*}
 P_{1}(x)=\frac{x-x_{1}}{x_{0}-x_{1}}f(x_{0})+\frac{x-x_{0}}{x_{1}-x_{0}}f(x_{1})
 \end{equation*}\]</div>
-<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=1\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(20)</a> to get</p>
+<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=1\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(27)</a> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{a}^{b}f(x)dx=\int_{a}^{b}P_{1}(x)dx+\frac{1}{2}\int_{a}^{b}\prod_{i=0}^{1}(x-x_{i})f''(\xi(x))dx,
@@ -486,7 +501,7 @@ P_{1}(x)=\frac{x-x_{1}}{x_{0}-x_{1}}f(x_{0})+\frac{x-x_{0}}{x_{1}-x_{0}}f(x_{1})
 \[\begin{equation*}
 \int_{a}^{b}(x-x_{0})(x-x_{1})f''(\xi(x))dx.
 \end{equation*}\]</div>
-<p>We will use <a class="reference internal" href="#chap4_thm65">Theorem 21</a> for this computation. Note that the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)=(x-a)(x-b)\)</span> does not change sign on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and it is integrable: so this function serves the role of <span class="math notranslate nohighlight">\(g(x)\)</span> in <a class="reference internal" href="#chap4_thm65">Theorem 21</a>. The other term, <span class="math notranslate nohighlight">\(f''(\xi(x))\)</span>, serves the role of <span class="math notranslate nohighlight">\(f(x)\)</span>. Applying the theorem, we get</p>
+<p>We will use <a class="reference internal" href="#chap4_thm65">Theorem 28</a> for this computation. Note that the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)=(x-a)(x-b)\)</span> does not change sign on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and it is integrable: so this function serves the role of <span class="math notranslate nohighlight">\(g(x)\)</span> in <a class="reference internal" href="#chap4_thm65">Theorem 28</a>. The other term, <span class="math notranslate nohighlight">\(f''(\xi(x))\)</span>, serves the role of <span class="math notranslate nohighlight">\(f(x)\)</span>. Applying the theorem, we get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{a}^{b}(x-a)(x-b)f''(\xi(x))dx=f''(\xi) \int_a^b (x-a)(x-b)dx
@@ -510,7 +525,7 @@ where <span class="math notranslate nohighlight">\(h=\frac{b-a}{2},\)</span> and
 \[\begin{equation*}
 P_{2}(x)=\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})+\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}f(x_{1})+\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}f(x_{2})
 \end{equation*}\]</div>
-<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=2\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(20)</a> to get</p>
+<p>to estimate <span class="math notranslate nohighlight">\(f(x)\)</span>. Substitute <span class="math notranslate nohighlight">\(n=2\)</span> in Equation <a class="reference internal" href="#equation-newtoncotes">(27)</a> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{a}^{b}f(x)dx=\int_{a}^{b}P_{2}(x)dx+\frac{1}{3!}\int_{a}^{b}\prod_{i=0}^{2}(x-x_{i})f^{(3)}(\xi(x))dx,
@@ -521,7 +536,7 @@ P_{2}(x)=\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})+\frac{(x-
 \int_{a}^{b}f(x)dx &amp; =\int_{a}^{b}\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})dx+\int_{a}^{b}\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}f(x_{1})dx+\\
  &amp; +\int_{a}^{b}\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}f(x_{2})dx+\frac{1}{6}\int_{a}^{b}(x-x_{0})(x-x_{1})(x-x_{2})f^{(3)}(\xi(x))dx.
 \end{align*}\]</div>
-<p>The sum of the first three integrals on the right-hand side simplify as: <span class="math notranslate nohighlight">\(\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]\)</span>. The last integral cannot be evaluated using <a class="reference internal" href="#chap4_thm65">Theorem 21</a> directly, like in the trapezoidal rule, since the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)(x-x_2)\)</span> changes sign on <span class="math notranslate nohighlight">\([a,b]\)</span>. However, a clever application of integration by parts transforms the integral to an integral where  <a class="reference internal" href="#chap4_thm65">Theorem 21</a> is applicable (see <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span> for details), and the integral simplifies as <span class="math notranslate nohighlight">\(-\frac{h^{5}}{90}f^{(4)}(\xi)\)</span> for some <span class="math notranslate nohighlight">\(\xi \in (a,b)\)</span>. In summary, we obtain</p>
+<p>The sum of the first three integrals on the right-hand side simplify as: <span class="math notranslate nohighlight">\(\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]\)</span>. The last integral cannot be evaluated using <a class="reference internal" href="#chap4_thm65">Theorem 28</a> directly, like in the trapezoidal rule, since the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)(x-x_2)\)</span> changes sign on <span class="math notranslate nohighlight">\([a,b]\)</span>. However, a clever application of integration by parts transforms the integral to an integral where  <a class="reference internal" href="#chap4_thm65">Theorem 28</a> is applicable (see <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span> for details), and the integral simplifies as <span class="math notranslate nohighlight">\(-\frac{h^{5}}{90}f^{(4)}(\xi)\)</span> for some <span class="math notranslate nohighlight">\(\xi \in (a,b)\)</span>. In summary, we obtain</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{a}^{b}f(x)dx=\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]-\frac{h^{5}}{90}f^{(4)}(\xi)
@@ -530,7 +545,7 @@ P_{2}(x)=\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})+\frac{(x-
 <p><strong>Exercise 5.1-1</strong></p>
 <p>Prove that the sum of the weights in Newton-Cotes rules is <span class="math notranslate nohighlight">\(b-a\)</span>, for any <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <div class="proof definition admonition" id="chap4_def66">
-<p class="admonition-title"><span class="caption-number">Definition 8 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 14 </span></p>
 <section class="definition-content" id="proof-content">
 <p>The degree of accuracy, or precision, of a quadrature formula is the
 largest positive integer <span class="math notranslate nohighlight">\(n\)</span> such that the formula is exact for <span class="math notranslate nohighlight">\(f(x)=x^{k},\)</span>
@@ -543,7 +558,7 @@ formulas; closed refers to the fact that the end points <span class="math notran
 the interval are used as nodes in the quadrature rule. Here is the
 general definition.</p>
 <div class="proof definition admonition" id="chap4_def67">
-<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Closed Newton-Cotes)</p>
+<p class="admonition-title"><span class="caption-number">Definition 15 </span> (Closed Newton-Cotes)</p>
 <section class="definition-content" id="proof-content">
 <p>The <span class="math notranslate nohighlight">\((n+1)\)</span>-point closed Newton-Cotes formula uses nodes <span class="math notranslate nohighlight">\(x_{i}=x_{0}+ih\)</span>,
 for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> where <span class="math notranslate nohighlight">\(x_{0}=a,x_{n}=b,h=\frac{b-a}{n},\)</span> and</p>
@@ -554,7 +569,7 @@ w_{i}=\int_{x_{0}}^{x_{n}}l_{i}(x)dx=\int_{x_{0}}^{x_{n}}\prod_{j=0,j\neq i}^{n}
 </section>
 </div><p>The following theorem provides an error formula for the closed Newton-Cotes formula. A proof can be found in <span id="id2">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap4_thm68">
-<p class="admonition-title"><span class="caption-number">Theorem 22 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 29 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>For the <span class="math notranslate nohighlight">\((n+1)\)</span>-point closed Newton-Cotes formula, we have:</p>
 <ul class="simple">
@@ -580,7 +595,7 @@ formula, if <span class="math notranslate nohighlight">\(n\)</span> is even, the
 although the interpolating polynomial is of degree <span class="math notranslate nohighlight">\(n\)</span>.
 The open Newton-Cotes formulas exclude the end points of the interval.</p>
 <div class="proof definition admonition" id="chap4_def69">
-<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Open Newton-Cotes)</p>
+<p class="admonition-title"><span class="caption-number">Definition 16 </span> (Open Newton-Cotes)</p>
 <section class="definition-content" id="proof-content">
 <p>The <span class="math notranslate nohighlight">\((n+1)\)</span>-point open Newton-Cotes formula uses nodes <span class="math notranslate nohighlight">\(x_{i}=x_{0}+ih\)</span>,
 for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> where <span class="math notranslate nohighlight">\(x_{0}=a+h,x_{n}=b-h,h=\frac{b-a}{n+2}\)</span>
@@ -593,7 +608,7 @@ w_{i}=\int_{a}^{b}l_{i}(x)dx=\int_{a}^{b}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x
 </section>
 </div><p>The error formula for the open Newton-Cotes formula is given next; for a proof see Isaacson and <span id="id3">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap4_thm70">
-<p class="admonition-title"><span class="caption-number">Theorem 23 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 30 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>For the <span class="math notranslate nohighlight">\((n+1)\)</span>-point open Newton-Cotes formula, we have:</p>
 <ul class="simple">
@@ -625,7 +640,7 @@ w_{i}=\int_{a}^{b}l_{i}(x)dx=\int_{a}^{b}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x
 a constant (the values of <span class="math notranslate nohighlight">\(f\)</span> at the midpoint), that is, a polynomial
 of degree 0, but it has degree of accuracy 1.</p>
 <div class="proof remark admonition" id="chap4_rem71">
-<p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
+<p class="admonition-title"><span class="caption-number">Remark 9 </span></p>
 <section class="remark-content" id="proof-content">
 <p>Both closed and open Newton-Cotes formulas using odd number of nodes
 (<span class="math notranslate nohighlight">\(n\)</span> is even), gain an extra degree of accuracy beyond that of the
@@ -645,7 +660,7 @@ for perfectly well-behaved integrands.</p></li>
 </ul>
 </section>
 </div><div class="proof example admonition" id="chap4_exa72">
-<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 42 </span></p>
 <section class="example-content" id="proof-content">
 <p>Estimate <span class="math notranslate nohighlight">\(\int_{0.5}^1 x^x dx\)</span> using the midpoint, trapezoidal, and Simpson’s rules.</p>
 </section>
@@ -670,7 +685,7 @@ Finally, for Simpson’s rule, <span class="math notranslate nohighlight">\(h=(b
 \end{array}
 \end{equation*}\]</div>
 <div class="proof example admonition" id="chap4_exa73">
-<p class="admonition-title"><span class="caption-number">Example 28 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 43 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the constants <span class="math notranslate nohighlight">\(c_{0},c_{1},x_{1}\)</span> so that the quadrature formula</p>
 <div class="amsmath math notranslate nohighlight">
@@ -745,11 +760,11 @@ has degree of accuracy 2.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="bookchapter5-0.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="bookchapter4-4.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Chapter 5 Numerical Quadrature and Differentiation</p>
+            <p class="prev-next-title">4.4 Piecewise polynomials: spline interpolation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="bookchapter5-2.html" title="next page">

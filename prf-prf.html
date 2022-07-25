@@ -185,6 +185,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -207,11 +227,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -356,6 +371,29 @@ title="Fullscreen mode"
    <h1>Proof Index</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-2by2cholesky"><strong>2by2cholesky</strong></a> | 
+   <a href="#cap-3by3GE"><strong>3by3GE</strong></a> | 
+   <a href="#cap-3by3cholesky"><strong>3by3cholesky</strong></a> | 
+   <a href="#cap-Aortho"><strong>Aortho</strong></a> | 
+   <a href="#cap-AorthoGramSchmidt"><strong>AorthoGramSchmidt</strong></a> | 
+   <a href="#cap-CholCost"><strong>CholCost</strong></a> | 
+   <a href="#cap-CholLA"><strong>CholLA</strong></a> | 
+   <a href="#cap-Choluniqueness"><strong>Choluniqueness</strong></a> | 
+   <a href="#cap-GE"><strong>GE</strong></a> | 
+   <a href="#cap-GEcost"><strong>GEcost</strong></a> | 
+   <a href="#cap-GramSchmidt"><strong>GramSchmidt</strong></a> | 
+   <a href="#cap-HilbertMatrix"><strong>HilbertMatrix</strong></a> | 
+   <a href="#cap-JacobiConverge"><strong>JacobiConverge</strong></a> | 
+   <a href="#cap-LU"><strong>LU</strong></a> | 
+   <a href="#cap-LUSolveLE"><strong>LUSolveLE</strong></a> | 
+   <a href="#cap-PALU"><strong>PALU</strong></a> | 
+   <a href="#cap-PD"><strong>PD</strong></a> | 
+   <a href="#cap-PD_properties"><strong>PD_properties</strong></a> | 
+   <a href="#cap-PartialPivoting"><strong>PartialPivoting</strong></a> | 
+   <a href="#cap-PartialPivoting2"><strong>PartialPivoting2</strong></a> | 
+   <a href="#cap-algo_ConjGrad1"><strong>algo_ConjGrad1</strong></a> | 
+   <a href="#cap-algo_ConjGrad2"><strong>algo_ConjGrad2</strong></a> | 
+   <a href="#cap-backsubcost"><strong>backsubcost</strong></a> | 
    <a href="#cap-chap1_def1"><strong>chap1_def1</strong></a> | 
    <a href="#cap-chap1_def12"><strong>chap1_def12</strong></a> | 
    <a href="#cap-chap1_def14"><strong>chap1_def14</strong></a> | 
@@ -450,10 +488,201 @@ title="Fullscreen mode"
    <a href="#cap-chap6_exa93"><strong>chap6_exa93</strong></a> | 
    <a href="#cap-chap6_exa94"><strong>chap6_exa94</strong></a> | 
    <a href="#cap-chap6_thm92"><strong>chap6_thm92</strong></a> | 
+   <a href="#cap-condition_number"><strong>condition_number</strong></a> | 
+   <a href="#cap-cost"><strong>cost</strong></a> | 
+   <a href="#cap-gramschmidt_v1_2by2"><strong>gramschmidt_v1_2by2</strong></a> | 
+   <a href="#cap-gramschmidt_v1_3by3"><strong>gramschmidt_v1_3by3</strong></a> | 
+   <a href="#cap-innerproduct"><strong>innerproduct</strong></a> | 
+   <a href="#cap-permmat"><strong>permmat</strong></a> | 
+   <a href="#cap-sdd"><strong>sdd</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a>
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-2by2cholesky"><td></td><td>
+       <strong>2by2cholesky</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#2by2cholesky"><code class="xref">2by2cholesky</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-3by3GE"><td></td><td>
+       <strong>3by3GE</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#3by3GE"><code class="xref">3by3GE</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-3by3cholesky"><td></td><td>
+       <strong>3by3cholesky</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#3by3cholesky"><code class="xref">3by3cholesky</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-Aortho"><td></td><td>
+       <strong>Aortho</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#Aortho"><code class="xref">Aortho</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-AorthoGramSchmidt"><td></td><td>
+       <strong>AorthoGramSchmidt</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#AorthoGramSchmidt"><code class="xref">AorthoGramSchmidt</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-CholCost"><td></td><td>
+       <strong>CholCost</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#CholCost"><code class="xref">CholCost</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-CholLA"><td></td><td>
+       <strong>CholLA</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#CholLA"><code class="xref">CholLA</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-Choluniqueness"><td></td><td>
+       <strong>Choluniqueness</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#Choluniqueness"><code class="xref">Choluniqueness</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-GE"><td></td><td>
+       <strong>GE</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#GE"><code class="xref">GE</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-GEcost"><td></td><td>
+       <strong>GEcost</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#GEcost"><code class="xref">GEcost</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-GramSchmidt"><td></td><td>
+       <strong>GramSchmidt</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#GramSchmidt"><code class="xref">GramSchmidt</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-HilbertMatrix"><td></td><td>
+       <strong>HilbertMatrix</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#HilbertMatrix"><code class="xref">HilbertMatrix</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-JacobiConverge"><td></td><td>
+       <strong>JacobiConverge</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-2.html#JacobiConverge"><code class="xref">JacobiConverge</code></a> <em>(bookchapter3-2)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-LU"><td></td><td>
+       <strong>LU</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#LU"><code class="xref">LU</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-LUSolveLE"><td></td><td>
+       <strong>LUSolveLE</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#LUSolveLE"><code class="xref">LUSolveLE</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-PALU"><td></td><td>
+       <strong>PALU</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#PALU"><code class="xref">PALU</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-PD"><td></td><td>
+       <strong>PD</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#PD"><code class="xref">PD</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-PD_properties"><td></td><td>
+       <strong>PD_properties</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#PD_properties"><code class="xref">PD_properties</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-PartialPivoting"><td></td><td>
+       <strong>PartialPivoting</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#PartialPivoting"><code class="xref">PartialPivoting</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-PartialPivoting2"><td></td><td>
+       <strong>PartialPivoting2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#PartialPivoting2"><code class="xref">PartialPivoting2</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-algo_ConjGrad1"><td></td><td>
+       <strong>algo_ConjGrad1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#algo_ConjGrad1"><code class="xref">algo_ConjGrad1</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-algo_ConjGrad2"><td></td><td>
+       <strong>algo_ConjGrad2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#algo_ConjGrad2"><code class="xref">algo_ConjGrad2</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-backsubcost"><td></td><td>
+       <strong>backsubcost</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#backsubcost"><code class="xref">backsubcost</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-chap1_def1"><td></td><td>
        <strong>chap1_def1</strong></td><td></td></tr>
@@ -1206,6 +1435,62 @@ title="Fullscreen mode"
        <td>
        <a href="bookchapter6-3.html#chap6_thm92"><code class="xref">chap6_thm92</code></a> <em>(bookchapter6-3)</em></td><td>
        <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-condition_number"><td></td><td>
+       <strong>condition_number</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#condition_number"><code class="xref">condition_number</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cost"><td></td><td>
+       <strong>cost</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#cost"><code class="xref">cost</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-gramschmidt_v1_2by2"><td></td><td>
+       <strong>gramschmidt_v1_2by2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#gramschmidt_v1_2by2"><code class="xref">gramschmidt_v1_2by2</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-gramschmidt_v1_3by3"><td></td><td>
+       <strong>gramschmidt_v1_3by3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#gramschmidt_v1_3by3"><code class="xref">gramschmidt_v1_3by3</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-innerproduct"><td></td><td>
+       <strong>innerproduct</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-3.html#innerproduct"><code class="xref">innerproduct</code></a> <em>(bookchapter3-3)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-permmat"><td></td><td>
+       <strong>permmat</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-1.html#permmat"><code class="xref">permmat</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-sdd"><td></td><td>
+       <strong>sdd</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter3-2.html#sdd"><code class="xref">sdd</code></a> <em>(bookchapter3-2)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>

@@ -183,6 +183,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -205,11 +225,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,12 +269,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+   6.2 Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-3.html">
-   Chapter 6–Approximation Theory
+   6.3 Orthogonal polynomials and least squares
   </a>
  </li>
 </ul>
@@ -823,17 +838,17 @@ convergence.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_6856</span><span class="o">/</span><span class="mf">3645725987.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_2176</span><span class="o">/</span><span class="mf">3645725987.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_6856/689667504.py</span> in <span class="ni">fixedpt</span><span class="nt">(g, pzero, eps, N)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_2176/689667504.py</span> in <span class="ni">fixedpt</span><span class="nt">(g, pzero, eps, N)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">while</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">6</span>         <span class="n">pone</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">pzero</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pone</span><span class="o">-</span><span class="n">pzero</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p is &#39;</span><span class="p">,</span> <span class="n">pone</span><span class="p">,</span> <span class="s1">&#39; and the iteration number is &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_6856/3645725987.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_2176/3645725987.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fixedpt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 
 <span class="ne">OverflowError</span>: (34, &#39;Result too large&#39;)

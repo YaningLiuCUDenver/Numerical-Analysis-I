@@ -183,6 +183,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -205,11 +225,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,12 +269,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+   6.2 Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-3.html">
-   Chapter 6–Approximation Theory
+   6.3 Orthogonal polynomials and least squares
   </a>
  </li>
 </ul>
@@ -473,7 +488,7 @@ the approximation</p>
 however, its inclusion is straightforward.</p>
 <p>For an example, let’s derive the two-dimensional Gauss-Legendre rule for the integral</p>
 <div class="math notranslate nohighlight" id="equation-multiint-1">
-<span class="eqno">(24)<a class="headerlink" href="#equation-multiint-1" title="Permalink to this equation">#</a></span>\[\int_{0}^{1}\int_{0}^{1}f(x,y)dydx\]</div>
+<span class="eqno">(31)<a class="headerlink" href="#equation-multiint-1" title="Permalink to this equation">#</a></span>\[\int_{0}^{1}\int_{0}^{1}f(x,y)dydx\]</div>
 <p>using two nodes for each axis. Note that each integral has to be transformed to
 <span class="math notranslate nohighlight">\((-1,1).\)</span> Start with the inner integral <span class="math notranslate nohighlight">\(\int_{0}^{1}f(x,y)dy\)</span> and use</p>
 <div class="amsmath math notranslate nohighlight">
@@ -490,7 +505,7 @@ t=2y-1, dt=2dy
 \[\begin{equation*}
 \frac{1}{2}\left(f\left(x,\frac{-1/\sqrt{3}+1}{2}\right)+f\left(x,\frac{1/\sqrt{3}+1}{2}\right)\right).
 \end{equation*}\]</div>
-<p>Substitute this approximation in <a class="reference internal" href="#equation-multiint-1">(24)</a> for the inner integral to get</p>
+<p>Substitute this approximation in <a class="reference internal" href="#equation-multiint-1">(31)</a> for the inner integral to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{0}^{1} \frac{1}{2}\left(f\left(x,\frac{-1/\sqrt{3}+1}{2}\right)+f\left(x,\frac{1/\sqrt{3}+1}{2}\right)\right) dx.
@@ -507,7 +522,7 @@ s=2x-1, ds=2dx
 \end{equation*}\]</div>
 <p>Apply the Gauss-Legendre rule again to get</p>
 <div class="math notranslate nohighlight" id="equation-compgaussresult">
-<span class="eqno">(25)<a class="headerlink" href="#equation-compgaussresult" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(32)<a class="headerlink" href="#equation-compgaussresult" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{1}{4}  \Biggl[ &amp; f\left(\frac{-1/\sqrt{3}+1}{2},\frac{-1/\sqrt{3}+1}{2}\right)+f\left(\frac{-1/\sqrt{3}+1}{2},\frac{1/\sqrt{3}+1}{2}\right) \nonumber \\
 &amp;+f\left(\frac{1/\sqrt{3}+1}{2},\frac{-1/\sqrt{3}+1}{2}\right)+f\left(\frac{1/\sqrt{3}+1}{2},\frac{1/\sqrt{3}+1}{2}\right)  \Biggr].
 \end{align}\end{split}\]</div>
@@ -533,7 +548,7 @@ rule for the same integral, <span class="math notranslate nohighlight">\(\int_{0
 \end{equation*}\]</div>
 <p>Apply Simpson’s rule again to this integral with <span class="math notranslate nohighlight">\(n=2\)</span> to obtain the final approximation:</p>
 <div class="math notranslate nohighlight" id="equation-compsimpresult">
-<span class="eqno">(26)<a class="headerlink" href="#equation-compsimpresult" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(33)<a class="headerlink" href="#equation-compsimpresult" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{1}{6} \Biggl[ \frac{1}{6} &amp;\biggl( f(0,0)+4f(0,0.5)+f(0,1)+4(f(0.5,0)+4f(0.5,0.5)+f(0.5,1)) \nonumber \\
 &amp;+f(1,0)+4f(1,0.5)+f(1,1) \biggr) \Biggr].
 \end{align}\end{split}\]</div>
@@ -549,7 +564,7 @@ rule for the same integral, <span class="math notranslate nohighlight">\(\int_{0
 \[\begin{equation*}
 \int_0^1 \int_0^1 \left(\frac{\pi}{2} \sin \pi x \right)\left(\frac{\pi}{2} \sin \pi y \right) dy dx.
 \end{equation*}\]</div>
-<p>This integral can be evaluated exactly, and its value is 1. It is used as a test integral for numerical quadrature rules. Evaluating Equations <a class="reference internal" href="#equation-compgaussresult">(25)</a> and <a class="reference internal" href="#equation-compsimpresult">(26)</a> with <span class="math notranslate nohighlight">\(f(x,y)= \left(\frac{\pi}{2} \sin \pi x \right)\left(\frac{\pi}{2} \sin \pi y \right)\)</span>, we obtain the approximations given in the table below:</p>
+<p>This integral can be evaluated exactly, and its value is 1. It is used as a test integral for numerical quadrature rules. Evaluating Equations <a class="reference internal" href="#equation-compgaussresult">(32)</a> and <a class="reference internal" href="#equation-compsimpresult">(33)</a> with <span class="math notranslate nohighlight">\(f(x,y)= \left(\frac{\pi}{2} \sin \pi x \right)\left(\frac{\pi}{2} \sin \pi y \right)\)</span>, we obtain the approximations given in the table below:</p>
 <table class="table">
 <colgroup>
 <col style="width: 33%" />
@@ -591,10 +606,10 @@ words,</p>
 For the two-dimensional integral we discussed before, the Monte Carlo
 estimate is</p>
 <div class="math notranslate nohighlight" id="equation-mc-est">
-<span class="eqno">(27)<a class="headerlink" href="#equation-mc-est" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(34)<a class="headerlink" href="#equation-mc-est" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}\int_{c}^{d}f(x,y)dydx\approx\frac{(b-a)(d-c)}{n}\sum_{i=1}^{n}f(a+(b-a)x_{i},c+(d-c)y_{i})
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_{i},y_{i}\)</span> are pseudorandom numbers from <span class="math notranslate nohighlight">\((0,1)\)</span>. In Python, the function <strong>np.random.rand()</strong> generates a pseudorandom number from the uniform distribution between 0 and 1. The following code takes the endpoints of the intervals <span class="math notranslate nohighlight">\(a,b,c,d\)</span>, and the number of nodes <span class="math notranslate nohighlight">\(n\)</span> (which is called the sample size in the Monte Carlo literature) as inputs, and returns the estimate for the integral using Equation <a class="reference internal" href="#equation-mc-est">(27)</a>.</p>
+<p>where <span class="math notranslate nohighlight">\(x_{i},y_{i}\)</span> are pseudorandom numbers from <span class="math notranslate nohighlight">\((0,1)\)</span>. In Python, the function <strong>np.random.rand()</strong> generates a pseudorandom number from the uniform distribution between 0 and 1. The following code takes the endpoints of the intervals <span class="math notranslate nohighlight">\(a,b,c,d\)</span>, and the number of nodes <span class="math notranslate nohighlight">\(n\)</span> (which is called the sample size in the Monte Carlo literature) as inputs, and returns the estimate for the integral using Equation <a class="reference internal" href="#equation-mc-est">(34)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -623,7 +638,7 @@ estimate is</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0066108072844238
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0068231298498278
 </pre></div>
 </div>
 </div>
@@ -640,7 +655,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 </figcaption>
 </figure>
 <div class="proof example admonition" id="chap4_exa81">
-<p class="admonition-title"><span class="caption-number">Example 34 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 49 </span></p>
 <section class="example-content" id="proof-content">
 <p><span id="id2">Capstick and Keister [<a class="reference internal" href="#id14" title="S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. Journal of Computational Physics, 123:267-273, 1996.">1996</a>]</span> discuss some high dimensional test integrals, some with analytical solutions, motivated by physical applications such as the calculation of quantum mechanical matrix elements in atomic, nuclear, and particle physics. One of the integrals with a known solution is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -649,7 +664,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(||\boldsymbol{t}||=(t_1^2+\dotsc +t_s^2)^{1/2}\)</span>. This integral can be transformed to an integral over the <span class="math notranslate nohighlight">\(s\)</span>-dimensional unit cube as</p>
 <div class="math notranslate nohighlight" id="equation-capstick-test">
-<span class="eqno">(28)<a class="headerlink" href="#equation-capstick-test" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(35)<a class="headerlink" href="#equation-capstick-test" title="Permalink to this equation">#</a></span>\[\begin{align}
 \pi^{s/2} \int_{(0,1)^s} \cos \left[ \left( \frac{(F^{-1}(x_1))^2+\dotsc +(F^{-1}(x_s))^2}{2} \right)^{1/2} \right] dx_1 dx_2 \dotsb dx_s
 \end{align}\]</div>
 </section>
@@ -658,7 +673,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 \[\begin{equation*}
 F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-s^2/2}ds.
 \end{equation*}\]</div>
-<p>We will estimate the integral <a class="reference internal" href="#equation-capstick-test">(28)</a> by Monte Carlo as</p>
+<p>We will estimate the integral <a class="reference internal" href="#equation-capstick-test">(35)</a> by Monte Carlo as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \frac{\pi^{s/2}}{n} \sum_{i=1}^n \cos \left[ \left( \frac{(F^{-1}(x^{(i)}_1))^2+\dotsc +(F^{-1}(x^{(i)}_s))^2}{2} \right)^{1/2} \right]
@@ -769,21 +784,28 @@ results.</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_32984</span><span class="o">/</span><span class="mf">1912928011.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_26232</span><span class="o">/</span><span class="mf">1912928011.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">error</span> <span class="o">=</span> <span class="p">[</span><span class="n">relerror</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">]</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_32984/1912928011.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_26232/1912928011.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">error</span> <span class="o">=</span> <span class="p">[</span><span class="n">relerror</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">]</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_32984/3218861989.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_26232/3218861989.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">relerror</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">mc</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="mf">1.356914</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.356914</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_32984/3735983042.py</span> in <span class="ni">mc</span><span class="nt">(s, n)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_26232/3735983042.py</span> in <span class="ni">mc</span><span class="nt">(s, n)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="ne">----&gt; </span><span class="mi">6</span>             <span class="nb">sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">invNormal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()))</span><span class="o">**</span><span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">est</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="nb">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">est</span><span class="o">/</span><span class="n">n</span>
+
+<span class="nn">~\AppData\Local\Temp/ipykernel_26232/1158285544.py</span> in <span class="ni">invNormal</span><span class="nt">(u)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> 
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">u</span><span class="o">-</span><span class="mf">0.5</span>
+<span class="ne">---&gt; </span><span class="mi">22</span>     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.42</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="n">r</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>         <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="p">(((</span><span class="n">a3</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">a2</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">a1</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">a0</span><span class="p">)</span><span class="o">/</span><span class="p">((((</span><span class="n">b3</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">b2</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">b1</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="n">b0</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -802,7 +824,7 @@ results.</p>
 <figure class="align-default" id="mc-capstick">
 <a class="reference internal image-reference" href="_images/mc_capstick.png"><img alt="_images/mc_capstick.png" src="_images/mc_capstick.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Monte Carlo relative error for the integral <a class="reference internal" href="#equation-capstick-test">(28)</a>.</span><a class="headerlink" href="#mc-capstick" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Monte Carlo relative error for the integral <a class="reference internal" href="#equation-capstick-test">(35)</a>.</span><a class="headerlink" href="#mc-capstick" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="docutils container" id="id4">

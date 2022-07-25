@@ -183,6 +183,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -205,11 +225,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,12 +269,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+   6.2 Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-3.html">
-   Chapter 6–Approximation Theory
+   6.3 Orthogonal polynomials and least squares
   </a>
  </li>
 </ul>
@@ -592,7 +607,7 @@ spaced data.</p>
 </div>
 </div>
 <p>We observe that as the degree of the interpolating polynomial increases, the polynomial has large oscillations toward the end points of the interval. In fact, it can be shown that for any <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(3.64&lt;|x|&lt;5, \sup_{n\geq 0} |f(x)-p_n(x)|=\infty\)</span>, where <span class="math notranslate nohighlight">\(f\)</span> is Runge’s function.</p>
-<p>This troublesome behavior of high degree interpolating polynomials improves significantly, if we consider data with <span class="math notranslate nohighlight">\(x\)</span>-coordinates that are \textbf{not} equally spaced. Consider the interpolation error of <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 15</a>:</p>
+<p>This troublesome behavior of high degree interpolating polynomials improves significantly, if we consider data with <span class="math notranslate nohighlight">\(x\)</span>-coordinates that are \textbf{not} equally spaced. Consider the interpolation error of <a class="reference internal" href="bookchapter4-1.html#chap3_thm51">Theorem 22</a>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 f(x)-p_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})(x-x_{1})\cdots(x-x_{n}).
@@ -603,7 +618,7 @@ f(x)-p_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})(x-x_{1})\cdots(x-x_{n}).
 <p>The following theorem shows the similarity between divided differences
 and derivatives.</p>
 <div class="proof theorem admonition" id="chap3_thm58">
-<p class="admonition-title"><span class="caption-number">Theorem 17 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 24 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f\in C^{n}[a,b]\)</span> and
 <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> are distinct numbers in <span class="math notranslate nohighlight">\([a,b].\)</span> Then there
@@ -615,19 +630,19 @@ f[x_{0},...,x_{n}]=\frac{f^{(n)}(\xi)}{n!}.
 </section>
 </div><p>To prove this theorem, we need the generalized Rolle’s theorem.</p>
 <div class="proof theorem admonition" id="chap3_thm59">
-<p class="admonition-title"><span class="caption-number">Theorem 18 </span> (Rolle’s theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 25 </span> (Rolle’s theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f\)</span> is a differentiable function on <span class="math notranslate nohighlight">\((a,b).\)</span> If <span class="math notranslate nohighlight">\(f(a)=f(b),\)</span>
 then there exists <span class="math notranslate nohighlight">\(c\in(a,b)\)</span> such that <span class="math notranslate nohighlight">\(f'(c)=0\)</span>.</p>
 </section>
 </div><div class="proof theorem admonition" id="chap3_thm60">
-<p class="admonition-title"><span class="caption-number">Theorem 19 </span> (Generalized Rolle’s theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 26 </span> (Generalized Rolle’s theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f\)</span> has <span class="math notranslate nohighlight">\(n\)</span> derivatives on <span class="math notranslate nohighlight">\((a,b).\)</span> If <span class="math notranslate nohighlight">\(f(x)=0\)</span> at <span class="math notranslate nohighlight">\((n+1)\)</span>
 distinct numbers <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\in[a,b]\)</span>, then there exists
 <span class="math notranslate nohighlight">\(c\in(a,b)\)</span> such that <span class="math notranslate nohighlight">\(f^{(n)}(c)=0\)</span>.</p>
 </section>
-</div><p><em>Proof of <a class="reference internal" href="#chap3_thm58">Theorem 17</a></em>
+</div><p><em>Proof of <a class="reference internal" href="#chap3_thm58">Theorem 24</a></em>
 Consider the function <span class="math notranslate nohighlight">\(g(x)=p_{n}(x)-f(x).\)</span> Observe that <span class="math notranslate nohighlight">\(g(x_{i})=0\)</span>
 for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> From generalized Rolle’s theorem, there exists
 <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span> such that <span class="math notranslate nohighlight">\(g^{(n)}(\xi)=0,\)</span> which implies</p>

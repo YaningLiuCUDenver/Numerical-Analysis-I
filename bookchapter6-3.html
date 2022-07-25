@@ -182,6 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -204,11 +224,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -516,7 +531,7 @@ vector spaces, the latter a subspace of the former, under the usual
 operations of function addition and multiplying by a scalar. An inner
 product on this space is defined as follows: given <span class="math notranslate nohighlight">\(f,g\in C^0[a,b]\)</span></p>
 <div class="math notranslate nohighlight" id="equation-inner-pr-def">
-<span class="eqno">(46)<a class="headerlink" href="#equation-inner-pr-def" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(53)<a class="headerlink" href="#equation-inner-pr-def" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\langle f,g\right\rangle =\int_{a}^{b}w(x)f(x)g(x)dx
 \end{equation}\]</div>
 <p>and the norm of a vector under this inner product is</p>
@@ -532,12 +547,12 @@ function with the following properties:</p>
 <li><p><span class="math notranslate nohighlight">\(\left\langle \beta f,g\right\rangle =\beta\left\langle f,g\right\rangle \)</span> for all real numbers <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\left\langle f_{1}+f_{2},g\right\rangle =\left\langle f_{1},g\right\rangle +\left\langle f_{2},g\right\rangle \)</span></p></li>
 </ol>
-<p>The mysterious function <span class="math notranslate nohighlight">\(w(x)\)</span> in <a class="reference internal" href="#equation-inner-pr-def">(46)</a> is called
+<p>The mysterious function <span class="math notranslate nohighlight">\(w(x)\)</span> in <a class="reference internal" href="#equation-inner-pr-def">(53)</a> is called
 a <strong>weight function</strong>. Its job is to assign different importance to different
 regions of the interval <span class="math notranslate nohighlight">\([a,b]\)</span>. The weight function is not arbitrary;
 it has to satisfy some properties.</p>
 <div class="proof definition admonition" id="chap6_def87">
-<p class="admonition-title"><span class="caption-number">Definition 11 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 17 </span></p>
 <section class="definition-content" id="proof-content">
 <p>A nonnegative function <span class="math notranslate nohighlight">\(w(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> is called a weight function
 if</p>
@@ -559,7 +574,7 @@ is written as a linear combination of orthogonal basis polynomials:
 <p>We need some definitions and theorems to continue with our quest.
 Let’s start with a formal definition of orthogonal functions.</p>
 <div class="proof definition admonition" id="chap6_def88">
-<p class="admonition-title"><span class="caption-number">Definition 12 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 18 </span></p>
 <section class="definition-content" id="proof-content">
 <p>Functions <span class="math notranslate nohighlight">\(\{\phi_{0},\phi_{1},...,\phi_{n}\}\)</span> are orthogonal for
 the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and with respect to the weight function <span class="math notranslate nohighlight">\(w(x)\)</span>
@@ -577,7 +592,7 @@ are called orthonormal.</p>
 </div><p>How can we find an orthogonal or orthonormal basis for our vector
 space? Gram-Schmidt process from linear algebra provides the answer.</p>
 <div class="proof theorem admonition" id="chap6_def89">
-<p class="admonition-title"><span class="caption-number">Theorem 26 </span> (Gram-Schmidt process)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 33 </span> (Gram-Schmidt process)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given a weight function <span class="math notranslate nohighlight">\(w(x)\)</span>, the Gram-Schmidt process constructs
 a unique set of polynomials <span class="math notranslate nohighlight">\(\phi_{0}(x),\phi_{1}(x),...,\phi_{n}(x)\)</span>
@@ -594,7 +609,7 @@ where the degree of <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</
 </div><p>Let’s discuss two orthogonal polynomials that can be obtained from
 the Gram-Schmidt process using different weight functions.</p>
 <div class="proof example admonition" id="chap6_exa90">
-<p class="admonition-title"><span class="caption-number">Example 40 </span> (Legendre Polynomials)</p>
+<p class="admonition-title"><span class="caption-number">Example 55 </span> (Legendre Polynomials)</p>
 <section class="example-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(w(x)\equiv1\)</span> and <span class="math notranslate nohighlight">\([a,b]=[-1,1]\)</span>, the first four polynomials
 obtained from the Gram-Schmidt process, when the process is applied to the monomials <span class="math notranslate nohighlight">\(1,x,x^2,x^3,...\)</span>, are:</p>
@@ -625,7 +640,7 @@ L_{n+1}(x)=\frac{2n+1}{n+1}xL_{n}(x)-\frac{n}{n+1}L_{n-1}(x),
 </div><p><strong>Exercise 6.3-1</strong></p>
 <p>Show, by direct integration, that the Legendre polynomials <span class="math notranslate nohighlight">\(L_1(x)\)</span> and <span class="math notranslate nohighlight">\(L_2(x)\)</span> are orthogonal.</p>
 <div class="proof example admonition" id="chap6_exa91">
-<p class="admonition-title"><span class="caption-number">Example 41 </span> (Chebyshev polynomials)</p>
+<p class="admonition-title"><span class="caption-number">Example 56 </span> (Chebyshev polynomials)</p>
 <section class="example-content" id="proof-content">
 <p>If we take <span class="math notranslate nohighlight">\(w(x)=(1-x^{2})^{-1/2}\)</span> and <span class="math notranslate nohighlight">\([a,b]=[-1,1]\)</span>, and again
 drop the orthonormal requirement in Gram-Schmidt, we obtain the following
@@ -662,7 +677,7 @@ a linearly independent set of functions, and any polynomial from <span class="ma
 can be written as a unique linear combination of them. These statements
 follow from the following theorem, which we will leave unproved.</p>
 <div class="proof theorem admonition" id="chap6_thm92">
-<p class="admonition-title"><span class="caption-number">Theorem 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 34 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(\phi_{j}(x)\)</span> is a polynomial of degree <span class="math notranslate nohighlight">\(j\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n\)</span>, then <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are linearly independent.</p></li>
@@ -698,7 +713,7 @@ so that the last summation in the above equation, <span class="math notranslate 
 solved the least squares problem! The polynomial that minimizes the
 error <span class="math notranslate nohighlight">\(E\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-least-sq-poly-orthonormal">
-<span class="eqno">(47)<a class="headerlink" href="#equation-least-sq-poly-orthonormal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(54)<a class="headerlink" href="#equation-least-sq-poly-orthonormal" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_{j}=\left\langle \phi_{j},\phi_{j}\right\rangle\)</span>.
@@ -710,11 +725,11 @@ E=\textcolor{blue}{\left\Vert f\right\Vert ^{2}-\sum_{j=0}^{n}\frac{\left\langle
 <p>If the polynomials <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are orthonormal, then
 these equations simplify by setting <span class="math notranslate nohighlight">\(\alpha_{j}=1\)</span>.</p>
 <p>We will appreciate the ease at which <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> can be computed using
-this approach, via formula <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a>,
-as opposed to solving the normal equations of <a class="reference internal" href="bookchapter6-2.html#equation-cont-normal">(45)</a>
+this approach, via formula <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a>,
+as opposed to solving the normal equations of <a class="reference internal" href="bookchapter6-2.html#equation-cont-normal">(52)</a>
 when we discuss some examples. But first let’s see the other advantage
 of this approach: how <span class="math notranslate nohighlight">\(P_{n+1}(x)\)</span> can be computed from <span class="math notranslate nohighlight">\(P_{n}(x)\)</span>.
-In Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a>, replace <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n+1\)</span> to get</p>
+In Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a>, replace <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n+1\)</span> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 P_{n+1}(x)  =\sum_{j=0}^{n+1}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)&amp;=\underbrace{\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)}_{P_n(x)}+\frac{\left\langle f,\phi_{n+1}\right\rangle }{\alpha_{n+1}}\phi_{n+1}(x)\\
@@ -722,20 +737,20 @@ P_{n+1}(x)  =\sum_{j=0}^{n+1}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha
 \end{align*}\]</div>
 <p>which is a simple recursion that links <span class="math notranslate nohighlight">\(P_{n+1}\)</span> to <span class="math notranslate nohighlight">\(P_{n}\)</span>.</p>
 <div class="proof example admonition" id="chap6_exa93">
-<p class="admonition-title"><span class="caption-number">Example 42 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 57 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the least squares polynomial approximation of degree three to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
 on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Legendre polynomials.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>Put <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a> and let <span class="math notranslate nohighlight">\(\phi_j\)</span> be <span class="math notranslate nohighlight">\(L_j\)</span> to get</p>
+<p>Put <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a> and let <span class="math notranslate nohighlight">\(\phi_j\)</span> be <span class="math notranslate nohighlight">\(L_j\)</span> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 P_{3}(x)&amp;
 =\frac{\left\langle f,L_{0}\right\rangle }{\alpha_{0}}L_{0}(x)+\frac{\left\langle f,L_{1}\right\rangle }{\alpha_{1}}L_{1}(x)+\frac{\left\langle f,L_{2}\right\rangle }{\alpha_{2}}L_{2}(x)+\frac{\left\langle f,L_{3}\right\rangle }{\alpha_{3}}L_{3}(x)\\
 &amp;=\frac{\left\langle e^{x},1\right\rangle }{2}+\frac{\left\langle e^{x},x\right\rangle }{2/3}x+\frac{\left\langle e^{x},\frac{3}{2}x^{2}-\frac{1}{2}\right\rangle }{2/5}\left(\frac{3}{2}x^{2}-\frac{1}{2}\right)+\frac{\left\langle e^{x},\frac{5}{2}x^{3}-\frac{3}{2}x\right\rangle }{2/7}\left(\frac{5}{2}x^{3}-\frac{3}{2}x\right),
 \end{align*}\]</div>
-<p>where we used the fact that <span class="math notranslate nohighlight">\(\alpha_j=\langle L_j, L_j \rangle = \frac{2}{2n+1}\)</span> (see <a class="reference internal" href="#chap6_exa90">Example 40</a>). We will compute the inner products, which are definite integrals on
+<p>where we used the fact that <span class="math notranslate nohighlight">\(\alpha_j=\langle L_j, L_j \rangle = \frac{2}{2n+1}\)</span> (see <a class="reference internal" href="#chap6_exa90">Example 55</a>). We will compute the inner products, which are definite integrals on
 <span class="math notranslate nohighlight">\((-1,1)\)</span>, using the five-node Gauss-Legendre quadrature we discussed in the
 previous chapter. The results rounded to four digits are:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -752,18 +767,18 @@ P_{3}(x) &amp; =\frac{2.35}{2}+\frac{3(0.7358)}{2}x+\frac{5(0.1431)}{2}\left(\fr
  &amp; =0.1761x^{3}+0.5366x^{2}+0.9980x+0.9961.
 \end{align*}\]</div>
 <div class="proof example admonition" id="chap6_exa94">
-<p class="admonition-title"><span class="caption-number">Example 43 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 58 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the least squares polynomial approximation of degree three to <span class="math notranslate nohighlight">\(f(x)=e^{x}\)</span>
 on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Chebyshev polynomials.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>As in the previous example solution, we take <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(47)</a></p>
+<p>As in the previous example solution, we take <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 P_{3}(x)=\sum_{j=0}^{3}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x),
 \end{equation*}\]</div>
-<p>but now <span class="math notranslate nohighlight">\(\phi_j\)</span> and <span class="math notranslate nohighlight">\(\alpha_j\)</span> will be replaced by <span class="math notranslate nohighlight">\(T_j\)</span>, the Chebyshev polynomials, and its corresponding constant; see  <a class="reference internal" href="#chap6_exa91">Example 41</a>. We have</p>
+<p>but now <span class="math notranslate nohighlight">\(\phi_j\)</span> and <span class="math notranslate nohighlight">\(\alpha_j\)</span> will be replaced by <span class="math notranslate nohighlight">\(T_j\)</span>, the Chebyshev polynomials, and its corresponding constant; see  <a class="reference internal" href="#chap6_exa91">Example 56</a>. We have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 P_{3}(x)=
@@ -855,7 +870,7 @@ P_{3}(x) &amp; =\frac{3.977}{\pi}+\frac{3.55}{\pi}x+\frac{0.853}{\pi}(2x^{2}-1)+
 </section>
 <section id="least-squares-using-legendre-polynomials">
 <h3>Least-squares using Legendre polynomials<a class="headerlink" href="#least-squares-using-legendre-polynomials" title="Permalink to this headline">#</a></h3>
-<p>In <a class="reference internal" href="#chap6_exa93">Example 42</a>, we computed the least squares
+<p>In <a class="reference internal" href="#chap6_exa93">Example 57</a>, we computed the least squares
 approximation to <span class="math notranslate nohighlight">\(e^x\)</span> using Legendre polynomials. The inner products
 were computed using the five-node Gauss-Legendre rule below.</p>
 <div class="cell docutils container">
@@ -1002,7 +1017,7 @@ shifted from <span class="math notranslate nohighlight">\(n+1\)</span> to <span 
 </section>
 <section id="least-squares-using-chebyshev-polynomials">
 <h3>Least squares using Chebyshev polynomials<a class="headerlink" href="#least-squares-using-chebyshev-polynomials" title="Permalink to this headline">#</a></h3>
-<p>In <a class="reference internal" href="#chap6_exa94">Example 43</a>, we computed the least squares
+<p>In <a class="reference internal" href="#chap6_exa94">Example 58</a>, we computed the least squares
 approximation to <span class="math notranslate nohighlight">\(e^x\)</span> using Chebyshev polynomials. The inner
 products, after a transformation, were computed using the composite
 Simpson rule. Below is the Python code for the composite Simpson rule we
@@ -1024,7 +1039,7 @@ discussed in the previous chapter.</p>
 </div>
 </div>
 </div>
-<p>The integrals in <a class="reference internal" href="#chap6_exa94">Example 43</a> were computed using the
+<p>The integrals in <a class="reference internal" href="#chap6_exa94">Example 58</a> were computed using the
 composite Simpson rule with <span class="math notranslate nohighlight">\(n=20\)</span>. For example, the second integral
 <span class="math notranslate nohighlight">\(\left\langle e^{x},T_{1}\right\rangle =\int_{0}^{\pi}e^{\cos\theta}\cos\theta d\theta\)</span>
 is computed as:</p>
@@ -1049,7 +1064,7 @@ for any <span class="math notranslate nohighlight">\(f\)</span> and <span class=
 The coefficients are returned as the output of the first function.</p>
 <p>The integral <span class="math notranslate nohighlight">\(\left\langle f,T_{j}\right\rangle\)</span> is transformed to the
 integral <span class="math notranslate nohighlight">\(\int_0^\pi f(\cos \theta)\cos(j\theta)d\theta\)</span>, similar to
-the derivation in <a class="reference internal" href="#chap6_exa94">Example 43</a>, and then the
+the derivation in <a class="reference internal" href="#chap6_exa94">Example 58</a>, and then the
 transformed integral is computed using the composite Simpson’s rule by
 <strong>polyChebCoeff</strong>.</p>
 <div class="cell docutils container">

@@ -1,0 +1,1760 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Gaussian elimination &#8212; First Semester in Numerical Analysis with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Iterative methods for solving linear systems" href="bookchapter3-2.html" />
+    <link rel="prev" title="Chapter 3 Solutions to linear systems" href="bookchapter3-0.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="bookintro.html">
+                    Welcome to First Semester in Numerical Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookpreface.html">
+   Preface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-0.html">
+   Chapter 1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-1.html">
+   1.1 Review of Calculus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-2.html">
+   1.2 Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter1-3.html">
+   1.3 Computer arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-0.html">
+   Chapter 2 Solutions of equations: Root-finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-1.html">
+   2.1 Error analysis for iterative methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-2.html">
+   2.2 Bisection method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-3.html">
+   2.3 Newton’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-4.html">
+   2.4 Secant method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-5.html">
+   2.5 Muller’s method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-6.html">
+   2.6 Fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter2-7.html">
+   2.7 High-order fixed-point iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-0.html">
+   Chapter 4 Interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-1.html">
+   4.1 Polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-2.html">
+   4.2 High degree polynomial interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-3.html">
+   4.3 Hermite interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter4-4.html">
+   4.4 Piecewise polynomials: spline interpolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-1.html">
+   5.1 Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-2.html">
+   5.2 Composite Newton-Cotes formulas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-3.html">
+   5.3 Gaussian quadrature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-4.html">
+   5.4 Multiple integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-5.html">
+   5.5 Improper integrals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-6.html">
+   5.6 Numerical differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-0.html">
+   Chapter 6 Approximation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-1.html">
+   6.1 Discrete least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-2.html">
+   6.2 Continuous least squares
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter6-3.html">
+   6.3 Orthogonal polynomials and least squares
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter3-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bookchapter3-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-cost-of-gaussian-elimination">
+   Computational cost of Gaussian elimination
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lu-factorization">
+   LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-elimination-with-partial-pivoting">
+   Gaussian elimination with partial pivoting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-pivoting">
+     Partial Pivoting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pa-lu-factorization">
+   PA=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-linear-equations-with-pa-lu-factorization">
+   Solving linear equations with PA=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-pivoting-and-paq-lu-factorization">
+   Full pivoting and PAQ=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#condition-number">
+   Condition number
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Gaussian elimination</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-cost-of-gaussian-elimination">
+   Computational cost of Gaussian elimination
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lu-factorization">
+   LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-elimination-with-partial-pivoting">
+   Gaussian elimination with partial pivoting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-pivoting">
+     Partial Pivoting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pa-lu-factorization">
+   PA=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-linear-equations-with-pa-lu-factorization">
+   Solving linear equations with PA=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-pivoting-and-paq-lu-factorization">
+   Full pivoting and PAQ=LU factorization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#condition-number">
+   Condition number
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-elimination">
+<h1>Gaussian elimination<a class="headerlink" href="#gaussian-elimination" title="Permalink to this headline">#</a></h1>
+<p>Recall in a linear algebra course that a system of linear equations can be solved by three types of elementary row operations (ERO）:</p>
+<ol class="simple">
+<li><p>Exchange two rows</p></li>
+<li><p>Multiply a row by a nonzero constant</p></li>
+<li><p>Add a multiple of a row to another row</p></li>
+</ol>
+<p>None of the ERO will change the solution to the linear system.</p>
+<p>Now we use a couple of examples to show how linear systems can be solved with ERO.</p>
+<div class="proof example admonition" id="GE">
+<p class="admonition-title"><span class="caption-number">Example 18 </span></p>
+<section class="example-content" id="proof-content">
+<p>Solve the following linear system by (naive) Gaussian Elimination:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2x + 3y &amp;= 8 \\
+3x - 4y &amp;= -5
+\end{align*}\]</div>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>We use matrix form and start with the augmented matrix:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; { |} &amp; {8} \\ {3} &amp; {-4} &amp; { |} &amp; {-5}\end{array}\right] &amp;\rightarrow R_2=R_2-\frac{3}{2}R_1 \rightarrow\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {|} &amp; {8} \\ {0} &amp; {-\frac{17}{2}} &amp; {|} &amp; {-\frac{34}{2}}\end{array}\right]\\
+ &amp;\rightarrow R_2=R_2/\left(-\frac{17}{2}\right) \rightarrow \left[\begin{array}{rrrr}{1} &amp; {1} &amp; {|} &amp; {3} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\
+ &amp;\rightarrow R_1=R_1-R_2 \rightarrow \left[\begin{array}{rrrr}{1} &amp; {0} &amp; {|} &amp; {1} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right]
+\end{align*}\]</div>
+<p>Here the notation for the first ERO means multiplying the first row by <span class="math notranslate nohighlight">\(\frac{3}{2}\)</span> and subtract it from the second row (or equivalently, multiplying the first row by <span class="math notranslate nohighlight">\(-\frac{3}{2}\)</span> and add it to the second row), the second ERO means dividing the second row by <span class="math notranslate nohighlight">\(-\frac{17}{2}\)</span>, and the third means subtracting the second row from the first (or multiplying the second row by <span class="math notranslate nohighlight">\(-1\)</span> and add it to the first row.</p>
+<p>The resulting linear system is in reduced echelon form from which one can directly read the solution:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+x_1 = 1, \, x_2 = 2
+\end{equation*}\]</div>
+<p>Now we look at a <span class="math notranslate nohighlight">\(3\times 3\)</span> system.</p>
+<div class="proof example admonition" id="3by3GE">
+<p class="admonition-title"><span class="caption-number">Example 19 </span></p>
+<section class="example-content" id="proof-content">
+<p>Solve the following linear system by (naive) Gaussian Elimination:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2x + 3y -z &amp;= -3 \\
+4x - 2y +3z &amp;= 12 \\
+2x -y + 2z &amp;= 7
+\end{align*}\]</div>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>In matrix form, the system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; { |} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right]
+\end{equation*}\]</div>
+<p>Performing Gaussian Elimination:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right]
+\end{align*}\]</div>
+<p>So the equivalent system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*} 
+2x+3 y-z &amp;=-3 \\
+-8 y +5z &amp;=18 \\
+\frac{1}{2} z &amp;=1
+\end{align*}\]</div>
+<p>The solution is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+x_1 = 1, \, x_2 = -1, \, x_3 =2
+\end{equation*}\]</div>
+<p>Gaussian elimination involes identifying a pivot position (the <span class="math notranslate nohighlight">\((i,i)\)</span> poisition on the diagonal) at each step, multiplying the row where pivot is by a separate factor, and subtract it from each row below. Note that no zeros were encountered in the Gaussian elimiation processes in the two examples above, and hence such Gaussian elimination is called “naive”. In addition, if echelon form, instead of reduced echelon form, is obtained from Gaussian elimination, a <strong>back substitution</strong> algorithm is needed to solve the upper-triangular system for <span class="math notranslate nohighlight">\(x\)</span>’s from bottom to top. The back substitution algorithm solves for <span class="math notranslate nohighlight">\(x_n\)</span> from the last equation, <span class="math notranslate nohighlight">\(x_{n-1}\)</span> from the second to last equation, and all the way up, until <span class="math notranslate nohighlight">\(x_1\)</span> is solved for from the first equation. The following code performs back subsitution for an upper triangular system, and the solution to the system is stored in place in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">back_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Backward substitution</span>
+<span class="sd">    The right hand side b is changed in place to store the solution</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    b: the right hand side of size n</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the shape of the coefficient matrix does not match the size of the RHS&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+     
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following Python function performs Gaussian elimination, where the final upper triangular matrix is stored in <span class="math notranslate nohighlight">\(A\)</span>, and the final right hand side is stored in <span class="math notranslate nohighlight">\(b\)</span>, so that additional storage is not needed. However, if the original coefficient matrix and righ hand side are needed later, one should make a copy of them before calling the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GaussianElim</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gaussian Elimination without pivoting. </span>
+<span class="sd">    The coefficient matrix A and the right hand side b are modified in place.</span>
+<span class="sd">    Input:</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    b: the right hand side of size n    </span>
+<span class="sd">    Return:</span>
+<span class="sd">    None. The solution is stored in b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the shape of the coefficient matrix does not match the size of the RHS&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+     
+    <span class="c1"># We hard code the epsilon here. It can be an input parameter.</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-5</span> 
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: zero pivot encountered!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># The multiplier</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    
+    <span class="c1"># No need to return. Both A and b are changed in place</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now combined with back subsitution, a linear system can be solved. We apply the code to the linear system in Example \ref{example:3by3GE}.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solve the linear system: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="s1">&#39;x = &#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">GaussianElim</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">back_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solution is &#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solve the linear system: 
+[[ 2.  3. -1.]
+ [ 4. -2.  3.]
+ [ 2. -1.  2.]] x =  [-3 12  7]
+The solution is  [ 1 -1  2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code produces the same results as we obtained analytically.</p>
+<section id="computational-cost-of-gaussian-elimination">
+<h2>Computational cost of Gaussian elimination<a class="headerlink" href="#computational-cost-of-gaussian-elimination" title="Permalink to this headline">#</a></h2>
+<p>We now determine the costs of Gaussian elimination and the subsequent back substitution.</p>
+<div class="proof theorem admonition" id="GEcost">
+<p class="admonition-title"><span class="caption-number">Theorem 13 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The cost of Gaussian elimination for an <span class="math notranslate nohighlight">\(n\times n\)</span> linear system is <span class="math notranslate nohighlight">\(O\left(\frac{2}{3}n^3\right)\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For the general linear system:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left[\begin{array}{ccccc}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}} \\ {\vdots} &amp; {\vdots} &amp; {\ldots} &amp; {\vdots} &amp; { |} &amp; {\vdots} \\ {a_{n 1}} &amp; {a_{n 2}} &amp; {\dots} &amp; {a_{n n}} &amp; { |} &amp; {b_{n}}\end{array}\right]
+\end{equation*}\]</div>
+<p>Note in the first step, only the first two rows are involved:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{llllll}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}}\end{array}
+\end{equation*}\]</div>
+<p>The two rows are changed to</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{llll}
+{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ 
+{0} &amp; {a_{22}-\frac{a_{21}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{2 n}-\frac{a_{21}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{2}-\frac{a_{21}}{a_{11}} b_{1}}
+\end{array}
+\end{equation*}\]</div>
+<p>This involves <span class="math notranslate nohighlight">\(1\)</span> divison (<span class="math notranslate nohighlight">\(a_{21}/a_{11}\)</span>), <span class="math notranslate nohighlight">\(n\)</span> multiplications and <span class="math notranslate nohighlight">\(n\)</span> additions. The same number of operations are needed for the other rows to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{array}{llll}
+{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ 
+{\vdots} &amp; {\vdots} &amp; {\dots} &amp; {\vdots} &amp; { |} &amp; {\vdots} \\
+{0} &amp; {a_{i2}-\frac{a_{i1}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{i n}-\frac{a_{i1}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{i}-\frac{a_{i1}}{a_{11}} b_{1}}
+\end{array}
+\end{equation*}\]</div>
+<p>So to eliminate the first column, the total number of operations is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+(2n+1)(n-1)
+\end{equation*}\]</div>
+<p>Similarly, to eliminate the second column (make <span class="math notranslate nohighlight">\(a_{i2}, i&gt;2\)</span> zero), for each row, the total number of operations involve <span class="math notranslate nohighlight">\(1\)</span> division, <span class="math notranslate nohighlight">\(n-1\)</span> multiplications, and <span class="math notranslate nohighlight">\(n-1\)</span> additions.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+(2(n-1)+1)(n-2)
+\end{equation*}\]</div>
+<p>Repeat this for column <span class="math notranslate nohighlight">\(3\)</span> to column <span class="math notranslate nohighlight">\(n\)</span>. The total number of operations is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;(2n+1)(n-1) + (2(n-1)+1)(n-2) + (2(n-2)+1)(n-3)+\cdots+(2(n-(n-2))+1)(n-(n-1)) \\
+&amp;= (2(n-1)+3)(n-1) + (2(n-2)+3)(n-2) + (2(n-3)+3)(n-3)+\cdots+(2(n-(n-1))+3)(n-(n-1)) \\
+&amp;= \sum_{j=1}^{n-1} (2(n-j)+3)(n-j) = \sum_{j=1}^{n-1} (2n^2+3n)-(4n+3)j+2j^2 \\
+&amp;= (2n^2+3n)(n-1) - (4n+3)\frac{n(n-1)}{2} + 2\frac{(n-1)(n)(2n-1)}{6} \\
+&amp;= \frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n
+\end{align*}\]</div>
+<p>where we used the following two identities:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1+2+3+4+\dots+n &amp;=n (n+1) / 2 \\
+1^{2}+2^{2}+3^{2}+4^{2}+\dots+n^{2} &amp;= n(n+1)(2 n+1) / 6
+\end{align*}\]</div>
+</div>
+<p>We use <span class="math notranslate nohighlight">\(O\left(\frac{2}{3}n^3\right)\)</span> to denote “of the order of”, i.e., the cost of Gaussian elimination is dominated by the term <span class="math notranslate nohighlight">\(\frac{2}{3}n^3\)</span>.</p>
+<div class="proof theorem admonition" id="backsubcost">
+<p class="admonition-title"><span class="caption-number">Theorem 14 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The cost of back substitution is <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Note that the last equation of a triangular system involves 1 division, the second to last equation involves one multiplication, one subtraction and one division, the third to last involves 5 total operations, etc., so total number of operations of back substitution is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+1+3+5+\cdots+(2n-1) = \frac{[1+(2n-1)]n}{2} = n^2
+\end{equation*}\]</div>
+</div>
+<p>Therefore, the total number of operations of solving a linear system with Gaussian elimination and back substitution is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n + n^2 = \frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n = O\left(\frac{2}{3}n^3\right)
+\end{equation*}\]</div>
+<div class="proof example admonition" id="cost">
+<p class="admonition-title"><span class="caption-number">Example 20 </span></p>
+<section class="example-content" id="proof-content">
+<p>If it takes 1 second to run back substitution for a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> upper triangular system, how long does it take to solve a linear system of the same size with Gaussian elimination?</p>
+</section>
+</div><p><strong>Exercise 3.1</strong></p>
+<p>Since back substitution costs <span class="math notranslate nohighlight">\(n^2=1000^2=10^6\)</span> operations, one operation takes <span class="math notranslate nohighlight">\(1/10^6 = 10^{-6}\)</span> second. The total cost of Gaussian elimination is dominated by <span class="math notranslate nohighlight">\(\frac{2}{3}n^3=\frac{2}{3}10^9\)</span> operations, which costs <span class="math notranslate nohighlight">\(\frac{2}{3}10^3\approx 667\)</span> seconds.</p>
+<p>Note that there is no need to consider the exact cost of <span class="math notranslate nohighlight">\(\frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n\approx 668\)</span>, since the extra terms contribute only <span class="math notranslate nohighlight">\(0.15\%\)</span> of the total time.</p>
+</section>
+<section id="lu-factorization">
+<h2>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">#</a></h2>
+<p>Gausian elimination produces a byproduct, a factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, for free. The factorization takes the form of <span class="math notranslate nohighlight">\(A=LU\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is a lower triangular matrix whose diagonal elements are all ones, and <span class="math notranslate nohighlight">\(U\)</span> is an upper triangular matrix. LU factorization can be utilized to solve a system of linear systems of the following form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+A\boldsymbol{x}_i = \boldsymbol{b}_i, \, i=1,2,\dots,K
+\end{equation*}\]</div>
+<p>All of the linear systems share the same coefficient matrix while the right hand sides are different. If Gaussian elimination were used to solve all linear systems, the total cost would be <span class="math notranslate nohighlight">\(\frac{2}{3}n^3K\)</span>, which could be computationally intractable if both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are large. However, by using <span class="math notranslate nohighlight">\(A=LU\)</span>, a linear system can be rewritten as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+LU\boldsymbol{x} = \boldsymbol{b}
+\end{equation*}\]</div>
+<p>which can further be written as a system of two linear systems:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L\boldsymbol{c} &amp;= \boldsymbol{b} \\
+U\boldsymbol{x} &amp;= \boldsymbol{c}
+\end{align*}\]</div>
+<p>The first linear system involves a <strong>forward substitution</strong>, which solves a lower triangular system from top to bottom, and the second can be solved by back substibution. Similar to back substitution, the cost of forward substitution is also <span class="math notranslate nohighlight">\(n^2\)</span>. So the total cost solve the system of linear systems is <span class="math notranslate nohighlight">\(\frac{2}{3}n^3+2n^2K\)</span>, which is in general much computationally efficient than solving all linear systems by Gaussian elimination.</p>
+<p>Next, we use an example to show how LU factorization can be obtained from the Gaussian elimination process without any additional computation and storage.</p>
+<div class="proof example admonition" id="LU">
+<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
+<section class="example-content" id="proof-content">
+<p>Obtain the LU factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>Repeat the Gaussian Elimination process, however, with the multipliers (factors) of elementary row operations stored in the corresponding lower triangular positions (the numbers in boxes)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; \fbox{1/2} &amp; {1/2} &amp; { |} &amp; {1}\end{array}\right]
+\end{align*}\]</div>
+<p>So the multipliers in boxes define the lower-triangular part of <span class="math notranslate nohighlight">\(L\)</span>, and the upper triangular part including the diagonal of the row echelon form (without the right hand side) define the matrix <span class="math notranslate nohighlight">\(U\)</span>. In this example, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+L = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+2 &amp; 1 &amp; 0 \\
+1 &amp; 1/2 &amp; 1
+\end{bmatrix},\,
+U = 
+\begin{bmatrix}
+2 &amp; 3 &amp; -1 \\
+0 &amp; -8 &amp; 5 \\
+0 &amp; 0 &amp; 1/2
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>It is easy to verfity <span class="math notranslate nohighlight">\(A=LU\)</span>.</p>
+<p>Note that the lower triangular part of the coefficient matrix stores the multipliers, instead of zeros, so no additional storage is needed for LU factorization.</p>
+<div class="proof example admonition" id="LUSolveLE">
+<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
+<section class="example-content" id="proof-content">
+<p>Use LU factorization to solve the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>The two linear systems, <span class="math notranslate nohighlight">\(L\boldsymbol{c} = \boldsymbol{b}\)</span> and <span class="math notranslate nohighlight">\(U\boldsymbol{x} = \boldsymbol{c}\)</span> now become</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+2 &amp; 1 &amp; 0 \\
+1 &amp; 1/2 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\ c_2 \\ c_3
+\end{bmatrix} = 
+\begin{bmatrix}
+-3 \\ 12 \\ 7
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+2 &amp; 3 &amp; -1 \\
+0 &amp; -8 &amp; 5 \\
+0 &amp; 0 &amp; 1/2
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix} = 
+\begin{bmatrix}
+c_1 \\ c_2 \\ c_3
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>Solving the first linear system using forward substitution, we obtain <span class="math notranslate nohighlight">\(\boldsymbol{c}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\boldsymbol{c} = 
+\begin{bmatrix}
+c_1 \\ c_2 \\ c_3
+\end{bmatrix} = 
+\begin{bmatrix}
+-3 \\ 18 \\ 1
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>Then solving for <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> from the second equation using back substitution, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\boldsymbol{x} = 
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix} = 
+\begin{bmatrix}
+1 \\ -1 \\ 2
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>which is identical to the solution obtained from Gaussian elimination.</p>
+<p>The following Python function <strong>LU</strong> performs LU factorization. Note that the coefficient matrix itself is replaced by the entries of the matrices <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span>. At each step of Gaussian elimination, the pivot position is checked for its value. If the absolute value of the pivot is greater than a hard-coded threshold <span class="math notranslate nohighlight">\(10^{-5}\)</span>, the pivot is considered nonzero. Otherwise, the algorithm stops.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    LU factorization without pivoting. </span>
+<span class="sd">    The coefficient matrix A is modified in place.</span>
+<span class="sd">    The lower triangular part of A represents the L matrix, the upper triangular part </span>
+<span class="sd">    (including the diagonal) represents U</span>
+<span class="sd">    A: the coefficient matrix of size n x n   </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>   
+     
+    <span class="c1"># We hard code the epsilon here. It can be an input parameter.</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-5</span> 
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: zero pivot encountered!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># The multiplier</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mp</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    
+    <span class="c1"># No need to return. Both A and b are changed in place</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now apply <strong>LU</strong> to the coefficient matrix in Example \ref{example:3by3GE}, and the same result is obtained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform LU decomposition of A = : &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">LU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The result is &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform LU decomposition of A = : 
+[[ 2.  3. -1.]
+ [ 4. -2.  3.]
+ [ 2. -1.  2.]]
+The result is 
+[[ 2.   3.  -1. ]
+ [ 2.  -8.   5. ]
+ [ 1.   0.5  0.5]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To use LU factorization to solve linear systems with Python, a function that implements forward substitution is needed. The following Python function <strong>forward_sub</strong> serves the purpose. The solution replaces the right hand side vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A_from_LU</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Forward substitution</span>
+<span class="sd">    The right hand side b is changed in place to store the solution</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    b: the right hand side of size n</span>
+<span class="sd">    A_from_LU: True, if the matrix A is from LU factorization (diagonals are 1).</span>
+<span class="sd">               False, if A is just a regular coefficient matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the shape of the coefficient matrix does not match the size of the RHS&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+     
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">A_from_LU</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>       
+            <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>  
+            <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we use Python to solve the linear system in Example <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="c1"># Perform LU factorization</span>
+<span class="n">LU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The matrix A after LU decomposition is &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="c1"># Perform forward substitution</span>
+<span class="n">forward_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After forward substition, the vector b is&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="c1"># Perform back substitution</span>
+<span class="n">back_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After backward substition, the vector b is&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The matrix A after LU decomposition is 
+[[ 2.   3.  -1. ]
+ [ 2.  -8.   5. ]
+ [ 1.   0.5  0.5]]
+After forward substition, the vector b is
+[-3 18  1]
+After backward substition, the vector b is
+[ 1 -1  2]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 3.2</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix. <span class="math notranslate nohighlight">\(I^{i,j}(m)\)</span> is also an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix that is similar to an identity matrix, but the <span class="math notranslate nohighlight">\((i,j)\)</span> position, where <span class="math notranslate nohighlight">\(i&gt;j\)</span>, has a value of <span class="math notranslate nohighlight">\(m\)</span>. For example, supposing <span class="math notranslate nohighlight">\(n=3\)</span>,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+I^{2,1}(-2)=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+-2 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{equation*}\]</div>
+<ol class="simple">
+<li><p>What is <span class="math notranslate nohighlight">\(I^{i,j}(m)A\)</span> for a general <span class="math notranslate nohighlight">\(n\)</span>?</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\((i_1,j_1) \ne (i_2,j_2)\)</span>, what is <span class="math notranslate nohighlight">\(I^{i_1,j_1}(m_1)I^{i_2,j_2}(m_2)\)</span>?</p></li>
+<li><p>What is the inverse of <span class="math notranslate nohighlight">\(I^{i,j}(m)\)</span>?</p></li>
+</ol>
+<p><strong>Exercise 3.3</strong></p>
+<p>Show the algorithm descibed in <a class="reference internal" href="#LU">Example 21</a> leads to the LU factorization for <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</section>
+<section id="gaussian-elimination-with-partial-pivoting">
+<h2>Gaussian elimination with partial pivoting<a class="headerlink" href="#gaussian-elimination-with-partial-pivoting" title="Permalink to this headline">#</a></h2>
+<p>To improve the stability of Gaussian elimination, pivots should be as large as possible, so that multipliers are as small as possible. The reason is that multiplying the row where the pivot is by a large multiplier and adding the product to another row will “overwhelm” the latter by losing significant information due to finite precision. There are various strategies to place large numbers at the pivot positions. One idea is to compare the absolute values of the pivot and all numbers below it, and the row where the largest number in magnitude is located is swapped with the row where pivot is, if they are not the same row. This variant of Gaussian elimination is called Gaussian elimination with partial pivoting. The algorithm is summarized below.</p>
+<section id="partial-pivoting">
+<h3>Partial Pivoting<a class="headerlink" href="#partial-pivoting" title="Permalink to this headline">#</a></h3>
+<p>The partial pivoting process works as follows:</p>
+<ol>
+<li><p>The first step: instead of using <span class="math notranslate nohighlight">\(a_{11}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    |a_{p1}|= \max_{1\le j\le n}|a_{j1}|
+    \end{equation*}\]</div>
+<p>if <span class="math notranslate nohighlight">\(p\ne 1\)</span>, then exchange rows <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</li>
+<li><p>The second step: select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    |a_{p2}|= \max_{2\le j\le n}|a_{j2}|
+    \end{equation*}\]</div>
+<p>if <span class="math notranslate nohighlight">\(p\ne 2\)</span>, then exchange rows <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</li>
+<li><p>A general <span class="math notranslate nohighlight">\(i\)</span>the step: select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    |a_{pi}|= \max_{i\le j\le n}|a_{ji}|
+    \end{equation*}\]</div>
+<p>If <span class="math notranslate nohighlight">\(p\ne i\)</span>, then exchange rows <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</li>
+</ol>
+<p>Note, in this way, the multiplier is no greater than <span class="math notranslate nohighlight">\(1\)</span>, so the problem of swamping is avoided.</p>
+<p>Using the partial pivoting strategy, we can also treat the cases where zeros appear in the pivot position, which would cause the naive Gaussian elimination to fail. Note that there must be at least one nonzero value below each pivot; otherwise the coefficient matrix is not invertible.</p>
+<div class="proof example admonition" id="PartialPivoting">
+<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
+<section class="example-content" id="proof-content">
+<p>Apply Gaussian elimination with partial pivoting to the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>As before, we start from the augmented matrix:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ \color{red}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2\leftrightarrow R_1 \rightarrow
+\left[\begin{array}{rrrr} {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right]
+\\ &amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {0} &amp; {4} &amp; {-\frac{5}{2}} &amp; { |} &amp; {-9} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {0} &amp; {4} &amp; {-\frac{5}{2}} &amp; { |} &amp; {-9} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right]
+\end{align*}\]</div>
+<p>So the equivalent system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*} 
+4x-2 y+3z &amp;=12 \\
+4 y -\frac{5}{2}z &amp;=-9 \\
+\frac{1}{2} z &amp;=1
+\end{align*}\]</div>
+<p>The solution is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+x_1 = 1, \, x_2 = -1, \, x_3 =2
+\end{equation*}\]</div>
+<p>Here, we marked the number that needs to be placed in the pivot position in red. The notation <span class="math notranslate nohighlight">\(R_1\leftrightarrow R_2\)</span> means swapping Rows <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span>. For this example, we only needed to switch rows once, since the <span class="math notranslate nohighlight">\((3,2)\)</span> position vanishes when we used the first pivot to eliminate the <span class="math notranslate nohighlight">\((3,1)\)</span> position.</p>
+<div class="proof example admonition" id="PartialPivoting2">
+<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<section class="example-content" id="proof-content">
+<p>Apply Gaussian elimination with partial pivoting to the following linear system:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+3x - 2y + z &amp;= -1 \\
+6x + y -3 z &amp;= 18 \\
+-4x +3 y - 2 z &amp;= 3
+\end{align*}\]</div>
+</section>
+</div><p><strong>Solution.</strong></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr}{3} &amp; {-2} &amp; {1} &amp; {|} &amp; {-1} \\ \color{red}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {-4} &amp; {3} &amp; {-2} &amp; { |} &amp; {3}\end{array}\right] &amp;\rightarrow R_2\leftrightarrow R_1 \rightarrow
+\left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {3} &amp; {-2} &amp; {1} &amp; {|} &amp; {-1} \\ {-4} &amp; {3} &amp; {-2} &amp; { |} &amp; {3}\end{array}\right]
+\\ &amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10} \\ {-4} &amp; {3} &amp; {-2} &amp; { |} &amp; {3}\end{array}\right] \\
+&amp;\rightarrow R_3=R_3-\left(-\frac{2}{3}\right)R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10} \\ {0} &amp; \color{red}{\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15}\end{array}\right]\\
+&amp;\rightarrow R_3\leftrightarrow R_2 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10}\end{array}\right]\\
+&amp;\rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15} \\ {0} &amp; {0} &amp; {-\frac{5}{22}} &amp; { |} &amp; {\frac{5}{22}}\end{array}\right]
+\end{align*}\]</div>
+<p>So the equivalent system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*} 
+6x +y-3z &amp;=18 \\
+\frac{11}{3} y -4z &amp;=15 \\
+-\frac{5}{22} z &amp;=\frac{5}{22}
+\end{align*}\]</div>
+<p>The solution is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+x_1 = 2, \, x_2 = 3, \, x_3 =-1
+\end{equation*}\]</div>
+<p>The following Python function <strong>GEPP</strong> performs Gaussian elimination with partial pivoting. Both the coefficient matrix and right-hand side vector <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are changed in place and they together represent the echelon form of the augmented matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GEPP</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gaussian elimination with partial pivoting. </span>
+<span class="sd">    The coefficient matrix A is modified in place.</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    b: the right hand side of size n    </span>
+<span class="sd">    Return:</span>
+<span class="sd">    None. The solution is stored in b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>  
+     
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># find p</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">])</span>        
+        <span class="k">if</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="c1"># change rows p and j of A and b:</span>
+            <span class="n">A</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">b</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># The multiplier</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We apply <strong>GEPP</strong> to the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>, and print out the matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(b\)</span> at the end. The final solution is the same as obtained earlier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solve the linear system: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="s1">&#39;x = &#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">GEPP</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After Gaussian elimination with partial pivoting, A becomes:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After Gaussian elimination with partial pivoting, b becomes:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">back_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solution is &#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solve the linear system: 
+[[ 3. -2.  1.]
+ [ 6.  1. -3.]
+ [-4.  3. -2.]] x =  [-1. 18.  3.]
+After Gaussian elimination with partial pivoting, A becomes:
+[[ 6.          1.         -3.        ]
+ [ 0.          3.66666667 -4.        ]
+ [ 0.          0.         -0.22727273]]
+After Gaussian elimination with partial pivoting, b becomes:
+[18.         15.          0.22727273]
+The solution is  [ 2.  3. -1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pa-lu-factorization">
+<h2>PA=LU factorization<a class="headerlink" href="#pa-lu-factorization" title="Permalink to this headline">#</a></h2>
+<p>The partial pivoting algorithm leads to a new matrix factorization for <span class="math notranslate nohighlight">\(A\)</span>, which takes the form of</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+PA=LU
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span> have the same forms as defined in LU factorization, and <span class="math notranslate nohighlight">\(P\)</span> is a permutation matrix.</p>
+<div class="proof definition admonition" id="permmat">
+<p class="admonition-title"><span class="caption-number">Definition 7 </span></p>
+<section class="definition-content" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(n\times n\)</span> permutation matrix is such that each column or row contains only one 1 and the rest are 0’s.</p>
+</section>
+</div><p>For example,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>is a <span class="math notranslate nohighlight">\(2\times 2\)</span> permutation matrix and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>is a <span class="math notranslate nohighlight">\(3\times 3\)</span> permuation matrix.</p>
+<p>A permutation matrix can be obtained by a sequence exchanges of rows or columns of the identity matrix of the same dimension. For example,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>is obtained by first exchanging the first two rows of the <span class="math notranslate nohighlight">\(3\times 3\)</span> identity matrix <span class="math notranslate nohighlight">\(I_3\)</span>, and then exchanging the first and third columns of the resulting matrix.</p>
+<p>The algorithm for PA=LU factorization is similar to LU factorization. The multipliers of elementary operations are stored in <span class="math notranslate nohighlight">\(A\)</span>. To obtain the <span class="math notranslate nohighlight">\(P\)</span> permutation matrix, we start from an identity matrix and perform row exchanges to the identity matrix and the subsequent matrices whenever row exchanges are needed for <span class="math notranslate nohighlight">\(A\)</span>. The following example illustrate the process.</p>
+<div class="proof example admonition" id="PALU">
+<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
+<section class="example-content" id="proof-content">
+<p>Find PA=LU factorization for the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a></p>
+</section>
+</div><p><strong>Solution.</strong></p>
+<p>Initially, let <span class="math notranslate nohighlight">\(P=I_3\)</span>,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>The first step of Gaussian elimination with partial pivoting involves exchanging the first two rows:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left[\begin{array}{rrrr}{3} &amp; {-2} &amp; {1} \\ \color{red}{6} &amp; {1} &amp; {-3} \\ {-4} &amp; {3} &amp; {-2} \end{array}\right] \rightarrow R_2\leftrightarrow R_1 \rightarrow
+\left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3}  \\ {3} &amp; {-2} &amp; {1}  \\ {-4} &amp; {3} &amp; {-2} \end{array}\right]
+\end{equation*}\]</div>
+<p>Accordingly, we update <span class="math notranslate nohighlight">\(P\)</span> by switching its first two rows:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix} \rightarrow R_2\leftrightarrow R_1 \rightarrow
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>Now eliminate the two numbers below the pivot (<span class="math notranslate nohighlight">\((1,1)\)</span> position), and store the multipliers in those positions:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3}  \\ {3} &amp; {-2} &amp; {1} \\ {-4} &amp; {3} &amp; {-2} \end{array}\right]&amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3}  \\ {\fbox{1/2}} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \\ {-4} &amp; {3} &amp; {-2} \end{array}\right] \\
+&amp;\rightarrow R_3=R_3-\left(-\frac{2}{3}\right)R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} \\ {\fbox{-2/3}} &amp; \color{red}{\frac{11}{3}} &amp; {-4} \end{array}\right]
+\end{align*}\]</div>
+<p>The next step involves swapping the second and third rows of <span class="math notranslate nohighlight">\(A\)</span>：</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} \\ {\fbox{-2/3}} &amp; \color{red}{\frac{11}{3}} &amp; {-4} \end{array}\right] \rightarrow
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3}  \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right]
+\end{equation*}\]</div>
+<p>Correspondingly we update <span class="math notranslate nohighlight">\(P\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P = 
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix} \rightarrow R_2\leftrightarrow R_3 \rightarrow
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>Now eliminate the <span class="math notranslate nohighlight">\((3,2)\)</span> position:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right] \rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; \fbox{-15/22} &amp; {-\frac{5}{22}} \end{array}\right]
+\end{equation*}\]</div>
+<p>The algorithm is now complete with</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+P = 
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0
+\end{bmatrix}, \,
+L = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ {-2/3} &amp; 1 &amp; 0 \\ 1/2 &amp; -15/22 &amp; 1
+\end{bmatrix}, \,
+U = 
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {0} &amp; {\frac{11}{3}} &amp; {-4}  \\ 0 &amp; 0 &amp; {-\frac{5}{22}} \end{array}\right]
+\end{equation*}\]</div>
+<p>It is easy to verify that <span class="math notranslate nohighlight">\(PA=LU\)</span>.</p>
+</section>
+<section id="solving-linear-equations-with-pa-lu-factorization">
+<h2>Solving linear equations with PA=LU factorization<a class="headerlink" href="#solving-linear-equations-with-pa-lu-factorization" title="Permalink to this headline">#</a></h2>
+<p>The linear system <span class="math notranslate nohighlight">\(A\boldsymbol{x} = \boldsymbol{b}\)</span> can be rewritten as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+PA\boldsymbol{x} = P\boldsymbol{b}
+\end{equation*}\]</div>
+<p>Using the PA=LU factorization, the linear system reads</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+LU\boldsymbol{x} = P\boldsymbol{b}
+\end{equation*}\]</div>
+<p>which can be written as two linear systems:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L\boldsymbol{c} &amp;= P\boldsymbol{b} \\
+U\boldsymbol{x} &amp;= \boldsymbol{c}
+\end{align*}\]</div>
+<p>The following Python function <strong>PALU</strong> performs PA=LU factorization. The <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span> factors are stored in <span class="math notranslate nohighlight">\(A\)</span> as in LU factorization, while the permutation matrix <span class="math notranslate nohighlight">\(P\)</span> is returned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PALU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    PA=LU factorization with partial pivoting. </span>
+<span class="sd">    The coefficient matrix A is modified in place.</span>
+<span class="sd">    The lower triangular part of A represents the L matrix, the upper triangular part </span>
+<span class="sd">    (including the diagonal) represents U</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    output:</span>
+<span class="sd">    Permutation matrix $P$ is returned, along with $A$ that is changed in place</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>   
+     
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># find p</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">])</span>        
+        <span class="k">if</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="c1"># change rows p and j of A. Update P:</span>
+            <span class="n">A</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">P</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>   
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># The multiplier</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mp</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Applying <strong>PALU</strong> to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a> gives the same result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PA=LU factorization of A = : &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before PA=LU factorization, A = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">PALU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The PA=LU factorization result is &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After PA=LU factorization, A = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The permutation matrix P = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PA=LU factorization of A = : 
+Before PA=LU factorization, A = 
+[[ 3. -2.  1.]
+ [ 6.  1. -3.]
+ [-4.  3. -2.]]
+The PA=LU factorization result is 
+After PA=LU factorization, A = 
+[[ 6.          1.         -3.        ]
+ [-0.66666667  3.66666667 -4.        ]
+ [ 0.5        -0.68181818 -0.22727273]]
+The permutation matrix P = 
+[[0. 1. 0.]
+ [0. 0. 1.]
+ [1. 0. 0.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also use PA=LU factorization to solve the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>. Again, the same result is obtained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">PALU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="c1"># First solve for c</span>
+<span class="n">Pb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">forward_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Pb</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Solve for x</span>
+<span class="n">back_sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Pb</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solution is: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Pb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution is: 
+[ 2.  3. -1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="full-pivoting-and-paq-lu-factorization">
+<h2>Full pivoting and PAQ=LU factorization<a class="headerlink" href="#full-pivoting-and-paq-lu-factorization" title="Permalink to this headline">#</a></h2>
+<p>The partial pivoting strategy for Gaussian elimination only considers candidates that are in the same column as the pivots. However, for the <span class="math notranslate nohighlight">\((k,k)\)</span> pivot position, <span class="math notranslate nohighlight">\(1\le k\le n\)</span>, if we consider the submatrix <span class="math notranslate nohighlight">\((a_{ij}), i&gt;=k, j\ge k\)</span>, i.e.,  all positions that are not above and not to the left of the pivot, as candiates to be placed at the pivot position, the strategy is known as <strong>full pivoting</strong>. Full pivoting is more stable, since at each step, it considers a wider range of candidates for the pivot position, and the multipliers can be even smaller compared to partial pivoting.</p>
+<p>The algorithm works as follows:</p>
+<ol>
+<li><p>The first step: instead of using <span class="math notranslate nohighlight">\(a_{11}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, and the <span class="math notranslate nohighlight">\(q\)</span>th column, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    |a_{pq}| = \max_{1\le i\le n, 1\le j\le n}|a_{ij}|,
+    \end{equation*}\]</div>
+<p>exchange row <span class="math notranslate nohighlight">\(p\)</span> and row <span class="math notranslate nohighlight">\(1\)</span>, and exchange column <span class="math notranslate nohighlight">\(q\)</span> and column <span class="math notranslate nohighlight">\(1\)</span>, so now <span class="math notranslate nohighlight">\(a_{pq}\)</span> is in the <span class="math notranslate nohighlight">\((1,1)\)</span> pivot position. Apply Gaussian elimination.</p>
+</li>
+<li><p>The second step: instead of using <span class="math notranslate nohighlight">\(a_{22}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, and the <span class="math notranslate nohighlight">\(q\)</span>th column, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    |a_{pq}| = \max_{2\le i\le n, 2\le j\le n}|a_{ij}|
+    \end{equation*}\]</div>
+<p>exchange row <span class="math notranslate nohighlight">\(p\)</span> and row <span class="math notranslate nohighlight">\(2\)</span>, and exchange column <span class="math notranslate nohighlight">\(q\)</span> and column <span class="math notranslate nohighlight">\(2\)</span>, so now <span class="math notranslate nohighlight">\(a_{pq}\)</span> is in the <span class="math notranslate nohighlight">\((2,2)\)</span> pivot position. Apply Gaussian elimination.</p>
+</li>
+<li><p>The rest of the pivot positions can be found in a similar fashion and so does the Gaussian elimination.</p></li>
+</ol>
+<p>Now we will have two permutation matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>, which correspond to the row and column exchanges. The factorization corresponding to Gaussian elimination with full pivoting is in the form of</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+PAQ = LU
+\end{equation*}\]</div>
+<p>which can be obtained in a similar fashion to the PA=LU factorization. The permutation matrix <span class="math notranslate nohighlight">\(Q\)</span> is obtained by performing the same sequence of column exchanges on an identity matrix.</p>
+<p>Below is the Python function for PAQ=LU factorization. The returned outputs are the two permutation matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PAQLU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    PAQ=LU factorization with full pivoting. </span>
+<span class="sd">    The coefficient matrix A is modified in place.</span>
+<span class="sd">    The lower triangular part of A represents the L matrix, the upper triangular part </span>
+<span class="sd">    (including the diagonal) represents U</span>
+<span class="sd">    A: the coefficient matrix of size n x n</span>
+<span class="sd">    output:</span>
+<span class="sd">    Permutation matrices $P$, $Q$ is returned, </span>
+<span class="sd">    along with $A$ that is changed in place</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the given coefficient matrix is not square&#39;</span><span class="p">)</span>
+        <span class="k">return</span>   
+     
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># find p and q so that the (p,q) position has the largest</span>
+        <span class="c1"># value of the |A|</span>
+        <span class="n">p</span><span class="p">,</span><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">:])),</span> 
+                               <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">:])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>         
+        <span class="k">if</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="c1"># exchange rows p and j of A. Update P:</span>
+            <span class="n">A</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">P</span><span class="p">[[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>   
+        <span class="k">if</span> <span class="n">q</span><span class="o">+</span><span class="n">j</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="c1"># exchange columns q and j of A. Update Q:</span>
+            <span class="n">A</span><span class="p">[:,</span> <span class="p">[</span><span class="n">q</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">q</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">Q</span><span class="p">[:,</span> <span class="p">[</span><span class="n">q</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[:,</span> <span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">q</span><span class="o">+</span><span class="n">j</span><span class="p">]]</span> 
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># The multiplier</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mp</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Apply PAQ=LU factorization to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PAQ=LU factorization of A = : &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before PAQ=LU factorization, A = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">P</span><span class="p">,</span><span class="n">Q</span> <span class="o">=</span> <span class="n">PAQLU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The PAQ=LU factorization result is &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After PAQ=LU factorization, A = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The permutation matrix P = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The permutation matrix Q = &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PAQ=LU factorization of A = : 
+Before PAQ=LU factorization, A = 
+[[ 3. -2.  1.]
+ [ 6.  1. -3.]
+ [-4.  3. -2.]]
+The PAQ=LU factorization result is 
+After PAQ=LU factorization, A = 
+[[ 6.         -3.          1.        ]
+ [-0.66666667 -4.          3.66666667]
+ [ 0.5        -0.625      -0.20833333]]
+The permutation matrix P = 
+[[0. 1. 0.]
+ [0. 0. 1.]
+ [1. 0. 0.]]
+The permutation matrix Q = 
+[[1. 0. 0.]
+ [0. 0. 1.]
+ [0. 1. 0.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Analytically, the PAQ=LU factorization for <span class="math notranslate nohighlight">\(A\)</span> is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+3 &amp; -2 &amp; 1 \\ 6 &amp; 1 &amp; -3 \\ -4 &amp; 3 &amp; -2
+\end{bmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 0
+\end{bmatrix} = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ -\frac{2}{3} &amp; 1 &amp; 0 \\ \frac{1}{2} &amp; -\frac{5}{8} &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+6 &amp; -3 &amp; 1 \\ 0 &amp; -4 &amp; \frac{11}{3} \\ 0 &amp; 0 &amp; -\frac{5}{24}
+\end{bmatrix}
+\end{equation*}\]</div>
+<p><strong>Exercise 3.4</strong></p>
+<p>For the linear system</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2x +2y -3z &amp;= 1 \\
+4x -2y + 2z &amp;= 4 \\
+2x +4y -z &amp;=5
+\end{align*}\]</div>
+<p>find the LU factorizaton, PA=LU factorization and PAQ=LU factorization of the coefficient matrix. Use LU factorization and PA=LU factorization to solve the linear system.</p>
+</section>
+<section id="condition-number">
+<h2>Condition number<a class="headerlink" href="#condition-number" title="Permalink to this headline">#</a></h2>
+<p>For a function of one variable, <span class="math notranslate nohighlight">\(y=f(x)\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, and <span class="math notranslate nohighlight">\(y\)</span> is the dependent variable, one is often interested how <span class="math notranslate nohighlight">\(y\)</span> responds to a small change of <span class="math notranslate nohighlight">\(x\)</span>. If a small change in <span class="math notranslate nohighlight">\(x\)</span> leads to a large change in <span class="math notranslate nohighlight">\(y\)</span>, then <span class="math notranslate nohighlight">\(y\)</span> is said to be <strong>sensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>; otherwise <span class="math notranslate nohighlight">\(y\)</span> is <strong>insensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>In the problem of solving a linear system, similarly we are interested in how the change in the independent variable, <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, affect the dependent variable <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Consider a perturbation of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{b}}=\boldsymbol{b}+\delta\boldsymbol{b}\)</span>, the ratio of the relative change in the magnitude (norm)  of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> to the relative change in the magnitude of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> can be expressed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = \frac{\frac{||A^{-1}\hat{\boldsymbol{b}}-A^{-1}\boldsymbol{b}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} =
+\frac{\frac{||A^{-1}\delta\boldsymbol{b}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = 
+\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||\boldsymbol{x}||} = 
+\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||}
+\end{equation*}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(||\delta\boldsymbol{x}||\)</span> is called <strong>forward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}\)</span> is called <strong>relative forward error</strong>, <span class="math notranslate nohighlight">\(||\delta\boldsymbol{b}||\)</span> is called <strong>backward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}\)</span> is called <strong>relative backward error</strong>, and the quantity <span class="math notranslate nohighlight">\(\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}}\)</span> is called <strong>error magnification error</strong>.</p>
+<p>To find the maximum of error magnification error, notice that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = \max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} = 
+\max_{\delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||} \max_{\boldsymbol{b}}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} = ||A^{-1}||_m\cdot||A||_m
+\end{equation*}\]</div>
+<p>where the notation <span class="math notranslate nohighlight">\(||\cdot||_m\)</span> denotes the <span class="math notranslate nohighlight">\(||\cdot||\)</span> (vector norm) induced matrix norm.</p>
+<div class="proof definition admonition" id="condition_number">
+<p class="admonition-title"><span class="caption-number">Definition 8 </span></p>
+<section class="definition-content" id="proof-content">
+<p>The quantity <span class="math notranslate nohighlight">\(||A^{-1}||_m\cdot||A||_m\)</span> is called the <strong>condition number</strong> of matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</section>
+</div><p>A large condition number indicates that a small change in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> incurs a large change in the solution to the linear system <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Such matrices are called <strong>ill-conditioned</strong>; otherwise, the matrices are called <strong>well-conditioned</strong>. Solving a linear system whose coefficient matrix is ill-conditioned is subjected to large error. Supposing the condition number of matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(O(10^k)\)</span>, then about <span class="math notranslate nohighlight">\(k\)</span> digits of accuracy is lost in solving a linear system that has <span class="math notranslate nohighlight">\(A\)</span> as the coefficient matrix. In double precision, this means about <span class="math notranslate nohighlight">\(16-k\)</span> digits of accuracy is expected.</p>
+<div class="proof example admonition" id="HilbertMatrix">
+<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+H = 
+\begin{bmatrix}
+1 &amp; \frac{1}{2} &amp; \frac{1}{3} &amp; \frac{1}{4} &amp; \frac{1}{5} &amp; \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8}\\
+\frac{1}{2} &amp; \frac{1}{3} &amp; \frac{1}{4} &amp; \frac{1}{5} &amp; \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9}\\
+\frac{1}{3} &amp; \frac{1}{4} &amp; \frac{1}{5} &amp; \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} \\
+\frac{1}{4} &amp; \frac{1}{5} &amp; \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} \\
+\frac{1}{5} &amp; \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} \\
+\frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} \\
+\frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} &amp; \frac{1}{14} \\
+\frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} &amp; \frac{1}{14} &amp; \frac{1}{15}
+\end{bmatrix}
+\end{equation*}\]</div>
+<p>In general, the position <span class="math notranslate nohighlight">\((i,j)\)</span> of the Hilbert matrix has the value <span class="math notranslate nohighlight">\(\frac{1}{i+j+1}\)</span>.</p>
+<p>Let the true solution be <span class="math notranslate nohighlight">\(\boldsymbol{x}=[1,1,1,1,1,1,1,1]^T\)</span>, and create the right hand side vector <span class="math notranslate nohighlight">\(\boldsymbol{b}=H\boldsymbol{x}\)</span>. Use Python to solve the system <span class="math notranslate nohighlight">\(H\boldsymbol{x}=\boldsymbol{b}\)</span>. How accurate are the solutions?</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify the effect of condition number</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The condition number of H is: </span><span class="si">{0:12.9e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">H</span><span class="p">)))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solution x is: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0:19.16f}</span><span class="s2"> </span><span class="si">{1:19.16f}</span><span class="s2"> </span><span class="si">{2:19.16f}</span><span class="s2"> </span><span class="si">{3:19.16f}</span><span class="s2"> &quot;</span>
+      <span class="s2">&quot;</span><span class="si">{4:19.16f}</span><span class="s2"> </span><span class="si">{4:19.16f}</span><span class="s2"> </span><span class="si">{4:19.16f}</span><span class="s2"> </span><span class="si">{4:19.16f}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
+      <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The error vector of the solution is: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0:19.16e}</span><span class="s2"> </span><span class="si">{1:19.16e}</span><span class="s2"> </span><span class="si">{2:19.16e}</span><span class="s2"> </span><span class="si">{3:19.16e}</span><span class="s2"> </span><span class="si">{4:19.16e}</span><span class="s2"> </span><span class="si">{4:19.16e}</span><span class="s2"> &quot;</span>
+      <span class="s2">&quot;</span><span class="si">{4:19.16e}</span><span class="s2"> </span><span class="si">{4:19.16e}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> 
+                                      <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                                      <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The condition number of H is: 1.525757557e+10
+The solution x is: 
+[ 1.0000000000124938  0.9999999992609565  1.0000000102814219  0.9999999418227916  1.0000001619251886  1.0000001619251886  1.0000001619251886  1.0000001619251886]
+The error vector of the solution is: 
+[1.2493783785316737e-11 7.3904349306985750e-10 1.0281421936042534e-08 5.8177208384080359e-08 1.6192518859092786e-07 1.6192518859092786e-07 1.6192518859092786e-07 1.6192518859092786e-07]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The condition number of the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix has a condition number of <span class="math notranslate nohighlight">\(10^{10}\)</span>, so <span class="math notranslate nohighlight">\(16-10=6\)</span> digits of accuracy is expected to be lost, which is verified by the printed errors, the largest one of which is <span class="math notranslate nohighlight">\(1.62\times 10^{-7}=0.162\times 10^{-6}\)</span>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="bookchapter3-0.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 3 Solutions to linear systems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bookchapter3-2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Iterative methods for solving linear systems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Yaning Liu, Giray Okten<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

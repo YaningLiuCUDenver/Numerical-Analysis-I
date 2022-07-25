@@ -183,6 +183,26 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-0.html">
+   Chapter 3 Solutions to linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-1.html">
+   Gaussian elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-2.html">
+   Iterative methods for solving linear systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter3-3.html">
+   Cholesky decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-0.html">
    Chapter 4 Interpolation
   </a>
@@ -205,11 +225,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter4-4.html">
    4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,12 +269,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-2.html">
-   Chapter 6–Approximation Theory
+   6.2 Continuous least squares
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter6-3.html">
-   Chapter 6–Approximation Theory
+   6.3 Orthogonal polynomials and least squares
   </a>
  </li>
 </ul>
@@ -489,7 +504,7 @@ H(x)=a_{0}+a_{1}x+...+a_{2n+1}x^{2n+1},
 \end{equation*}\]</div>
 <p>then there are <span class="math notranslate nohighlight">\(2n+2\)</span> unknowns, <span class="math notranslate nohighlight">\(a_0,...,a_{2n+1}\)</span>, to solve for. The following theorem shows that there is a unique solution to this system of equations; a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap3_thm61">
-<p class="admonition-title"><span class="caption-number">Theorem 20 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 27 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(f \in C^1[a,b]\)</span> and <span class="math notranslate nohighlight">\(x_{0},...,x_{n}\in[a,b]\)</span>
 are distinct, then there is a unique polynomial <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span>, of degree at most <span class="math notranslate nohighlight">\(2n+1\)</span>, agreeing with
@@ -510,7 +525,7 @@ polynomial.</p>
 </section>
 </div><p>The only difference between Hermite interpolation and polynomial interpolation is that in the former, we have the derivative information, which can go a long way in capturing the shape of the underlying function.</p>
 <div class="proof example admonition" id="chap3_exa62">
-<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
 <section class="example-content" id="proof-content">
 <p>We want to interpolate the following data:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -543,7 +558,7 @@ y' \text{-values}&amp;: 1, -1, 1.
 </figure>
 <section id="computing-the-hermite-polynomial">
 <h2>Computing the Hermite polynomial<a class="headerlink" href="#computing-the-hermite-polynomial" title="Permalink to this headline">#</a></h2>
-<p>We do not use <a class="reference internal" href="#chap3_thm61">Theorem 20</a> to compute the Hermite polynomial: there
+<p>We do not use <a class="reference internal" href="#chap3_thm61">Theorem 27</a> to compute the Hermite polynomial: there
 is a more efficient method using divided differences for this computation.</p>
 <p>We start with the data:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -577,7 +592,7 @@ f[z_{0},z_{1}]=f[x_{0},x_{0}]=\frac{f(x_{0})-f(x_{0})}{x_{0}-x_{0}}
 f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=\frac{f(x_{i})-f(x_{i})}{x_{i}-x_{i}}
 \end{equation*}\]</div>
 <p>for <span class="math notranslate nohighlight">\(i=0,...,n.\)</span></p>
-<p>From <a class="reference internal" href="bookchapter4-2.html#chap3_thm58">Theorem 17</a>, we know <span class="math notranslate nohighlight">\(f[x_{0},...,x_{n}]=\frac{f^{(n)}(\xi)}{n!}\)</span>
+<p>From <a class="reference internal" href="bookchapter4-2.html#chap3_thm58">Theorem 24</a>, we know <span class="math notranslate nohighlight">\(f[x_{0},...,x_{n}]=\frac{f^{(n)}(\xi)}{n!}\)</span>
 for some <span class="math notranslate nohighlight">\(\xi\)</span> between the min and max of <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> From
 a classical result by Hermite &amp; Gennochi (see <span id="id2">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>, page 144), divided differences are
 continuous functions of their variables <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> This implies
@@ -595,9 +610,9 @@ f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=f'(x_{i})=y'_{i}
 \end{equation*}\]</div>
 <p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
 <div class="proof example admonition" id="chap3_exa63">
-<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 40 </span></p>
 <section class="example-content" id="proof-content">
-<p>Let’s compute the Hermite polynomial of <a class="reference internal" href="#chap3_exa62">Example 24</a>. The data is:</p>
+<p>Let’s compute the Hermite polynomial of <a class="reference internal" href="#chap3_exa62">Example 39</a>. The data is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{array}{cccc}
@@ -683,7 +698,7 @@ the <span class="math notranslate nohighlight">\(y\)</span>-coordinates, and the
 </div>
 </div>
 </div>
-<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa62">Example 24</a>.</p>
+<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa62">Example 39</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdiff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">]),</span>
@@ -699,7 +714,7 @@ the <span class="math notranslate nohighlight">\(y\)</span>-coordinates, and the
 </div>
 </div>
 </div>
-<p>Note that in the hand-calculations of <a class="reference internal" href="#chap3_exa63">Example 25</a>, where two-digit rounding
+<p>Note that in the hand-calculations of <a class="reference internal" href="#chap3_exa63">Example 40</a>, where two-digit rounding
 was used, we obtained 0.0065 as the first third divided difference. In the
 Python output above, this divided difference is 0.0067.</p>
 <p>The following function computes the Hermite interpolating polynomial,
@@ -725,7 +740,7 @@ evaluates the polynomial at <span class="math notranslate nohighlight">\(w\)</sp
 </div>
 </div>
 </div>
-<p>Let’s recreate the Hermite interpolating polynomial plot of <a class="reference internal" href="#chap3_exa62">Example 24</a>.</p>
+<p>Let’s recreate the Hermite interpolating polynomial plot of <a class="reference internal" href="#chap3_exa62">Example 39</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
