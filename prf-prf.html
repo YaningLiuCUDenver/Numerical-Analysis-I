@@ -279,6 +279,21 @@ const thebe_selector_output = ".output, .cell_output"
    6.3 Orthogonal polynomials and least squares
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter7-0.html">
+   Chapter 7 Numerical Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter7-1.html">
+   7.1 Golden-section search
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter7-2.html">
+   7.2 Derivative-based optimization
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -394,6 +409,9 @@ title="Fullscreen mode"
    <a href="#cap-algo_ConjGrad1"><strong>algo_ConjGrad1</strong></a> | 
    <a href="#cap-algo_ConjGrad2"><strong>algo_ConjGrad2</strong></a> | 
    <a href="#cap-backsubcost"><strong>backsubcost</strong></a> | 
+   <a href="#cap-cg_exa1"><strong>cg_exa1</strong></a> | 
+   <a href="#cap-cg_exa2"><strong>cg_exa2</strong></a> | 
+   <a href="#cap-cg_exa3"><strong>cg_exa3</strong></a> | 
    <a href="#cap-chap1_def1"><strong>chap1_def1</strong></a> | 
    <a href="#cap-chap1_def12"><strong>chap1_def12</strong></a> | 
    <a href="#cap-chap1_def14"><strong>chap1_def14</strong></a> | 
@@ -489,13 +507,20 @@ title="Fullscreen mode"
    <a href="#cap-chap6_exa94"><strong>chap6_exa94</strong></a> | 
    <a href="#cap-chap6_thm92"><strong>chap6_thm92</strong></a> | 
    <a href="#cap-condition_number"><strong>condition_number</strong></a> | 
+   <a href="#cap-conjgrad_opt_algo"><strong>conjgrad_opt_algo</strong></a> | 
    <a href="#cap-cost"><strong>cost</strong></a> | 
+   <a href="#cap-golden_sin"><strong>golden_sin</strong></a> | 
    <a href="#cap-gramschmidt_v1_2by2"><strong>gramschmidt_v1_2by2</strong></a> | 
    <a href="#cap-gramschmidt_v1_3by3"><strong>gramschmidt_v1_3by3</strong></a> | 
    <a href="#cap-innerproduct"><strong>innerproduct</strong></a> | 
+   <a href="#cap-newton_exa1"><strong>newton_exa1</strong></a> | 
+   <a href="#cap-newton_opt_sincos"><strong>newton_opt_sincos</strong></a> | 
    <a href="#cap-permmat"><strong>permmat</strong></a> | 
+   <a href="#cap-sd_exa1"><strong>sd_exa1</strong></a> | 
    <a href="#cap-sdd"><strong>sdd</strong></a> | 
-   <a href="#cap-theorem-4"><strong>theorem-4</strong></a>
+   <a href="#cap-steepest_descent_algo"><strong>steepest_descent_algo</strong></a> | 
+   <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
+   <a href="#cap-unimodal"><strong>unimodal</strong></a>
    </div>
 
    <table class="indextable modindextable">
@@ -683,6 +708,30 @@ title="Fullscreen mode"
        <td>
        <a href="bookchapter3-1.html#backsubcost"><code class="xref">backsubcost</code></a> <em>(bookchapter3-1)</em></td><td>
        <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cg_exa1"><td></td><td>
+       <strong>cg_exa1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#cg_exa1"><code class="xref">cg_exa1</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cg_exa2"><td></td><td>
+       <strong>cg_exa2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#cg_exa2"><code class="xref">cg_exa2</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cg_exa3"><td></td><td>
+       <strong>cg_exa3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#cg_exa3"><code class="xref">cg_exa3</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-chap1_def1"><td></td><td>
        <strong>chap1_def1</strong></td><td></td></tr>
@@ -1444,12 +1493,28 @@ title="Fullscreen mode"
        <a href="bookchapter3-1.html#condition_number"><code class="xref">condition_number</code></a> <em>(bookchapter3-1)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-conjgrad_opt_algo"><td></td><td>
+       <strong>conjgrad_opt_algo</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#conjgrad_opt_algo"><code class="xref">conjgrad_opt_algo</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-cost"><td></td><td>
        <strong>cost</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="bookchapter3-1.html#cost"><code class="xref">cost</code></a> <em>(bookchapter3-1)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-golden_sin"><td></td><td>
+       <strong>golden_sin</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-1.html#golden_sin"><code class="xref">golden_sin</code></a> <em>(bookchapter7-1)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-gramschmidt_v1_2by2"><td></td><td>
@@ -1476,6 +1541,22 @@ title="Fullscreen mode"
        <a href="bookchapter3-3.html#innerproduct"><code class="xref">innerproduct</code></a> <em>(bookchapter3-3)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-newton_exa1"><td></td><td>
+       <strong>newton_exa1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#newton_exa1"><code class="xref">newton_exa1</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-newton_opt_sincos"><td></td><td>
+       <strong>newton_opt_sincos</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#newton_opt_sincos"><code class="xref">newton_opt_sincos</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-permmat"><td></td><td>
        <strong>permmat</strong></td><td></td></tr>
      <tr>
@@ -1483,6 +1564,14 @@ title="Fullscreen mode"
        <td>
        <a href="bookchapter3-1.html#permmat"><code class="xref">permmat</code></a> <em>(bookchapter3-1)</em></td><td>
        <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-sd_exa1"><td></td><td>
+       <strong>sd_exa1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#sd_exa1"><code class="xref">sd_exa1</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-sdd"><td></td><td>
        <strong>sdd</strong></td><td></td></tr>
@@ -1492,6 +1581,14 @@ title="Fullscreen mode"
        <a href="bookchapter3-2.html#sdd"><code class="xref">sdd</code></a> <em>(bookchapter3-2)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-steepest_descent_algo"><td></td><td>
+       <strong>steepest_descent_algo</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-2.html#steepest_descent_algo"><code class="xref">steepest_descent_algo</code></a> <em>(bookchapter7-2)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>
      <tr>
@@ -1499,6 +1596,14 @@ title="Fullscreen mode"
        <td>
        <a href="bookchapter4-1.html#theorem-4"><code class="xref">theorem-4</code></a> <em>(bookchapter4-1)</em></td><td>
        <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-unimodal"><td></td><td>
+       <strong>unimodal</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="bookchapter7-1.html#unimodal"><code class="xref">unimodal</code></a> <em>(bookchapter7-1)</em></td><td>
+       <em>definition</em></td></tr>
    </table>
 
 
