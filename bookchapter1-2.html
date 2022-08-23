@@ -1258,7 +1258,7 @@ call it with real or integer inputs, and Python will know what to do:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="n">n</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">:</span>
-    <span class="n">newvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">newvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newvalues</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="n">newvalues</span>
 </pre></div>
@@ -1266,8 +1266,7 @@ call it with real or integer inputs, and Python will know what to do:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.84147098, -0.7568025 ,  0.41211849, -0.28790332, -0.13235175,
-       -0.99177885, -0.95375265,  0.92002604, -0.62988799, -0.50636564,
-       -0.50636564])
+       -0.99177885, -0.95375265,  0.92002604, -0.62988799, -0.50636564])
 </pre></div>
 </div>
 </div>
@@ -1405,7 +1404,7 @@ removing <strong>break</strong>:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.71735946, 0.58308391, 0.57627938, 0.31934359, 0.59267715])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.79708476, 0.90208923, 0.63871475, 0.99629712, 0.48318283])
 </pre></div>
 </div>
 </div>
@@ -1418,7 +1417,7 @@ removing <strong>break</strong>:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.09249587,  0.79369425, -0.89573752, -0.44920423, -1.28009798])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.49878834,  1.30152192,  1.82077839,  0.92749091,  1.52988655])
 </pre></div>
 </div>
 </div>
