@@ -659,7 +659,7 @@ is the specific model used in most computers today:</p>
 <ul class="simple">
 <li><p>Notice how <span class="math notranslate nohighlight">\(s\)</span> appears in different forms in equations <a class="reference internal" href="#equation-float-pt-general">(1)</a> and <a class="reference internal" href="#equation-ieee">(2)</a>. In <a class="reference internal" href="#equation-ieee">(2)</a>, <span class="math notranslate nohighlight">\(s\)</span> is either 0 or 1. If <span class="math notranslate nohighlight">\(s=0\)</span>, then <span class="math notranslate nohighlight">\(x\)</span> is positive. If <span class="math notranslate nohighlight">\(s=1\)</span>, <span class="math notranslate nohighlight">\(x\)</span> is negative.</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(\beta=2,\)</span> in the normalized floating-point representation of <span class="math notranslate nohighlight">\(x\)</span> the first (nonzero) digit after the decimal point has to be 1. Then we do not have to store this number. That’s why we write <span class="math notranslate nohighlight">\(x\)</span> as a decimal number starting at 1 in <a class="reference internal" href="#equation-ieee">(2)</a>. Even though precision is <span class="math notranslate nohighlight">\(t=52,\)</span> we are able to access up to the 53rd digit <span class="math notranslate nohighlight">\(a_{53}\)</span>.</p></li>
-<li><p>The bounds for the exponent are: <span class="math notranslate nohighlight">\(0\leq e\leq 2047.\)</span> We will discuss where 2047 comes from shortly. But first, let’s discuss why we have <span class="math notranslate nohighlight">\(e-1023\)</span> as the exponent in the representation <a class="reference internal" href="#equation-ieee">(2)</a>, as opposed to simply <span class="math notranslate nohighlight">\(e\)</span> (which we had in the representation <a class="reference internal" href="#equation-float-pt-general">(1)</a>. If the smallest exponent possible was <span class="math notranslate nohighlight">\(e=0\)</span>, then the smallest positive number the computer can generate would be <span class="math notranslate nohighlight">\((1.00...0)_{2}=1\)</span>: certainly we need the computer to represent numbers less than 1! That’s why we use the shifted expression <span class="math notranslate nohighlight">\(e-1023\)</span>, called the \textbf{biased exponent},  in the representation In <a class="reference internal" href="#equation-ieee">(2)</a>. Note that the bounds for the biased exponent are <span class="math notranslate nohighlight">\(-1023\leq e-1023 \leq 1024.\)</span></p></li>
+<li><p>The bounds for the exponent are: <span class="math notranslate nohighlight">\(0\leq e\leq 2047.\)</span> We will discuss where 2047 comes from shortly. But first, let’s discuss why we have <span class="math notranslate nohighlight">\(e-1023\)</span> as the exponent in the representation <a class="reference internal" href="#equation-ieee">(2)</a>, as opposed to simply <span class="math notranslate nohighlight">\(e\)</span> (which we had in the representation <a class="reference internal" href="#equation-float-pt-general">(1)</a>). If the smallest exponent possible was <span class="math notranslate nohighlight">\(e=0\)</span>, then the smallest positive number the computer can generate would be <span class="math notranslate nohighlight">\((1.00...0)_{2}=1\)</span>: certainly we need the computer to represent numbers less than 1! That’s why we use the shifted expression <span class="math notranslate nohighlight">\(e-1023\)</span>, called the <strong>biased exponent</strong>,  in the representation In <a class="reference internal" href="#equation-ieee">(2)</a>. Note that the bounds for the biased exponent are <span class="math notranslate nohighlight">\(-1023\leq e-1023 \leq 1024.\)</span></p></li>
 </ul>
 <p>Here is a schema that illustrates how the physical bits of a computer
 correspond to the representation above. Each cell in the table below,
@@ -683,7 +683,7 @@ e&amp;=(00...0)_{2}=0\\
 e&amp;=(11...1)_{2}=2^{0}+2^{1}+...+2^{10}=\frac{2^{11}-1}{2-1}=2047.
 \end{align*}\]</div>
 <ul class="simple">
-<li><p>The red bits, and there are 52 of them, store the digits <span class="math notranslate nohighlight">\(a_{2}\)</span></p></li>
+<li><p>The red bits, and there are 52 of them, store the digits <span class="math notranslate nohighlight">\(a_{2}\)</span> through <span class="math notranslate nohighlight">\(a_{53}\)</span>.</p></li>
 </ul>
 <div class="proof example admonition" id="chap1_exa9">
 <p class="admonition-title"><span class="caption-number">Example 2 </span></p>
@@ -770,7 +770,7 @@ the bit by bit representation of a number, we can define the following function 
 This arrangement, all exponent bits set to zero, is reserved for
 <span class="math notranslate nohighlight">\(\pm 0.0\)</span> and <strong>subnormal numbers</strong>. Subnormal
 numbers are an exception to our normalized floating-point representation,
-an exception that is useful in various ways. For details see <span id="id1">[<a class="reference internal" href="#id22" title="D Goldberg. What every computer scientist should know about floating-point arithmetic. ACM Computing Surveys (CSUR), 23:5-48, 1991.">Goldberg, 1991</a>]</span>.</p>
+an exception that is useful in various ways. For details see <span id="id1">[<a class="reference internal" href="#id8" title="D Goldberg. What every computer scientist should know about floating-point arithmetic. ACM Computing Surveys (CSUR), 23:5-48, 1991.">Goldberg, 1991</a>]</span>.</p>
 <p>Here is how plus and minus infinity is represented in the computer:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -830,7 +830,7 @@ on how the numbers are spaced.</p>
 (00001100)_2 + (11110100)_2 = (\textcolor{red}{1}00000000)_2
 \end{equation*}\]</div>
 <p>and realize that the first 8 digits of the sum (from right to left), which is what the computer can only represent (ignoring the red digit 1), is <span class="math notranslate nohighlight">\((00000000)_2\)</span>. So just like <span class="math notranslate nohighlight">\(12+(-12)=0\)</span> in base 10, the sum of the representations of these numbers is also 0.</p>
-<p>We can repeat these calculations with 64-bits, using Python. The function \textit{int2bin} defined below outputs the digits of an integer, using two’s complement for negative numbers:</p>
+<p>We can repeat these calculations with 64-bits, using Python. The function <em>int2bin</em> defined below outputs the digits of an integer, using two’s complement for negative numbers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">struct</span>
@@ -852,49 +852,6 @@ on how the numbers are spaced.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="docutils container" id="id2">
-<dl class="citation">
-<dt class="label" id="id3"><span class="brackets">AS91</span></dt>
-<dd><p>M. Abramowitz and I.A. Stegun. <em>Handbook of mathematical functions: with formulas, graphs, and mathematical tables</em>. Volume 55. Courier Corporation, 1991.</p>
-</dd>
-<dt class="label" id="id10"><span class="brackets">Atk89</span></dt>
-<dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets">BFB16</span></dt>
-<dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
-</dd>
-<dt class="label" id="id12"><span class="brackets">CK96</span></dt>
-<dd><p>S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. <em>Journal of Computational Physics</em>, 123:267–273, 1996.</p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">CM27</span></dt>
-<dd><p>A.B. Chace and H.P. Manning. The rhind mathematical papyrus: british museum 10057 and 10058. <em>Mathematical Association of America</em>, 1927.</p>
-</dd>
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id17">CGL83</a></span></dt>
-<dd><p>T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. <em>The American Statistician</em>, 37:242–247, 1983.</p>
-</dd>
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id18">CK12</a></span></dt>
-<dd><p>E.W. Cheney and D.R. Kincaid. <em>Numerical mathematics and computing</em>. Cengage Learning, 2012.</p>
-</dd>
-<dt class="label" id="id13"><span class="brackets">Gla13</span></dt>
-<dd><p>P. Glasserman. <em>Monte Carlo methods in Financial Engineering</em>. Springer, 2013.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
-<dd><p>D Goldberg. What every computer scientist should know about floating-point arithmetic. <em>ACM Computing Surveys (CSUR)</em>, 23:5–48, 1991.</p>
-</dd>
-<dt class="label" id="id14"><span class="brackets">Hea97</span></dt>
-<dd><p>M.T. Heath. <em>Scientific Computing: An introductory survey</em>. McGraw-Hill, 1997.</p>
-</dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id16">Hig93</a></span></dt>
-<dd><p>N.J Higham. The accuracy of floating point summation. <em>SIAM Journal on Scientific Computing</em>, 14:783–799, 1993.</p>
-</dd>
-<dt class="label" id="id11"><span class="brackets">IK66</span></dt>
-<dd><p>Isaacson, E. and H.B. Keller. <em>Analysis of Numerical Methods</em>. John Wiley &amp; Sons, 1966.</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets">KC09</span></dt>
-<dd><p>D. Kincaid and W. Cheney. <em>Numerical Analysis: Mathematics of Scientific Computing</em>. American Mathematical Society, 3rd edition, 2009.</p>
-</dd>
-</dl>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -935,7 +892,7 @@ on how the numbers are spaced.</p>
 </div>
 </div>
 </div>
-<p>Let’s have a closer look at this function. The Python function \textbf{factorial(n)} computes the factorial, returned as a float, as the gamma function at <span class="math notranslate nohighlight">\(n+1\)</span>. If we call <span class="math notranslate nohighlight">\(f\)</span> with an integer input, then the above code will compute <span class="math notranslate nohighlight">\(n^n\)</span> as an integer and <span class="math notranslate nohighlight">\(\text{factorial}(n)\)</span> as a float. Then it will divide these numbers, by first converting <span class="math notranslate nohighlight">\(n^n\)</span> to a float, and obtain a floating-point factorial. Let’s compute
+<p>Let’s have a closer look at this function. The Python function <strong>factorial(n)</strong> computes the factorial, returned as a float, as the gamma function at <span class="math notranslate nohighlight">\(n+1\)</span>. If we call <span class="math notranslate nohighlight">\(f\)</span> with an integer input, then the above code will compute <span class="math notranslate nohighlight">\(n^n\)</span> as an integer and <span class="math notranslate nohighlight">\(\text{factorial}(n)\)</span> as a float. Then it will divide these numbers, by first converting <span class="math notranslate nohighlight">\(n^n\)</span> to a float, and obtain a floating-point factorial. Let’s compute
 <span class="math notranslate nohighlight">\(f(n)=\frac{n^n}{n!}\)</span> as <span class="math notranslate nohighlight">\(n=1,...,1000\)</span>:</p>
 <div class="cell tag_{ tag_&quot;tags&quot;: tag_[ tag_&quot;output_scroll&quot; tag_] tag_} tag_output_scroll docutils container">
 <div class="cell_input docutils container">
@@ -1092,11 +1049,11 @@ on how the numbers are spaced.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_32048</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_19188</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
 <span class="ne">----&gt; </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_32048/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_19188/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -1135,7 +1092,7 @@ on how the numbers are spaced.</p>
 </div>
 </div>
 </div>
-<p>The function <span class="math notranslate nohighlight">\(f(n)\)</span> can be coded in a much better way if we rewrite <span class="math notranslate nohighlight">\(\frac{n^n}{n!}\)</span> as <span class="math notranslate nohighlight">\(\frac{n}{n}\frac{n}{n-1}...\frac{n}{1}\)</span>. Each fraction can be computed separately, and then multiplied,  which will slow down the growth of the numbers. Here is a new code using a \textbf{for} statement.</p>
+<p>The function <span class="math notranslate nohighlight">\(f(n)\)</span> can be coded in a much better way if we rewrite <span class="math notranslate nohighlight">\(\frac{n^n}{n!}\)</span> as <span class="math notranslate nohighlight">\(\frac{n}{n}\frac{n}{n-1}...\frac{n}{1}\)</span>. Each fraction can be computed separately, and then multiplied,  which will slow down the growth of the numbers. Here is a new code using a <strong>for</strong> statement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -2189,7 +2146,7 @@ Informally, we call these numbers <span class="math notranslate nohighlight">\(k
 computer represent <span class="math notranslate nohighlight">\(x\)</span>? Let’s use the notation <span class="math notranslate nohighlight">\(fl(x)\)</span> for the floating-point
 representation of <span class="math notranslate nohighlight">\(x\)</span>. There are two choices, chopping and rounding:</p>
 <ul class="simple">
-<li><p>In chopping, we simply take the first <span class="math notranslate nohighlight">\(k\)</span> digits and ignore the rest: <span class="math notranslate nohighlight">\(fl(x)=0.d_{1}d_{2}\ldots d_{k}.\)</span></p></li>
+<li><p>In chopping, we simply take the first <span class="math notranslate nohighlight">\(k\)</span> digits and ignore the rest: <span class="math notranslate nohighlight">\(fl(x)=0.d_{1}d_{2}\ldots d_{k}\times 10^n.\)</span></p></li>
 <li><p>In rounding, if <span class="math notranslate nohighlight">\(d_{k+1}\geq 5\)</span> we add 1 to <span class="math notranslate nohighlight">\(d_{k}\)</span> to obtain <span class="math notranslate nohighlight">\(fl(x)\)</span>. If <span class="math notranslate nohighlight">\(d_{k+1}&lt;5,\)</span> then we simply do as in chopping.</p></li>
 </ul>
 <div class="proof example admonition" id="chap1_exa11">
@@ -2199,10 +2156,10 @@ representation of <span class="math notranslate nohighlight">\(x\)</span>. There
 below:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\pi=0.314159265...\times10^{1}\)</span></p>
-<p>Chopping gives <span class="math notranslate nohighlight">\(fl(\pi)=0.31415\)</span> and rounding gives <span class="math notranslate nohighlight">\(fl(\pi)=0.31416.\)</span></p>
+<p>Chopping gives <span class="math notranslate nohighlight">\(fl(\pi)=0.31415\times10^{1}\)</span> and rounding gives <span class="math notranslate nohighlight">\(fl(\pi)=0.31416\times10^{1}.\)</span></p>
 </li>
 <li><p><span class="math notranslate nohighlight">\(0.0001234567\)</span></p>
-<p>We need to write the number in the normalized representation first as <span class="math notranslate nohighlight">\(0.1234567\times10^{-3}.\)</span> Now chopping gives <span class="math notranslate nohighlight">\(0.12345\)</span> and rounding gives <span class="math notranslate nohighlight">\(0.12346.\)</span></p>
+<p>We need to write the number in the normalized representation first as <span class="math notranslate nohighlight">\(0.1234567\times10^{-3}.\)</span> Now chopping gives <span class="math notranslate nohighlight">\(0.12345\times10^{-3}\)</span> and rounding gives <span class="math notranslate nohighlight">\(0.12346\times10^{-3}.\)</span></p>
 </li>
 </ul>
 </section>
@@ -2231,7 +2188,7 @@ to understand why.</p>
 <li><p><span class="math notranslate nohighlight">\(x=0.20\times10^{5},x^{*}=0.21\times10^{5}\)</span></p></li>
 </ol>
 </section>
-</div><p>Notice how the only difference in the three cases is the exponent
+</div><p>Notice the only difference in the three cases is the exponent
 of the numbers. The absolute errors are: <span class="math notranslate nohighlight">\(0.01\times 10\)</span> , <span class="math notranslate nohighlight">\(0.01\times 10^{-2}\)</span>
 , <span class="math notranslate nohighlight">\(0.01\times 10^{5}\)</span>. The absolute errors are different since the
 exponents are different. However, the relative error in each case
@@ -2247,7 +2204,7 @@ that</p>
 \frac{|x-x^{*}|}{|x|}\leq5\times10^{-s}.
 \end{equation*}\]</div>
 </section>
-</div><p>In Example <a class="reference internal" href="#chap1_exa13">Example 5</a> we had <span class="math notranslate nohighlight">\(\frac{|x-x^{*}|}{|x|}=0.05\leq5\times10^{-2}\)</span>
+</div><p>In <a class="reference internal" href="#chap1_exa13">Example 5</a> we had <span class="math notranslate nohighlight">\(\frac{|x-x^{*}|}{|x|}=0.05\leq5\times10^{-2}\)</span>
 but not less than or equal to <span class="math notranslate nohighlight">\(5\times10^{-3}\)</span>. Therefore we say
 <span class="math notranslate nohighlight">\(x^{*}=0.21\)</span> approximates <span class="math notranslate nohighlight">\(x=0.20\)</span> to 2 significant digits (but not to 3 digits).</p>
 <p>When the computer approximates a real number <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(fl(x)\)</span>, what
@@ -2284,7 +2241,7 @@ fl(x)=0.d_{1}d_{2}...d_{k}\times 10^{n}
 \frac{|x-fl(x)|}{|x|}=\frac{0.d_{k+1}d_{k+2}...\times 10^{n-k}}{0.d_{1}d_{2}...\times 10^{n}}=\left(\frac{0.d_{k+1}d_{k+2}...}{0.d_{1}d_{2}...}\right)10^{-k}.
 \end{equation*}\]</div>
 <p>We have two simple bounds: <span class="math notranslate nohighlight">\(0.d_{k+1}d_{k+2}...&lt;1\)</span> and <span class="math notranslate nohighlight">\(0.d_{1}d_{2}...\geq 0.1\)</span>,
-the latter true since the smallest <span class="math notranslate nohighlight">\(d_{1}\)</span> can be, is 1. Using these
+the latter true since the smallest value <span class="math notranslate nohighlight">\(d_{1}\)</span> can be, is 1. Using these
 bounds in the equation above we get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -2294,7 +2251,7 @@ bounds in the equation above we get</p>
 <div class="proof remark admonition" id="chap1_rem16">
 <p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
 <section class="remark-content" id="proof-content">
-<p>Lemma <a class="reference internal" href="#chap1_lem15">Lemma 1</a> easily transfers to the base
+<p><a class="reference internal" href="#chap1_lem15">Lemma 1</a> easily transfers to the base
 2 floating-point representation: <span class="math notranslate nohighlight">\(x=(-1)^{s}(1.a_{2}...a_{53})_{2}\times2^{e-1023}\)</span>, by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -2358,7 +2315,7 @@ which is the smallest number that will make the sum larger than 1.0 with roundin
 2^{-53} &amp; \text{if rounding}
 \end{cases}.
 \end{equation*}\]</div>
-<p>As a consequence, notice that we can restate the inequality in Remark <a class="reference internal" href="#chap1_rem16">Remark 1</a> in a compact way using the machine epsilon as:</p>
+<p>As a consequence, notice that we can restate the inequality in <a class="reference internal" href="#chap1_rem16">Remark 1</a> in a compact way using the machine epsilon as:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \frac{|x-fl(x)|}{|x|}\leq \epsilon.
@@ -2459,7 +2416,7 @@ error but not the relative error.</p>
 \[\begin{equation*}
 \frac{1-\cos x}{\sin x}
 \end{equation*}\]</div>
-<p>when <span class="math notranslate nohighlight">\(x\)</span> is near zero. This is a problem where we have both \textit{subtraction of nearly equal quantities} which happens in the numerator, and \textit{division by a small number}, when <span class="math notranslate nohighlight">\(x\)</span> is close to zero. Let <span class="math notranslate nohighlight">\(x=0.1\)</span>. Continuing with five-digit rounding, we have</p>
+<p>when <span class="math notranslate nohighlight">\(x\)</span> is near zero. This is a problem where we have both <em>subtraction of nearly equal quantities</em> which happens in the numerator, and <em>division by a small number</em>, when <span class="math notranslate nohighlight">\(x\)</span> is close to zero. Let <span class="math notranslate nohighlight">\(x=0.1\)</span>. Continuing with five-digit rounding, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 &amp;fl(\sin 0.1)=0.099833, fl(\cos 0.1)=0.99500\\
@@ -2545,7 +2502,7 @@ happens instead of one.</p>
 </div><div class="proof example admonition" id="chap1_exa20">
 <p class="admonition-title"><span class="caption-number">Example 8 </span></p>
 <section class="example-content" id="proof-content">
-<p>The simple procedure of adding numbers, even if they do not have mixed signs, can accumulate large errors due to rounding or chopping. Several sophisticated algorithms to add large lists of numbers with accumulated error smaller than straightforward addition exist in the literature (see, for example, <span id="id16">Higham [<a class="reference internal" href="#id23" title="N.J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14:783-799, 1993.">1993</a>]</span>).</p>
+<p>The simple procedure of adding numbers, even if they do not have mixed signs, can accumulate large errors due to rounding or chopping. Several sophisticated algorithms to add large lists of numbers with accumulated error smaller than straightforward addition exist in the literature (see, for example, <span id="id2">Higham [<a class="reference internal" href="#id9" title="N.J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14:783-799, 1993.">1993</a>]</span>).</p>
 <p>For a simple example, consider using four-digit arithmetic with rounding, and computing the average of two numbers, <span class="math notranslate nohighlight">\(\frac{a+b}{2}\)</span>. For <span class="math notranslate nohighlight">\(a=2.954\)</span> and <span class="math notranslate nohighlight">\(b=100.9\)</span>, the true average is <span class="math notranslate nohighlight">\(51.927\)</span>. However, four-digit arithmetic with rounding yields:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -2571,7 +2528,7 @@ fl\left( \frac{100.9+2.954}{2} \right) = fl\left( \frac{fl(103.854)}{2}\right)=f
 <li><p><span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \left[ \sum_{i=1}^n x_i^2 - \frac{1}{n} \left( \sum_{i=1}^n x_i \right)^2 \right]\)</span>,</p></li>
 <li><p>First compute <span class="math notranslate nohighlight">\(\bar{x}=\frac{1}{n} \sum_{i=1}^n x_i\)</span>, and then <span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})^2\)</span>.</p></li>
 </ol>
-<p>Both formulas can suffer from roundoff errors due to adding large lists of numbers if <span class="math notranslate nohighlight">\(n\)</span> is large, as mentioned in the previous example. However, the first formula is also prone to error due to cancellation of leading digits (see <span id="id17">Chan <em>et al.</em> [<a class="reference internal" href="#id24" title="T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. The American Statistician, 37:242-247, 1983.">1983</a>]</span> for details).</p>
+<p>Both formulas can suffer from roundoff errors due to adding large lists of numbers if <span class="math notranslate nohighlight">\(n\)</span> is large, as mentioned in the previous example. However, the first formula is also prone to error due to cancellation of leading digits (see <span id="id3">Chan <em>et al.</em> [<a class="reference internal" href="#id10" title="T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. The American Statistician, 37:242-247, 1983.">1983</a>]</span> for details).</p>
 <p>For an example, consider four-digit rounding arithmetic, and let the data be <span class="math notranslate nohighlight">\(1.253,2.411,3.174\)</span>. The sample variance from formula 1 and formula 2 are, 0.93 and 0.9355, respectively. The exact value, up to 6 digits, is 0.935562. Formula 2 is a numerically more stable choice for computing the variance than the first one.</p>
 </section>
 </div><div class="proof example admonition" id="chap1_exa22">
@@ -2652,7 +2609,7 @@ why.</p>
 <p><strong>Exercise 1.3-3</strong></p>
 <p>Write two functions in Python to compute the binomial coefficient <span class="math notranslate nohighlight">\(\binom{m}{k}\)</span>
 using the following formulas:</p>
-<p>a. <span class="math notranslate nohighlight">\(\binom{m}{k}=\frac{m!}{k!(m-k)!}\)</span> (<span class="math notranslate nohighlight">\(m!\)</span> is \textbf{scipy.special.factorial(m)} in Python.)</p>
+<p>a. <span class="math notranslate nohighlight">\(\binom{m}{k}=\frac{m!}{k!(m-k)!}\)</span> (<span class="math notranslate nohighlight">\(m!\)</span> is <strong>scipy.special.factorial(m)</strong> in Python.)</p>
 <p>b. <span class="math notranslate nohighlight">\(\binom{m}{k}=(\frac{m}{k})(\frac{m-1}{k-1})\times...\times(\frac{m-k+1}{1})\)</span></p>
 <p>Then, experiment with various values for <span class="math notranslate nohighlight">\(m,k\)</span> to see which formula
 causes overflow first.</p>
@@ -2724,7 +2681,7 @@ degree polynomial?</p>
 </section>
 </div><p><strong>Exercise 1.3-6</strong></p>
 <p>The following is from “Numerical mathematics and computing” by
-<span id="id18">Cheney and Kincaid [<a class="reference internal" href="#id25" title="E.W. Cheney and D.R. Kincaid. Numerical mathematics and computing. Cengage Learning, 2012.">2012</a>]</span>:</p>
+<span id="id4">Cheney and Kincaid [<a class="reference internal" href="#id11" title="E.W. Cheney and D.R. Kincaid. Numerical mathematics and computing. Cengage Learning, 2012.">2012</a>]</span>:</p>
 <p><em>In 1996, the Ariane 5 rocket launched by the European Space
 Agency exploded 40 seconds after lift-off from Kourou, French Guiana.
 An investigation determined that the horizontal velocity required
@@ -2735,18 +2692,18 @@ The rocket and its cargo were valued at $500 million</em>.</p>
 <p>Search online, or in the library, to find another example of computer
 arithmetic going very wrong! Write a short paragraph explaining the
 problem, and give a reference.</p>
-<div class="docutils container" id="id19">
+<div class="docutils container" id="id5">
 <dl class="citation">
-<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id17">CGL83</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id3">CGL83</a></span></dt>
 <dd><p>T.F. Chan, G.H. Golub, and R.J. LeVeque. Algorithms for computing the sample variance: analysis and recommendations. <em>The American Statistician</em>, 37:242–247, 1983.</p>
 </dd>
-<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id18">CK12</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id4">CK12</a></span></dt>
 <dd><p>E.W. Cheney and D.R. Kincaid. <em>Numerical mathematics and computing</em>. Cengage Learning, 2012.</p>
 </dd>
-<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id1">Gol91</a></span></dt>
 <dd><p>D Goldberg. What every computer scientist should know about floating-point arithmetic. <em>ACM Computing Surveys (CSUR)</em>, 23:5–48, 1991.</p>
 </dd>
-<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id16">Hig93</a></span></dt>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id2">Hig93</a></span></dt>
 <dd><p>N.J Higham. The accuracy of floating point summation. <em>SIAM Journal on Scientific Computing</em>, 14:783–799, 1993.</p>
 </dd>
 </dl>
