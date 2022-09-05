@@ -544,6 +544,14 @@ first stopping criterion discussed earlier, but not the same. One can also use m
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform the bisection method</span>
+<span class="sd">    input:</span>
+<span class="sd">    f: function, the function f</span>
+<span class="sd">    a, b: float, the left and right ends</span>
+<span class="sd">    eps: float, the tolerance; once (b-a)&lt;eps, stop</span>
+<span class="sd">    N: int, the maximum number of steps to run the algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">p</span> <span class="o">=</span> <span class="mf">0.</span> <span class="c1"># to ensure the value of p carries out of the while loop</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">:</span>
@@ -564,8 +572,8 @@ first stopping criterion discussed earlier, but not the same. One can also use m
 </div>
 </div>
 <p>Let’s use the bisection method to find the root of
-(f(x)=x^5+2x^3-5x-2), with (\epsilon=10^{-4}). Note that ([0,2])
-contains a root, since (f(0)&lt;0) and (f(2)&gt;0). We set (N=20) below.</p>
+<span class="math notranslate nohighlight">\(f(x)=x^5+2x^3-5x-2\)</span>, with <span class="math notranslate nohighlight">\(\epsilon=10^{-4}\)</span>. Note that <span class="math notranslate nohighlight">\([0,2]\)</span>
+contains a root, since <span class="math notranslate nohighlight">\(f(0)&lt;0\)</span> and <span class="math notranslate nohighlight">\(f(2)&gt;0\)</span>. We set <span class="math notranslate nohighlight">\(N=20\)</span> below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bisection</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -671,7 +679,7 @@ the number of required iterations is 15.</p>
 using the bisection algorithm, following the steps below:</p>
 <p>a. First express the problem as <span class="math notranslate nohighlight">\(f(x)=0\)</span> with <span class="math notranslate nohighlight">\(p=25^{1/3}\)</span> the root.</p>
 <p>b. Find an interval <span class="math notranslate nohighlight">\((a,b)\)</span> that contains the root, using Intermediate Value Theorem.</p>
-<p>c. Determine, analytically, the number of iterates necessary to obtain the accuracy of <span class="math notranslate nohighlight">\(10^{-5}\)</span>.</p>
+<p>c. Determine, analytically, the number of iterations necessary to obtain the accuracy of <span class="math notranslate nohighlight">\(10^{-5}\)</span>.</p>
 <p>d. Use the Python code for the bisection method to compute the iterate from (c), and compare the actual absolute error with <span class="math notranslate nohighlight">\(10^{-5}\)</span>.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
