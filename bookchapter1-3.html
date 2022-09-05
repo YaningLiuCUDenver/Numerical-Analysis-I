@@ -1049,11 +1049,11 @@ on how the numbers are spaced.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_37108</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_33848</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
 <span class="ne">----&gt; </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_37108/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
+<span class="nn">~\AppData\Local\Temp/ipykernel_33848/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -2537,7 +2537,7 @@ fl\left( \frac{100.9+2.954}{2} \right) = fl\left( \frac{fl(103.854)}{2}\right)=f
 <p>We have a sum to compute:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-e^{-7}=1+\frac{-7}{1}+\frac{(-7)^{2}}{2!}+\frac{(-7)^{3}}{3!}+...+\frac{(-7)^{n}}{n!}.
+e^{-7}=1+\frac{-7}{1}+\frac{(-7)^{2}}{2!}+\frac{(-7)^{3}}{3!}+\cdots+\frac{(-7)^{n}}{n!}+\cdots.
 \end{equation*}\]</div>
 <p>The alternating signs make this a potentially error prone calculation.</p>
 <p>Python reports the “exact” value for <span class="math notranslate nohighlight">\(e^{-7}\)</span> as 0.0009118819655545162. If we use Python to compute this sum with <span class="math notranslate nohighlight">\(n=20\)</span>, the result is 0.009183673977218275. Here is the Python code for the calculation:</p>
