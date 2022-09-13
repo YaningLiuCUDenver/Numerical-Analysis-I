@@ -887,42 +887,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img879086a9bbc44c5496e7c6a899068158">
+  <img id="_anim_imga8e680d50cbf41e6b63258c620df5c87">
   <div class="anim-controls">
-    <input id="_anim_slider879086a9bbc44c5496e7c6a899068158" type="range" class="anim-slider"
+    <input id="_anim_slidera8e680d50cbf41e6b63258c620df5c87" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim879086a9bbc44c5496e7c6a899068158.set_frame(parseInt(this.value));"></input>
+           oninput="anima8e680d50cbf41e6b63258c620df5c87.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim879086a9bbc44c5496e7c6a899068158.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anima8e680d50cbf41e6b63258c620df5c87.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim879086a9bbc44c5496e7c6a899068158.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anima8e680d50cbf41e6b63258c620df5c87.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim879086a9bbc44c5496e7c6a899068158.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anima8e680d50cbf41e6b63258c620df5c87.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim879086a9bbc44c5496e7c6a899068158.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anima8e680d50cbf41e6b63258c620df5c87.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim879086a9bbc44c5496e7c6a899068158.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anima8e680d50cbf41e6b63258c620df5c87.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim879086a9bbc44c5496e7c6a899068158.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anima8e680d50cbf41e6b63258c620df5c87.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim879086a9bbc44c5496e7c6a899068158.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anima8e680d50cbf41e6b63258c620df5c87.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim879086a9bbc44c5496e7c6a899068158.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anima8e680d50cbf41e6b63258c620df5c87.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim879086a9bbc44c5496e7c6a899068158.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anima8e680d50cbf41e6b63258c620df5c87.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select879086a9bbc44c5496e7c6a899068158"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selecta8e680d50cbf41e6b63258c620df5c87"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_879086a9bbc44c5496e7c6a899068158"
+      <input type="radio" name="state" value="once" id="_anim_radio1_a8e680d50cbf41e6b63258c620df5c87"
              >
-      <label for="_anim_radio1_879086a9bbc44c5496e7c6a899068158">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_879086a9bbc44c5496e7c6a899068158"
+      <label for="_anim_radio1_a8e680d50cbf41e6b63258c620df5c87">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_a8e680d50cbf41e6b63258c620df5c87"
              checked>
-      <label for="_anim_radio2_879086a9bbc44c5496e7c6a899068158">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_879086a9bbc44c5496e7c6a899068158"
+      <label for="_anim_radio2_a8e680d50cbf41e6b63258c620df5c87">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_a8e680d50cbf41e6b63258c620df5c87"
              >
-      <label for="_anim_radio3_879086a9bbc44c5496e7c6a899068158">Reflect</label>
+      <label for="_anim_radio3_a8e680d50cbf41e6b63258c620df5c87">Reflect</label>
     </form>
   </div>
 </div>
@@ -932,9 +932,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img879086a9bbc44c5496e7c6a899068158";
-    var slider_id = "_anim_slider879086a9bbc44c5496e7c6a899068158";
-    var loop_select_id = "_anim_loop_select879086a9bbc44c5496e7c6a899068158";
+    var img_id = "_anim_imga8e680d50cbf41e6b63258c620df5c87";
+    var slider_id = "_anim_slidera8e680d50cbf41e6b63258c620df5c87";
+    var loop_select_id = "_anim_loop_selecta8e680d50cbf41e6b63258c620df5c87";
     var frames = new Array(20);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -6867,7 +6867,7 @@ JEnKEwOYJEmSJOWJAUySJEmS8sQAJkmSJEl5YgCTJEmSpDz5/7eehIiuvo/CAAAAAElFTkSuQmCC\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim879086a9bbc44c5496e7c6a899068158 = new Animation(frames, img_id, slider_id, 500.0,
+        anima8e680d50cbf41e6b63258c620df5c87 = new Animation(frames, img_id, slider_id, 500.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -6875,7 +6875,7 @@ JEnKEwOYJEmSJOWJAUySJEmS8sQAJkmSJEl5YgCTJEmSpDz5/7eehIiuvo/CAAAAAElFTkSuQmCC\
 </div></div>
 </div>
 <p>Below is a widget showing different convergence regions.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">fixed</span>
@@ -6888,7 +6888,7 @@ JEnKEwOYJEmSJOWJAUySJEmS8sQAJkmSJEl5YgCTJEmSpDz5/7eehIiuvo/CAAAAAElFTkSuQmCC\
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2a62ee660fba4b32ab9afb6c2c9cd393"}
+{"version_major": 2, "version_minor": 0, "model_id": "1f5fffc07c2a4c6881614c06d0ef571e"}
 </script></div>
 </div>
 <div class="proof theorem admonition" id="chap2_thm32">
@@ -7135,7 +7135,7 @@ C(\sigma)=S\phi(\mathbb{d_1})-Ke^{-rT}\phi(\mathbb{d_2}).
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"4abfa48d89de4e46ad307541c26368c0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "aa346d58f80b49be98594424f23a0f07": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "81c6610bd18140869e17631122ecb860": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Initial guess", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_4abfa48d89de4e46ad307541c26368c0", "max": 10.0, "min": -10.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_aa346d58f80b49be98594424f23a0f07", "value": 0.0}}, "fb9900ba96984f4799a9f7d76de20e6e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2a62ee660fba4b32ab9afb6c2c9cd393": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_81c6610bd18140869e17631122ecb860", "IPY_MODEL_9ce6ece6f3d44ce8815f5b47d6088850"], "layout": "IPY_MODEL_fb9900ba96984f4799a9f7d76de20e6e"}}, "b57d10d7e60646f48ad9de5434bb55ca": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9ce6ece6f3d44ce8815f5b47d6088850": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b57d10d7e60646f48ad9de5434bb55ca", "msg_id": "", "outputs": [{"output_type": "stream", "name": "stdout", "text": "p is  -0.43641313299799755  and the iteration number is  4\n"}]}}}, "version_major": 2, "version_minor": 0}
+{"state": {"f9b66450b0734f1988b159f7fefffd89": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7a9b860e079443c4a15e2c973725620d": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "e8318b279dae40fabd012568e8a2e684": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Initial guess", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_f9b66450b0734f1988b159f7fefffd89", "max": 10.0, "min": -10.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_7a9b860e079443c4a15e2c973725620d", "value": 0.0}}, "5ac2b77633294803b7be3fa7229aa9be": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1f5fffc07c2a4c6881614c06d0ef571e": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_e8318b279dae40fabd012568e8a2e684", "IPY_MODEL_2f63ec31f0f34fa8b1521c728b8caf0d"], "layout": "IPY_MODEL_5ac2b77633294803b7be3fa7229aa9be"}}, "d14d70dd48904f0a967c2e3d4881b72f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2f63ec31f0f34fa8b1521c728b8caf0d": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d14d70dd48904f0a967c2e3d4881b72f", "msg_id": "", "outputs": [{"output_type": "stream", "name": "stdout", "text": "p is  -0.43641313299799755  and the iteration number is  4\n"}]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
