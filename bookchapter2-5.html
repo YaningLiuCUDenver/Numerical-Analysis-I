@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -499,7 +501,7 @@ and <span class="math notranslate nohighlight">\((p_{1},f(p_{1}))\)</span> to fi
 method takes three initial approximations, passes a parabola (quadratic
 polynomial) through <span class="math notranslate nohighlight">\((p_{0},f(p_{0})),\)</span> <span class="math notranslate nohighlight">\((p_{1},f(p_{1}))\)</span>, <span class="math notranslate nohighlight">\((p_{2},f(p_{2}))\)</span>,
 and uses <strong>one</strong> of the roots of the polynomial as the next iterate.</p>
-<p>Let the quadratic polynomial written in the following form</p>
+<p>Let the quadratic polynomial be written in the following form</p>
 <div class="math notranslate nohighlight" id="equation-muller-poly">
 <span class="eqno">(15)<a class="headerlink" href="#equation-muller-poly" title="Permalink to this equation">#</a></span>\[P(x)=a(x-p_{2})^{2}+b(x-p_{2})+c.\]</div>
 <p>Solve the following equations for <span class="math notranslate nohighlight">\(a,b,c\)</span></p>

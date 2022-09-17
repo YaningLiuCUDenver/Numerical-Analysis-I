@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -572,8 +574,8 @@ rule to each domain separately, we get</p>
 <p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(n\)</span> be even, <span class="math notranslate nohighlight">\(h=\frac{b-a}{n+2},\)</span> and <span class="math notranslate nohighlight">\(x_{j}=a+(j+1)h\)</span>
 for <span class="math notranslate nohighlight">\(j=-1,0,...,n+1.\)</span> The composite Midpoint rule for <span class="math notranslate nohighlight">\(n+2\)</span> subintervals
 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d5aaa88-6e96-4c68-8834-f9882d710943">
-<span class="eqno">(28)<a class="headerlink" href="#equation-9d5aaa88-6e96-4c68-8834-f9882d710943" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0176416a-47f7-4b38-a093-b74dc388f62c">
+<span class="eqno">(28)<a class="headerlink" href="#equation-0176416a-47f7-4b38-a093-b74dc388f62c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=2h\sum_{j=0}^{n/2}f(x_{2j})+\frac{b-a}{6}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
@@ -582,8 +584,8 @@ is</p>
 Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}\)</span>, and <span class="math notranslate nohighlight">\(x_{j}=a+jh\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n.\)</span>
 The composite Trapezoidal rule for <span class="math notranslate nohighlight">\(n\)</span> subintervals is</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-3c533b3e-be80-4403-8b7e-07980081e1a8">
-<span class="eqno">(29)<a class="headerlink" href="#equation-3c533b3e-be80-4403-8b7e-07980081e1a8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5d985961-d435-4895-bf3a-b6c49416489f">
+<span class="eqno">(29)<a class="headerlink" href="#equation-5d985961-d435-4895-bf3a-b6c49416489f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_{j})+f(b)\right]-\frac{b-a}{12}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
