@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -664,7 +662,7 @@ p_{n}(x)=y_{0}l_{0}(x)+y_{1}l_{1}(x)+...+y_{n}l_{n}(x).
 <p>The main advantage of the Lagrange form of interpolation is that finding the interpolating polynomial is trivial: there is no need to solve a matrix equation. However, the evaluation, differentiation, and integration of the Lagrange form
 of a polynomial is more expensive than, for example, the monomial form.</p>
 <div class="proof example admonition" id="chap3_exa48">
-<p class="admonition-title"><span class="caption-number">Example 33 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 34 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the interpolating polynomial using the monomial basis and Lagrange
 basis functions for the data: <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6).\)</span></p>
@@ -813,7 +811,7 @@ y_{n}
 lower-triangular, and <span class="math notranslate nohighlight">\(a\)</span> can be solved by forward substitution, which is shown in the next example, in
 <span class="math notranslate nohighlight">\(O(n^2)\)</span> operations.</p>
 <div class="proof example admonition" id="chap3_exa49">
-<p class="admonition-title"><span class="caption-number">Example 34 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 35 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the interpolating polynomial using Newton’s basis for the data:
 <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>.</p>
@@ -853,7 +851,7 @@ a_{0}+3a_{1}+3a_{2}=6\Rightarrow-6+9+3a_{2}=6\Rightarrow a_{2}=1.
 \[\begin{equation*}
 p_{2}(x)=-6+3(x+1)+(x+1)(x-1).
 \end{equation*}\]</div>
-<p>Factoring out and simplifying gives <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^2\)</span>, which is the polynomial discussed in Example <a class="reference internal" href="#chap3_exa48">Example 33</a>.</p>
+<p>Factoring out and simplifying gives <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^2\)</span>, which is the polynomial discussed in Example <a class="reference internal" href="#chap3_exa48">Example 34</a>.</p>
 <p><strong>Summary:</strong> The interpolating polynomial <span class="math notranslate nohighlight">\(p_2(x)\)</span> for the data, <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>, represented in three different basis functions is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -868,7 +866,7 @@ p_{n}(x)&amp;=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})(x-
 &amp;=a_{0}+(x-x_{0})(a_{1}+(x-x_{1})(a_{2}+...+(x-x_{n-2})(a_{n-1}+(x-x_{n-1})(a_{n}))\cdots))
 \end{align*}\]</div>
 <div class="proof example admonition" id="chap3_exa50">
-<p class="admonition-title"><span class="caption-number">Example 35 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 36 </span></p>
 <section class="example-content" id="proof-content">
 <p>Write <span class="math notranslate nohighlight">\(p_{2}(x)=-6+3(x+1)+(x+1)(x-1)\)</span> using the nested form.</p>
 </section>
@@ -947,7 +945,7 @@ midpoint, and thus <span class="math notranslate nohighlight">\(s=t=h/2\)</span>
 \end{align*}\]</div>
 </div>
 <div class="proof example admonition" id="chap3_exa53">
-<p class="admonition-title"><span class="caption-number">Example 36 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 37 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find an upper bound for the absolute error when <span class="math notranslate nohighlight">\(f(x)=\cos x\)</span> is approximated by its interpolating polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> on <span class="math notranslate nohighlight">\([0,\pi/2]\)</span>. For the interpolating polynomial, use 5 equally spaced nodes (<span class="math notranslate nohighlight">\(n=4\)</span>) in <span class="math notranslate nohighlight">\([0,\pi/2]\)</span>, including the endpoints.</p>
 </section>
@@ -1067,7 +1065,7 @@ p_{k}(x) &amp; =f[\tilde{x}_{0}]+f[\tilde{x}_{0},\tilde{x}_{1}](x-\tilde{x}_{0})
 in the second. Therefore they must be equal to each other.</p>
 </div>
 <div class="proof example admonition" id="chap3_exa56">
-<p class="admonition-title"><span class="caption-number">Example 37 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 38 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the interpolating polynomial for the data <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>
 using Newton’s form and divided differences.</p>
@@ -1097,7 +1095,7 @@ x_{2}=2 &amp; f[x_{2}]=6 &amp;  &amp; \\
 \[\begin{equation*}
 p_{2}(x)=\textcolor{blue}{-6}+\textcolor{blue}{3}(x+1)+\textcolor{blue}{1}(x+1)(x-1),
 \end{equation*}\]</div>
-<p>which is the same polynomial we had in <a class="reference internal" href="#chap3_exa49">Example 34</a>.</p>
+<p>which is the same polynomial we had in <a class="reference internal" href="#chap3_exa49">Example 35</a>.</p>
 <p><strong>Exercise 4.1-4</strong></p>
 <p>Consider the function <span class="math notranslate nohighlight">\(f\)</span> given in the following table.</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1118,7 +1116,7 @@ instead of the Newton form, and you were given an additional data
 point like in part (b), how easy would it be (compared to what you
 did in part (b)) to update your interpolating polynomial?</p>
 <div class="proof example admonition" id="chap3_exa57">
-<p class="admonition-title"><span class="caption-number">Example 38 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
 <section class="example-content" id="proof-content">
 <p>Before the widespread availability of computers and mathematical software, the values of some often-used mathematical functions were disseminated to researchers and engineers via tables. The following table, taken from <span id="id1">[<a class="reference internal" href="#id3" title="M. Abramowitz and I.A. Stegun. Handbook of mathematical functions: with formulas, graphs, and mathematical tables. Volume 55. Courier Corporation, 1991.">Abramowitz and Stegun, 1991</a>]</span>, displays some values of the gamma function, <span class="math notranslate nohighlight">\(\Gamma(x)=\int_0^\infty t^{x-1} e^{-t}dt\)</span>.</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1286,7 +1284,7 @@ a=(\color{red}{y_0,f[x_0,x_1],f[x_0,x_1,x_2]})
 </div>
 </div>
 </div>
-<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa56">Example 37</a>:</p>
+<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa56">Example 38</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]))</span>
@@ -1299,7 +1297,7 @@ a=(\color{red}{y_0,f[x_0,x_1],f[x_0,x_1,x_2]})
 </div>
 </div>
 </div>
-<p>These are the divided differences in the second ordering of the data in <a class="reference internal" href="#chap3_exa57">Example 38</a>:</p>
+<p>These are the divided differences in the second ordering of the data in <a class="reference internal" href="#chap3_exa57">Example 39</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.765</span><span class="p">,</span><span class="mf">1.760</span><span class="p">,</span><span class="mf">1.755</span><span class="p">,</span><span class="mf">1.750</span><span class="p">]),</span>
@@ -1336,7 +1334,7 @@ f[x_{0}]+f[x_{0},x_{1}](z-x_{0})+\ldots
 </div>
 </div>
 </div>
-<p>Let’s verify the code by computing <span class="math notranslate nohighlight">\(p_3(1.761)\)</span> of <a class="reference internal" href="#chap3_exa57">Example 38</a>:</p>
+<p>Let’s verify the code by computing <span class="math notranslate nohighlight">\(p_3(1.761)\)</span> of <a class="reference internal" href="#chap3_exa57">Example 39</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.765</span><span class="p">,</span><span class="mf">1.760</span><span class="p">,</span><span class="mf">1.755</span><span class="p">,</span><span class="mf">1.750</span><span class="p">]),</span>

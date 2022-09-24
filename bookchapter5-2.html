@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -549,7 +547,7 @@ behavior of high-degree interpolating polynomials that use equally-spaced
 nodes. A solution is to break up the domain into smaller intervals
 and use a Newton-Cotes rule with a smaller <span class="math notranslate nohighlight">\(n\)</span> on each subinterval: this is known as a composite rule.</p>
 <div class="proof example admonition" id="chap4_exa74">
-<p class="admonition-title"><span class="caption-number">Example 44 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 45 </span></p>
 <section class="example-content" id="proof-content">
 <p>Let’s compute <span class="math notranslate nohighlight">\(\int_{0}^{2}e^{x}\sin xdx\)</span>. The antiderivative can be computed using integration by parts, and the true value of the integral to 6 digits
 is 5.39689. If we apply the Simpson’s rule we get:</p>
@@ -599,11 +597,11 @@ is</p></li>
 <span class="eqno">(30)<a class="headerlink" href="#equation-comps" title="Permalink to this equation">#</a></span>\[\int_{a}^{b}f(x)dx=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{\frac{n}{2}-1}f(x_{2j})+4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{b-a}{180}h^{4}f^{(4)}(\xi)\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
 <p><strong>Exercise 4.2-1</strong></p>
-<p>Show that the quadrature rule in <a class="reference internal" href="#chap4_exa74">Example 44</a> corresponds to taking <span class="math notranslate nohighlight">\(n=4\)</span> in the composite Simpson’s formula <a class="reference internal" href="#equation-comps">(30)</a>.</p>
+<p>Show that the quadrature rule in <a class="reference internal" href="#chap4_exa74">Example 45</a> corresponds to taking <span class="math notranslate nohighlight">\(n=4\)</span> in the composite Simpson’s formula <a class="reference internal" href="#equation-comps">(30)</a>.</p>
 <p><strong>Exercise 4.2-2</strong></p>
 <p>Show that the absolute error for the composite trapezoidal rule decays at the rate of <span class="math notranslate nohighlight">\(1/n^2\)</span>, and the absolute error for the composite Simpson’s rule decays at the rate of <span class="math notranslate nohighlight">\(1/n^4\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of subintervals.</p>
 <div class="proof example admonition" id="chap4_exa75">
-<p class="admonition-title"><span class="caption-number">Example 45 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 46 </span></p>
 <section class="example-content" id="proof-content">
 <p>Determine <span class="math notranslate nohighlight">\(n\)</span> that ensures the composite Simpson’s rule approximates <span class="math notranslate nohighlight">\(\int_{1}^{2}x\log xdx\)</span> with an absolute error of at most <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p>
 </section>
@@ -638,7 +636,7 @@ an absolute error of <span class="math notranslate nohighlight">\(2\times10^{-7}
 </div>
 </div>
 </div>
-<p>Let’s verify the calculations of <a class="reference internal" href="bookchapter5-1.html#chap4_exa72">Example 42</a>:</p>
+<p>Let’s verify the calculations of <a class="reference internal" href="bookchapter5-1.html#chap4_exa72">Example 43</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -728,7 +726,7 @@ the rule integrates polynomials <span class="math notranslate nohighlight">\(1, 
 </section>
 <section id="composite-simpson-s-rule">
 <h3>Composite Simpson’s rule<a class="headerlink" href="#composite-simpson-s-rule" title="Permalink to this headline">#</a></h3>
-<p>Next we code the composite Simpson’s rule, and verify the result of <a class="reference internal" href="#chap4_exa75">Example 45</a>.</p>
+<p>Next we code the composite Simpson’s rule, and verify the result of <a class="reference internal" href="#chap4_exa75">Example 46</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>

@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -607,7 +605,7 @@ b &amp; c
 \end{equation}\]</div>
 <p>Note that <span class="math notranslate nohighlight">\(R\)</span> is not unique, since a negative sign can be chosen for each of the two square roots in Eqns. <a class="reference internal" href="#equation-sqrtalpha">(21)</a> and <a class="reference internal" href="#equation-sqrtgamma">(22)</a>.</p>
 <div class="proof example admonition" id="2by2cholesky">
-<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 28 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the Cholesky decomposition for the <span class="math notranslate nohighlight">\(2 \times 2\)</span> SPD matrix</p>
 <div class="amsmath math notranslate nohighlight">
@@ -722,7 +720,7 @@ In general, Step <span class="math notranslate nohighlight">\(k\)</span> costs</
 <p>Cholesky decomposition is not unique, unless the restriction that diagonal elements of <span class="math notranslate nohighlight">\(R\)</span> are positive is posted.</p>
 </section>
 </div><div class="proof example admonition" id="3by3cholesky">
-<p class="admonition-title"><span class="caption-number">Example 28 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the Cholesky decomposition for the <span class="math notranslate nohighlight">\(3 \times 3\)</span> SPD matrix</p>
 <div class="amsmath math notranslate nohighlight">
@@ -927,7 +925,7 @@ R\boldsymbol{x} &amp;= \boldsymbol{c}
 \end{align*}\]</div>
 <p>Solving this two linear systems in turn using forward and back substitutions leads to the solution to the original linear system.</p>
 <div class="proof example admonition" id="CholLA">
-<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
 <section class="example-content" id="proof-content">
 <p>Solve the system of linear equations</p>
 <div class="amsmath math notranslate nohighlight">
@@ -951,7 +949,7 @@ x_3
 \end{equation*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>From <a class="reference internal" href="#3by3cholesky">Example 28</a>, we obtained</p>
+<p>From <a class="reference internal" href="#3by3cholesky">Example 29</a>, we obtained</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 R = 
@@ -1072,7 +1070,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 </ol>
 </section>
 </div><div class="proof example admonition" id="GramSchmidt">
-<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
 <section class="example-content" id="proof-content">
 <p>Orthogonalize the following set of vectors</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1266,7 +1264,7 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
 </div>
 </div>
 <div class="proof example admonition" id="gramschmidt_v1_2by2">
-<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use Conjugate Gradient to solve the following <span class="math notranslate nohighlight">\(2\times 2\)</span> linear system:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -2332,9 +2330,9 @@ EZAAAAAASUVORK5CYII=\
 </div></div>
 </div>
 <div class="proof example admonition" id="gramschmidt_v1_3by3">
-<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 33 </span></p>
 <section class="example-content" id="proof-content">
-<p>Solve the linear system shown in <a class="reference internal" href="#CholLA">Example 29</a> using the conjugate gradient method.</p>
+<p>Solve the linear system shown in <a class="reference internal" href="#CholLA">Example 30</a> using the conjugate gradient method.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
 <div class="cell docutils container">
@@ -2418,7 +2416,7 @@ EZAAAAAASUVORK5CYII=\
 </div>
 </div>
 </div>
-<p>Apply the new code to <a class="reference internal" href="#gramschmidt_v1_3by3">Example 32</a> generates the same result.</p>
+<p>Apply the new code to <a class="reference internal" href="#gramschmidt_v1_3by3">Example 33</a> generates the same result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">29</span><span class="p">]])</span>

@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -480,7 +478,7 @@ bound means the error of the approximation might be large.</p>
 the variable of integration and transform the integral, if possible, to one that
 behaves well.</p>
 <div class="proof example admonition" id="chap4_exa82">
-<p class="admonition-title"><span class="caption-number">Example 50 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 51 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider the previous integral <span class="math notranslate nohighlight">\(\int_{-1}^{1}\frac{f(x)}{\sqrt{1-x^{2}}}dx.\)</span>
 Try the transformation <span class="math notranslate nohighlight">\(\theta=\cos^{-1}x.\)</span> Then <span class="math notranslate nohighlight">\(d\theta=-dx/\sqrt{1-x^{2}}\)</span>
@@ -494,7 +492,7 @@ rule, provided <span class="math notranslate nohighlight">\(f\)</span> is smooth
 </section>
 </div><p>If the interval of integration is infinite, another approach that might work is truncation of the interval to a finite one. The success of this approach depends on whether we can estimate the resulting error.</p>
 <div class="proof example admonition" id="chap4_exa83">
-<p class="admonition-title"><span class="caption-number">Example 51 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 52 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider the improper integral <span class="math notranslate nohighlight">\(\int_0^\infty e^{-x^2}dx\)</span>. Write the integral as</p>
 <div class="amsmath math notranslate nohighlight">

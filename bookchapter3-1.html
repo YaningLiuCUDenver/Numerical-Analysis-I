@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -593,10 +591,10 @@ title="Print to PDF"
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; { |} &amp; {8} \\ {3} &amp; {-4} &amp; { |} &amp; {-5}\end{array}\right] &amp;\rightarrow R_2=R_2-\frac{3}{2}R_1 \rightarrow\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {|} &amp; {8} \\ {0} &amp; {-\frac{17}{2}} &amp; {|} &amp; {-\frac{34}{2}}\end{array}\right]\\
- &amp;\rightarrow R_2=R_2/\left(-\frac{17}{2}\right) \rightarrow \left[\begin{array}{rrrr}{1} &amp; {1} &amp; {|} &amp; {3} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\
- &amp;\rightarrow R_1=R_1-R_2 \rightarrow \left[\begin{array}{rrrr}{1} &amp; {0} &amp; {|} &amp; {1} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right]
+ &amp;\rightarrow R_2=R_2/\left(-\frac{17}{2}\right) \rightarrow \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {|} &amp; {8} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\
+ &amp;\rightarrow R_1=R_1-3R_2 \rightarrow \left[\begin{array}{rrrr}{2} &amp; {0} &amp; {|} &amp; {2} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\ &amp;\rightarrow R_1=R_1/2 \rightarrow \left[\begin{array}{rrrr}{1} &amp; {0} &amp; {|} &amp; {1} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right]
 \end{align*}\]</div>
-<p>Here the notation for the first ERO means multiplying the first row by <span class="math notranslate nohighlight">\(\frac{3}{2}\)</span> and subtract it from the second row (or equivalently, multiplying the first row by <span class="math notranslate nohighlight">\(-\frac{3}{2}\)</span> and add it to the second row), the second ERO means dividing the second row by <span class="math notranslate nohighlight">\(-\frac{17}{2}\)</span>, and the third means subtracting the second row from the first (or multiplying the second row by <span class="math notranslate nohighlight">\(-1\)</span> and add it to the first row.</p>
+<p>Here the notation for the first ERO means multiplying the first row by <span class="math notranslate nohighlight">\(\frac{3}{2}\)</span> and subtract it from the second row (or equivalently, multiplying the first row by <span class="math notranslate nohighlight">\(-\frac{3}{2}\)</span> and add it to the second row), the second ERO means dividing the second row by <span class="math notranslate nohighlight">\(-\frac{17}{2}\)</span> (or multiplying the second row by <span class="math notranslate nohighlight">\(-\frac{2}{17}\)</span>, the third means multiplying the second row by <span class="math notranslate nohighlight">\(3\)</span> and subtracting it from the first (or multiplying the second row by <span class="math notranslate nohighlight">\(-3\)</span> and add it to the first row), and the last means dividing the first row by <span class="math notranslate nohighlight">\(2\)</span> (or multiplying the first row by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>).</p>
 <p>The resulting linear system is in reduced echelon form from which one can directly read the solution:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -620,14 +618,14 @@ x_1 = 1, \, x_2 = 2
 \[\begin{equation*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; { |} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right]
 \end{equation*}\]</div>
-<p>Performing Gaussian Elimination:</p>
+<p>Perform Gaussian elimination:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right]
 \end{align*}\]</div>
-<p>So the equivalent system is:</p>
+<p>So the equivalent system of equations is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} 
 2x+3 y-z &amp;=-3 \\
@@ -637,9 +635,9 @@ x_1 = 1, \, x_2 = 2
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x_1 = 1, \, x_2 = -1, \, x_3 =2
+x = 1, \, y = -1, \, z =2
 \end{equation*}\]</div>
-<p>Gaussian elimination involes identifying a pivot position (the <span class="math notranslate nohighlight">\((i,i)\)</span> poisition on the diagonal) at each step, multiplying the row where pivot is by a separate factor, and subtract it from each row below. Note that no zeros were encountered in the Gaussian elimiation processes in the two examples above, and hence such Gaussian elimination is called “naive”. In addition, if echelon form, instead of reduced echelon form, is obtained from Gaussian elimination, a <strong>back substitution</strong> algorithm is needed to solve the upper-triangular system for <span class="math notranslate nohighlight">\(x\)</span>’s from bottom to top. The back substitution algorithm solves for <span class="math notranslate nohighlight">\(x_n\)</span> from the last equation, <span class="math notranslate nohighlight">\(x_{n-1}\)</span> from the second to last equation, and all the way up, until <span class="math notranslate nohighlight">\(x_1\)</span> is solved for from the first equation. The following code performs back subsitution for an upper triangular system, and the solution to the system is stored in place in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p>
+<p>Gaussian elimination involves identifying a pivot position (the <span class="math notranslate nohighlight">\((i,i)\)</span> position on the diagonal) at each step, multiplying the row where pivot is by separate factors, and subtract the products from the rows below. Note that no zeros were encountered in the Gaussian elimination processes in the two examples above, and hence such Gaussian elimination is called “naive”. In addition, if echelon form, instead of reduced echelon form, is obtained from Gaussian elimination, a <strong>back substitution</strong> algorithm is needed to solve the upper triangular system for <span class="math notranslate nohighlight">\(x\)</span>’s from bottom to top. The back substitution algorithm solves for <span class="math notranslate nohighlight">\(x_n\)</span> from the last equation, <span class="math notranslate nohighlight">\(x_{n-1}\)</span> from the second to last equation, and all the way up, until <span class="math notranslate nohighlight">\(x_1\)</span> is solved for from the first equation. The following code performs back substitution for an upper triangular system, and the solution to the system is stored in place in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -674,7 +672,7 @@ x_1 = 1, \, x_2 = -1, \, x_3 =2
 </div>
 </div>
 </div>
-<p>The following Python function performs Gaussian elimination, where the final upper triangular matrix is stored in <span class="math notranslate nohighlight">\(A\)</span>, and the final right hand side is stored in <span class="math notranslate nohighlight">\(b\)</span>, so that additional storage is not needed. However, if the original coefficient matrix and righ hand side are needed later, one should make a copy of them before calling the function.</p>
+<p>The following Python function performs Gaussian elimination, where the final upper triangular matrix is stored in <span class="math notranslate nohighlight">\(A\)</span>, and the final right hand side is stored in <span class="math notranslate nohighlight">\(b\)</span>, so that no additional storage is  needed. However, if the original coefficient matrix and right hand side are needed later, one should make a copy of them before calling the function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GaussianElim</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -715,7 +713,7 @@ x_1 = 1, \, x_2 = -1, \, x_3 =2
 </div>
 </div>
 </div>
-<p>Now combined with back subsitution, a linear system can be solved. We apply the code to the linear system in Example \ref{example:3by3GE}.</p>
+<p>Now combined with <em>back_sub</em>, <em>GaussianElim</em> can solve linear systems. We apply the code to the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
@@ -748,7 +746,7 @@ The solution is  [ 1 -1  2]
 <p>The cost of Gaussian elimination for an <span class="math notranslate nohighlight">\(n\times n\)</span> linear system is <span class="math notranslate nohighlight">\(O\left(\frac{2}{3}n^3\right)\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. For the general linear system:</p>
+<p>Proof. For a general linear system:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \left[\begin{array}{ccccc}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}} \\ {\vdots} &amp; {\vdots} &amp; {\ldots} &amp; {\vdots} &amp; { |} &amp; {\vdots} \\ {a_{n 1}} &amp; {a_{n 2}} &amp; {\dots} &amp; {a_{n n}} &amp; { |} &amp; {b_{n}}\end{array}\right]
@@ -780,12 +778,12 @@ The solution is  [ 1 -1  2]
 \[\begin{equation*}
 (2n+1)(n-1)
 \end{equation*}\]</div>
-<p>Similarly, to eliminate the second column (make <span class="math notranslate nohighlight">\(a_{i2}, i&gt;2\)</span> zero), for each row, the total number of operations involve <span class="math notranslate nohighlight">\(1\)</span> division, <span class="math notranslate nohighlight">\(n-1\)</span> multiplications, and <span class="math notranslate nohighlight">\(n-1\)</span> additions.</p>
+<p>Similarly, to eliminate the second column (make <span class="math notranslate nohighlight">\(a_{i2}, i&gt;2\)</span> zero), for each row, the total number of operations is <span class="math notranslate nohighlight">\(2(n-1)+1\)</span>, comprising <span class="math notranslate nohighlight">\(1\)</span> division, <span class="math notranslate nohighlight">\(n-1\)</span> multiplications, and <span class="math notranslate nohighlight">\(n-1\)</span> additions. Therefore, the total number of operations adds up to</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 (2(n-1)+1)(n-2)
 \end{equation*}\]</div>
-<p>Repeat this for column <span class="math notranslate nohighlight">\(3\)</span> to column <span class="math notranslate nohighlight">\(n\)</span>. The total number of operations is</p>
+<p>Repeat the same operation count for column <span class="math notranslate nohighlight">\(3\)</span> to column <span class="math notranslate nohighlight">\(n\)</span>. The total number of operations is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 &amp;(2n+1)(n-1) + (2(n-1)+1)(n-2) + (2(n-2)+1)(n-3)+\cdots+(2(n-(n-2))+1)(n-(n-1)) \\
@@ -808,7 +806,7 @@ The solution is  [ 1 -1  2]
 <p>The cost of back substitution is <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. Note that the last equation of a triangular system involves 1 division, the second to last equation involves one multiplication, one subtraction and one division, the third to last involves 5 total operations, etc., so total number of operations of back substitution is</p>
+<p>Proof. Note that the last equation of an upper triangular system involves 1 division, the second to last equation involves one multiplication, one subtraction and one division, the third to last involves 5 total operations, etc., so the total number of operations of back substitution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 1+3+5+\cdots+(2n-1) = \frac{[1+(2n-1)]n}{2} = n^2
@@ -824,18 +822,23 @@ The solution is  [ 1 -1  2]
 <section class="example-content" id="proof-content">
 <p>If it takes 1 second to run back substitution for a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> upper triangular system, how long does it take to solve a linear system of the same size with Gaussian elimination?</p>
 </section>
-</div><p><strong>Exercise 3.1</strong></p>
+</div><div class="proof example admonition" id="operations">
+<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
+<section class="example-content" id="proof-content">
+<p>If it takes 1 second to run back substitution for a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> upper triangular system, how long does it take to solve a linear system of the same size with Gaussian elimination?</p>
+</section>
+</div><p><strong>Solution.</strong></p>
 <p>Since back substitution costs <span class="math notranslate nohighlight">\(n^2=1000^2=10^6\)</span> operations, one operation takes <span class="math notranslate nohighlight">\(1/10^6 = 10^{-6}\)</span> second. The total cost of Gaussian elimination is dominated by <span class="math notranslate nohighlight">\(\frac{2}{3}n^3=\frac{2}{3}10^9\)</span> operations, which costs <span class="math notranslate nohighlight">\(\frac{2}{3}10^3\approx 667\)</span> seconds.</p>
 <p>Note that there is no need to consider the exact cost of <span class="math notranslate nohighlight">\(\frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n\approx 668\)</span>, since the extra terms contribute only <span class="math notranslate nohighlight">\(0.15\%\)</span> of the total time.</p>
 </section>
 <section id="lu-factorization">
 <h2>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">#</a></h2>
-<p>Gausian elimination produces a byproduct, a factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, for free. The factorization takes the form of <span class="math notranslate nohighlight">\(A=LU\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is a lower triangular matrix whose diagonal elements are all ones, and <span class="math notranslate nohighlight">\(U\)</span> is an upper triangular matrix. LU factorization can be utilized to solve a system of linear systems of the following form</p>
+<p>Gaussian elimination produces a byproduct, a factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, for free. The factorization takes the form of <span class="math notranslate nohighlight">\(A=LU\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is a lower triangular matrix whose diagonal elements are all ones, and <span class="math notranslate nohighlight">\(U\)</span> is an upper triangular matrix. LU factorization can be utilized to solve a system of linear systems of the following form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 A\boldsymbol{x}_i = \boldsymbol{b}_i, \, i=1,2,\dots,K
 \end{equation*}\]</div>
-<p>All of the linear systems share the same coefficient matrix while the right hand sides are different. If Gaussian elimination were used to solve all linear systems, the total cost would be <span class="math notranslate nohighlight">\(\frac{2}{3}n^3K\)</span>, which could be computationally intractable if both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are large. However, by using <span class="math notranslate nohighlight">\(A=LU\)</span>, a linear system can be rewritten as</p>
+<p>All of the linear systems share the same coefficient matrix while the right hand sides are different. If Gaussian elimination were used to solve all linear systems, the total cost would be around <span class="math notranslate nohighlight">\(\frac{2}{3}n^3K\)</span>, which could be computationally intractable if both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are large. However, by using <span class="math notranslate nohighlight">\(A=LU\)</span>, a linear system can be rewritten as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 LU\boldsymbol{x} = \boldsymbol{b}
@@ -846,22 +849,22 @@ LU\boldsymbol{x} = \boldsymbol{b}
 L\boldsymbol{c} &amp;= \boldsymbol{b} \\
 U\boldsymbol{x} &amp;= \boldsymbol{c}
 \end{align*}\]</div>
-<p>The first linear system involves a <strong>forward substitution</strong>, which solves a lower triangular system from top to bottom, and the second can be solved by back substibution. Similar to back substitution, the cost of forward substitution is also <span class="math notranslate nohighlight">\(n^2\)</span>. So the total cost solve the system of linear systems is <span class="math notranslate nohighlight">\(\frac{2}{3}n^3+2n^2K\)</span>, which is in general much computationally efficient than solving all linear systems by Gaussian elimination.</p>
+<p>The first linear system involves a <strong>forward substitution</strong>, which solves a lower triangular system from top to bottom, and the second can be solved by back substitution. Similar to back substitution, the cost of forward substitution is also <span class="math notranslate nohighlight">\(n^2\)</span>. So the total cost of solving the system of linear systems is <span class="math notranslate nohighlight">\(\frac{2}{3}n^3+2n^2K\)</span>, which is in general much more computationally efficient than solving all linear systems by Gaussian elimination.</p>
 <p>Next, we use an example to show how LU factorization can be obtained from the Gaussian elimination process without any additional computation and storage.</p>
 <div class="proof example admonition" id="LU">
-<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
 <section class="example-content" id="proof-content">
 <p>Obtain the LU factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>Repeat the Gaussian Elimination process, however, with the multipliers (factors) of elementary row operations stored in the corresponding lower triangular positions (the numbers in boxes)</p>
+<p>Repeat the Gaussian elimination process, however, with the multipliers (factors) of elementary row operations stored in the corresponding lower triangular positions (the numbers in boxes)</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; \fbox{1/2} &amp; {1/2} &amp; { |} &amp; {1}\end{array}\right]
 \end{align*}\]</div>
-<p>So the multipliers in boxes define the lower-triangular part of <span class="math notranslate nohighlight">\(L\)</span>, and the upper triangular part including the diagonal of the row echelon form (without the right hand side) define the matrix <span class="math notranslate nohighlight">\(U\)</span>. In this example, we have</p>
+<p>So the multipliers in boxes define the lower triangular part of <span class="math notranslate nohighlight">\(L\)</span>, and the upper triangular part including the diagonal of the row echelon form (without the right hand side) defines the matrix <span class="math notranslate nohighlight">\(U\)</span>. In this example, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 L = 
@@ -880,12 +883,12 @@ U =
 <p>It is easy to verfity <span class="math notranslate nohighlight">\(A=LU\)</span>.</p>
 <p>Note that the lower triangular part of the coefficient matrix stores the multipliers, instead of zeros, so no additional storage is needed for LU factorization.</p>
 <div class="proof example admonition" id="LUSolveLE">
-<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use LU factorization to solve the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>The two linear systems, <span class="math notranslate nohighlight">\(L\boldsymbol{c} = \boldsymbol{b}\)</span> and <span class="math notranslate nohighlight">\(U\boldsymbol{x} = \boldsymbol{c}\)</span> now become</p>
+<p>The two linear systems, <span class="math notranslate nohighlight">\(L\boldsymbol{c} = \boldsymbol{b}\)</span> and <span class="math notranslate nohighlight">\(U\boldsymbol{x} = \boldsymbol{c}\)</span>, now become</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{bmatrix}
@@ -926,7 +929,7 @@ c_1 \\ c_2 \\ c_3
 -3 \\ 18 \\ 1
 \end{bmatrix}
 \end{equation*}\]</div>
-<p>Then solving for <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> from the second equation using back substitution, we have</p>
+<p>Then solving for <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> from the second system using back substitution, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \boldsymbol{x} = 
@@ -968,7 +971,7 @@ x_1 \\ x_2 \\ x_3
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
                 <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
     
-    <span class="c1"># No need to return. Both A and b are changed in place</span>
+    <span class="c1"># No need to return. A is changed in place.</span>
 </pre></div>
 </div>
 </div>
@@ -1031,7 +1034,7 @@ The result is
 </div>
 </div>
 </div>
-<p>Now we use Python to solve the linear system in Example <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
+<p>Now we use Python to solve the linear system in <a class="reference internal" href="#3by3GE">Example 19</a> with LU factorization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
@@ -1064,7 +1067,7 @@ After backward substition, the vector b is
 </div>
 </div>
 </div>
-<p><strong>Exercise 3.2</strong></p>
+<p><strong>Exercise 3.1-1</strong></p>
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix. <span class="math notranslate nohighlight">\(I^{i,j}(m)\)</span> is also an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix that is similar to an identity matrix, but the <span class="math notranslate nohighlight">\((i,j)\)</span> position, where <span class="math notranslate nohighlight">\(i&gt;j\)</span>, has a value of <span class="math notranslate nohighlight">\(m\)</span>. For example, supposing <span class="math notranslate nohighlight">\(n=3\)</span>,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -1080,8 +1083,8 @@ I^{2,1}(-2)=
 <li><p>Let <span class="math notranslate nohighlight">\((i_1,j_1) \ne (i_2,j_2)\)</span>, what is <span class="math notranslate nohighlight">\(I^{i_1,j_1}(m_1)I^{i_2,j_2}(m_2)\)</span>?</p></li>
 <li><p>What is the inverse of <span class="math notranslate nohighlight">\(I^{i,j}(m)\)</span>?</p></li>
 </ol>
-<p><strong>Exercise 3.3</strong></p>
-<p>Show the algorithm descibed in <a class="reference internal" href="#LU">Example 21</a> leads to the LU factorization for <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p><strong>Exercise 3.1-2</strong></p>
+<p>Show the algorithm described in <a class="reference internal" href="#LU">Example 22</a> leads to the LU factorization for a general matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </section>
 <section id="gaussian-elimination-with-partial-pivoting">
 <h2>Gaussian elimination with partial pivoting<a class="headerlink" href="#gaussian-elimination-with-partial-pivoting" title="Permalink to this headline">#</a></h2>
@@ -1115,7 +1118,7 @@ I^{2,1}(-2)=
 <p>Note, in this way, the multiplier is no greater than <span class="math notranslate nohighlight">\(1\)</span>, so the problem of swamping is avoided.</p>
 <p>Using the partial pivoting strategy, we can also treat the cases where zeros appear in the pivot position, which would cause the naive Gaussian elimination to fail. Note that there must be at least one nonzero value below each pivot; otherwise the coefficient matrix is not invertible.</p>
 <div class="proof example admonition" id="PartialPivoting">
-<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
 <section class="example-content" id="proof-content">
 <p>Apply Gaussian elimination with partial pivoting to the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
@@ -1142,7 +1145,7 @@ x_1 = 1, \, x_2 = -1, \, x_3 =2
 \end{equation*}\]</div>
 <p>Here, we marked the number that needs to be placed in the pivot position in red. The notation <span class="math notranslate nohighlight">\(R_1\leftrightarrow R_2\)</span> means swapping Rows <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span>. For this example, we only needed to switch rows once, since the <span class="math notranslate nohighlight">\((3,2)\)</span> position vanishes when we used the first pivot to eliminate the <span class="math notranslate nohighlight">\((3,1)\)</span> position.</p>
 <div class="proof example admonition" id="PartialPivoting2">
-<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
 <section class="example-content" id="proof-content">
 <p>Apply Gaussian elimination with partial pivoting to the following linear system:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1210,7 +1213,7 @@ x_1 = 2, \, x_2 = 3, \, x_3 =-1
 </div>
 </div>
 </div>
-<p>We apply <strong>GEPP</strong> to the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>, and print out the matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(b\)</span> at the end. The final solution is the same as obtained earlier.</p>
+<p>We apply <strong>GEPP</strong> to the linear system in <a class="reference internal" href="#PartialPivoting2">Example 25</a>, and print out the matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(b\)</span> at the end. The final solution is the same as obtained earlier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1288,9 +1291,9 @@ PA=LU
 <p>is obtained by first exchanging the first two rows of the <span class="math notranslate nohighlight">\(3\times 3\)</span> identity matrix <span class="math notranslate nohighlight">\(I_3\)</span>, and then exchanging the first and third columns of the resulting matrix.</p>
 <p>The algorithm for PA=LU factorization is similar to LU factorization. The multipliers of elementary operations are stored in <span class="math notranslate nohighlight">\(A\)</span>. To obtain the <span class="math notranslate nohighlight">\(P\)</span> permutation matrix, we start from an identity matrix and perform row exchanges to the identity matrix and the subsequent matrices whenever row exchanges are needed for <span class="math notranslate nohighlight">\(A\)</span>. The following example illustrate the process.</p>
 <div class="proof example admonition" id="PALU">
-<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
 <section class="example-content" id="proof-content">
-<p>Find PA=LU factorization for the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a></p>
+<p>Find PA=LU factorization for the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a></p>
 </section>
 </div><p><strong>Solution.</strong></p>
 <p>Initially, let <span class="math notranslate nohighlight">\(P=I_3\)</span>,</p>
@@ -1419,7 +1422,7 @@ U\boldsymbol{x} &amp;= \boldsymbol{c}
 </div>
 </div>
 </div>
-<p>Applying <strong>PALU</strong> to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a> gives the same result.</p>
+<p>Applying <strong>PALU</strong> to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a> gives the same result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1455,7 +1458,7 @@ The permutation matrix P =
 </div>
 </div>
 </div>
-<p>We also use PA=LU factorization to solve the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>. Again, the same result is obtained.</p>
+<p>We also use PA=LU factorization to solve the linear system in <a class="reference internal" href="#PartialPivoting2">Example 25</a>. Again, the same result is obtained.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1552,7 +1555,7 @@ PAQ = LU
 </div>
 </div>
 </div>
-<p>Apply PAQ=LU factorization to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a>:</p>
+<p>Apply PAQ=LU factorization to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1573,7 +1576,9 @@ PAQ = LU
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PAQ=LU factorization of A = : 
-Before PAQ=LU factorization, A = 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before PAQ=LU factorization, A = 
 [[ 3. -2.  1.]
  [ 6.  1. -3.]
  [-4.  3. -2.]]
@@ -1613,7 +1618,7 @@ The permutation matrix Q =
 6 &amp; -3 &amp; 1 \\ 0 &amp; -4 &amp; \frac{11}{3} \\ 0 &amp; 0 &amp; -\frac{5}{24}
 \end{bmatrix}
 \end{equation*}\]</div>
-<p><strong>Exercise 3.4</strong></p>
+<p><strong>Exercise 3.1-3</strong></p>
 <p>For the linear system</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -1649,7 +1654,7 @@ The permutation matrix Q =
 </section>
 </div><p>A large condition number indicates that a small change in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> incurs a large change in the solution to the linear system <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Such matrices are called <strong>ill-conditioned</strong>; otherwise, the matrices are called <strong>well-conditioned</strong>. Solving a linear system whose coefficient matrix is ill-conditioned is subjected to large error. Supposing the condition number of matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(O(10^k)\)</span>, then about <span class="math notranslate nohighlight">\(k\)</span> digits of accuracy is lost in solving a linear system that has <span class="math notranslate nohighlight">\(A\)</span> as the coefficient matrix. In double precision, this means about <span class="math notranslate nohighlight">\(16-k\)</span> digits of accuracy is expected.</p>
 <div class="proof example admonition" id="HilbertMatrix">
-<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix</p>
 <div class="amsmath math notranslate nohighlight">

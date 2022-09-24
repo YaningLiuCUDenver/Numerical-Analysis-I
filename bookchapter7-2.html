@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -572,7 +570,7 @@ title="Print to PDF"
 </div>
 <p>We revisit the polynomial function described in Section <a class="reference internal" href="bookchapter7-1.html#section7-1"><span class="std std-ref">7.1 Golden-section search</span></a>, and use Newton’s method to find the minimum. Note that the initial guess should be sufficiently close to the extremizer; otherwise, the algorithm may not converge, or it simply converges to other extremizers that are also solutions to the equation <span class="math notranslate nohighlight">\(f'(x)=0\)</span>.</p>
 <div class="proof example admonition" id="newton_exa1">
-<p class="admonition-title"><span class="caption-number">Example 60 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 61 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the minimum of the polynomial</p>
 <div class="amsmath math notranslate nohighlight">
@@ -10661,7 +10659,7 @@ IMMwDMMwug4TIMMwDMMwuo7/D+GU8tMf3AlWAAAAAElFTkSuQmCC\
 </div>
 <p>In this case, since <span class="math notranslate nohighlight">\(f'(\boldsymbol{x})\)</span> is linear, Newton’s method converges to the true minimizer in just one step.</p>
 <div class="proof example admonition" id="newton_opt_sincos">
-<p class="admonition-title"><span class="caption-number">Example 61 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 62 </span></p>
 <section class="example-content" id="proof-content">
 <p>Apply Newton’s method to the following function</p>
 <div class="amsmath math notranslate nohighlight">
@@ -24943,7 +24941,7 @@ f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^TA\boldsymbol{x} - \boldsymbol{b}^
 \end{equation}\]</div>
 <p>Therefore, finding the extremizer of <span class="math notranslate nohighlight">\(f\)</span> is equivalent to solving an SPD linear system <span class="math notranslate nohighlight">\(A\boldsymbol{x}=\boldsymbol{b}\)</span>, and conjugate gradient can be employed for that purpose.</p>
 <div class="proof example admonition" id="cg_exa1">
-<p class="admonition-title"><span class="caption-number">Example 62 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 63 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the minimizer of the function</p>
 <div class="amsmath math notranslate nohighlight">
@@ -25046,7 +25044,7 @@ A =
 </div>
 </div>
 <div class="proof example admonition" id="cg_exa2">
-<p class="admonition-title"><span class="caption-number">Example 63 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 64 </span></p>
 <section class="example-content" id="proof-content">
 <p>Locate the extremum of the following function of three variables:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -25190,7 +25188,7 @@ due to Eqn. <a class="reference internal" href="#equation-cg-grad">(66)</a>. In 
 </div>
 </div>
 <div class="proof example admonition" id="cg_exa3">
-<p class="admonition-title"><span class="caption-number">Example 64 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 65 </span></p>
 <section class="example-content" id="proof-content">
 <p>Locate the minimum of the following function using conjugate gradient method.</p>
 <div class="amsmath math notranslate nohighlight">
@@ -27014,9 +27012,9 @@ Ssf/B/36fx/RbCLGAAAAAElFTkSuQmCC\
 </div>
 </div>
 <div class="proof example admonition" id="sd_exa1">
-<p class="admonition-title"><span class="caption-number">Example 65 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 66 </span></p>
 <section class="example-content" id="proof-content">
-<p>Revisit <a class="reference internal" href="#cg_exa3">Example 64</a> using steepest descent.</p>
+<p>Revisit <a class="reference internal" href="#cg_exa3">Example 65</a> using steepest descent.</p>
 </section>
 </div><p>Apply the steepest descent algorithm with the <em>steepest_descent</em> function.</p>
 <div class="cell docutils container">
