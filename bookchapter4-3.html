@@ -540,7 +540,7 @@ polynomial.</p>
 </section>
 </div><p>The only difference between Hermite interpolation and polynomial interpolation is that in the former, we have the derivative information, which can go a long way in capturing the shape of the underlying function.</p>
 <div class="proof example admonition" id="chap3_exa62">
-<p class="admonition-title"><span class="caption-number">Example 40 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
 <section class="example-content" id="proof-content">
 <p>We want to interpolate the following data:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -625,9 +625,9 @@ f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=f'(x_{i})=y'_{i}
 \end{equation*}\]</div>
 <p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
 <div class="proof example admonition" id="chap3_exa63">
-<p class="admonition-title"><span class="caption-number">Example 41 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 40 </span></p>
 <section class="example-content" id="proof-content">
-<p>Let’s compute the Hermite polynomial of <a class="reference internal" href="#chap3_exa62">Example 40</a>. The data is:</p>
+<p>Let’s compute the Hermite polynomial of <a class="reference internal" href="#chap3_exa62">Example 39</a>. The data is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{array}{cccc}
@@ -713,7 +713,7 @@ the <span class="math notranslate nohighlight">\(y\)</span>-coordinates, and the
 </div>
 </div>
 </div>
-<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa62">Example 40</a>.</p>
+<p>Let’s compute the divided differences of <a class="reference internal" href="#chap3_exa62">Example 39</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdiff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">]),</span>
@@ -729,7 +729,7 @@ the <span class="math notranslate nohighlight">\(y\)</span>-coordinates, and the
 </div>
 </div>
 </div>
-<p>Note that in the hand-calculations of <a class="reference internal" href="#chap3_exa63">Example 41</a>, where two-digit rounding
+<p>Note that in the hand-calculations of <a class="reference internal" href="#chap3_exa63">Example 40</a>, where two-digit rounding
 was used, we obtained 0.0065 as the first third divided difference. In the
 Python output above, this divided difference is 0.0067.</p>
 <p>The following function computes the Hermite interpolating polynomial,
@@ -755,7 +755,7 @@ evaluates the polynomial at <span class="math notranslate nohighlight">\(w\)</sp
 </div>
 </div>
 </div>
-<p>Let’s recreate the Hermite interpolating polynomial plot of <a class="reference internal" href="#chap3_exa62">Example 40</a>.</p>
+<p>Let’s recreate the Hermite interpolating polynomial plot of <a class="reference internal" href="#chap3_exa62">Example 39</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>

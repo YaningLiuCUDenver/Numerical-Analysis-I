@@ -470,7 +470,7 @@ title="Print to PDF"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#partial-pivoting">
-     Partial Pivoting
+     Partial pivoting
     </a>
    </li>
   </ul>
@@ -481,8 +481,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-linear-equations-with-pa-lu-factorization">
-   Solving linear equations with PA=LU factorization
+  <a class="reference internal nav-link" href="#solving-linear-systems-with-pa-lu-factorization">
+   Solving linear systems with PA=LU factorization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -531,7 +531,7 @@ title="Print to PDF"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#partial-pivoting">
-     Partial Pivoting
+     Partial pivoting
     </a>
    </li>
   </ul>
@@ -542,8 +542,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-linear-equations-with-pa-lu-factorization">
-   Solving linear equations with PA=LU factorization
+  <a class="reference internal nav-link" href="#solving-linear-systems-with-pa-lu-factorization">
+   Solving linear systems with PA=LU factorization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -822,11 +822,6 @@ The solution is  [ 1 -1  2]
 <section class="example-content" id="proof-content">
 <p>If it takes 1 second to run back substitution for a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> upper triangular system, how long does it take to solve a linear system of the same size with Gaussian elimination?</p>
 </section>
-</div><div class="proof example admonition" id="operations">
-<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
-<section class="example-content" id="proof-content">
-<p>If it takes 1 second to run back substitution for a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> upper triangular system, how long does it take to solve a linear system of the same size with Gaussian elimination?</p>
-</section>
 </div><p><strong>Solution.</strong></p>
 <p>Since back substitution costs <span class="math notranslate nohighlight">\(n^2=1000^2=10^6\)</span> operations, one operation takes <span class="math notranslate nohighlight">\(1/10^6 = 10^{-6}\)</span> second. The total cost of Gaussian elimination is dominated by <span class="math notranslate nohighlight">\(\frac{2}{3}n^3=\frac{2}{3}10^9\)</span> operations, which costs <span class="math notranslate nohighlight">\(\frac{2}{3}10^3\approx 667\)</span> seconds.</p>
 <p>Note that there is no need to consider the exact cost of <span class="math notranslate nohighlight">\(\frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n\approx 668\)</span>, since the extra terms contribute only <span class="math notranslate nohighlight">\(0.15\%\)</span> of the total time.</p>
@@ -852,7 +847,7 @@ U\boldsymbol{x} &amp;= \boldsymbol{c}
 <p>The first linear system involves a <strong>forward substitution</strong>, which solves a lower triangular system from top to bottom, and the second can be solved by back substitution. Similar to back substitution, the cost of forward substitution is also <span class="math notranslate nohighlight">\(n^2\)</span>. So the total cost of solving the system of linear systems is <span class="math notranslate nohighlight">\(\frac{2}{3}n^3+2n^2K\)</span>, which is in general much more computationally efficient than solving all linear systems by Gaussian elimination.</p>
 <p>Next, we use an example to show how LU factorization can be obtained from the Gaussian elimination process without any additional computation and storage.</p>
 <div class="proof example admonition" id="LU">
-<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
 <section class="example-content" id="proof-content">
 <p>Obtain the LU factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
@@ -883,7 +878,7 @@ U =
 <p>It is easy to verfity <span class="math notranslate nohighlight">\(A=LU\)</span>.</p>
 <p>Note that the lower triangular part of the coefficient matrix stores the multipliers, instead of zeros, so no additional storage is needed for LU factorization.</p>
 <div class="proof example admonition" id="LUSolveLE">
-<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 22 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use LU factorization to solve the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
@@ -1084,41 +1079,41 @@ I^{2,1}(-2)=
 <li><p>What is the inverse of <span class="math notranslate nohighlight">\(I^{i,j}(m)\)</span>?</p></li>
 </ol>
 <p><strong>Exercise 3.1-2</strong></p>
-<p>Show the algorithm described in <a class="reference internal" href="#LU">Example 22</a> leads to the LU factorization for a general matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Show the algorithm described in <a class="reference internal" href="#LU">Example 21</a> leads to the LU factorization for a general matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </section>
 <section id="gaussian-elimination-with-partial-pivoting">
 <h2>Gaussian elimination with partial pivoting<a class="headerlink" href="#gaussian-elimination-with-partial-pivoting" title="Permalink to this headline">#</a></h2>
-<p>To improve the stability of Gaussian elimination, pivots should be as large as possible, so that multipliers are as small as possible. The reason is that multiplying the row where the pivot is by a large multiplier and adding the product to another row will “overwhelm” the latter by losing significant information due to finite precision. There are various strategies to place large numbers at the pivot positions. One idea is to compare the absolute values of the pivot and all numbers below it, and the row where the largest number in magnitude is located is swapped with the row where pivot is, if they are not the same row. This variant of Gaussian elimination is called Gaussian elimination with partial pivoting. The algorithm is summarized below.</p>
+<p>To improve the stability of Gaussian elimination, pivots should be as large as possible, so that multipliers are as small as possible. The reason is that multiplying the row where the pivot is by a large multiplier and adding the product to another row will “overwhelm” the latter by losing significant information due to finite precision. There are various strategies to place large numbers at the pivot positions. One idea is to compare the absolute values of the pivot and all numbers below it, and the row where the largest number in magnitude is located is swapped with the row where pivot is, if they are not the same row. This variant of Gaussian elimination is called <strong>Gaussian elimination with partial pivoting</strong>. The algorithm is summarized below.</p>
 <section id="partial-pivoting">
-<h3>Partial Pivoting<a class="headerlink" href="#partial-pivoting" title="Permalink to this headline">#</a></h3>
+<h3>Partial pivoting<a class="headerlink" href="#partial-pivoting" title="Permalink to this headline">#</a></h3>
 <p>The partial pivoting process works as follows:</p>
 <ol>
 <li><p>The first step: instead of using <span class="math notranslate nohighlight">\(a_{11}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    |a_{p1}|= \max_{1\le j\le n}|a_{j1}|
+    |a_{p1}|= \max_{1\le j\le n}\{|a_{j1}|\}.
     \end{equation*}\]</div>
-<p>if <span class="math notranslate nohighlight">\(p\ne 1\)</span>, then exchange rows <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(p\ne 1\)</span>, then exchange rows <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
 </li>
 <li><p>The second step: select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    |a_{p2}|= \max_{2\le j\le n}|a_{j2}|
+    |a_{p2}|= \max_{2\le j\le n}\{|a_{j2}|\}.
     \end{equation*}\]</div>
-<p>if <span class="math notranslate nohighlight">\(p\ne 2\)</span>, then exchange rows <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(p\ne 2\)</span>, then exchange rows <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
 </li>
-<li><p>A general <span class="math notranslate nohighlight">\(i\)</span>the step: select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
+<li><p>A general <span class="math notranslate nohighlight">\(i\)</span>th step: select the <span class="math notranslate nohighlight">\(p\)</span>th row, where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    |a_{pi}|= \max_{i\le j\le n}|a_{ji}|
+    |a_{pi}|= \max_{i\le j\le n}\{|a_{ji}|\}.
     \end{equation*}\]</div>
 <p>If <span class="math notranslate nohighlight">\(p\ne i\)</span>, then exchange rows <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
 </li>
 </ol>
-<p>Note, in this way, the multiplier is no greater than <span class="math notranslate nohighlight">\(1\)</span>, so the problem of swamping is avoided.</p>
-<p>Using the partial pivoting strategy, we can also treat the cases where zeros appear in the pivot position, which would cause the naive Gaussian elimination to fail. Note that there must be at least one nonzero value below each pivot; otherwise the coefficient matrix is not invertible.</p>
+<p>Note, in this way, the multipliers are no greater than <span class="math notranslate nohighlight">\(1\)</span>, so the problem of “swamping” is avoided.</p>
+<p>Using the partial pivoting strategy, we can also treat the cases where zeros appear in the pivot positions, which would cause the naive Gaussian elimination to fail. Note that there must be at least one nonzero value below a zero pivot; otherwise the coefficient matrix is not invertible.</p>
 <div class="proof example admonition" id="PartialPivoting">
-<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
 <section class="example-content" id="proof-content">
 <p>Apply Gaussian elimination with partial pivoting to the linear system in <a class="reference internal" href="#3by3GE">Example 19</a>.</p>
 </section>
@@ -1141,11 +1136,11 @@ I^{2,1}(-2)=
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x_1 = 1, \, x_2 = -1, \, x_3 =2
+x = 1, \, y = -1, \, z =2
 \end{equation*}\]</div>
-<p>Here, we marked the number that needs to be placed in the pivot position in red. The notation <span class="math notranslate nohighlight">\(R_1\leftrightarrow R_2\)</span> means swapping Rows <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span>. For this example, we only needed to switch rows once, since the <span class="math notranslate nohighlight">\((3,2)\)</span> position vanishes when we used the first pivot to eliminate the <span class="math notranslate nohighlight">\((3,1)\)</span> position.</p>
+<p>Here, we marked the number that needs to be placed in the pivot position in red. The notation <span class="math notranslate nohighlight">\(R_1\leftrightarrow R_2\)</span> means swapping Rows <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span>. For this example, we only needed to switch rows once, since the <span class="math notranslate nohighlight">\((3,2)\)</span> position vanished when we used the first pivot to eliminate the <span class="math notranslate nohighlight">\((3,1)\)</span> position.</p>
 <div class="proof example admonition" id="PartialPivoting2">
-<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
 <section class="example-content" id="proof-content">
 <p>Apply Gaussian elimination with partial pivoting to the following linear system:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1175,7 +1170,7 @@ x_1 = 1, \, x_2 = -1, \, x_3 =2
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x_1 = 2, \, x_2 = 3, \, x_3 =-1
+x = 2, \, y = 3, \, z =-1
 \end{equation*}\]</div>
 <p>The following Python function <strong>GEPP</strong> performs Gaussian elimination with partial pivoting. Both the coefficient matrix and right-hand side vector <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are changed in place and they together represent the echelon form of the augmented matrix.</p>
 <div class="cell docutils container">
@@ -1213,7 +1208,7 @@ x_1 = 2, \, x_2 = 3, \, x_3 =-1
 </div>
 </div>
 </div>
-<p>We apply <strong>GEPP</strong> to the linear system in <a class="reference internal" href="#PartialPivoting2">Example 25</a>, and print out the matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(b\)</span> at the end. The final solution is the same as obtained earlier.</p>
+<p>We apply <strong>GEPP</strong> to the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>, and print out the matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(b\)</span> at the end. The final solution is the same as obtained earlier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1278,8 +1273,8 @@ PA=LU
 0 &amp; 1 &amp; 0
 \end{bmatrix}
 \end{equation*}\]</div>
-<p>is a <span class="math notranslate nohighlight">\(3\times 3\)</span> permuation matrix.</p>
-<p>A permutation matrix can be obtained by a sequence exchanges of rows or columns of the identity matrix of the same dimension. For example,</p>
+<p>is a <span class="math notranslate nohighlight">\(3\times 3\)</span> permutation matrix.</p>
+<p>A permutation matrix can be obtained by a sequence of exchanges of rows or columns of the identity matrix of the same dimension. For example,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{bmatrix}
@@ -1289,11 +1284,11 @@ PA=LU
 \end{bmatrix}
 \end{equation*}\]</div>
 <p>is obtained by first exchanging the first two rows of the <span class="math notranslate nohighlight">\(3\times 3\)</span> identity matrix <span class="math notranslate nohighlight">\(I_3\)</span>, and then exchanging the first and third columns of the resulting matrix.</p>
-<p>The algorithm for PA=LU factorization is similar to LU factorization. The multipliers of elementary operations are stored in <span class="math notranslate nohighlight">\(A\)</span>. To obtain the <span class="math notranslate nohighlight">\(P\)</span> permutation matrix, we start from an identity matrix and perform row exchanges to the identity matrix and the subsequent matrices whenever row exchanges are needed for <span class="math notranslate nohighlight">\(A\)</span>. The following example illustrate the process.</p>
+<p>The algorithm for PA=LU factorization is similar to LU factorization. The multipliers of elementary row operations are stored in <span class="math notranslate nohighlight">\(A\)</span>. To obtain the permutation matrix <span class="math notranslate nohighlight">\(P\)</span>, we start from an identity matrix and perform row exchanges to the identity matrix and the subsequent matrices whenever row exchanges are needed for <span class="math notranslate nohighlight">\(A\)</span>. The following example illustrates the process.</p>
 <div class="proof example admonition" id="PALU">
-<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 25 </span></p>
 <section class="example-content" id="proof-content">
-<p>Find PA=LU factorization for the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a></p>
+<p>Find PA=LU factorization for the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a>.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
 <p>Initially, let <span class="math notranslate nohighlight">\(P=I_3\)</span>,</p>
@@ -1350,7 +1345,7 @@ P =
 \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right] \rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow
 \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; \fbox{-15/22} &amp; {-\frac{5}{22}} \end{array}\right]
 \end{equation*}\]</div>
-<p>The algorithm is now complete with</p>
+<p>The algorithm is now completed with</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 P = 
@@ -1366,8 +1361,8 @@ U =
 \end{equation*}\]</div>
 <p>It is easy to verify that <span class="math notranslate nohighlight">\(PA=LU\)</span>.</p>
 </section>
-<section id="solving-linear-equations-with-pa-lu-factorization">
-<h2>Solving linear equations with PA=LU factorization<a class="headerlink" href="#solving-linear-equations-with-pa-lu-factorization" title="Permalink to this headline">#</a></h2>
+<section id="solving-linear-systems-with-pa-lu-factorization">
+<h2>Solving linear systems with PA=LU factorization<a class="headerlink" href="#solving-linear-systems-with-pa-lu-factorization" title="Permalink to this headline">#</a></h2>
 <p>The linear system <span class="math notranslate nohighlight">\(A\boldsymbol{x} = \boldsymbol{b}\)</span> can be rewritten as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -1422,11 +1417,11 @@ U\boldsymbol{x} &amp;= \boldsymbol{c}
 </div>
 </div>
 </div>
-<p>Applying <strong>PALU</strong> to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a> gives the same result.</p>
+<p>Applying <strong>PALU</strong> to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a> gives the same result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PA=LU factorization of A = : &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PA=LU factorization: &#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before PA=LU factorization, A = &#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
@@ -1440,7 +1435,7 @@ U\boldsymbol{x} &amp;= \boldsymbol{c}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PA=LU factorization of A = : 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PA=LU factorization: 
 Before PA=LU factorization, A = 
 [[ 3. -2.  1.]
  [ 6.  1. -3.]
@@ -1458,7 +1453,7 @@ The permutation matrix P =
 </div>
 </div>
 </div>
-<p>We also use PA=LU factorization to solve the linear system in <a class="reference internal" href="#PartialPivoting2">Example 25</a>. Again, the same result is obtained.</p>
+<p>We also use PA=LU factorization to solve the linear system in <a class="reference internal" href="#PartialPivoting2">Example 24</a>. Again, the same result is obtained.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
@@ -1484,31 +1479,31 @@ The permutation matrix P =
 </section>
 <section id="full-pivoting-and-paq-lu-factorization">
 <h2>Full pivoting and PAQ=LU factorization<a class="headerlink" href="#full-pivoting-and-paq-lu-factorization" title="Permalink to this headline">#</a></h2>
-<p>The partial pivoting strategy for Gaussian elimination only considers candidates that are in the same column as the pivots. However, for the <span class="math notranslate nohighlight">\((k,k)\)</span> pivot position, <span class="math notranslate nohighlight">\(1\le k\le n\)</span>, if we consider the submatrix <span class="math notranslate nohighlight">\((a_{ij}), i&gt;=k, j\ge k\)</span>, i.e.,  all positions that are not above and not to the left of the pivot, as candiates to be placed at the pivot position, the strategy is known as <strong>full pivoting</strong>. Full pivoting is more stable, since at each step, it considers a wider range of candidates for the pivot position, and the multipliers can be even smaller compared to partial pivoting.</p>
+<p>The partial pivoting strategy for Gaussian elimination only considers candidates that are in the same column as the pivots. However, for the <span class="math notranslate nohighlight">\((k,k)\)</span> pivot position, <span class="math notranslate nohighlight">\(1\le k\le n\)</span>, if we consider the submatrix <span class="math notranslate nohighlight">\((a_{ij}), i\ge k, j\ge k\)</span>, i.e.,  all positions that are not above and not to the left of the pivot, as candidates to be placed at the pivot position, the strategy is known as <strong>full pivoting</strong>. Full pivoting is more stable, since at each step, it considers a wider range of candidates for the pivot position, and the multipliers can be even smaller compared to partial pivoting.</p>
 <p>The algorithm works as follows:</p>
 <ol>
 <li><p>The first step: instead of using <span class="math notranslate nohighlight">\(a_{11}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, and the <span class="math notranslate nohighlight">\(q\)</span>th column, where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    |a_{pq}| = \max_{1\le i\le n, 1\le j\le n}|a_{ij}|,
+    |a_{pq}| = \max_{1\le i\le n, 1\le j\le n}\{|a_{ij}|\},
     \end{equation*}\]</div>
 <p>exchange row <span class="math notranslate nohighlight">\(p\)</span> and row <span class="math notranslate nohighlight">\(1\)</span>, and exchange column <span class="math notranslate nohighlight">\(q\)</span> and column <span class="math notranslate nohighlight">\(1\)</span>, so now <span class="math notranslate nohighlight">\(a_{pq}\)</span> is in the <span class="math notranslate nohighlight">\((1,1)\)</span> pivot position. Apply Gaussian elimination.</p>
 </li>
 <li><p>The second step: instead of using <span class="math notranslate nohighlight">\(a_{22}\)</span> as the pivot, select the <span class="math notranslate nohighlight">\(p\)</span>th row, and the <span class="math notranslate nohighlight">\(q\)</span>th column, where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    |a_{pq}| = \max_{2\le i\le n, 2\le j\le n}|a_{ij}|
+    |a_{pq}| = \max_{2\le i\le n, 2\le j\le n}\{|a_{ij}|\},
     \end{equation*}\]</div>
 <p>exchange row <span class="math notranslate nohighlight">\(p\)</span> and row <span class="math notranslate nohighlight">\(2\)</span>, and exchange column <span class="math notranslate nohighlight">\(q\)</span> and column <span class="math notranslate nohighlight">\(2\)</span>, so now <span class="math notranslate nohighlight">\(a_{pq}\)</span> is in the <span class="math notranslate nohighlight">\((2,2)\)</span> pivot position. Apply Gaussian elimination.</p>
 </li>
-<li><p>The rest of the pivot positions can be found in a similar fashion and so does the Gaussian elimination.</p></li>
+<li><p>The rest of the pivots can be found in a similar fashion.</p></li>
 </ol>
 <p>Now we will have two permutation matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>, which correspond to the row and column exchanges. The factorization corresponding to Gaussian elimination with full pivoting is in the form of</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 PAQ = LU
 \end{equation*}\]</div>
-<p>which can be obtained in a similar fashion to the PA=LU factorization. The permutation matrix <span class="math notranslate nohighlight">\(Q\)</span> is obtained by performing the same sequence of column exchanges on an identity matrix.</p>
+<p>which can be obtained in a similar fashion to the PA=LU factorization. The permutation matrix <span class="math notranslate nohighlight">\(Q\)</span> is obtained by performing the same sequence of column exchanges to an identity matrix.</p>
 <p>Below is the Python function for PAQ=LU factorization. The returned outputs are the two permutation matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1520,7 +1515,7 @@ PAQ = LU
 <span class="sd">    (including the diagonal) represents U</span>
 <span class="sd">    A: the coefficient matrix of size n x n</span>
 <span class="sd">    output:</span>
-<span class="sd">    Permutation matrices $P$, $Q$ is returned, </span>
+<span class="sd">    Permutation matrices $P$, $Q$ are returned, </span>
 <span class="sd">    along with $A$ that is changed in place</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -1555,11 +1550,11 @@ PAQ = LU
 </div>
 </div>
 </div>
-<p>Apply PAQ=LU factorization to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 25</a>:</p>
+<p>Apply PAQ=LU factorization to the coefficient matrix in <a class="reference internal" href="#PartialPivoting2">Example 24</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PAQ=LU factorization of A = : &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Perform PAQ=LU factorization: &#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before PAQ=LU factorization, A = &#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
@@ -1575,7 +1570,7 @@ PAQ = LU
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PAQ=LU factorization of A = : 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perform PAQ=LU factorization: 
 Before PAQ=LU factorization, A = 
 [[ 3. -2.  1.]
  [ 6.  1. -3.]
@@ -1624,12 +1619,12 @@ The permutation matrix Q =
 4x -2y + 2z &amp;= 4 \\
 2x +4y -z &amp;=5
 \end{align*}\]</div>
-<p>find the LU factorizaton, PA=LU factorization and PAQ=LU factorization of the coefficient matrix. Use LU factorization and PA=LU factorization to solve the linear system.</p>
+<p>find the LU factorizaton, PA=LU factorization, and PAQ=LU factorization of the coefficient matrix. Use LU factorization and PA=LU factorization to solve the linear system.</p>
 </section>
 <section id="condition-number">
 <h2>Condition number<a class="headerlink" href="#condition-number" title="Permalink to this headline">#</a></h2>
-<p>For a function of one variable, <span class="math notranslate nohighlight">\(y=f(x)\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, and <span class="math notranslate nohighlight">\(y\)</span> is the dependent variable, one is often interested how <span class="math notranslate nohighlight">\(y\)</span> responds to a small change of <span class="math notranslate nohighlight">\(x\)</span>. If a small change in <span class="math notranslate nohighlight">\(x\)</span> leads to a large change in <span class="math notranslate nohighlight">\(y\)</span>, then <span class="math notranslate nohighlight">\(y\)</span> is said to be <strong>sensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>; otherwise <span class="math notranslate nohighlight">\(y\)</span> is <strong>insensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>In the problem of solving a linear system, similarly we are interested in how the change in the independent variable, <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, affect the dependent variable <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Consider a perturbation of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{b}}=\boldsymbol{b}+\delta\boldsymbol{b}\)</span>, the ratio of the relative change in the magnitude (norm)  of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> to the relative change in the magnitude of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> can be expressed as</p>
+<p>For a function of one variable, <span class="math notranslate nohighlight">\(y=f(x)\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, and <span class="math notranslate nohighlight">\(y\)</span> is the dependent variable, one is often interested in how <span class="math notranslate nohighlight">\(y\)</span> responds to a small change in <span class="math notranslate nohighlight">\(x\)</span>. If a small change in <span class="math notranslate nohighlight">\(x\)</span> leads to a large change in <span class="math notranslate nohighlight">\(y\)</span>, then <span class="math notranslate nohighlight">\(y\)</span> is said to be <strong>sensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>; otherwise <span class="math notranslate nohighlight">\(y\)</span> is <strong>insensitive</strong> to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>In the problem of solving a linear system, similarly we are interested in how the change in the independent variable, <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, affect the dependent variable <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Considering a perturbation of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{b}}=\boldsymbol{b}+\delta\boldsymbol{b}\)</span>, the ratio of the relative change in the magnitude (norm)  of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> to the relative change in the magnitude of <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> can be expressed as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = \frac{\frac{||A^{-1}\hat{\boldsymbol{b}}-A^{-1}\boldsymbol{b}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} =
@@ -1637,22 +1632,22 @@ The permutation matrix Q =
 \frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||\boldsymbol{x}||} = 
 \frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||}
 \end{equation*}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(||\delta\boldsymbol{x}||\)</span> is called <strong>forward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}\)</span> is called <strong>relative forward error</strong>, <span class="math notranslate nohighlight">\(||\delta\boldsymbol{b}||\)</span> is called <strong>backward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}\)</span> is called <strong>relative backward error</strong>, and the quantity <span class="math notranslate nohighlight">\(\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}}\)</span> is called <strong>error magnification error</strong>.</p>
-<p>To find the maximum of error magnification error, notice that</p>
+<p>Here <span class="math notranslate nohighlight">\(||\delta\boldsymbol{x}||\)</span> is called <strong>forward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}\)</span> is called <strong>relative forward error</strong>, <span class="math notranslate nohighlight">\(||\delta\boldsymbol{b}||\)</span> is called <strong>backward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}\)</span> is called <strong>relative backward error</strong>, and the quantity <span class="math notranslate nohighlight">\(\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}}\)</span> is called <strong>error magnification factor</strong>.</p>
+<p>To find the maximum of error magnification factor, notice that</p>
 <div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = \max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} = 
-\max_{\delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||} \max_{\boldsymbol{b}}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} = ||A^{-1}||_m\cdot||A||_m
-\end{equation*}\]</div>
+\[\begin{align*}
+\max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} &amp;= \max_{\boldsymbol{b}, \delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} = \max_{\delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||} \max_{\boldsymbol{b}}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||} \\
+&amp;= \max_{\delta\boldsymbol{b}}\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||} \max_{\boldsymbol{x}}\frac{||\boldsymbol{A}\boldsymbol{x}||}{||\boldsymbol{x}||} = ||A^{-1}||_m\cdot||A||_m
+\end{align*}\]</div>
 <p>where the notation <span class="math notranslate nohighlight">\(||\cdot||_m\)</span> denotes the <span class="math notranslate nohighlight">\(||\cdot||\)</span> (vector norm) induced matrix norm.</p>
 <div class="proof definition admonition" id="condition_number">
 <p class="admonition-title"><span class="caption-number">Definition 8 </span></p>
 <section class="definition-content" id="proof-content">
 <p>The quantity <span class="math notranslate nohighlight">\(||A^{-1}||_m\cdot||A||_m\)</span> is called the <strong>condition number</strong> of matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </section>
-</div><p>A large condition number indicates that a small change in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> incurs a large change in the solution to the linear system <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Such matrices are called <strong>ill-conditioned</strong>; otherwise, the matrices are called <strong>well-conditioned</strong>. Solving a linear system whose coefficient matrix is ill-conditioned is subjected to large error. Supposing the condition number of matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(O(10^k)\)</span>, then about <span class="math notranslate nohighlight">\(k\)</span> digits of accuracy is lost in solving a linear system that has <span class="math notranslate nohighlight">\(A\)</span> as the coefficient matrix. In double precision, this means about <span class="math notranslate nohighlight">\(16-k\)</span> digits of accuracy is expected.</p>
+</div><p>A large condition number indicates that a small change in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> incurs a large change in <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, the solution to the linear system. Such matrices are called <strong>ill-conditioned</strong>; otherwise, the matrices are called <strong>well-conditioned</strong>. Solving a linear system whose coefficient matrix is ill-conditioned is subject to large error. As a rule of thumb, supposing the condition number of matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(O(10^k)\)</span>, then up to <span class="math notranslate nohighlight">\(k\)</span> digits of accuracy is lost in solving a linear system that has <span class="math notranslate nohighlight">\(A\)</span> as the coefficient matrix. With double precision, this means about <span class="math notranslate nohighlight">\(16-k\)</span> digits of accuracy is expected.</p>
 <div class="proof example admonition" id="HilbertMatrix">
-<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1707,7 +1702,7 @@ The error vector of the solution is:
 </div>
 </div>
 </div>
-<p>The condition number of the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix has a condition number of <span class="math notranslate nohighlight">\(10^{10}\)</span>, so <span class="math notranslate nohighlight">\(16-10=6\)</span> digits of accuracy is expected to be lost, which is verified by the printed errors, the largest one of which is <span class="math notranslate nohighlight">\(1.62\times 10^{-7}=0.162\times 10^{-6}\)</span>.</p>
+<p>The condition number of the <span class="math notranslate nohighlight">\(8\times 8\)</span> Hilbert matrix is about <span class="math notranslate nohighlight">\(10^{10}\)</span>, so <span class="math notranslate nohighlight">\(16-10=6\)</span> digits of accuracy is expected, which is verified by the printed errors, the largest one of which is <span class="math notranslate nohighlight">\(1.62\times 10^{-7}\)</span>.</p>
 </section>
 </section>
 
