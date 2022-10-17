@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -585,7 +583,7 @@ title="Print to PDF"
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 2x + 3y &amp;= 8 \\
-3x - 4y &amp;= -5
+3x - 4y &amp;= -5.
 \end{align*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -594,13 +592,13 @@ title="Print to PDF"
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; { |} &amp; {8} \\ {3} &amp; {-4} &amp; { |} &amp; {-5}\end{array}\right] &amp;\rightarrow R_2=R_2-\frac{3}{2}R_1 \rightarrow\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {|} &amp; {8} \\ {0} &amp; {-\frac{17}{2}} &amp; {|} &amp; {-\frac{34}{2}}\end{array}\right]\\
  &amp;\rightarrow R_2=R_2/\left(-\frac{17}{2}\right) \rightarrow \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {|} &amp; {8} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\
- &amp;\rightarrow R_1=R_1-3R_2 \rightarrow \left[\begin{array}{rrrr}{2} &amp; {0} &amp; {|} &amp; {2} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\ &amp;\rightarrow R_1=R_1/2 \rightarrow \left[\begin{array}{rrrr}{1} &amp; {0} &amp; {|} &amp; {1} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right]
+ &amp;\rightarrow R_1=R_1-3R_2 \rightarrow \left[\begin{array}{rrrr}{2} &amp; {0} &amp; {|} &amp; {2} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right] \\ &amp;\rightarrow R_1=R_1/2 \rightarrow \left[\begin{array}{rrrr}{1} &amp; {0} &amp; {|} &amp; {1} \\ {0} &amp; {1} &amp; {|} &amp; {2}\end{array}\right].
 \end{align*}\]</div>
 <p>Here the notation for the first ERO means multiplying the first row by <span class="math notranslate nohighlight">\(\frac{3}{2}\)</span> and subtract it from the second row (or equivalently, multiplying the first row by <span class="math notranslate nohighlight">\(-\frac{3}{2}\)</span> and add it to the second row), the second ERO means dividing the second row by <span class="math notranslate nohighlight">\(-\frac{17}{2}\)</span> (or multiplying the second row by <span class="math notranslate nohighlight">\(-\frac{2}{17}\)</span>, the third means multiplying the second row by <span class="math notranslate nohighlight">\(3\)</span> and subtracting it from the first (or multiplying the second row by <span class="math notranslate nohighlight">\(-3\)</span> and add it to the first row), and the last means dividing the first row by <span class="math notranslate nohighlight">\(2\)</span> (or multiplying the first row by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>).</p>
 <p>The resulting linear system is in reduced echelon form from which one can directly read the solution:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x_1 = 1, \, x_2 = 2
+x_1 = 1, \, x_2 = 2.
 \end{equation*}\]</div>
 <p>Now we look at a <span class="math notranslate nohighlight">\(3\times 3\)</span> system.</p>
 <div class="proof example admonition" id="3by3GE">
@@ -611,33 +609,33 @@ x_1 = 1, \, x_2 = 2
 \[\begin{align*}
 2x + 3y -z &amp;= -3 \\
 4x - 2y +3z &amp;= 12 \\
-2x -y + 2z &amp;= 7
+2x -y + 2z &amp;= 7.
 \end{align*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
 <p>In matrix form, the system is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; { |} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right]
+\left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; { |} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right].
 \end{equation*}\]</div>
 <p>Perform Gaussian elimination:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
-&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right]
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ {0} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right].
 \end{align*}\]</div>
 <p>So the equivalent system of equations is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} 
 2x+3 y-z &amp;=-3 \\
 -8 y +5z &amp;=18 \\
-\frac{1}{2} z &amp;=1
+\frac{1}{2} z &amp;=1.
 \end{align*}\]</div>
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x = 1, \, y = -1, \, z =2
+x = 1, \, y = -1, \, z =2.
 \end{equation*}\]</div>
 <p>Gaussian elimination involves identifying a pivot position (the <span class="math notranslate nohighlight">\((i,i)\)</span> position on the diagonal) at each step, multiplying the row where pivot is by separate factors, and subtract the products from the rows below. Note that no zeros were encountered in the Gaussian elimination processes in the two examples above, and hence such Gaussian elimination is called “naive”. In addition, if echelon form, instead of reduced echelon form, is obtained from Gaussian elimination, a <strong>back substitution</strong> algorithm is needed to solve the upper triangular system for <span class="math notranslate nohighlight">\(x\)</span>’s from bottom to top. The back substitution algorithm solves for <span class="math notranslate nohighlight">\(x_n\)</span> from the last equation, <span class="math notranslate nohighlight">\(x_{n-1}\)</span> from the second to last equation, and all the way up, until <span class="math notranslate nohighlight">\(x_1\)</span> is solved for from the first equation. The following code performs back substitution for an upper triangular system, and the solution to the system is stored in place in <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p>
 <div class="cell docutils container">
@@ -753,17 +751,17 @@ The solution is  [ 1 -1  2]
 \[\begin{equation*}
 \left[\begin{array}{ccccc}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}} \\ {\vdots} &amp; {\vdots} &amp; {\ldots} &amp; {\vdots} &amp; { |} &amp; {\vdots} \\ {a_{n 1}} &amp; {a_{n 2}} &amp; {\dots} &amp; {a_{n n}} &amp; { |} &amp; {b_{n}}\end{array}\right]
 \end{equation*}\]</div>
-<p>Note in the first step, only the first two rows are involved:</p>
+<p>note in the first step, only the first two rows are involved:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\begin{array}{llllll}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}}\end{array}
+\begin{array}{llllll}{a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ {a_{21}} &amp; {a_{22}} &amp; {\dots} &amp; {a_{2 n}} &amp; { |} &amp; {b_{2}}.\end{array}
 \end{equation*}\]</div>
 <p>The two rows are changed to</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{array}{llll}
 {a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ 
-{0} &amp; {a_{22}-\frac{a_{21}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{2 n}-\frac{a_{21}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{2}-\frac{a_{21}}{a_{11}} b_{1}}
+{0} &amp; {a_{22}-\frac{a_{21}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{2 n}-\frac{a_{21}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{2}-\frac{a_{21}}{a_{11}} b_{1}}.
 \end{array}
 \end{equation*}\]</div>
 <p>This involves <span class="math notranslate nohighlight">\(1\)</span> divison (<span class="math notranslate nohighlight">\(a_{21}/a_{11}\)</span>), <span class="math notranslate nohighlight">\(n\)</span> multiplications and <span class="math notranslate nohighlight">\(n\)</span> additions. The same number of operations are needed for the other rows to get</p>
@@ -772,18 +770,18 @@ The solution is  [ 1 -1  2]
 \begin{array}{llll}
 {a_{11}} &amp; {a_{12}} &amp; {\dots} &amp; {a_{1 n}} &amp; { |} &amp; {b_{1}} \\ 
 {\vdots} &amp; {\vdots} &amp; {\dots} &amp; {\vdots} &amp; { |} &amp; {\vdots} \\
-{0} &amp; {a_{i2}-\frac{a_{i1}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{i n}-\frac{a_{i1}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{i}-\frac{a_{i1}}{a_{11}} b_{1}}
+{0} &amp; {a_{i2}-\frac{a_{i1}}{a_{11}} a_{12}} &amp; {\dots} &amp; {a_{i n}-\frac{a_{i1}}{a_{1 1}} a_{1 n}} &amp; { |} &amp; {b_{i}-\frac{a_{i1}}{a_{11}} b_{1}}.
 \end{array}
 \end{equation*}\]</div>
 <p>So to eliminate the first column, the total number of operations is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-(2n+1)(n-1)
+(2n+1)(n-1).
 \end{equation*}\]</div>
 <p>Similarly, to eliminate the second column (make <span class="math notranslate nohighlight">\(a_{i2}, i&gt;2\)</span> zero), for each row, the total number of operations is <span class="math notranslate nohighlight">\(2(n-1)+1\)</span>, comprising <span class="math notranslate nohighlight">\(1\)</span> division, <span class="math notranslate nohighlight">\(n-1\)</span> multiplications, and <span class="math notranslate nohighlight">\(n-1\)</span> additions. Therefore, the total number of operations adds up to</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-(2(n-1)+1)(n-2)
+(2(n-1)+1)(n-2).
 \end{equation*}\]</div>
 <p>Repeat the same operation count for column <span class="math notranslate nohighlight">\(3\)</span> to column <span class="math notranslate nohighlight">\(n\)</span>. The total number of operations is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -792,13 +790,13 @@ The solution is  [ 1 -1  2]
 &amp;= (2(n-1)+3)(n-1) + (2(n-2)+3)(n-2) + (2(n-3)+3)(n-3)+\cdots+(2(n-(n-1))+3)(n-(n-1)) \\
 &amp;= \sum_{j=1}^{n-1} (2(n-j)+3)(n-j) = \sum_{j=1}^{n-1} (2n^2+3n)-(4n+3)j+2j^2 \\
 &amp;= (2n^2+3n)(n-1) - (4n+3)\frac{n(n-1)}{2} + 2\frac{(n-1)(n)(2n-1)}{6} \\
-&amp;= \frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n
+&amp;= \frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n,
 \end{align*}\]</div>
 <p>where we used the following two identities:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-1+2+3+4+\dots+n &amp;=n (n+1) / 2 \\
-1^{2}+2^{2}+3^{2}+4^{2}+\dots+n^{2} &amp;= n(n+1)(2 n+1) / 6
+1+2+3+4+\dots+n &amp;=n (n+1) / 2, \\
+1^{2}+2^{2}+3^{2}+4^{2}+\dots+n^{2} &amp;= n(n+1)(2 n+1) / 6.
 \end{align*}\]</div>
 </div>
 <p>We use <span class="math notranslate nohighlight">\(O\left(\frac{2}{3}n^3\right)\)</span> to denote “of the order of”, i.e., the cost of Gaussian elimination is dominated by the term <span class="math notranslate nohighlight">\(\frac{2}{3}n^3\)</span>.</p>
@@ -811,13 +809,13 @@ The solution is  [ 1 -1  2]
 <p>Proof. Note that the last equation of an upper triangular system involves 1 division, the second to last equation involves one multiplication, one subtraction and one division, the third to last involves 5 total operations, etc., so the total number of operations of back substitution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-1+3+5+\cdots+(2n-1) = \frac{[1+(2n-1)]n}{2} = n^2
+1+3+5+\cdots+(2n-1) = \frac{[1+(2n-1)]n}{2} = n^2.
 \end{equation*}\]</div>
 </div>
 <p>Therefore, the total number of operations of solving a linear system with Gaussian elimination and back substitution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n + n^2 = \frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n = O\left(\frac{2}{3}n^3\right)
+\frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n + n^2 = \frac{2}{3}n^3 + \frac{3}{2}n^2 - \frac{7}{6}n = O\left(\frac{2}{3}n^3\right).
 \end{equation*}\]</div>
 <div class="proof example admonition" id="cost">
 <p class="admonition-title"><span class="caption-number">Example 20 </span></p>
@@ -833,18 +831,18 @@ The solution is  [ 1 -1  2]
 <p>Gaussian elimination produces a byproduct, a factorization of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, for free. The factorization takes the form of <span class="math notranslate nohighlight">\(A=LU\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is a lower triangular matrix whose diagonal elements are all ones, and <span class="math notranslate nohighlight">\(U\)</span> is an upper triangular matrix. LU factorization can be utilized to solve a system of linear systems of the following form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-A\boldsymbol{x}_i = \boldsymbol{b}_i, \, i=1,2,\dots,K
+A\boldsymbol{x}_i = \boldsymbol{b}_i, \, i=1,2,\dots,K.
 \end{equation*}\]</div>
 <p>All of the linear systems share the same coefficient matrix while the right hand sides are different. If Gaussian elimination were used to solve all linear systems, the total cost would be around <span class="math notranslate nohighlight">\(\frac{2}{3}n^3K\)</span>, which could be computationally intractable if both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are large. However, by using <span class="math notranslate nohighlight">\(A=LU\)</span>, a linear system can be rewritten as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-LU\boldsymbol{x} = \boldsymbol{b}
+LU\boldsymbol{x} = \boldsymbol{b},
 \end{equation*}\]</div>
 <p>which can further be written as a system of two linear systems:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 L\boldsymbol{c} &amp;= \boldsymbol{b} \\
-U\boldsymbol{x} &amp;= \boldsymbol{c}
+U\boldsymbol{x} &amp;= \boldsymbol{c}.
 \end{align*}\]</div>
 <p>The first linear system involves a <strong>forward substitution</strong>, which solves a lower triangular system from top to bottom, and the second can be solved by back substitution. Similar to back substitution, the cost of forward substitution is also <span class="math notranslate nohighlight">\(n^2\)</span>. So the total cost of solving the system of linear systems is <span class="math notranslate nohighlight">\(\frac{2}{3}n^3+2n^2K\)</span>, which is in general much more computationally efficient than solving all linear systems by Gaussian elimination.</p>
 <p>Next, we use an example to show how LU factorization can be obtained from the Gaussian elimination process without any additional computation and storage.</p>
@@ -859,7 +857,7 @@ U\boldsymbol{x} &amp;= \boldsymbol{c}
 \[\begin{align*}
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2=R_2-2R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-R_1 \rightarrow \left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; {-4} &amp; {3} &amp; { |} &amp; {10}\end{array}\right] \\
-&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; \fbox{1/2} &amp; {1/2} &amp; { |} &amp; {1}\end{array}\right]
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_2 \rightarrow\left[\begin{array}{rrrrr}{2} &amp; {3} &amp; {-1} &amp; { |} &amp; {-3} \\ \fbox{2} &amp; {-8} &amp; {5} &amp; { |} &amp; {18} \\ \fbox{1} &amp; \fbox{1/2} &amp; {1/2} &amp; { |} &amp; {1}\end{array}\right].
 \end{align*}\]</div>
 <p>So the multipliers in boxes define the lower triangular part of <span class="math notranslate nohighlight">\(L\)</span>, and the upper triangular part including the diagonal of the row echelon form (without the right hand side) defines the matrix <span class="math notranslate nohighlight">\(U\)</span>. In this example, we have</p>
 <div class="amsmath math notranslate nohighlight">
@@ -875,7 +873,7 @@ U =
 2 &amp; 3 &amp; -1 \\
 0 &amp; -8 &amp; 5 \\
 0 &amp; 0 &amp; 1/2
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>It is easy to verfity <span class="math notranslate nohighlight">\(A=LU\)</span>.</p>
 <p>Note that the lower triangular part of the coefficient matrix stores the multipliers, instead of zeros, so no additional storage is needed for LU factorization.</p>
@@ -898,7 +896,7 @@ c_1 \\ c_2 \\ c_3
 \end{bmatrix} = 
 \begin{bmatrix}
 -3 \\ 12 \\ 7
-\end{bmatrix}
+\end{bmatrix},
 \end{equation*}\]</div>
 <p>and</p>
 <div class="amsmath math notranslate nohighlight">
@@ -913,7 +911,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix} = 
 \begin{bmatrix}
 c_1 \\ c_2 \\ c_3
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Solving the first linear system using forward substitution, we obtain <span class="math notranslate nohighlight">\(\boldsymbol{c}\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -924,7 +922,7 @@ c_1 \\ c_2 \\ c_3
 \end{bmatrix} = 
 \begin{bmatrix}
 -3 \\ 18 \\ 1
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Then solving for <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> from the second system using back substitution, we have</p>
 <div class="amsmath math notranslate nohighlight">
@@ -935,7 +933,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix} = 
 \begin{bmatrix}
 1 \\ -1 \\ 2
-\end{bmatrix}
+\end{bmatrix},
 \end{equation*}\]</div>
 <p>which is identical to the solution obtained from Gaussian elimination.</p>
 <p>The following Python function <strong>LU</strong> performs LU factorization. Note that the coefficient matrix itself is replaced by the entries of the matrices <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span>. At each step of Gaussian elimination, the pivot position is checked for its value. If the absolute value of the pivot is greater than a hard-coded threshold <span class="math notranslate nohighlight">\(10^{-5}\)</span>, the pivot is considered nonzero. Otherwise, the algorithm stops.</p>
@@ -1073,7 +1071,7 @@ I^{2,1}(-2)=
 1 &amp; 0 &amp; 0 \\
 -2 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 1
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <ol class="simple">
 <li><p>What is <span class="math notranslate nohighlight">\(I^{i,j}(m)A\)</span> for a general <span class="math notranslate nohighlight">\(n\)</span>?</p></li>
@@ -1126,19 +1124,19 @@ I^{2,1}(-2)=
 \left[\begin{array}{rrrr}{2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ \color{red}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] &amp;\rightarrow R_2\leftrightarrow R_1 \rightarrow
 \left[\begin{array}{rrrr} {4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {2} &amp; {3} &amp; {-1} &amp; {|} &amp; {-3} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right]
 \\ &amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {0} &amp; {4} &amp; {-\frac{5}{2}} &amp; { |} &amp; {-9} \\ {2} &amp; {-1} &amp; {2} &amp; { |} &amp; {7}\end{array}\right] \\
-&amp;\rightarrow R_3=R_3-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {0} &amp; {4} &amp; {-\frac{5}{2}} &amp; { |} &amp; {-9} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right]
+&amp;\rightarrow R_3=R_3-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{4} &amp; {-2} &amp; {3} &amp; {|} &amp; {12} \\ {0} &amp; {4} &amp; {-\frac{5}{2}} &amp; { |} &amp; {-9} \\ {0} &amp; {0} &amp; {\frac{1}{2}} &amp; { |} &amp; {1}\end{array}\right].
 \end{align*}\]</div>
 <p>So the equivalent system is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} 
 4x-2 y+3z &amp;=12 \\
 4 y -\frac{5}{2}z &amp;=-9 \\
-\frac{1}{2} z &amp;=1
+\frac{1}{2} z &amp;=1.
 \end{align*}\]</div>
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x = 1, \, y = -1, \, z =2
+x = 1, \, y = -1, \, z =2.
 \end{equation*}\]</div>
 <p>Here, we marked the number that needs to be placed in the pivot position in red. The notation <span class="math notranslate nohighlight">\(R_1\leftrightarrow R_2\)</span> means swapping Rows <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span>. For this example, we only needed to switch rows once, since the <span class="math notranslate nohighlight">\((3,2)\)</span> position vanished when we used the first pivot to eliminate the <span class="math notranslate nohighlight">\((3,1)\)</span> position.</p>
 <div class="proof example admonition" id="PartialPivoting2">
@@ -1149,7 +1147,7 @@ x = 1, \, y = -1, \, z =2
 \[\begin{align*}
 3x - 2y + z &amp;= -1 \\
 6x + y -3 z &amp;= 18 \\
--4x +3 y - 2 z &amp;= 3
+-4x +3 y - 2 z &amp;= 3.
 \end{align*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -1160,19 +1158,19 @@ x = 1, \, y = -1, \, z =2
 \\ &amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10} \\ {-4} &amp; {3} &amp; {-2} &amp; { |} &amp; {3}\end{array}\right] \\
 &amp;\rightarrow R_3=R_3-\left(-\frac{2}{3}\right)R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10} \\ {0} &amp; \color{red}{\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15}\end{array}\right]\\
 &amp;\rightarrow R_3\leftrightarrow R_2 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15} \\ {0} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} &amp; { |} &amp; {-10}\end{array}\right]\\
-&amp;\rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15} \\ {0} &amp; {0} &amp; {-\frac{5}{22}} &amp; { |} &amp; {\frac{5}{22}}\end{array}\right]
+&amp;\rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} &amp; {|} &amp; {18} \\ {0} &amp; {\frac{11}{3}} &amp; {-4} &amp; { |} &amp; {15} \\ {0} &amp; {0} &amp; {-\frac{5}{22}} &amp; { |} &amp; {\frac{5}{22}}\end{array}\right].
 \end{align*}\]</div>
 <p>So the equivalent system is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} 
 6x +y-3z &amp;=18 \\
 \frac{11}{3} y -4z &amp;=15 \\
--\frac{5}{22} z &amp;=\frac{5}{22}
+-\frac{5}{22} z &amp;=\frac{5}{22}.
 \end{align*}\]</div>
 <p>The solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-x = 2, \, y = 3, \, z =-1
+x = 2, \, y = 3, \, z =-1.
 \end{equation*}\]</div>
 <p>The following Python function <strong>GEPP</strong> performs Gaussian elimination with partial pivoting. Both the coefficient matrix and right-hand side vector <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are changed in place and they together represent the echelon form of the augmented matrix.</p>
 <div class="cell docutils container">
@@ -1299,13 +1297,13 @@ PA=LU
 P = 
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>The first step of Gaussian elimination with partial pivoting involves exchanging the first two rows:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \left[\begin{array}{rrrr}{3} &amp; {-2} &amp; {1} \\ \color{red}{6} &amp; {1} &amp; {-3} \\ {-4} &amp; {3} &amp; {-2} \end{array}\right] \rightarrow R_2\leftrightarrow R_1 \rightarrow
-\left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3}  \\ {3} &amp; {-2} &amp; {1}  \\ {-4} &amp; {3} &amp; {-2} \end{array}\right]
+\left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3}  \\ {3} &amp; {-2} &amp; {1}  \\ {-4} &amp; {3} &amp; {-2} \end{array}\right].
 \end{equation*}\]</div>
 <p>Accordingly, we update <span class="math notranslate nohighlight">\(P\)</span> by switching its first two rows:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1316,19 +1314,19 @@ P =
 \end{bmatrix} \rightarrow R_2\leftrightarrow R_1 \rightarrow
 \begin{bmatrix}
 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Now eliminate the two numbers below the pivot (<span class="math notranslate nohighlight">\((1,1)\)</span> position), and store the multipliers in those positions:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \left[\begin{array}{rrrr} {6} &amp; {1} &amp; {-3}  \\ {3} &amp; {-2} &amp; {1} \\ {-4} &amp; {3} &amp; {-2} \end{array}\right]&amp;\rightarrow R_2=R_2-\frac{1}{2}R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3}  \\ {\fbox{1/2}} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \\ {-4} &amp; {3} &amp; {-2} \end{array}\right] \\
-&amp;\rightarrow R_3=R_3-\left(-\frac{2}{3}\right)R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} \\ {\fbox{-2/3}} &amp; \color{red}{\frac{11}{3}} &amp; {-4} \end{array}\right]
+&amp;\rightarrow R_3=R_3-\left(-\frac{2}{3}\right)R_1 \rightarrow \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} \\ {\fbox{-2/3}} &amp; \color{red}{\frac{11}{3}} &amp; {-4} \end{array}\right].
 \end{align*}\]</div>
 <p>The next step involves swapping the second and third rows of <span class="math notranslate nohighlight">\(A\)</span>：</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}} \\ {\fbox{-2/3}} &amp; \color{red}{\frac{11}{3}} &amp; {-4} \end{array}\right] \rightarrow R_2\leftrightarrow R_3 \rightarrow
-\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3}  \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right]
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3}  \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right].
 \end{equation*}\]</div>
 <p>Correspondingly we update <span class="math notranslate nohighlight">\(P\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1339,13 +1337,13 @@ P =
 \end{bmatrix} \rightarrow R_2\leftrightarrow R_3 \rightarrow
 \begin{bmatrix}
 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Now eliminate the <span class="math notranslate nohighlight">\((3,2)\)</span> position:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; {-\frac{5}{2}} &amp; {\frac{5}{2}}  \end{array}\right] \rightarrow R_3=R_3-\left(-\frac{15}{22}\right)R_2 \rightarrow
-\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; \fbox{-15/22} &amp; {-\frac{5}{22}} \end{array}\right]
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {\fbox{-2/3}} &amp; {\frac{11}{3}} &amp; {-4}  \\ \fbox{1/2} &amp; \fbox{-15/22} &amp; {-\frac{5}{22}} \end{array}\right].
 \end{equation*}\]</div>
 <p>The algorithm is now completed with</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1359,7 +1357,7 @@ L =
 1 &amp; 0 &amp; 0 \\ {-2/3} &amp; 1 &amp; 0 \\ 1/2 &amp; -15/22 &amp; 1
 \end{bmatrix}, \,
 U = 
-\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {0} &amp; {\frac{11}{3}} &amp; {-4}  \\ 0 &amp; 0 &amp; {-\frac{5}{22}} \end{array}\right]
+\left[\begin{array}{rrrrr}{6} &amp; {1} &amp; {-3} \\ {0} &amp; {\frac{11}{3}} &amp; {-4}  \\ 0 &amp; 0 &amp; {-\frac{5}{22}} \end{array}\right].
 \end{equation*}\]</div>
 <p>It is easy to verify that <span class="math notranslate nohighlight">\(PA=LU\)</span>.</p>
 </section>
@@ -1368,18 +1366,18 @@ U =
 <p>The linear system <span class="math notranslate nohighlight">\(A\boldsymbol{x} = \boldsymbol{b}\)</span> can be rewritten as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-PA\boldsymbol{x} = P\boldsymbol{b}
+PA\boldsymbol{x} = P\boldsymbol{b}.
 \end{equation*}\]</div>
 <p>Using the PA=LU factorization, the linear system reads</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-LU\boldsymbol{x} = P\boldsymbol{b}
+LU\boldsymbol{x} = P\boldsymbol{b},
 \end{equation*}\]</div>
 <p>which can be written as two linear systems:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 L\boldsymbol{c} &amp;= P\boldsymbol{b} \\
-U\boldsymbol{x} &amp;= \boldsymbol{c}
+U\boldsymbol{x} &amp;= \boldsymbol{c}.
 \end{align*}\]</div>
 <p>The following Python function <strong>PALU</strong> performs PA=LU factorization. The <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span> factors are stored in <span class="math notranslate nohighlight">\(A\)</span> as in LU factorization, while the permutation matrix <span class="math notranslate nohighlight">\(P\)</span> is returned.</p>
 <div class="cell docutils container">
@@ -1611,7 +1609,7 @@ The permutation matrix Q =
 \end{bmatrix}
 \begin{bmatrix}
 6 &amp; -3 &amp; 1 \\ 0 &amp; -4 &amp; \frac{11}{3} \\ 0 &amp; 0 &amp; -\frac{5}{24}
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p><strong>Exercise 3.1-3</strong></p>
 <p>For the linear system</p>
@@ -1632,7 +1630,7 @@ The permutation matrix Q =
 \frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = \frac{\frac{||A^{-1}\hat{\boldsymbol{b}}-A^{-1}\boldsymbol{b}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} =
 \frac{\frac{||A^{-1}\delta\boldsymbol{b}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}} = 
 \frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||\boldsymbol{x}||} = 
-\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||}
+\frac{||A^{-1}\delta\boldsymbol{b}||}{||\delta\boldsymbol{b}||}\frac{||\boldsymbol{b}||}{||A^{-1}\boldsymbol{b}||}.
 \end{equation*}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(||\delta\boldsymbol{x}||\)</span> is called <strong>forward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}\)</span> is called <strong>relative forward error</strong>, <span class="math notranslate nohighlight">\(||\delta\boldsymbol{b}||\)</span> is called <strong>backward error</strong>, <span class="math notranslate nohighlight">\(\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}\)</span> is called <strong>relative backward error</strong>, and the quantity <span class="math notranslate nohighlight">\(\frac{\frac{||\delta\boldsymbol{x}||}{||\boldsymbol{x}||}}{\frac{||\delta\boldsymbol{b}||}{||\boldsymbol{b}||}}\)</span> is called <strong>error magnification factor</strong>.</p>
 <p>To find the maximum of error magnification factor, notice that</p>
@@ -1664,7 +1662,7 @@ H =
 \frac{1}{6} &amp; \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} \\
 \frac{1}{7} &amp; \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} &amp; \frac{1}{14} \\
 \frac{1}{8} &amp; \frac{1}{9} &amp; \frac{1}{10} &amp; \frac{1}{11} &amp; \frac{1}{12} &amp; \frac{1}{13} &amp; \frac{1}{14} &amp; \frac{1}{15}
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>In general, the position <span class="math notranslate nohighlight">\((i,j)\)</span> of the Hilbert matrix has the value <span class="math notranslate nohighlight">\(\frac{1}{i+j-1}\)</span>.</p>
 <p>Let the true solution be <span class="math notranslate nohighlight">\(\boldsymbol{x}=[1,1,1,1,1,1,1,1]^T\)</span>, and create the right hand side vector <span class="math notranslate nohighlight">\(\boldsymbol{b}=H\boldsymbol{x}\)</span>. Use Python to solve the system <span class="math notranslate nohighlight">\(H\boldsymbol{x}=\boldsymbol{b}\)</span>. How accurate are the solutions?</p>

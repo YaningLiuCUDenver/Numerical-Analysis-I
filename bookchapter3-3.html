@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -520,7 +518,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="cholesky-decomposition">
 <span id="section3-3"></span><h1>3.3 Cholesky decomposition<a class="headerlink" href="#cholesky-decomposition" title="Permalink to this headline">#</a></h1>
-<p>We now consider a special form of LU decomposition, When the matrix satifies certain properties.</p>
+<p>We now consider a special form of LU decomposition, when the matrix satisfies certain properties.</p>
 <div class="proof definition admonition" id="PD">
 <p class="admonition-title"><span class="caption-number">Definition 10 </span></p>
 <section class="definition-content" id="proof-content">
@@ -531,7 +529,7 @@ title="Print to PDF"
 \[\begin{equation*}
 A =R^TR
 \end{equation*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(R\)</span> is a upper triangular matrix. Such a decomposition is called <strong>Cholesky Decomposition</strong>.</p>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is an upper triangular matrix. Such a decomposition is called <strong>Cholesky decomposition</strong>.</p>
 <div class="proof theorem admonition" id="PD_properties">
 <p class="admonition-title"><span class="caption-number">Theorem 16 </span></p>
 <section class="theorem-content" id="proof-content">
@@ -539,18 +537,18 @@ A =R^TR
 <ol class="simple">
 <li><p>Eigenvalues of an SPD matrix are positive</p></li>
 <li><p>The determinant of an SPD matrix is positive</p></li>
-<li><p>Any principal submatrix of an SPD matrix is SPD. (A principla submatrix is a submatrix whose diagonal elements are also those of the original matrix.)</p></li>
+<li><p>Any principal submatrix of an SPD matrix is SPD. (A principal submatrix is a submatrix whose diagonal elements are also those of the original matrix.)</p></li>
 </ol>
 </section>
 </div><p>We use a <span class="math notranslate nohighlight">\(2 \times 2\)</span> example to inspire us to the algorithm for a general <span class="math notranslate nohighlight">\(n \times n\)</span> SPD matrix.</p>
-<p>For a general <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix,</p>
+<p>For a general <span class="math notranslate nohighlight">\(2 \times 2\)</span> SPD matrix,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 A = 
 \begin{bmatrix}
 a &amp; b \\
 b &amp; c
-\end{bmatrix}
+\end{bmatrix},
 \end{equation*}\]</div>
 <p>the factor <span class="math notranslate nohighlight">\(R\)</span> in the Cholesky decomposition <span class="math notranslate nohighlight">\(A=R^TR\)</span> has the following general form:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -559,7 +557,7 @@ R =
 \begin{bmatrix}
 \alpha &amp; \beta \\
 0 &amp; \gamma
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Then we have</p>
 <div class="amsmath math notranslate nohighlight">
@@ -583,14 +581,14 @@ R^TR =
 a &amp; b \\
 b &amp; c
 \end{bmatrix}
-= A
+= A.
 \end{equation*}\]</div>
 <p>An elementwise comparison of the elements in <span class="math notranslate nohighlight">\(R^TR\)</span> and <span class="math notranslate nohighlight">\(A\)</span> gives the following system of equations</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \alpha^2 &amp;= a \\
 \alpha\beta &amp;= b \\
-\beta^2 + \gamma^2 &amp;= c
+\beta^2 + \gamma^2 &amp;= c,
 \end{align*}\]</div>
 <p>which leads to</p>
 <div class="math notranslate nohighlight" id="equation-sqrtalpha">
@@ -603,7 +601,7 @@ b &amp; c
 \end{equation*}\]</div>
 <div class="math notranslate nohighlight" id="equation-sqrtgamma">
 <span class="eqno">(22)<a class="headerlink" href="#equation-sqrtgamma" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\gamma = \sqrt{c-\beta^2} = \sqrt{(ac-b^2)/a}
+\gamma = \sqrt{c-\beta^2} = \sqrt{(ac-b^2)/a}.
 \end{equation}\]</div>
 <p>Note that <span class="math notranslate nohighlight">\(R\)</span> is not unique, since a negative sign can be chosen for each of the two square roots in Eqns. <a class="reference internal" href="#equation-sqrtalpha">(21)</a> and <a class="reference internal" href="#equation-sqrtgamma">(22)</a>.</p>
 <div class="proof example admonition" id="2by2cholesky">
@@ -615,7 +613,7 @@ b &amp; c
 \begin{bmatrix}
 4 &amp; -2 \\
 -2 &amp; 10
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -623,7 +621,7 @@ b &amp; c
 \[\begin{align*}
 \alpha &amp;= \sqrt{a} = \sqrt{4} = 2 \\
 \beta &amp;= b/\sqrt{a} = -2/2 = -1 \\
-\gamma &amp;= \sqrt{(ac-b^2)/a}= \sqrt{(4(10)-(-2)(-2))/4} = 3
+\gamma &amp;= \sqrt{(ac-b^2)/a}= \sqrt{(4(10)-(-2)(-2))/4} = 3.
 \end{align*}\]</div>
 <p>So the Cholesky decomposition is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -640,9 +638,9 @@ b &amp; c
 \begin{bmatrix}
 2 &amp; -1 \\
 0 &amp; 3
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
-<p>The Cholesky decomposition algorithm for a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix can be extended to a general <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. The extention is done by partioning the matrix into blocks in a interative way and the algorithm is summarized below:</p>
+<p>The Cholesky decomposition algorithm for a <span class="math notranslate nohighlight">\(2\times 2\)</span> SPD matrix can be extended to a general <span class="math notranslate nohighlight">\(n \times n\)</span> SPD matrix. The extension is done by partitioning the matrix into blocks in an iterative way and the algorithm is summarized below:</p>
 <ol>
 <li><p>Partition the matrix</p>
 <div class="amsmath math notranslate nohighlight">
@@ -676,23 +674,23 @@ b &amp; c
     C = 
     \begin{bmatrix}
     a_{22} &amp; a_{23} &amp; \dots &amp; a_{2n} \\
-    a_{32} &amp; a_{33} &amp; \vdots &amp; a_{3n} \\
+    a_{32} &amp; a_{33} &amp; \cdots &amp; a_{3n} \\
     \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
     a_{n2} &amp; a_{n3} &amp; \dots &amp; a_{nn}
     \end{bmatrix}
     \end{equation*}\]</div>
-<p>is the symmetric lower <span class="math notranslate nohighlight">\(n-1 \times n-1\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>is the symmetric lower <span class="math notranslate nohighlight">\((n-1) \times (n-1)\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </li>
-<li><p>Update the <span class="math notranslate nohighlight">\((1,1)\)</span> position of <span class="math notranslate nohighlight">\(R\)</span> by setting <span class="math notranslate nohighlight">\(R_{11} = \alpha = \sqrt{a_{11}}\)</span> and <span class="math notranslate nohighlight">\([R_{12},\cdots,R_{1n}]=\beta\)</span> by <span class="math notranslate nohighlight">\(\boldsymbol{b}^T/ \sqrt{a_{11}}\)</span>.</p></li>
-<li><p>Repeat Steps 1 and 2 on the <span class="math notranslate nohighlight">\(n-1 \times n-1\)</span> matrix <span class="math notranslate nohighlight">\(A^{(1)}=C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> to update <span class="math notranslate nohighlight">\(R_{22}\)</span> and <span class="math notranslate nohighlight">\([R_{23},\dots, R_{2n}]\)</span>. Note that <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> is an outer product that results in an <span class="math notranslate nohighlight">\(n-1 \times n-1\)</span> matrix, and <span class="math notranslate nohighlight">\(C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> resembles <span class="math notranslate nohighlight">\(c-\beta^2\)</span> in Eqn. <a class="reference internal" href="#equation-sqrtgamma">(22)</a> in the <span class="math notranslate nohighlight">\(2\times 2\)</span> case.</p></li>
+<li><p>Update the <span class="math notranslate nohighlight">\((1,1)\)</span> position of <span class="math notranslate nohighlight">\(R\)</span> by setting <span class="math notranslate nohighlight">\(R_{11} = \alpha = \sqrt{a_{11}}\)</span> and update <span class="math notranslate nohighlight">\([R_{12},\cdots,R_{1n}]=\boldsymbol{\beta}\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{b}^T/ \sqrt{a_{11}}\)</span>.</p></li>
+<li><p>Repeat Steps 1 and 2 on the <span class="math notranslate nohighlight">\((n-1) \times (n-1)\)</span> matrix <span class="math notranslate nohighlight">\(A^{(1)}=C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> to update <span class="math notranslate nohighlight">\(R_{22}\)</span> and <span class="math notranslate nohighlight">\([R_{23},\dots, R_{2n}]\)</span>. Note that <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> is an outer product that results in an <span class="math notranslate nohighlight">\((n-1) \times (n-1)\)</span> matrix, and <span class="math notranslate nohighlight">\(C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> resembles <span class="math notranslate nohighlight">\(c-\beta^2\)</span> in Eqn. <a class="reference internal" href="#equation-sqrtgamma">(22)</a> in the <span class="math notranslate nohighlight">\(2\times 2\)</span> case.</p></li>
 </ol>
 <div class="proof theorem admonition" id="CholCost">
 <p class="admonition-title"><span class="caption-number">Theorem 17 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The algorithm above for Cholesky decomposition has a cost of <span class="math notranslate nohighlight">\(\frac{1}{3}n^3+\frac{1}{2}n^2+\frac{1}{6}n\)</span> flops.</p>
+<p>The algorithm above for Cholesky decomposition has a cost of <span class="math notranslate nohighlight">\(\frac{1}{3}n^3+\frac{1}{2}n^2+\frac{1}{6}n\)</span> floating point operations (flops).</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. The first step involves computing the square root of <span class="math notranslate nohighlight">\(a_{11}\)</span> (1 flop), dividing the vector <span class="math notranslate nohighlight">\([a_{12}, \dots, a_{1n}]\)</span> by the square root (n-1 flops), and computing <span class="math notranslate nohighlight">\(A^{(1)}\)</span>, where calculating <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> costs <span class="math notranslate nohighlight">\(\frac{(n-1)n}{2}\)</span> flops, since only the upper or lower triangular part including the diagonal needs to be computed due to the symmetry, and so does calculating <span class="math notranslate nohighlight">\(C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span>. So the total cost of performing the first step is</p>
+<p>Proof. The first step involves computing the square root of <span class="math notranslate nohighlight">\(a_{11}\)</span> (1 flop), dividing the vector <span class="math notranslate nohighlight">\([a_{12}, \dots, a_{1n}]\)</span> by the square root (n-1 flops), and computing <span class="math notranslate nohighlight">\(A^{(1)}\)</span>, where calculating <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span> costs <span class="math notranslate nohighlight">\(\frac{(n-1)n}{2}\)</span> flops, since only the upper or lower triangular part including the diagonal needs to be computed due to symmetry, and so does calculating <span class="math notranslate nohighlight">\(C-\boldsymbol{\beta}\boldsymbol{\beta}^T\)</span>. So the total cost of performing the first step is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 1+(n-1)+\frac{(n-1)n}{2} + \frac{(n-1)n}{2}
@@ -701,25 +699,25 @@ b &amp; c
 In general, Step <span class="math notranslate nohighlight">\(k\)</span> costs</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-1+(n-k)+\frac{(n-k+1)(n-k)}{2}(2)
+1+(n-k)+\frac{(n-k+1)(n-k)}{2}(2).
 \end{equation*}\]</div>
 <p>Summing the costs of all steps leads to:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \sum_{k=1}^n 1+(n-k)+\frac{(n-k+1)(n-k)}{2}(2) &amp;= \sum_{k=1}^n (n^2+2n+1) - (2n+2)\sum_{k=1}^nk + \sum_{k=1}^n k^2 \\
 &amp;= (n^3+2n^2+n) - (2n+2)\frac{(n+1)n}{2} + \frac{n(n+1)(2n+1)}{6} \\
-&amp;= \frac{1}{3}n^3+\frac{1}{2}n^2+\frac{1}{6}n
+&amp;= \frac{1}{3}n^3+\frac{1}{2}n^2+\frac{1}{6}n,
 \end{align*}\]</div>
 <p>where we used the formula</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}
+\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}.
 \end{equation*}\]</div>
 </div>
 <div class="proof remark admonition" id="Choluniqueness">
 <p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
 <section class="remark-content" id="proof-content">
-<p>Cholesky decomposition is not unique, unless the restriction that diagonal elements of <span class="math notranslate nohighlight">\(R\)</span> are positive is posted.</p>
+<p>Cholesky decomposition is not unique, unless the restriction that diagonal elements of <span class="math notranslate nohighlight">\(R\)</span> are positive is posed.</p>
 </section>
 </div><div class="proof example admonition" id="3by3cholesky">
 <p class="admonition-title"><span class="caption-number">Example 28 </span></p>
@@ -731,7 +729,7 @@ In general, Step <span class="math notranslate nohighlight">\(k\)</span> costs</
 1 &amp; -3 &amp; -2 \\
 -3 &amp; 10 &amp; 9\\
 -2 &amp; 9 &amp; 29 
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -754,7 +752,7 @@ R^{(1)}
 \end{bmatrix}
 \end{equation*}\]</div>
 <p>where
-<span class="math notranslate nohighlight">\(R^{(1)}\)</span> is the lower <span class="math notranslate nohighlight">\(n-1 \times n-1\)</span> lower submatrix of <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<span class="math notranslate nohighlight">\(R^{(1)}\)</span> is the lower <span class="math notranslate nohighlight">\((n-1) \times (n-1)\)</span> submatrix of <span class="math notranslate nohighlight">\(R\)</span>.</p>
 <p>Step 2. Calculate</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -765,17 +763,17 @@ A^{(1)}=C-\boldsymbol{\beta}\boldsymbol{\beta}^T =
 \end{bmatrix}
 -
 \begin{bmatrix}
--3 &amp; -2
-\end{bmatrix}
-\begin{bmatrix}
 -3 \\
 -2
+\end{bmatrix}
+\begin{bmatrix}
+-3 &amp; -2
 \end{bmatrix}
 = 
 \begin{bmatrix}
 1 &amp; 3 \\
 3 &amp; 25
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Step 3. Repeat Step 1 on <span class="math notranslate nohighlight">\(A^{(1)}\)</span> to update <span class="math notranslate nohighlight">\(R^{(1)}\)</span>, i.e., update <span class="math notranslate nohighlight">\(R^{(1)}_{11}\)</span> and <span class="math notranslate nohighlight">\(R^{(1)}_{12}\)</span> by <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(3/1=3\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -794,7 +792,7 @@ R =
 1 &amp; -3 &amp; -2 \\
 0 &amp; 1 &amp; 3 \\
 0 &amp; 0 &amp; R^{(2)}
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Step 4. Calculate <span class="math notranslate nohighlight">\(A^{(2)}=25-3(3)=16\)</span>, based on which <span class="math notranslate nohighlight">\(R^{(2)}\)</span> can be computed by <span class="math notranslate nohighlight">\(R^{(2)}=\sqrt{16}=4\)</span>. So the final Cholesky factor <span class="math notranslate nohighlight">\(R\)</span> for <span class="math notranslate nohighlight">\(A\)</span> is:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -804,7 +802,7 @@ R =
 1 &amp; -3 &amp; -2 \\
 0 &amp; 1 &amp; 3 \\
 0 &amp; 0 &amp; 4
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>The following Python function <strong>chol</strong> implements Cholesky factorization for symmetric postive-definite matrices.</p>
 <div class="cell docutils container">
@@ -843,45 +841,56 @@ R =
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2. -1.]
- [ 0.  3.]]
-[[ 4. -2.]
- [-2. 10.]]
-</pre></div>
-</div>
-</div>
-</div>
+<p>Apply <strong>chol</strong> to the following matrix:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \begin{bmatrix}
 4 &amp; -2 \\
 -2 &amp; 10
-\end{bmatrix}
+\end{bmatrix}.
 \end{align*}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
 <span class="n">R</span> <span class="o">=</span> <span class="n">chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R = &#39;</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RT x R = &#39;</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.  1.  2.]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R =  [[ 2. -1.]
+ [ 0.  3.]]
+RT x R =  [[ 4. -2.]
+ [-2. 10.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the following matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{bmatrix}
+1 &amp; 1 &amp; 2 \\
+1 &amp; 5 &amp; 0 \\
+2 &amp; 0 &amp; 9
+\end{bmatrix},
+\end{align*}\]</div>
+<p>the Python function gives</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R = &#39;</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RT x R = &#39;</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R =  [[ 1.  1.  2.]
  [ 0.  2. -1.]
  [ 0.  0.  2.]]
-[[1. 1. 2.]
+RT x R =  [[1. 1. 2.]
  [1. 5. 0.]
  [2. 0. 9.]]
 </pre></div>
@@ -895,7 +904,7 @@ R =
 \begin{bmatrix}
 36 &amp; -48 \\
 -48 &amp; 73 \\
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p><strong>Exercise 3.7</strong></p>
 <p>Find the Cholesky decomposition for the following matrix</p>
@@ -905,7 +914,7 @@ R =
 4 &amp; -6 &amp; 2 \\
 -6 &amp; 34 &amp; 12 \\
 2 &amp; 12 &amp; 14
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p><strong>Exercise 3.8</strong></p>
 <p>Find the Cholesky decomposition for the following matrix. Does the algorithm work? If not, what is the problem?</p>
@@ -915,17 +924,17 @@ R =
 4 &amp; -2 &amp; 2 \\
 -2 &amp; 5 &amp; 1 \\
 2 &amp; 1 &amp; -2
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <section id="use-cholesky-decomposition-to-solve-linear-systems">
 <h2>Use Cholesky decomposition to solve linear systems<a class="headerlink" href="#use-cholesky-decomposition-to-solve-linear-systems" title="Permalink to this headline">#</a></h2>
-<p>Cholesky decomposition can be used to solve linear systems in the same fashion as how we used LU decomposition. Let the linear system be <span class="math notranslate nohighlight">\(A\boldsymbol{x}=\boldsymbol{b}\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is symmetric positive-definite, with a Cholesky decomposition <span class="math notranslate nohighlight">\(A=R^TR\)</span>. Then the system can be rewritten as <span class="math notranslate nohighlight">\(R^TR\boldsymbol{x}=\boldsymbol{b}\)</span>, which can be splitted into two separate linear systems:</p>
+<p>Cholesky decomposition can be used to solve linear systems in the same fashion as how we used LU decomposition. Let the linear system be <span class="math notranslate nohighlight">\(A\boldsymbol{x}=\boldsymbol{b}\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is symmetric positive-definite, with a Cholesky decomposition <span class="math notranslate nohighlight">\(A=R^TR\)</span>. Then the system can be rewritten as <span class="math notranslate nohighlight">\(R^TR\boldsymbol{x}=\boldsymbol{b}\)</span>, which can be split into two separate linear systems:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 R^T\boldsymbol{c} &amp;= \boldsymbol{b} \\
-R\boldsymbol{x} &amp;= \boldsymbol{c}
+R\boldsymbol{x} &amp;= \boldsymbol{c}.
 \end{align*}\]</div>
-<p>Solving this two linear systems in turn using forward and back substitutions leads to the solution to the original linear system.</p>
+<p>Solving the two linear systems in turn using forward and back substitutions leads to the solution to the original linear system.</p>
 <div class="proof example admonition" id="CholLA">
 <p class="admonition-title"><span class="caption-number">Example 29 </span></p>
 <section class="example-content" id="proof-content">
@@ -947,7 +956,7 @@ x_3
 0 \\
 -5 \\
 -47
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -959,7 +968,7 @@ R =
 1 &amp; -3 &amp; -2 \\
 0 &amp; 1 &amp; 3 \\
 0 &amp; 0 &amp; 4
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>So the two systems of linear equations to be solved are:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -985,7 +994,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix} &amp;= 
 \begin{bmatrix}
 c_1 \\ c_2 \\ c_3
-\end{bmatrix}
+\end{bmatrix}.
 \end{align*}\]</div>
 <p>The first linear system gives</p>
 <div class="amsmath math notranslate nohighlight">
@@ -996,7 +1005,7 @@ c_1 \\ c_2 \\ c_3
 \end{bmatrix} =
 \begin{bmatrix}
 0 \\ -5 \\ -8
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>The second leads to</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1006,7 +1015,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix} =
 \begin{bmatrix}
 -1 \\1 \\ -2
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 <p>Cholesky decomposition has a wide range of applications, such as generating samples from a general multivariate normal distribution, non-linear optimization, etc., in addition to solving systems of linear equations.</p>
 <p><strong>Exercise 3.9</strong></p>
@@ -1023,7 +1032,7 @@ x_1 \\ x_2 \\ x_3
 \end{bmatrix} = 
 \begin{bmatrix}
 -24 \\ 126 \\ 46
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </section>
@@ -1055,10 +1064,10 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 <span class="eqno">(23)<a class="headerlink" href="#equation-linearsystem" title="Permalink to this equation">#</a></span>\[A\boldsymbol{x} = \boldsymbol{b}\]</div>
 <p>where <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n \times n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\in\mathbb{R}^{n}\)</span>. Suppose <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\boldsymbol{u}_2, \dots, \boldsymbol{u}_n\)</span> is a A-orthgonal basis of <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> be the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Then <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> can be written as a linear combination of the basis as</p>
 <div class="math notranslate nohighlight" id="equation-linearcomb">
-<span class="eqno">(24)<a class="headerlink" href="#equation-linearcomb" title="Permalink to this equation">#</a></span>\[\boldsymbol{x}^* = a_1\boldsymbol{u}_1 + a_2\boldsymbol{u}_2 + \cdots + a_n\boldsymbol{u}_n\]</div>
+<span class="eqno">(24)<a class="headerlink" href="#equation-linearcomb" title="Permalink to this equation">#</a></span>\[\boldsymbol{x}^* = a_1\boldsymbol{u}_1 + a_2\boldsymbol{u}_2 + \cdots + a_n\boldsymbol{u}_n.\]</div>
 <p>The coefficients <span class="math notranslate nohighlight">\(a_i\)</span>, <span class="math notranslate nohighlight">\(1\le i\le n\)</span>, can be obtained by</p>
 <div class="math notranslate nohighlight" id="equation-ai">
-<span class="eqno">(25)<a class="headerlink" href="#equation-ai" title="Permalink to this equation">#</a></span>\[a_i = \frac{\langle \boldsymbol{b},\boldsymbol{u}_i \rangle}{\langle \boldsymbol{u}_i,\boldsymbol{u}_i \rangle_A} = \frac{\boldsymbol{b}^T\boldsymbol{u}_i}{\boldsymbol{u}_i^TA\boldsymbol{u}_i}\]</div>
+<span class="eqno">(25)<a class="headerlink" href="#equation-ai" title="Permalink to this equation">#</a></span>\[a_i = \frac{\langle \boldsymbol{b},\boldsymbol{u}_i \rangle}{\langle \boldsymbol{u}_i,\boldsymbol{u}_i \rangle_A} = \frac{\boldsymbol{b}^T\boldsymbol{u}_i}{\boldsymbol{u}_i^TA\boldsymbol{u}_i}.\]</div>
 <p>Before we get to the Conjugate Gradient Algorithm, we first talk about the well-known Gram-Schmidt Orthogonalization algorithm.</p>
 <div class="proof theorem admonition" id="GramSchmidt">
 <p class="admonition-title"><span class="caption-number">Theorem 18 </span></p>
@@ -1080,15 +1089,15 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 \boldsymbol{v}_1 = 
 \begin{bmatrix}
 1 \\ 2 \\ 2
-\end{bmatrix}
+\end{bmatrix},
 \boldsymbol{v}_2 = 
 \begin{bmatrix}
 -1 \\ 2 \\ 3
-\end{bmatrix}
+\end{bmatrix},
 \boldsymbol{v}_3 = 
 \begin{bmatrix}
 3 \\ 0 \\ 3
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </div><p><strong>Solution.</strong></p>
@@ -1098,7 +1107,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
     \boldsymbol{u_1} = \boldsymbol{v}_1 = 
     \begin{bmatrix}
     1 \\ 2 \\ 2
-    \end{bmatrix}
+    \end{bmatrix}.
    \end{equation*}\]</div>
 </li>
 <li><div class="amsmath math notranslate nohighlight">
@@ -1118,7 +1127,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
     \end{bmatrix} = 
     \begin{bmatrix}
     -2 \\ 0 \\ 1
-    \end{bmatrix}
+    \end{bmatrix}.
    \end{equation*}\]</div>
 </li>
 <li><div class="amsmath math notranslate nohighlight">
@@ -1147,7 +1156,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
     = 
     \begin{bmatrix}
     \frac{4}{5} \\ -2 \\ \frac{8}{5}
-    \end{bmatrix}
+    \end{bmatrix}.
    \end{equation*}\]</div>
 </li>
 </ol>
@@ -1171,17 +1180,17 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 <p>where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-a_0 = \frac{\boldsymbol{u}_0^T \boldsymbol{b}}{\boldsymbol{u}_0^TA\boldsymbol{u}_0} = \frac{\boldsymbol{u}_0^T \boldsymbol{r}_0}{\boldsymbol{u}_0^TA\boldsymbol{u}_0}
+a_0 = \frac{\boldsymbol{u}_0^T \boldsymbol{b}}{\boldsymbol{u}_0^TA\boldsymbol{u}_0} = \frac{\boldsymbol{u}_0^T \boldsymbol{r}_0}{\boldsymbol{u}_0^TA\boldsymbol{u}_0}.
 \end{equation*}\]</div>
 <p>In the second step, update the residual:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\boldsymbol{r}_1 = \boldsymbol{b}-A\boldsymbol{x}_1
+\boldsymbol{r}_1 = \boldsymbol{b}-A\boldsymbol{x}_1.
 \end{equation*}\]</div>
 <p>Note <span class="math notranslate nohighlight">\(\boldsymbol{u}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span> are not A-orthogonal in general, so we apply the Gram-Schmidt algorithm to <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\boldsymbol{u}_1 = \boldsymbol{r}_1 - \frac{\boldsymbol{r}_1^TA\boldsymbol{u}_0}{\boldsymbol{u}_0^TA\boldsymbol{u}_0}\boldsymbol{u}_0
+\boldsymbol{u}_1 = \boldsymbol{r}_1 - \frac{\boldsymbol{r}_1^TA\boldsymbol{u}_0}{\boldsymbol{u}_0^TA\boldsymbol{u}_0}\boldsymbol{u}_0.
 \end{equation*}\]</div>
 <p>Now <span class="math notranslate nohighlight">\(\boldsymbol{u}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}_1\)</span> are a set of two A-orthogonal vectors. Again, update the estimated solution by
 Eqns. <a class="reference internal" href="#equation-linearcomb">(24)</a> and <a class="reference internal" href="#equation-ai">(25)</a>:</p>
@@ -1192,12 +1201,12 @@ Eqns. <a class="reference internal" href="#equation-linearcomb">(24)</a> and <a 
 <p>where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}_1} = \frac{\boldsymbol{u}_1^T \boldsymbol{r}_1}{\boldsymbol{u}_1^TA\boldsymbol{u}_1}
+a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}_1} = \frac{\boldsymbol{u}_1^T \boldsymbol{r}_1}{\boldsymbol{u}_1^TA\boldsymbol{u}_1}.
 \end{equation*}\]</div>
 <p>The second equality holds since</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\boldsymbol{u}_1^T \boldsymbol{r}_1 = \boldsymbol{u}_1^T(\boldsymbol{b}-A\boldsymbol{x}_1) = \boldsymbol{u}_1^T\boldsymbol{b} - \boldsymbol{u}_1^TA\boldsymbol{x}_1
+\boldsymbol{u}_1^T \boldsymbol{r}_1 = \boldsymbol{u}_1^T(\boldsymbol{b}-A\boldsymbol{x}_1) = \boldsymbol{u}_1^T\boldsymbol{b} - \boldsymbol{u}_1^TA\boldsymbol{x}_1.
 \end{equation*}\]</div>
 <p>Note that <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span> only vectors that are A-orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{u}_1\)</span>, so the last term in the equation above vanishes.</p>
 <p>The algorithm can proceed and it converges with at most <span class="math notranslate nohighlight">\(n\)</span> steps, when a set of <span class="math notranslate nohighlight">\(n\)</span> A-orthogonal vectors (directions) are found. In addition, it is not necessary to start from a zero initial guess <span class="math notranslate nohighlight">\(\boldsymbol{x}_0=\boldsymbol{0}\)</span>. If <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\ne\boldsymbol{0}\)</span>, the algorithm actually solves the linear system <span class="math notranslate nohighlight">\(A\hat{\boldsymbol{x}}=\boldsymbol{b}-A\boldsymbol{x}_0\)</span>, and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}+\boldsymbol{x}_0\)</span> is the solution to the original linear system.</p>
@@ -1220,7 +1229,7 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_{k+1} = \boldsymbol{r}_{k+1} - \sum_{i&lt;=k}\frac{\boldsymbol{r}_{k+1}^TA\boldsymbol{u}_{i}}{\boldsymbol{u}_{i}^TA\boldsymbol{u}_{i}}\boldsymbol{u}_{i}\)</span></p></li>
 </ol>
 </li>
-<li><p>return <span class="math notranslate nohighlight">\(\boldsymbol{x}_{k+1}\)</span></p></li>
+<li><p>return <span class="math notranslate nohighlight">\(\boldsymbol{x}_{k+1}\)</span>.</p></li>
 </ol>
 </section>
 </div><p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a tolerance, and if the norm of the residual is less than it, the algorithm is considered to converge. The algorithm is implemented in the following Python function <strong>ConjGrad_v1</strong>.</p>
@@ -1283,7 +1292,7 @@ x_2
 \begin{bmatrix}
 4 \\
 34
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}\]</div>
 </section>
 </div><div class="cell docutils container">
@@ -1571,42 +1580,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img0eb130c6a1594363be89805253d3073a">
+  <img id="_anim_img4362d48cfc514828a7902ec85bf15d8d">
   <div class="anim-controls">
-    <input id="_anim_slider0eb130c6a1594363be89805253d3073a" type="range" class="anim-slider"
+    <input id="_anim_slider4362d48cfc514828a7902ec85bf15d8d" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim0eb130c6a1594363be89805253d3073a.set_frame(parseInt(this.value));"></input>
+           oninput="anim4362d48cfc514828a7902ec85bf15d8d.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim0eb130c6a1594363be89805253d3073a.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim4362d48cfc514828a7902ec85bf15d8d.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim0eb130c6a1594363be89805253d3073a.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim4362d48cfc514828a7902ec85bf15d8d.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim0eb130c6a1594363be89805253d3073a.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim4362d48cfc514828a7902ec85bf15d8d.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim0eb130c6a1594363be89805253d3073a.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim4362d48cfc514828a7902ec85bf15d8d.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim0eb130c6a1594363be89805253d3073a.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim4362d48cfc514828a7902ec85bf15d8d.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim0eb130c6a1594363be89805253d3073a.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim4362d48cfc514828a7902ec85bf15d8d.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim0eb130c6a1594363be89805253d3073a.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim4362d48cfc514828a7902ec85bf15d8d.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim0eb130c6a1594363be89805253d3073a.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim4362d48cfc514828a7902ec85bf15d8d.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim0eb130c6a1594363be89805253d3073a.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim4362d48cfc514828a7902ec85bf15d8d.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select0eb130c6a1594363be89805253d3073a"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select4362d48cfc514828a7902ec85bf15d8d"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_0eb130c6a1594363be89805253d3073a"
+      <input type="radio" name="state" value="once" id="_anim_radio1_4362d48cfc514828a7902ec85bf15d8d"
              >
-      <label for="_anim_radio1_0eb130c6a1594363be89805253d3073a">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_0eb130c6a1594363be89805253d3073a"
+      <label for="_anim_radio1_4362d48cfc514828a7902ec85bf15d8d">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_4362d48cfc514828a7902ec85bf15d8d"
              checked>
-      <label for="_anim_radio2_0eb130c6a1594363be89805253d3073a">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_0eb130c6a1594363be89805253d3073a"
+      <label for="_anim_radio2_4362d48cfc514828a7902ec85bf15d8d">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_4362d48cfc514828a7902ec85bf15d8d"
              >
-      <label for="_anim_radio3_0eb130c6a1594363be89805253d3073a">Reflect</label>
+      <label for="_anim_radio3_4362d48cfc514828a7902ec85bf15d8d">Reflect</label>
     </form>
   </div>
 </div>
@@ -1616,9 +1625,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img0eb130c6a1594363be89805253d3073a";
-    var slider_id = "_anim_slider0eb130c6a1594363be89805253d3073a";
-    var loop_select_id = "_anim_loop_select0eb130c6a1594363be89805253d3073a";
+    var img_id = "_anim_img4362d48cfc514828a7902ec85bf15d8d";
+    var slider_id = "_anim_slider4362d48cfc514828a7902ec85bf15d8d";
+    var loop_select_id = "_anim_loop_select4362d48cfc514828a7902ec85bf15d8d";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2324,7 +2333,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim0eb130c6a1594363be89805253d3073a = new Animation(frames, img_id, slider_id, 2000.0,
+        anim4362d48cfc514828a7902ec85bf15d8d = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -2375,7 +2384,7 @@ EZAAAAAASUVORK5CYII=\
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_{k+1} = \boldsymbol{r}_{k+1} + \boldsymbol{b}_k\boldsymbol{u}_{k}\)</span></p></li>
 </ol>
 </li>
-<li><p>return <span class="math notranslate nohighlight">\(\boldsymbol{x}_{k+1}\)</span></p></li>
+<li><p>return <span class="math notranslate nohighlight">\(\boldsymbol{x}_{k+1}\)</span>.</p></li>
 </ol>
 </section>
 </div><p>We implement the algorithm in the following Python function <strong>ConjGrad_v2</strong>.</p>
