@@ -1254,7 +1254,7 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
     <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># The ith column stores u_i</span>
     <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="n">x0</span>
     <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
@@ -1571,42 +1571,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgce55293dbe8746a39555f6cb89df0c5b">
+  <img id="_anim_imgd42869a46c904ff98916d9462b9d5f62">
   <div class="anim-controls">
-    <input id="_anim_sliderce55293dbe8746a39555f6cb89df0c5b" type="range" class="anim-slider"
+    <input id="_anim_sliderd42869a46c904ff98916d9462b9d5f62" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animce55293dbe8746a39555f6cb89df0c5b.set_frame(parseInt(this.value));"></input>
+           oninput="animd42869a46c904ff98916d9462b9d5f62.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animce55293dbe8746a39555f6cb89df0c5b.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animd42869a46c904ff98916d9462b9d5f62.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animd42869a46c904ff98916d9462b9d5f62.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animd42869a46c904ff98916d9462b9d5f62.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animce55293dbe8746a39555f6cb89df0c5b.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animd42869a46c904ff98916d9462b9d5f62.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animce55293dbe8746a39555f6cb89df0c5b.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animd42869a46c904ff98916d9462b9d5f62.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animce55293dbe8746a39555f6cb89df0c5b.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animd42869a46c904ff98916d9462b9d5f62.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animd42869a46c904ff98916d9462b9d5f62.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animd42869a46c904ff98916d9462b9d5f62.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animce55293dbe8746a39555f6cb89df0c5b.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animd42869a46c904ff98916d9462b9d5f62.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectce55293dbe8746a39555f6cb89df0c5b"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectd42869a46c904ff98916d9462b9d5f62"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_ce55293dbe8746a39555f6cb89df0c5b"
+      <input type="radio" name="state" value="once" id="_anim_radio1_d42869a46c904ff98916d9462b9d5f62"
              >
-      <label for="_anim_radio1_ce55293dbe8746a39555f6cb89df0c5b">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_ce55293dbe8746a39555f6cb89df0c5b"
+      <label for="_anim_radio1_d42869a46c904ff98916d9462b9d5f62">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_d42869a46c904ff98916d9462b9d5f62"
              checked>
-      <label for="_anim_radio2_ce55293dbe8746a39555f6cb89df0c5b">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_ce55293dbe8746a39555f6cb89df0c5b"
+      <label for="_anim_radio2_d42869a46c904ff98916d9462b9d5f62">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_d42869a46c904ff98916d9462b9d5f62"
              >
-      <label for="_anim_radio3_ce55293dbe8746a39555f6cb89df0c5b">Reflect</label>
+      <label for="_anim_radio3_d42869a46c904ff98916d9462b9d5f62">Reflect</label>
     </form>
   </div>
 </div>
@@ -1616,9 +1616,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgce55293dbe8746a39555f6cb89df0c5b";
-    var slider_id = "_anim_sliderce55293dbe8746a39555f6cb89df0c5b";
-    var loop_select_id = "_anim_loop_selectce55293dbe8746a39555f6cb89df0c5b";
+    var img_id = "_anim_imgd42869a46c904ff98916d9462b9d5f62";
+    var slider_id = "_anim_sliderd42869a46c904ff98916d9462b9d5f62";
+    var loop_select_id = "_anim_loop_selectd42869a46c904ff98916d9462b9d5f62";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2324,7 +2324,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animce55293dbe8746a39555f6cb89df0c5b = new Animation(frames, img_id, slider_id, 2000.0,
+        animd42869a46c904ff98916d9462b9d5f62 = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -2399,7 +2399,7 @@ EZAAAAAASUVORK5CYII=\
     <span class="n">r_old</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
     <span class="n">r_new</span> <span class="o">=</span> <span class="n">r_old</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_old</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="n">x0</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">r_old</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
