@@ -1054,29 +1054,29 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 \end{equation*}\]</div>
 <p>such that the following properties hold:</p>
 <ol class="simple">
-<li><p>For any <span class="math notranslate nohighlight">\(\boldsymbol{u}\in V\)</span>, <span class="math notranslate nohighlight">\(\langle\boldsymbol{u}, \boldsymbol{u}\rangle = 0\)</span> and the equality holds only when <span class="math notranslate nohighlight">\(\boldsymbol{u}=\boldsymbol{0}\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\boldsymbol{u}\in V\)</span>, <span class="math notranslate nohighlight">\(\langle\boldsymbol{u}, \boldsymbol{u}\rangle \ge 0\)</span> and the equality holds only when <span class="math notranslate nohighlight">\(\boldsymbol{u}=\boldsymbol{0}\)</span></p></li>
 <li><p>For any <span class="math notranslate nohighlight">\(\boldsymbol{u}, \boldsymbol{v}, \boldsymbol{w}\in V\)</span>, <span class="math notranslate nohighlight">\(a, b\in \mathbb{F}\)</span>, <span class="math notranslate nohighlight">\(\langle a\boldsymbol{u}+b\boldsymbol{v}, \boldsymbol{w}  \rangle = a\langle \boldsymbol{u}, \boldsymbol{w}  \rangle + b\langle \boldsymbol{v}, \boldsymbol{w}  \rangle\)</span></p></li>
 <li><p>For any <span class="math notranslate nohighlight">\(\boldsymbol{u}, \boldsymbol{v}\in V\)</span>, <span class="math notranslate nohighlight">\(\langle\boldsymbol{u}, \boldsymbol{v}\rangle = \overline{\langle\boldsymbol{v}, \boldsymbol{u}\rangle}\)</span>, where <span class="math notranslate nohighlight">\(\overline{\boldsymbol{u}}\)</span> denotes the conjugate of <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p></li>
 </ol>
 </section>
-</div><p>Now considering solving the linear system</p>
+</div><p>Now consider solving the linear system</p>
 <div class="math notranslate nohighlight" id="equation-linearsystem">
 <span class="eqno">(23)<a class="headerlink" href="#equation-linearsystem" title="Permalink to this equation">#</a></span>\[A\boldsymbol{x} = \boldsymbol{b}\]</div>
-<p>where <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n \times n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\in\mathbb{R}^{n}\)</span>. Suppose <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\boldsymbol{u}_2, \dots, \boldsymbol{u}_n\)</span> is a A-orthgonal basis of <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> be the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Then <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> can be written as a linear combination of the basis as</p>
+<p>where <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n \times n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\in\mathbb{R}^{n}\)</span>. Suppose <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\boldsymbol{u}_2, \dots, \boldsymbol{u}_n\)</span> is an A-orthogonal basis of <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> be the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Then <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> can be written as a linear combination of the basis as</p>
 <div class="math notranslate nohighlight" id="equation-linearcomb">
 <span class="eqno">(24)<a class="headerlink" href="#equation-linearcomb" title="Permalink to this equation">#</a></span>\[\boldsymbol{x}^* = a_1\boldsymbol{u}_1 + a_2\boldsymbol{u}_2 + \cdots + a_n\boldsymbol{u}_n.\]</div>
 <p>The coefficients <span class="math notranslate nohighlight">\(a_i\)</span>, <span class="math notranslate nohighlight">\(1\le i\le n\)</span>, can be obtained by</p>
 <div class="math notranslate nohighlight" id="equation-ai">
 <span class="eqno">(25)<a class="headerlink" href="#equation-ai" title="Permalink to this equation">#</a></span>\[a_i = \frac{\langle \boldsymbol{b},\boldsymbol{u}_i \rangle}{\langle \boldsymbol{u}_i,\boldsymbol{u}_i \rangle_A} = \frac{\boldsymbol{b}^T\boldsymbol{u}_i}{\boldsymbol{u}_i^TA\boldsymbol{u}_i}.\]</div>
-<p>Before we get to the Conjugate Gradient Algorithm, we first talk about the well-known Gram-Schmidt Orthogonalization algorithm.</p>
+<p>Before we get to the conjugate gradient algorithm, we first talk about the well-known Gram-Schmidt Orthogonalization algorithm.</p>
 <div class="proof theorem admonition" id="GramSchmidt">
 <p class="admonition-title"><span class="caption-number">Theorem 18 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>Given a set of linearly independent vectors <span class="math notranslate nohighlight">\(\boldsymbol{v}_1, \boldsymbol{v}_2, \cdots, \boldsymbol{v}_n\in \mathbb{R}^n\)</span>, the following process generates a set of orthogonal vectors:</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_1 = \boldsymbol{v}_1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2 \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 = \boldsymbol{v}_2 - \frac{\boldsymbol{v}_2 \cdot \boldsymbol{u}_1}{|\boldsymbol{u}_1|^2}\boldsymbol{u}_1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_2 \rangle}{\langle \boldsymbol{u}_2 \boldsymbol{u}_2 \rangle} \boldsymbol{u}_2 = \boldsymbol{v}_3 - \frac{\boldsymbol{v}_3 \cdot \boldsymbol{u}_1}{|\boldsymbol{u}_1|^2}\boldsymbol{u}_1 - \frac{\boldsymbol{v}_3 \cdot \boldsymbol{u}_2}{|\boldsymbol{u}_2|^2}\boldsymbol{u}_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2, \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 = \boldsymbol{v}_2 - \frac{\boldsymbol{v}_2 \cdot \boldsymbol{u}_1}{||\boldsymbol{u}_1||_2^2}\boldsymbol{u}_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_2 \rangle}{\langle \boldsymbol{u}_2, \boldsymbol{u}_2 \rangle} \boldsymbol{u}_2 = \boldsymbol{v}_3 - \frac{\boldsymbol{v}_3 \cdot \boldsymbol{u}_1}{||\boldsymbol{u}_1||_2^2}\boldsymbol{u}_1 - \frac{\boldsymbol{v}_3 \cdot \boldsymbol{u}_2}{||\boldsymbol{u}_2||_2^2}\boldsymbol{u}_2\)</span></p></li>
 <li><p>Similarly, <span class="math notranslate nohighlight">\(\boldsymbol{u}_4, \dots, \boldsymbol{u}_n\)</span> can be obtained, and <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\dots, \boldsymbol{u}_n\)</span> is a set of orthogonal vectors.</p></li>
 </ol>
 </section>
@@ -1112,7 +1112,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 </li>
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-   \boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2 \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 = 
+   \boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2, \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 = 
    \begin{bmatrix}
     -1 \\ 2 \\ 3
     \end{bmatrix}
@@ -1132,7 +1132,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 </li>
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-   \boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_2 \rangle}{\langle \boldsymbol{u}_2 \boldsymbol{u}_2 \rangle} \boldsymbol{u}_2 = 
+   \boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_1 \rangle}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_2 \rangle}{\langle \boldsymbol{u}_2, \boldsymbol{u}_2 \rangle} \boldsymbol{u}_2 = 
    \begin{bmatrix}
     3 \\ 0 \\ 3
     \end{bmatrix}
@@ -1160,15 +1160,15 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
    \end{equation*}\]</div>
 </li>
 </ol>
-<p>Similarly, we can generate a set of A-orthogonal vectors from a set of linearly independent vectors by slightly modifying the algorithm agove.</p>
+<p>Similarly, we can generate a set of A-orthogonal vectors from a set of linearly independent vectors by slightly modifying the algorithm above.</p>
 <div class="proof theorem admonition" id="AorthoGramSchmidt">
 <p class="admonition-title"><span class="caption-number">Theorem 19 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>Given a set of linearly independent vectors <span class="math notranslate nohighlight">\(\boldsymbol{v}_1, \boldsymbol{v}_2, \cdots, \boldsymbol{v}_n\in \mathbb{R}^n\)</span>, the following process generates a set of A-orthogonal vectors:</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_1 = \boldsymbol{v}_1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2 \boldsymbol{u}_1 \rangle_A}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle_A} \boldsymbol{u}_1 = \boldsymbol{v}_2 - \frac{\boldsymbol{v}_2 A \boldsymbol{u}_1}{\boldsymbol{u}_1A\boldsymbol{u}_1}\boldsymbol{u}_1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_1 \rangle_A}{\langle \boldsymbol{u}_1 \boldsymbol{u}_1 \rangle_A} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3 \boldsymbol{u}_2 \rangle_A}{\langle \boldsymbol{u}_2 \boldsymbol{u}_2 \rangle_A} \boldsymbol{u}_2 = \boldsymbol{v}_3 - \frac{\boldsymbol{v}_3 A \boldsymbol{u}_1}{\boldsymbol{u}_1A\boldsymbol{u}_1}\boldsymbol{u}_1 - \frac{\boldsymbol{v}_3 A \boldsymbol{u}_2}{\boldsymbol{u}_2A\boldsymbol{u}_2}\boldsymbol{u}_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_2 = \boldsymbol{v}_2 - \frac{\langle \boldsymbol{v}_2, \boldsymbol{u}_1 \rangle_A}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle_A} \boldsymbol{u}_1 = \boldsymbol{v}_2 - \frac{\boldsymbol{v}_2 A \boldsymbol{u}_1}{\boldsymbol{u}_1A\boldsymbol{u}_1}\boldsymbol{u}_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{u}_3 = \boldsymbol{v}_3 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_1 \rangle_A}{\langle \boldsymbol{u}_1, \boldsymbol{u}_1 \rangle_A} \boldsymbol{u}_1 - \frac{\langle \boldsymbol{v}_3, \boldsymbol{u}_2 \rangle_A}{\langle \boldsymbol{u}_2, \boldsymbol{u}_2 \rangle_A} \boldsymbol{u}_2 = \boldsymbol{v}_3 - \frac{\boldsymbol{v}_3 A \boldsymbol{u}_1}{\boldsymbol{u}_1A\boldsymbol{u}_1}\boldsymbol{u}_1 - \frac{\boldsymbol{v}_3 A \boldsymbol{u}_2}{\boldsymbol{u}_2A\boldsymbol{u}_2}\boldsymbol{u}_2\)</span></p></li>
 <li><p>Similarly, <span class="math notranslate nohighlight">\(\boldsymbol{u}_4, \dots, \boldsymbol{u}_n\)</span> can be obtained, and <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\dots, \boldsymbol{u}_n\)</span> is a set of A-orthogonal vectors.</p></li>
 </ol>
 </section>
@@ -1580,42 +1580,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgfe1c66a26b5d4664811fe561d38863b8">
+  <img id="_anim_img131d8baaec7b4675aa73239b4f6a108f">
   <div class="anim-controls">
-    <input id="_anim_sliderfe1c66a26b5d4664811fe561d38863b8" type="range" class="anim-slider"
+    <input id="_anim_slider131d8baaec7b4675aa73239b4f6a108f" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animfe1c66a26b5d4664811fe561d38863b8.set_frame(parseInt(this.value));"></input>
+           oninput="anim131d8baaec7b4675aa73239b4f6a108f.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animfe1c66a26b5d4664811fe561d38863b8.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim131d8baaec7b4675aa73239b4f6a108f.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animfe1c66a26b5d4664811fe561d38863b8.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animfe1c66a26b5d4664811fe561d38863b8.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animfe1c66a26b5d4664811fe561d38863b8.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim131d8baaec7b4675aa73239b4f6a108f.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animfe1c66a26b5d4664811fe561d38863b8.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim131d8baaec7b4675aa73239b4f6a108f.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animfe1c66a26b5d4664811fe561d38863b8.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim131d8baaec7b4675aa73239b4f6a108f.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animfe1c66a26b5d4664811fe561d38863b8.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animfe1c66a26b5d4664811fe561d38863b8.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animfe1c66a26b5d4664811fe561d38863b8.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim131d8baaec7b4675aa73239b4f6a108f.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectfe1c66a26b5d4664811fe561d38863b8"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select131d8baaec7b4675aa73239b4f6a108f"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_fe1c66a26b5d4664811fe561d38863b8"
+      <input type="radio" name="state" value="once" id="_anim_radio1_131d8baaec7b4675aa73239b4f6a108f"
              >
-      <label for="_anim_radio1_fe1c66a26b5d4664811fe561d38863b8">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_fe1c66a26b5d4664811fe561d38863b8"
+      <label for="_anim_radio1_131d8baaec7b4675aa73239b4f6a108f">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_131d8baaec7b4675aa73239b4f6a108f"
              checked>
-      <label for="_anim_radio2_fe1c66a26b5d4664811fe561d38863b8">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_fe1c66a26b5d4664811fe561d38863b8"
+      <label for="_anim_radio2_131d8baaec7b4675aa73239b4f6a108f">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_131d8baaec7b4675aa73239b4f6a108f"
              >
-      <label for="_anim_radio3_fe1c66a26b5d4664811fe561d38863b8">Reflect</label>
+      <label for="_anim_radio3_131d8baaec7b4675aa73239b4f6a108f">Reflect</label>
     </form>
   </div>
 </div>
@@ -1625,9 +1625,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgfe1c66a26b5d4664811fe561d38863b8";
-    var slider_id = "_anim_sliderfe1c66a26b5d4664811fe561d38863b8";
-    var loop_select_id = "_anim_loop_selectfe1c66a26b5d4664811fe561d38863b8";
+    var img_id = "_anim_img131d8baaec7b4675aa73239b4f6a108f";
+    var slider_id = "_anim_slider131d8baaec7b4675aa73239b4f6a108f";
+    var loop_select_id = "_anim_loop_select131d8baaec7b4675aa73239b4f6a108f";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2333,7 +2333,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animfe1c66a26b5d4664811fe561d38863b8 = new Animation(frames, img_id, slider_id, 2000.0,
+        anim131d8baaec7b4675aa73239b4f6a108f = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
