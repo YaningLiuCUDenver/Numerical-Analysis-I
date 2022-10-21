@@ -1172,7 +1172,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 <li><p>Similarly, <span class="math notranslate nohighlight">\(\boldsymbol{u}_4, \dots, \boldsymbol{u}_n\)</span> can be obtained, and <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\dots, \boldsymbol{u}_n\)</span> is a set of A-orthogonal vectors.</p></li>
 </ol>
 </section>
-</div><p>Now we continue the discussion of using a set of A-orthogonal vectors to find the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Since the set of A-orthogonal vectors are not ready in the first place, our goal is to generate them on the fly. Suppose we start with an initial guess of the solution of <span class="math notranslate nohighlight">\(\boldsymbol{x}_0=\boldsymbol{0}\)</span>. The corresponding residual is <span class="math notranslate nohighlight">\(\boldsymbol{u}_0 = \boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0=\boldsymbol{b}\)</span>, which serves as the first vector in the set of <span class="math notranslate nohighlight">\(n\)</span> A-orthogoal vectors. In the next step, we update the estimate of the solution by Eqns. <a class="reference internal" href="#equation-linearcomb">(24)</a> and <a class="reference internal" href="#equation-ai">(25)</a>:</p>
+</div><p>Now we continue the discussion of using a set of A-orthogonal vectors to find the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Since the set of A-orthogonal vectors are not ready in the first place, our goal is to generate them on the fly. Suppose we start with an initial guess of the solution <span class="math notranslate nohighlight">\(\boldsymbol{x}_0=\boldsymbol{0}\)</span>. The corresponding residual is <span class="math notranslate nohighlight">\(\boldsymbol{u}_0 = \boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0=\boldsymbol{b}\)</span>, which serves as the first vector in the set of <span class="math notranslate nohighlight">\(n\)</span> A-orthogonal vectors. Now, we update the estimate of the solution by Eqns. <a class="reference internal" href="#equation-linearcomb">(24)</a> and <a class="reference internal" href="#equation-ai">(25)</a>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \boldsymbol{x}_1 = \boldsymbol{x}_0 + a_0 \boldsymbol{u}_0
@@ -1187,7 +1187,7 @@ a_0 = \frac{\boldsymbol{u}_0^T \boldsymbol{b}}{\boldsymbol{u}_0^TA\boldsymbol{u}
 \[\begin{equation*}
 \boldsymbol{r}_1 = \boldsymbol{b}-A\boldsymbol{x}_1.
 \end{equation*}\]</div>
-<p>Note <span class="math notranslate nohighlight">\(\boldsymbol{u}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span> are not A-orthogonal in general, so we apply the Gram-Schmidt algorithm to <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span>:</p>
+<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol{u}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span> are not A-orthogonal in general, so we apply the Gram-Schmidt algorithm to <span class="math notranslate nohighlight">\(\boldsymbol{r}_1\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \boldsymbol{u}_1 = \boldsymbol{r}_1 - \frac{\boldsymbol{r}_1^TA\boldsymbol{u}_0}{\boldsymbol{u}_0^TA\boldsymbol{u}_0}\boldsymbol{u}_0.
@@ -1208,14 +1208,14 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
 \[\begin{equation*}
 \boldsymbol{u}_1^T \boldsymbol{r}_1 = \boldsymbol{u}_1^T(\boldsymbol{b}-A\boldsymbol{x}_1) = \boldsymbol{u}_1^T\boldsymbol{b} - \boldsymbol{u}_1^TA\boldsymbol{x}_1.
 \end{equation*}\]</div>
-<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span> only vectors that are A-orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{u}_1\)</span>, so the last term in the equation above vanishes.</p>
+<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span> only involves vectors that are A-orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{u}_1\)</span>, so the last term in the equation above vanishes.</p>
 <p>The algorithm can proceed and it converges with at most <span class="math notranslate nohighlight">\(n\)</span> steps, when a set of <span class="math notranslate nohighlight">\(n\)</span> A-orthogonal vectors (directions) are found. In addition, it is not necessary to start from a zero initial guess <span class="math notranslate nohighlight">\(\boldsymbol{x}_0=\boldsymbol{0}\)</span>. If <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\ne\boldsymbol{0}\)</span>, the algorithm actually solves the linear system <span class="math notranslate nohighlight">\(A\hat{\boldsymbol{x}}=\boldsymbol{b}-A\boldsymbol{x}_0\)</span>, and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}+\boldsymbol{x}_0\)</span> is the solution to the original linear system.</p>
 <p>The algorithm can be summarized as follows.</p>
 <div class="proof algorithm admonition" id="algo_ConjGrad1">
 <p class="admonition-title"><span class="caption-number">Algorithm 1 </span></p>
 <section class="algorithm-content" id="proof-content">
 <ol class="simple">
-<li><p>Initialize <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\)</span> as any vector. Set <span class="math notranslate nohighlight">\(\boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}_0=\boldsymbol{r}_0\)</span></p></li>
+<li><p>Initialize <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\)</span> as any vector. Set <span class="math notranslate nohighlight">\(\boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}_0=\boldsymbol{r}_0\)</span>.</p></li>
 <li><p>For <span class="math notranslate nohighlight">\(k=0, 1, \dots, n-1\)</span>:</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_k=\frac{\boldsymbol{u}_k^T \boldsymbol{r}_k}{\boldsymbol{u}_k^TA\boldsymbol{u}_k}\)</span></p></li>
@@ -1232,14 +1232,14 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
 <li><p>return <span class="math notranslate nohighlight">\(\boldsymbol{x}_{k+1}\)</span>.</p></li>
 </ol>
 </section>
-</div><p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a tolerance, and if the norm of the residual is less than it, the algorithm is considered to converge. The algorithm is implemented in the following Python function <strong>ConjGrad_v1</strong>.</p>
+</div><p>Here <span class="math notranslate nohighlight">\(\epsilon\)</span> is a tolerance, and if the norm of the residual is less than it, the algorithm is considered to converge. The algorithm is implemented in the following Python function <strong>ConjGrad_v1</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conjugate Gradient Method</span>
 <span class="k">def</span> <span class="nf">ConjGrad_v1</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Perform conjugate Gradient method, the first version.</span>
-<span class="sd">    A: an symmetric positive definite matrix</span>
+<span class="sd">    Perform conjugate gradient method, the first version.</span>
+<span class="sd">    A: a symmetric positive definite matrix</span>
 <span class="sd">    b: the right-hand side</span>
 <span class="sd">    x0: the initial guess</span>
 <span class="sd">    eps: the tolerance for stopping the algorithm</span>
@@ -1254,7 +1254,7 @@ a_1 = \frac{\boldsymbol{u}_1^T \boldsymbol{b}}{\boldsymbol{u}_1^TA\boldsymbol{u}
     <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># The ith column stores u_i</span>
     <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="n">x</span>
     <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
@@ -1329,8 +1329,8 @@ x_2
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conjugate Gradient Method for the animation</span>
 <span class="k">def</span> <span class="nf">ConjGrad</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">nstep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Perform conjugate Gradient method, the first version.</span>
-<span class="sd">    A: an symmetric positive definite matrix</span>
+<span class="sd">    Perform conjugate gradient method, the first version.</span>
+<span class="sd">    A: a symmetric positive definite matrix</span>
 <span class="sd">    b: the right-hand side</span>
 <span class="sd">    x0: the initial guess</span>
 <span class="sd">    nstep: the number of steps of conjugate gradient</span>
@@ -1356,7 +1356,7 @@ x_2
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_old</span><span class="p">,</span> <span class="n">r_old</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">r_new</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">a</span>
 
-<span class="c1"># Animation for the Conjugate Gradient method</span>
+<span class="c1"># Animation for the conjugate gradient method</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.</span><span class="p">,</span> <span class="mi">34</span><span class="p">])</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
@@ -1367,7 +1367,6 @@ x_2
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ConjGrad</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CG&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">a</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">a</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;u direction&#39;</span><span class="p">)</span>
@@ -1387,14 +1386,6 @@ x_2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 0.] [ 4. 34.] [ 4. 34.] 0.10577617328519856
-[0. 0.] [ 4. 34.] [ 4. 34.] 0.10577617328519856
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.42310469 3.59638989] [ 9.50036101 -1.11768953] [9.81266848 1.53692398] 0.2626090254076602
-[3. 4.] [0.00000000e+00 3.10862447e-15] [1.03627174e-30 3.10862447e-15] 0.1
-</pre></div>
-</div>
 <div class="output text_html">
 <link rel="stylesheet"
 href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -1580,42 +1571,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img131d8baaec7b4675aa73239b4f6a108f">
+  <img id="_anim_imgce55293dbe8746a39555f6cb89df0c5b">
   <div class="anim-controls">
-    <input id="_anim_slider131d8baaec7b4675aa73239b4f6a108f" type="range" class="anim-slider"
+    <input id="_anim_sliderce55293dbe8746a39555f6cb89df0c5b" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim131d8baaec7b4675aa73239b4f6a108f.set_frame(parseInt(this.value));"></input>
+           oninput="animce55293dbe8746a39555f6cb89df0c5b.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim131d8baaec7b4675aa73239b4f6a108f.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animce55293dbe8746a39555f6cb89df0c5b.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim131d8baaec7b4675aa73239b4f6a108f.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animce55293dbe8746a39555f6cb89df0c5b.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim131d8baaec7b4675aa73239b4f6a108f.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animce55293dbe8746a39555f6cb89df0c5b.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim131d8baaec7b4675aa73239b4f6a108f.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animce55293dbe8746a39555f6cb89df0c5b.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim131d8baaec7b4675aa73239b4f6a108f.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animce55293dbe8746a39555f6cb89df0c5b.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim131d8baaec7b4675aa73239b4f6a108f.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animce55293dbe8746a39555f6cb89df0c5b.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select131d8baaec7b4675aa73239b4f6a108f"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectce55293dbe8746a39555f6cb89df0c5b"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_131d8baaec7b4675aa73239b4f6a108f"
+      <input type="radio" name="state" value="once" id="_anim_radio1_ce55293dbe8746a39555f6cb89df0c5b"
              >
-      <label for="_anim_radio1_131d8baaec7b4675aa73239b4f6a108f">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_131d8baaec7b4675aa73239b4f6a108f"
+      <label for="_anim_radio1_ce55293dbe8746a39555f6cb89df0c5b">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_ce55293dbe8746a39555f6cb89df0c5b"
              checked>
-      <label for="_anim_radio2_131d8baaec7b4675aa73239b4f6a108f">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_131d8baaec7b4675aa73239b4f6a108f"
+      <label for="_anim_radio2_ce55293dbe8746a39555f6cb89df0c5b">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_ce55293dbe8746a39555f6cb89df0c5b"
              >
-      <label for="_anim_radio3_131d8baaec7b4675aa73239b4f6a108f">Reflect</label>
+      <label for="_anim_radio3_ce55293dbe8746a39555f6cb89df0c5b">Reflect</label>
     </form>
   </div>
 </div>
@@ -1625,9 +1616,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img131d8baaec7b4675aa73239b4f6a108f";
-    var slider_id = "_anim_slider131d8baaec7b4675aa73239b4f6a108f";
-    var loop_select_id = "_anim_loop_select131d8baaec7b4675aa73239b4f6a108f";
+    var img_id = "_anim_imgce55293dbe8746a39555f6cb89df0c5b";
+    var slider_id = "_anim_sliderce55293dbe8746a39555f6cb89df0c5b";
+    var loop_select_id = "_anim_loop_selectce55293dbe8746a39555f6cb89df0c5b";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2333,7 +2324,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim131d8baaec7b4675aa73239b4f6a108f = new Animation(frames, img_id, slider_id, 2000.0,
+        animce55293dbe8746a39555f6cb89df0c5b = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -2364,12 +2355,12 @@ EZAAAAAASUVORK5CYII=\
 </div>
 </div>
 </div>
-<p>Note that the above conjugate gradient algorithm requires spaces to store <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>, which is very inefficient for large <span class="math notranslate nohighlight">\(n\)</span>. The following modification of the conjugate gradient algorithm avoids the need to store the two variables. It can shown that the two algorithms are equivalent.</p>
+<p>Note that the above conjugate gradient algorithm requires spaces to store <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>, which is very inefficient for large <span class="math notranslate nohighlight">\(n\)</span>. The following modification of the conjugate gradient algorithm avoids the need to store the two variables. It can be shown that the two algorithms are equivalent.</p>
 <div class="proof algorithm admonition" id="algo_ConjGrad2">
 <p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Conjugate Gradient)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="simple">
-<li><p>Initialize <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\)</span> as any vector. Set <span class="math notranslate nohighlight">\(\boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}_0=\boldsymbol{r}_0\)</span></p></li>
+<li><p>Initialize <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\)</span> as any vector. Set <span class="math notranslate nohighlight">\(\boldsymbol{r}_0=\boldsymbol{b}-A\boldsymbol{x}_0\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{u}_0=\boldsymbol{r}_0\)</span>.</p></li>
 <li><p>For <span class="math notranslate nohighlight">\(k=0, 1, \dots, n-1\)</span>:</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_k=\frac{\boldsymbol{r}_k^T \boldsymbol{r}_k}{\boldsymbol{u}_k^TA\boldsymbol{u}_k}\)</span></p></li>
@@ -2393,8 +2384,8 @@ EZAAAAAASUVORK5CYII=\
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conjugate Gradient Method</span>
 <span class="k">def</span> <span class="nf">ConjGrad_v2</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Perform conjugate Gradient method, the first version.</span>
-<span class="sd">    A: an symmetric positive definite matrix</span>
+<span class="sd">    Perform conjugate gradient method, the second version.</span>
+<span class="sd">    A: a symmetric positive definite matrix</span>
 <span class="sd">    b: the right-hand side</span>
 <span class="sd">    x0: the initial guess</span>
 <span class="sd">    eps: the tolerance for stopping the algorithm</span>
@@ -2427,7 +2418,7 @@ EZAAAAAASUVORK5CYII=\
 </div>
 </div>
 </div>
-<p>Apply the new code to <a class="reference internal" href="#gramschmidt_v1_3by3">Example 32</a> generates the same result.</p>
+<p>Applying the new code to <a class="reference internal" href="#gramschmidt_v1_3by3">Example 32</a> generates the same result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">29</span><span class="p">]])</span>
