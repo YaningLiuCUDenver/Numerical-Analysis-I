@@ -463,7 +463,7 @@ title="Print to PDF"
 find a function <span class="math notranslate nohighlight">\(f\)</span> such that <span class="math notranslate nohighlight">\(f(x_{i})=y_{i}.\)</span> This problem is called the interpolation problem, and <span class="math notranslate nohighlight">\(f\)</span> is called
 the interpolating function, or interpolant, for the given data.</p>
 <p>Interpolation is used, for example, when we use mathematical software to plot a smooth curve through discrete data points, when we want to find the in-between values in a table, or when we differentiate or integrate black-box type functions.</p>
-<p>How do we choose <span class="math notranslate nohighlight">\(f\)</span>? Or, what kind of function do we want <span class="math notranslate nohighlight">\(f\)</span> to be? There are several options. Examples of functions used in interpolation are polynomials, piecewise polynomials, rational functions, trigonometric functions, and exponential functions. As we try to find a good choice for <span class="math notranslate nohighlight">\(f\)</span> for our data, some questions to consider are whether we want <span class="math notranslate nohighlight">\(f\)</span> to inherit the properties of the data (for example, if the data is periodic, should we use a trigonometric function as <span class="math notranslate nohighlight">\(f\)</span>?), and how we want <span class="math notranslate nohighlight">\(f\)</span> behave between data points. In general <span class="math notranslate nohighlight">\(f\)</span> should be easy to evaluate, and easy to integrate &amp; differentiate.</p>
+<p>How do we choose <span class="math notranslate nohighlight">\(f\)</span>? Or, what kind of function do we want <span class="math notranslate nohighlight">\(f\)</span> to be? There are several options. Examples of functions used in interpolation are polynomials, piecewise polynomials, rational functions, trigonometric functions, and exponential functions. As we try to find a good choice for <span class="math notranslate nohighlight">\(f\)</span> for our data, some questions to consider are whether we want <span class="math notranslate nohighlight">\(f\)</span> to inherit the properties of the data (for example, if the data is periodic, should we use a trigonometric function as <span class="math notranslate nohighlight">\(f\)</span>?), and how we want <span class="math notranslate nohighlight">\(f\)</span> to behave between data points. In general <span class="math notranslate nohighlight">\(f\)</span> should be easy to evaluate, and easy to integrate &amp; differentiate.</p>
 <p>Here is a general framework for the interpolation problem. We are given data, and we pick a family of functions from which the interpolant <span class="math notranslate nohighlight">\(f\)</span> will be chosen:</p>
 <ul class="simple">
 <li><p>Data: <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span></p></li>
@@ -493,7 +493,7 @@ Aa=y
 \[\begin{equation*}
 A=\begin{bmatrix}\phi_{0}(x_{0}) &amp; ... &amp; \phi_{n}(x_{0})\\
 \phi_{0}(x_{1}) &amp; ... &amp; \phi_{n}(x_{1})\\
-\vdots\\
+\vdots  &amp; \vdots &amp; \vdots \\
 \phi_{0}(x_{n}) &amp; ... &amp; \phi_{n}(x_{n})
 \end{bmatrix},a=\begin{bmatrix}a_{0}\\
 a_{1}\\

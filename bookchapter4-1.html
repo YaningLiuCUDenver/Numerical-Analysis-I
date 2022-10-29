@@ -584,9 +584,9 @@ p_{n}(x_{i})=a_{0}+a_{1}x_{i}+a_{2}x_{i}^{2}+...+a_{n}x_{i}^{n}=y_{i}
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \underbrace{\begin{bmatrix}1 &amp; x_{0} &amp; x_{0}^{2} &amp; ... &amp; x_{0}^{n}\\
-1 &amp; x_{1} &amp; x_{1}^{2} &amp;  &amp; x_{1}^{n}\\
-\vdots\\
-1 &amp; x_{n} &amp; x_{n}^{2} &amp;  &amp; x_{n}^{n}
+1 &amp; x_{1} &amp; x_{1}^{2} &amp; \cdots &amp; x_{1}^{n}\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
+1 &amp; x_{n} &amp; x_{n}^{2} &amp; \cdots &amp; x_{n}^{n}
 \end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
 a_{1}\\
 \vdots\\
@@ -597,9 +597,7 @@ y_{1}\\
 y_{n}
 \end{bmatrix}}_y
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}\)</span> where <span class="math notranslate nohighlight">\([\cdot]^T\)</span> stands for the transpose of the vector.
-\index{van der Monde matrix}
-The coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is known as the van der Monde matrix. This
+<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}\)</span> where <span class="math notranslate nohighlight">\([\cdot]^T\)</span> stands for the transpose of the vector. The coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is known as the <em>van der Monde matrix</em>. This
 is usually an ill-conditioned matrix, which means solving the system of equations
 could result in large error in the coefficients <span class="math notranslate nohighlight">\(a_{i}.\)</span> An intuitive
 way to understand the ill-conditioning is to plot several basis monomials,

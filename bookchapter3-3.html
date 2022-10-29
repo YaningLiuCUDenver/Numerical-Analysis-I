@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -1571,42 +1573,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgd42869a46c904ff98916d9462b9d5f62">
+  <img id="_anim_img4c0cd528fbc24bf3b67e338c718c83c0">
   <div class="anim-controls">
-    <input id="_anim_sliderd42869a46c904ff98916d9462b9d5f62" type="range" class="anim-slider"
+    <input id="_anim_slider4c0cd528fbc24bf3b67e338c718c83c0" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animd42869a46c904ff98916d9462b9d5f62.set_frame(parseInt(this.value));"></input>
+           oninput="anim4c0cd528fbc24bf3b67e338c718c83c0.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animd42869a46c904ff98916d9462b9d5f62.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animd42869a46c904ff98916d9462b9d5f62.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animd42869a46c904ff98916d9462b9d5f62.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animd42869a46c904ff98916d9462b9d5f62.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animd42869a46c904ff98916d9462b9d5f62.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animd42869a46c904ff98916d9462b9d5f62.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animd42869a46c904ff98916d9462b9d5f62.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animd42869a46c904ff98916d9462b9d5f62.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animd42869a46c904ff98916d9462b9d5f62.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim4c0cd528fbc24bf3b67e338c718c83c0.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectd42869a46c904ff98916d9462b9d5f62"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select4c0cd528fbc24bf3b67e338c718c83c0"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_d42869a46c904ff98916d9462b9d5f62"
+      <input type="radio" name="state" value="once" id="_anim_radio1_4c0cd528fbc24bf3b67e338c718c83c0"
              >
-      <label for="_anim_radio1_d42869a46c904ff98916d9462b9d5f62">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_d42869a46c904ff98916d9462b9d5f62"
+      <label for="_anim_radio1_4c0cd528fbc24bf3b67e338c718c83c0">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_4c0cd528fbc24bf3b67e338c718c83c0"
              checked>
-      <label for="_anim_radio2_d42869a46c904ff98916d9462b9d5f62">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_d42869a46c904ff98916d9462b9d5f62"
+      <label for="_anim_radio2_4c0cd528fbc24bf3b67e338c718c83c0">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_4c0cd528fbc24bf3b67e338c718c83c0"
              >
-      <label for="_anim_radio3_d42869a46c904ff98916d9462b9d5f62">Reflect</label>
+      <label for="_anim_radio3_4c0cd528fbc24bf3b67e338c718c83c0">Reflect</label>
     </form>
   </div>
 </div>
@@ -1616,9 +1618,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgd42869a46c904ff98916d9462b9d5f62";
-    var slider_id = "_anim_sliderd42869a46c904ff98916d9462b9d5f62";
-    var loop_select_id = "_anim_loop_selectd42869a46c904ff98916d9462b9d5f62";
+    var img_id = "_anim_img4c0cd528fbc24bf3b67e338c718c83c0";
+    var slider_id = "_anim_slider4c0cd528fbc24bf3b67e338c718c83c0";
+    var loop_select_id = "_anim_loop_select4c0cd528fbc24bf3b67e338c718c83c0";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2324,7 +2326,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animd42869a46c904ff98916d9462b9d5f62 = new Animation(frames, img_id, slider_id, 2000.0,
+        anim4c0cd528fbc24bf3b67e338c718c83c0 = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
