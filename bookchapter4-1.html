@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -609,7 +607,7 @@ making the columns of the matrix nearly linearly dependent.</p>
 <p><span class="caption-number">Fig. 6 </span><span class="caption-text">Monomial basis functions</span><a class="headerlink" href="#monomial-basis-functions" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Solving the matrix equation <span class="math notranslate nohighlight">\(Aa=b\)</span> could also be expensive. Using Gaussian elimination to solve the matrix equation for a general matrix <span class="math notranslate nohighlight">\(A\)</span> requires <span class="math notranslate nohighlight">\(O(n^3)\)</span> operations. This means the number of operations grows like <span class="math notranslate nohighlight">\(Cn^3\)</span>, where <span class="math notranslate nohighlight">\(C\)</span> is a positive constant.\footnote{The formal definition of the big O notation is as follows: We write <span class="math notranslate nohighlight">\(f(n)=O(g(n))\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span> if and only if there exists a positive constant <span class="math notranslate nohighlight">\(M\)</span> and a positive integer <span class="math notranslate nohighlight">\(n^*\)</span> such that <span class="math notranslate nohighlight">\(|f(n)|\leq M g(n)\)</span> for all <span class="math notranslate nohighlight">\(n\geq n^*\)</span>.} However, there are some advantages to the monomial form: evaluating the polynomial is very efficient using Horner’s method,
+<p>Solving the matrix equation <span class="math notranslate nohighlight">\(Aa=b\)</span> could also be expensive. Using Gaussian elimination to solve the matrix equation for a general matrix <span class="math notranslate nohighlight">\(A\)</span> requires <span class="math notranslate nohighlight">\(O(n^3)\)</span> operations. This means the number of operations grows like <span class="math notranslate nohighlight">\(Cn^3\)</span>, where <span class="math notranslate nohighlight">\(C\)</span> is a positive constant<a class="footnote-reference brackets" href="#label1" id="id1">1</a>. However, there are some advantages to the monomial form: evaluating the polynomial is very efficient using Horner’s method,
 which is the nested form discussed in Exercises 1.3-4, 1.3-5 of Chapter 1, requiring <span class="math notranslate nohighlight">\(O(n)\)</span> operations. Differentiation and integration are also relatively efficient.</p>
 </section>
 <section id="lagrange-form-of-polynomial-interpolation">
@@ -622,23 +620,23 @@ l_{k}(x)=\prod_{j=0,j\neq k}^{n}\left(\frac{x-x_{j}}{x_{k}-x_{j}}\right),k=0,1,.
 <p>We write the interpolating polynomial <span class="math notranslate nohighlight">\(p_n(x)\)</span> as a linear combination of these basis functions as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-p_{n}(x)=a_{0}l_{0}(x)+a_{1}l_{1}(x)+...+a_{n}l_{n}(x).
+p_{n}(x)=a_{0}l_{0}(x)+a_{1}l_{1}(x)+\cdots+a_{n}l_{n}(x).
 \end{equation*}\]</div>
 <p>We will determine <span class="math notranslate nohighlight">\(a_{i}\)</span> from</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-p_{n}(x_{i})=a_{0}l_{0}(x_{i})+a_{1}l_{1}(x_{i})+...+a_{n}l_{n}(x_{i})=y_{i}
+p_{n}(x_{i})=a_{0}l_{0}(x_{i})+a_{1}l_{1}(x_{i})+\cdots+a_{n}l_{n}(x_{i})=y_{i}
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> Or, in matrix form, we want to solve</p>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,\dots,n.\)</span> Or, in matrix form, we want to solve</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\underbrace{\begin{bmatrix}l_{0}(x_{0}) &amp; l_{1}(x_{0}) &amp; ... &amp; l_{n}(x_{0})\\
-l_{0}(x_{1}) &amp; l_{1}(x_{1}) &amp;  &amp; l_{n}(x_{1})\\
-\vdots\\
-l_{0}(x_{n}) &amp; l_{1}(x_{n}) &amp;  &amp; l_{n}(x_{n})
+\underbrace{\begin{bmatrix}l_{0}(x_{0}) &amp; l_{1}(x_{0}) &amp; \cdots &amp; l_{n}(x_{0})\\
+l_{0}(x_{1}) &amp; l_{1}(x_{1}) &amp; \cdots &amp; l_{n}(x_{1})\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
+l_{0}(x_{n}) &amp; l_{1}(x_{n}) &amp; \cdots &amp; l_{n}(x_{n})
 \end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
 a_{1}\\
-\vdots\\
+\vdots \\
 a_{n}
 \end{bmatrix}}_a=\underbrace{\begin{bmatrix}y_{0}\\
 y_{1}\\
@@ -646,18 +644,18 @@ y_{1}\\
 y_{n}
 \end{bmatrix}}_y
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}.\)</span></p>
+<p>for <span class="math notranslate nohighlight">\([a_{0},\dots,a_{n}]^{T}.\)</span></p>
 <p>Solving this matrix equation is trivial for the following reason.
 Observe that <span class="math notranslate nohighlight">\(l_{k}(x_{k})=1\)</span> and <span class="math notranslate nohighlight">\(l_{k}(x_{i})=0\)</span> for all <span class="math notranslate nohighlight">\(i\neq k.\)</span>
 Then the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> becomes the identity matrix, and</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-a_{k}=y_{k}\text{ for }k=0,1,...,n.
+a_{k}=y_{k}\text{ for }k=0,1,\dots,n.
 \end{equation*}\]</div>
 <p>The interpolating polynomial becomes</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-p_{n}(x)=y_{0}l_{0}(x)+y_{1}l_{1}(x)+...+y_{n}l_{n}(x).
+p_{n}(x)=y_{0}l_{0}(x)+y_{1}l_{1}(x)+\cdots+y_{n}l_{n}(x).
 \end{equation*}\]</div>
 <p>The main advantage of the Lagrange form of interpolation is that finding the interpolating polynomial is trivial: there is no need to solve a matrix equation. However, the evaluation, differentiation, and integration of the Lagrange form
 of a polynomial is more expensive than, for example, the monomial form.</p>
@@ -768,34 +766,34 @@ p_{2}(x) &amp; =-6 \frac{(x-1)(x-2)}{6} +6 \frac{(x+1)(x-1)}{3}=-(x-1)(x-2)+2(x+
 are the Lagrange basis functions for <span class="math notranslate nohighlight">\(n+1\)</span> data points. (Hint. First
 verify the identity for <span class="math notranslate nohighlight">\(n=1\)</span> algebraically, for any two data points.
 For the general case, think about what special function’s interpolating
-polynomial in Lagrange form is <span class="math notranslate nohighlight">\(\sum_{k=0}^{n}l_{k}(x)\)</span> ).</p>
+polynomial in Lagrange form is <span class="math notranslate nohighlight">\(\sum_{k=0}^{n}l_{k}(x)\)</span>.)</p>
 </section>
 <section id="newton-s-form-of-polynomial-interpolation">
 <h2>Newton’s form of polynomial interpolation<a class="headerlink" href="#newton-s-form-of-polynomial-interpolation" title="Permalink to this headline">#</a></h2>
 <p>The Newton basis functions up to degree <span class="math notranslate nohighlight">\(n\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\pi_{k}(x)=\prod_{j=0}^{k-1}(x-x_{j}), k=0,1,...,n
+\pi_{k}(x)=\prod_{j=0}^{k-1}(x-x_{j}), k=0,1,\dots,n
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\pi_{0}(x)=\prod_{j=0}^{-1}(x-x_{j})\)</span> is interpreted as 1.
 The interpolating polynomial <span class="math notranslate nohighlight">\(p_n\)</span>, written as a linear combination of Newton basis functions, is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-p_{n}(x) &amp; =a_{0}\pi_{0}(x)+a_{1}\pi_{1}(x)+...+a_{n}\pi_{n}(x)\\
- &amp; =a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})\cdots(x-x_{n-1}).
+p_{n}(x) &amp; =a_{0}\pi_{0}(x)+a_{1}\pi_{1}(x)+\cdots+a_{n}\pi_{n}(x)\\
+ &amp; =a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+\cdots+a_{n}(x-x_{0})\cdots(x-x_{n-1}).
 \end{align*}\]</div>
 <p>We will determine <span class="math notranslate nohighlight">\(a_{i}\)</span> from</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-p_{n}(x_{i})=a_{0}+a_{1}(x_{i}-x_{0})+...+a_{n}(x_i-x_{0})\cdots(x_i-x_{n-1})=y_{i},
+p_{n}(x_{i})=a_{0}+a_{1}(x_{i}-x_{0})+\cdots+a_{n}(x_i-x_{0})\cdots(x_i-x_{n-1})=y_{i},
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> or in matrix form</p>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,\dots,n,\)</span> or in matrix form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \underbrace{\begin{bmatrix}1 &amp; 0 &amp; 0 &amp; \ldots &amp; 0\\
-1 &amp; (x_{1}-x_{0}) &amp; 0 &amp;  &amp; 0\\
-1 &amp; (x_{2}-x_{0}) &amp; (x_{2}-x_{0})(x_{2}-x_{1}) &amp;  &amp; 0\\
-\vdots &amp; \vdots &amp; \vdots &amp;  &amp; \vdots\\
+1 &amp; (x_{1}-x_{0}) &amp; 0 &amp; \ldots &amp; 0\\
+1 &amp; (x_{2}-x_{0}) &amp; (x_{2}-x_{0})(x_{2}-x_{1}) &amp; \ldots &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\
 1 &amp; (x_{n}-x_{0}) &amp; (x_{n}-x_{0})(x_{n}-x_{1}) &amp; \ldots &amp; \prod_{i=0}^{n-1}(x_{n}-x_{i})
 \end{bmatrix}}_A \underbrace{\begin{bmatrix}a_{0}\\
 a_{1}\\
@@ -805,9 +803,9 @@ a_{n}
 y_{1}\\
 \vdots\\
 y_{n}
-\end{bmatrix}}_y
+\end{bmatrix}}_y.
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\([a_{0},...,a_{n}]^{T}.\)</span> Note that the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is
+<p>Note that the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> is
 lower-triangular, and <span class="math notranslate nohighlight">\(a\)</span> can be solved by forward substitution, which is shown in the next example, in
 <span class="math notranslate nohighlight">\(O(n^2)\)</span> operations.</p>
 <div class="proof example admonition" id="chap3_exa49">
@@ -851,7 +849,7 @@ a_{0}+3a_{1}+3a_{2}=6\Rightarrow-6+9+3a_{2}=6\Rightarrow a_{2}=1.
 \[\begin{equation*}
 p_{2}(x)=-6+3(x+1)+(x+1)(x-1).
 \end{equation*}\]</div>
-<p>Factoring out and simplifying gives <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^2\)</span>, which is the polynomial discussed in Example <a class="reference internal" href="#chap3_exa48">Example 33</a>.</p>
+<p>Multiplying out and simplifying give <span class="math notranslate nohighlight">\(p_2(x)=-4+3x+x^2\)</span>, which is the polynomial discussed in <a class="reference internal" href="#chap3_exa48">Example 33</a>.</p>
 <p><strong>Summary:</strong> The interpolating polynomial <span class="math notranslate nohighlight">\(p_2(x)\)</span> for the data, <span class="math notranslate nohighlight">\((-1,-6),(1,0),(2,6)\)</span>, represented in three different basis functions is:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -862,8 +860,8 @@ p_{2}(x)=-6+3(x+1)+(x+1)(x-1).
 <p>Similar to the monomial form, a polynomial written in Newton’s form can be evaluated using the Horner’s method which has <span class="math notranslate nohighlight">\(O(n)\)</span> complexity:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-p_{n}(x)&amp;=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})(x-x_{1})\cdots(x-x_{n-1})\\
-&amp;=a_{0}+(x-x_{0})(a_{1}+(x-x_{1})(a_{2}+...+(x-x_{n-2})(a_{n-1}+(x-x_{n-1})(a_{n}))\cdots))
+p_{n}(x)&amp;=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+\cdots+a_{n}(x-x_{0})(x-x_{1})\cdots(x-x_{n-1})\\
+&amp;=a_{0}+(x-x_{0})(a_{1}+(x-x_{1})(a_{2}+\cdots+(x-x_{n-2})(a_{n-1}+(x-x_{n-1})(a_{n}))\cdots))
 \end{align*}\]</div>
 <div class="proof example admonition" id="chap3_exa50">
 <p class="admonition-title"><span class="caption-number">Example 35 </span></p>
@@ -873,7 +871,7 @@ p_{n}(x)&amp;=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+...+a_{n}(x-x_{0})(x-
 </div><p><strong>Solution.</strong></p>
 <p><span class="math notranslate nohighlight">\(-6+3(x+1)+(x+1)(x-1)=-6+(x+1)(2+x);\)</span> note that the left-hand side has 2 multiplications,
 and the right-hand side has 1.</p>
-<p><strong>Complexity of the three forms of polynomial interpolation:</strong> The number of multiplications required in solving the corresponding matrix equation in each polynomial basis is:</p>
+<p><strong>Complexity of the three forms of polynomial interpolation:</strong> The number of operations required in solving the corresponding matrix equation in each polynomial basis is:</p>
 <ul class="simple">
 <li><p>Monomial <span class="math notranslate nohighlight">\(\rightarrow O(n^3)\)</span></p></li>
 <li><p>Lagrange <span class="math notranslate nohighlight">\(\rightarrow\)</span> trivial</p></li>
@@ -888,9 +886,9 @@ functions. Verify the three polynomials are identical.</p>
 <div class="proof theorem admonition" id="theorem-4">
 <p class="admonition-title"><span class="caption-number">Theorem 21 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>If points <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> are distinct, then for real values
-<span class="math notranslate nohighlight">\(y_{0},y_{1},...,y_{n},\)</span> there is a unique polynomial <span class="math notranslate nohighlight">\(p_{n}\)</span> of
-degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,...,n.\)</span></p>
+<p>If points <span class="math notranslate nohighlight">\(x_{0},x_{1},\dots,x_{n}\)</span> are distinct, then for real values
+<span class="math notranslate nohighlight">\(y_{0},y_{1},\dots,y_{n},\)</span> there is a unique polynomial <span class="math notranslate nohighlight">\(p_{n}\)</span> of
+degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(p_{n}(x_{i})=y_{i},i=0,1,\dots,n.\)</span></p>
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. We have already established the existence of <span class="math notranslate nohighlight">\(p_{n}\)</span> without mentioning it! The Lagrange
@@ -901,7 +899,7 @@ p_{n}(x)=\sum_{k=0}^{n}y_{k}l_{k}(x)=\sum_{k=0}^{n}y_{k}\prod_{j=0,j\neq k}^{n}\
 \end{equation*}\]</div>
 <p>Let’s prove uniqueness. Assume <span class="math notranslate nohighlight">\(p_{n},q_{n}\)</span> are two distinct polynomials
 satisfying the conclusion. Then <span class="math notranslate nohighlight">\(p_{n}-q_{n}\)</span> is a polynomial of
-degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\((p_{n}-q_{n})(x_{i})=0\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span>
+degree at most <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\((p_{n}-q_{n})(x_{i})=0\)</span> for <span class="math notranslate nohighlight">\(i=0,1,\dots,n.\)</span>
 This means the non-zero polynomial <span class="math notranslate nohighlight">\((p_{n}-q_{n})\)</span> of degree at most
 <span class="math notranslate nohighlight">\(n,\)</span> has <span class="math notranslate nohighlight">\((n+1)\)</span> distinct roots, which is a contradiction.</p>
 </div>
@@ -909,20 +907,20 @@ This means the non-zero polynomial <span class="math notranslate nohighlight">\(
 <div class="proof theorem admonition" id="chap3_thm51">
 <p class="admonition-title"><span class="caption-number">Theorem 22 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> be distinct
+<p>Let <span class="math notranslate nohighlight">\(x_{0},x_{1},\dots,x_{n}\)</span> be distinct
 numbers in the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and <span class="math notranslate nohighlight">\(f\in C^{n+1}[a,b].\)</span> Then for
-each <span class="math notranslate nohighlight">\(x\in[a,b],\)</span> there is a number <span class="math notranslate nohighlight">\(\xi\)</span> between <span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span> such that</p>
+each <span class="math notranslate nohighlight">\(x\in[a,b],\)</span> there is a number <span class="math notranslate nohighlight">\(\xi\)</span> between <span class="math notranslate nohighlight">\(x_{0},x_{1},\dots,x_{n}\)</span> such that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 f(x)-p_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})(x-x_{1})\cdots(x-x_{n}).
 \end{equation*}\]</div>
 </section>
 </div><p>The following lemma is useful in finding upper bounds for <span class="math notranslate nohighlight">\(|f(x)-p_{n}(x)|\)</span>
-using <a class="reference internal" href="#chap3_thm51">Theorem 22</a>, when the nodes <span class="math notranslate nohighlight">\(x_0,...,x_n\)</span> are <strong>equally spaced</strong>.</p>
+using <a class="reference internal" href="#chap3_thm51">Theorem 22</a>, when the nodes <span class="math notranslate nohighlight">\(x_0,\dots,x_n\)</span> are <strong>equally spaced</strong>.</p>
 <div class="proof lemma admonition" id="chap3_lem52">
 <p class="admonition-title"><span class="caption-number">Lemma 2 </span></p>
 <section class="lemma-content" id="proof-content">
-<p>Consider the partition of <span class="math notranslate nohighlight">\([a,b]\)</span> as <span class="math notranslate nohighlight">\(x_0=a,x_1=a+h,...,x_n=a+nh=b\)</span>. More succinctly, <span class="math notranslate nohighlight">\(x_{i}=a+ih\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n\)</span> and <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}.\)</span> Then for any <span class="math notranslate nohighlight">\(x\in[a,b]\)</span></p>
+<p>Consider the partition of <span class="math notranslate nohighlight">\([a,b]\)</span> as <span class="math notranslate nohighlight">\(x_0=a,x_1=a+h,\dots,x_n=a+nh=b\)</span>. More succinctly, <span class="math notranslate nohighlight">\(x_{i}=a+ih\)</span> for <span class="math notranslate nohighlight">\(i=0,1,\dots,n\)</span> and <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}.\)</span> Then for any <span class="math notranslate nohighlight">\(x\in[a,b]\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \prod_{i=0}^{n}|x-x_{i}|\leq\frac{1}{4}h^{n+1}n!
@@ -931,7 +929,7 @@ using <a class="reference internal" href="#chap3_thm51">Theorem 22</a>, when the
 </div><div class="proof admonition" id="proof">
 <p>Proof. Since <span class="math notranslate nohighlight">\(x\in[a,b]\)</span>, it falls into one of the subintervals: let <span class="math notranslate nohighlight">\(x\in[x_{j},x_{j+1}].\)</span>
 Consider the product <span class="math notranslate nohighlight">\(|x-x_{j}||x-x_{j+1}|.\)</span> Put <span class="math notranslate nohighlight">\(s=|x-x_{j}|\)</span> and
-<span class="math notranslate nohighlight">\(t=|x-x_{j+1}|.\)</span> The maximum of <span class="math notranslate nohighlight">\(st\)</span> given <span class="math notranslate nohighlight">\(s+t=h,\)</span> using Calculus,
+<span class="math notranslate nohighlight">\(t=|x-x_{j+1}|.\)</span> The maximum of <span class="math notranslate nohighlight">\(st\)</span> given <span class="math notranslate nohighlight">\(s+t=h,\)</span> using calculus,
 can be found to be <span class="math notranslate nohighlight">\(h^{2}/4,\)</span> which is attained when <span class="math notranslate nohighlight">\(x\)</span> is the
 midpoint, and thus <span class="math notranslate nohighlight">\(s=t=h/2\)</span>. Then</p>
 <div class="amsmath math notranslate nohighlight">
@@ -970,7 +968,7 @@ midpoint, and thus <span class="math notranslate nohighlight">\(s=t=h/2\)</span>
 <p>Find an upper bound for the absolute error when <span class="math notranslate nohighlight">\(f(x)=\ln x\)</span> is approximated by an interpolating
 polynomial of degree five with six nodes equally spaced in the interval
 <span class="math notranslate nohighlight">\([1,2]\)</span>.</p>
-<p>We now revisit Newton’s form of interpolation, and learn an alternative method, known as \textbf{divided differences}, to compute the coefficients of the interpolating polynomial. This approach is  numerically more stable than the forward substitution approach we used earlier. Let’s recall the interpolation problem.</p>
+<p>We now revisit Newton’s form of interpolation, and learn an alternative method, known as <strong>divided differences</strong>, to compute the coefficients of the interpolating polynomial. This approach is  numerically more stable than the forward substitution approach we used earlier. Let’s recall the interpolation problem.</p>
 <ul class="simple">
 <li><p>Data: <span class="math notranslate nohighlight">\((x_{i},y_{i}),i=0,1,...,n\)</span></p></li>
 <li><p>Interpolant in Newton’s form:</p></li>
@@ -1118,7 +1116,7 @@ did in part (b)) to update your interpolating polynomial?</p>
 <div class="proof example admonition" id="chap3_exa57">
 <p class="admonition-title"><span class="caption-number">Example 38 </span></p>
 <section class="example-content" id="proof-content">
-<p>Before the widespread availability of computers and mathematical software, the values of some often-used mathematical functions were disseminated to researchers and engineers via tables. The following table, taken from <span id="id1">[<a class="reference internal" href="#id3" title="M. Abramowitz and I.A. Stegun. Handbook of mathematical functions: with formulas, graphs, and mathematical tables. Volume 55. Courier Corporation, 1991.">Abramowitz and Stegun, 1991</a>]</span>, displays some values of the gamma function, <span class="math notranslate nohighlight">\(\Gamma(x)=\int_0^\infty t^{x-1} e^{-t}dt\)</span>.</p>
+<p>Before the widespread availability of computers and mathematical software, the values of some often-used mathematical functions were disseminated to researchers and engineers via tables. The following table, taken from <span id="id2">[<a class="reference internal" href="#id4" title="M. Abramowitz and I.A. Stegun. Handbook of mathematical functions: with formulas, graphs, and mathematical tables. Volume 55. Courier Corporation, 1991.">Abramowitz and Stegun, 1991</a>]</span>, displays some values of the gamma function, <span class="math notranslate nohighlight">\(\Gamma(x)=\int_0^\infty t^{x-1} e^{-t}dt\)</span>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \begin{array}{ccccc}
@@ -1365,13 +1363,19 @@ x &amp; 0.4 &amp; 0.8 &amp; 1.2 &amp; 1.6\\
 \log x &amp; -0.92 &amp; -0.22 &amp; 0.18 &amp; 0.47\\
 \end{array}
 \end{equation*}\]</div>
-<div class="docutils container" id="id2">
+<div class="docutils container" id="id3">
 <dl class="citation">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">AS91</a></span></dt>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">AS91</a></span></dt>
 <dd><p>M. Abramowitz and I.A. Stegun. <em>Handbook of mathematical functions: with formulas, graphs, and mathematical tables</em>. Volume 55. Courier Corporation, 1991.</p>
 </dd>
 </dl>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="label1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The formal definition of the big O notation is as follows: we write <span class="math notranslate nohighlight">\(f(n)=O(g(n))\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span> if and only if there exists a positive constant <span class="math notranslate nohighlight">\(M\)</span> and a positive integer <span class="math notranslate nohighlight">\(n^*\)</span> such that <span class="math notranslate nohighlight">\(|f(n)|\leq M g(n)\)</span> for all <span class="math notranslate nohighlight">\(n\geq n^*\)</span>.</p>
+</dd>
+</dl>
 </section>
 </section>
 
