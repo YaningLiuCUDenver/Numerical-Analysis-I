@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -509,23 +507,23 @@ title="Print to PDF"
 <p>In polynomial interpolation, our starting point has been the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates of some data we want to interpolate. Suppose, in addition, we know the derivative of the underlying function at these <span class="math notranslate nohighlight">\(x\)</span>-coordinates. Our new data set has the following form.</p>
 <p><strong>Data:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x_{0},x_{1},...,x_{n}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(y_{0},y_{1},...,y_{n};\, y_{i}=f(x_{i})\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(y_{0}',y_{1}',...,y_{n}';\, y'_{i}=f'(x_{i})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{0},x_{1},\ldots,x_{n}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{0},y_{1},\ldots,y_{n};\, y_{i}=f(x_{i})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{0}',y_{1}',\ldots,y_{n}';\, y'_{i}=f'(x_{i})\)</span></p></li>
 </ul>
 <p>We seek a polynomial that fits the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> values, that is, we seek a polynomial <span class="math notranslate nohighlight">\(H(x)\)</span> such that <span class="math notranslate nohighlight">\(H(x_{i})=y_{i}\)</span> and <span class="math notranslate nohighlight">\(H'(x_{i})=y'_{i}\)</span>,
-<span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span> This makes <span class="math notranslate nohighlight">\(2n+2\)</span> equations, and if we let</p>
+<span class="math notranslate nohighlight">\(i=0,1,\ldots,n.\)</span> This makes <span class="math notranslate nohighlight">\(2n+2\)</span> equations, and if we let</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-H(x)=a_{0}+a_{1}x+...+a_{2n+1}x^{2n+1},
+H(x)=a_{0}+a_{1}x+\cdots+a_{2n+1}x^{2n+1},
 \end{equation*}\]</div>
-<p>then there are <span class="math notranslate nohighlight">\(2n+2\)</span> unknowns, <span class="math notranslate nohighlight">\(a_0,...,a_{2n+1}\)</span>, to solve for. The following theorem shows that there is a unique solution to this system of equations; a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
+<p>then there are <span class="math notranslate nohighlight">\(2n+2\)</span> unknowns, <span class="math notranslate nohighlight">\(a_0,\ldots,a_{2n+1}\)</span>, to solve for. The following theorem shows that there is a unique solution to this system of equations; a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id5" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap3_thm61">
 <p class="admonition-title"><span class="caption-number">Theorem 27 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(f \in C^1[a,b]\)</span> and <span class="math notranslate nohighlight">\(x_{0},...,x_{n}\in[a,b]\)</span>
+<p>If <span class="math notranslate nohighlight">\(f \in C^1[a,b]\)</span> and <span class="math notranslate nohighlight">\(x_{0},\ldots,x_{n}\in[a,b]\)</span>
 are distinct, then there is a unique polynomial <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span>, of degree at most <span class="math notranslate nohighlight">\(2n+1\)</span>, agreeing with
-<span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> at <span class="math notranslate nohighlight">\(x_{0},...,x_{n}\)</span>. The polynomial can be written as:</p>
+<span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> at <span class="math notranslate nohighlight">\(x_{0},\ldots,x_{n}\)</span>. The polynomial can be written as:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 H_{2n+1}(x)=\sum_{i=0}^{n}y_{i}h_{i}(x)+\sum_{i=0}^{n}y_{i}'\widetilde{h_{i}}(x)
@@ -537,7 +535,7 @@ h_{i}(x) &amp; =\left(1-2(x-x_{i})l'_{i}(x_{i})\right)(l_{i}(x))^{2}\\
 \widetilde{h}_{i}(x) &amp; =(x-x_{i})(l_{i}(x))^{2}.
 \end{align*}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(l_{i}(x)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th Lagrange basis function for the nodes
-<span class="math notranslate nohighlight">\(x_{0},...,x_{n}\)</span>, and <span class="math notranslate nohighlight">\(l'_{i}(x)\)</span> is its derivative. <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span> is called the Hermite interpolating
+<span class="math notranslate nohighlight">\(x_{0},\ldots,x_{n}\)</span>, and <span class="math notranslate nohighlight">\(l'_{i}(x)\)</span> is its derivative. <span class="math notranslate nohighlight">\(H_{2n+1}(x)\)</span> is called the Hermite interpolating
 polynomial.</p>
 </section>
 </div><p>The only difference between Hermite interpolation and polynomial interpolation is that in the former, we have the derivative information, which can go a long way in capturing the shape of the underlying function.</p>
@@ -580,23 +578,23 @@ is a more efficient method using divided differences for this computation.</p>
 <p>We start with the data:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-&amp;x_{0},x_{1},...,x_{n}\\
-&amp;y_{0},y_{1},...,y_{n}; y_{i}=f(x_{i})\\
-&amp;y_{0}',y_{1}',...,y_{n}';y'_{i}=f'(x_{i})\\
+&amp;x_{0},x_{1},\ldots,x_{n}\\
+&amp;y_{0},y_{1},\ldots,y_{n}; y_{i}=f(x_{i})\\
+&amp;y_{0}',y_{1}',\ldots,y_{n}';y'_{i}=f'(x_{i})\\
 \end{align*}\]</div>
-<p>and define a sequence <span class="math notranslate nohighlight">\(z_{0},z_{1},...,z_{2n+1}\)</span> by</p>
+<p>and define a sequence <span class="math notranslate nohighlight">\(z_{0},z_{1},\ldots,z_{2n+1}\)</span> by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-z_{0} &amp; =x_{0},z_{2}=x_{1},z_{4}=x_{2},...,z_{2n}=x_{n}\\
-z_{1} &amp; =x_{0},z_{3}=x_{1},z_{5}=x_{2},...,z_{2n+1}=x_{n}
+z_{0} &amp; =x_{0},z_{2}=x_{1},z_{4}=x_{2},\ldots,z_{2n}=x_{n}\\
+z_{1} &amp; =x_{0},z_{3}=x_{1},z_{5}=x_{2},\ldots,z_{2n+1}=x_{n}
 \end{align*}\]</div>
-<p>i.e., <span class="math notranslate nohighlight">\(z_{2i}=z_{2i+1}=x_{i},\)</span> for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
+<p>i.e., <span class="math notranslate nohighlight">\(z_{2i}=z_{2i+1}=x_{i},\)</span> for <span class="math notranslate nohighlight">\(i=0,1,\ldots,n.\)</span></p>
 <p>Then the Hermite polynomial can be written as:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 H_{2n+1}(x) =&amp; f[z_{0}]+f[z_{0},z_{1}](x-z_{0})+f[z_{0},z_{1},z_{2}](x-z_{0})(x-z_{1})+\\
- &amp; \ldots+f[z_{0},z_{1},...,z_{2n+1}](x-z_{0})\cdots(x-z_{2n})\\
-  =&amp;f[z_{0}]+\sum_{i=1}^{2n+1}f[z_{0},....,z_{i}](x-z_{0})(x-z_{1})\cdots(x-z_{i-1}).
+ &amp; \cdots+f[z_{0},z_{1},\ldots,z_{2n+1}](x-z_{0})\cdots(x-z_{2n})\\
+  =&amp;f[z_{0}]+\sum_{i=1}^{2n+1}f[z_{0},\ldots,z_{i}](x-z_{0})(x-z_{1})\cdots(x-z_{i-1}).
 \end{align*}\]</div>
 <p>There is a little problem with some of the first divided differences above: they are undefined! Observe that</p>
 <div class="amsmath math notranslate nohighlight">
@@ -608,16 +606,16 @@ f[z_{0},z_{1}]=f[x_{0},x_{0}]=\frac{f(x_{0})-f(x_{0})}{x_{0}-x_{0}}
 \[\begin{equation*}
 f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=\frac{f(x_{i})-f(x_{i})}{x_{i}-x_{i}}
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(i=0,...,n.\)</span></p>
-<p>From <a class="reference internal" href="bookchapter4-2.html#chap3_thm58">Theorem 24</a>, we know <span class="math notranslate nohighlight">\(f[x_{0},...,x_{n}]=\frac{f^{(n)}(\xi)}{n!}\)</span>
-for some <span class="math notranslate nohighlight">\(\xi\)</span> between the min and max of <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> From
-a classical result by Hermite &amp; Gennochi (see <span id="id2">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>, page 144), divided differences are
-continuous functions of their variables <span class="math notranslate nohighlight">\(x_{0},...,x_{n}.\)</span> This implies
+<p>for <span class="math notranslate nohighlight">\(i=0,\ldots,n.\)</span></p>
+<p>From <a class="reference internal" href="bookchapter4-2.html#chap3_thm58">Theorem 24</a>, we know <span class="math notranslate nohighlight">\(f[x_{0},\ldots,x_{n}]=\frac{f^{(n)}(\xi)}{n!}\)</span>
+for some <span class="math notranslate nohighlight">\(\xi\)</span> between the min and max of <span class="math notranslate nohighlight">\(x_{0},\ldots,x_{n}.\)</span> From
+a classical result by Hermite &amp; Gennochi (see <span id="id2">Atkinson [<a class="reference internal" href="#id11" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span>, page 144), divided differences are
+continuous functions of their variables <span class="math notranslate nohighlight">\(x_{0},\ldots,x_{n}.\)</span> This implies
 we can take the limit of the above result as <span class="math notranslate nohighlight">\(x_{i}\rightarrow x_{0}\)</span>
 for all <span class="math notranslate nohighlight">\(i,\)</span> which results in</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-f[x_{0},...,x_{0}]=\frac{f^{(n)}(x_{0})}{n!}.
+f[x_{0},\ldots,x_{0}]=\frac{f^{(n)}(x_{0})}{n!}.
 \end{equation*}\]</div>
 <p>Therefore in the Hermite polynomial coefficient calculations, we will
 put</p>
@@ -625,7 +623,7 @@ put</p>
 \[\begin{equation*}
 f[z_{2i},z_{2i+1}]=f[x_{i},x_{i}]=f'(x_{i})=y'_{i}
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(i=0,1,...,n.\)</span></p>
+<p>for <span class="math notranslate nohighlight">\(i=0,1,\ldots,n.\)</span></p>
 <div class="proof example admonition" id="chap3_exa63">
 <p class="admonition-title"><span class="caption-number">Example 40 </span></p>
 <section class="example-content" id="proof-content">
@@ -642,7 +640,7 @@ i &amp; x_{i} &amp; y_{i} &amp; y_{i}'\\
 <p>Here <span class="math notranslate nohighlight">\(n=2,\)</span> and <span class="math notranslate nohighlight">\(2n+1=5,\)</span> so the Hermite polynomial is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-H_{5}(x)=f[z_{0}]+\sum_{i=1}^{5}f[z_{0},...,z_{i}](x-z_{0})\cdots(x-z_{i-1}).
+H_{5}(x)=f[z_{0}]+\sum_{i=1}^{5}f[z_{0},\ldots,z_{i}](x-z_{0})\cdots(x-z_{i-1}).
 \end{equation*}\]</div>
 <p>The divided differences are:</p>
 <div class="amsmath math notranslate nohighlight">
