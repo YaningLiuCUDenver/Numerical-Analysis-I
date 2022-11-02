@@ -230,6 +230,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="bookchapter5-0.html">
+   Numerical Quadrature and Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="bookchapter5-1.html">
    5.1 Newton-Cotes formulas
   </a>
@@ -574,8 +579,8 @@ rule to each domain separately, we get</p>
 <p>Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(n\)</span> be even, <span class="math notranslate nohighlight">\(h=\frac{b-a}{n+2},\)</span> and <span class="math notranslate nohighlight">\(x_{j}=a+(j+1)h\)</span>
 for <span class="math notranslate nohighlight">\(j=-1,0,...,n+1.\)</span> The composite Midpoint rule for <span class="math notranslate nohighlight">\(n+2\)</span> subintervals
 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0eb3b77c-525a-4740-bc06-4593ecb3e2fb">
-<span class="eqno">(28)<a class="headerlink" href="#equation-0eb3b77c-525a-4740-bc06-4593ecb3e2fb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-aa143b44-f990-4afc-ba50-6624242c70ab">
+<span class="eqno">(28)<a class="headerlink" href="#equation-aa143b44-f990-4afc-ba50-6624242c70ab" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=2h\sum_{j=0}^{n/2}f(x_{2j})+\frac{b-a}{6}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
@@ -584,8 +589,8 @@ is</p>
 Let <span class="math notranslate nohighlight">\(f\in C^{2}[a,b],\)</span> <span class="math notranslate nohighlight">\(h=\frac{b-a}{n}\)</span>, and <span class="math notranslate nohighlight">\(x_{j}=a+jh\)</span> for <span class="math notranslate nohighlight">\(j=0,1,...,n.\)</span>
 The composite Trapezoidal rule for <span class="math notranslate nohighlight">\(n\)</span> subintervals is</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-ea73c259-3f6b-4980-87ee-ce90c084c98c">
-<span class="eqno">(29)<a class="headerlink" href="#equation-ea73c259-3f6b-4980-87ee-ce90c084c98c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-87bb628f-5ef9-4f98-bef5-f30f28d3bd24">
+<span class="eqno">(29)<a class="headerlink" href="#equation-87bb628f-5ef9-4f98-bef5-f30f28d3bd24" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{a}^{b}f(x)dx=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_{j})+f(b)\right]-\frac{b-a}{12}h^{2}f''(\xi)
 \end{align}\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span>.</p>
