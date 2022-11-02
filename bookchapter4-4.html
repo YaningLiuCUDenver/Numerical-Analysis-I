@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -524,7 +522,7 @@ segments, that is, linear polynomials. For example, consider the following figur
 <figure class="align-default" id="linear-spline">
 <a class="reference internal image-reference" href="_images/linear_spline_fig.png"><img alt="_images/linear_spline_fig.png" src="_images/linear_spline_fig.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Linear spline</span><a class="headerlink" href="#linear-spline" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Linear spline.</span><a class="headerlink" href="#linear-spline" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let <span class="math notranslate nohighlight">\(P(x)=ax+b\)</span> and <span class="math notranslate nohighlight">\(Q(x)=cx+d\)</span>. We find the coefficients <span class="math notranslate nohighlight">\(a,b,c,d\)</span> by solving</p>
@@ -535,7 +533,7 @@ P(x_{i}) &amp; =y_{i}\\
 Q(x_{i}) &amp; =y_{i}\\
 Q(x_{i+1}) &amp; =y_{i+1}
 \end{align*}\]</div>
-<p>which is a system of four equations and four unknowns. We then repeat this procedure for all data points, <span class="math notranslate nohighlight">\((x_0,y_0),(x_1,y_1),...,(x_n,y_n)\)</span>, to determine all of the linear polynomials.</p>
+<p>which is a system of four equations and four unknowns. We then repeat this procedure for all data points, <span class="math notranslate nohighlight">\((x_0,y_0),(x_1,y_1),\ldots,(x_n,y_n)\)</span>, to determine all of the linear polynomials.</p>
 <p>One disadvantage
 of linear spline interpolation is the lack of smoothness. The first derivative of the
 spline is not continuous at the nodes (unless the data fall on a line). We can obtain better smoothness by increasing the degree of the piecewise polynomials. In <strong>quadratic spline interpolation</strong>, we connect the nodes via second
@@ -543,13 +541,13 @@ degree polynomials.</p>
 <figure class="align-default" id="quadratic-spline">
 <a class="reference internal image-reference" href="_images/quadratic_spline_fig.png"><img alt="_images/quadratic_spline_fig.png" src="_images/quadratic_spline_fig.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Quadratic spline</span><a class="headerlink" href="#quadratic-spline" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Quadratic spline.</span><a class="headerlink" href="#quadratic-spline" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let <span class="math notranslate nohighlight">\(P(x)=a_{0}+a_{1}x+a_{2}x^{2}\)</span> and <span class="math notranslate nohighlight">\(Q(x)=b_{0}+b_{1}x+b_{2}x^{2}.\)</span>
 There are six unknowns to determine, but only four equations from the interpolation conditions:
 <span class="math notranslate nohighlight">\(P(x_{i-1})=y_{i-1},P(x_{i})=y_{i},Q(x_{i})=y_{i},Q(x_{i+1})=y_{i+1}\)</span>.
-We can find extra two conditions by requiring some smoothness, <span class="math notranslate nohighlight">\(P'(x_{i})=Q'(x_{i})\)</span>,
+We can find two extra conditions by requiring some smoothness, <span class="math notranslate nohighlight">\(P'(x_{i})=Q'(x_{i})\)</span>,
 and another equation by requiring <span class="math notranslate nohighlight">\(P'\)</span> or <span class="math notranslate nohighlight">\(Q'\)</span> take a certain value at one
 of the end points.</p>
 <section id="cubic-spline-interpolation">
@@ -558,13 +556,13 @@ of the end points.</p>
 interpolation. It uses cubic polynomials to connect the nodes. Consider the data</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-(x_0,y_0),(x_1,y_1),...,(x_n,y_n),
+(x_0,y_0),(x_1,y_1),\ldots,(x_n,y_n),
 \end{equation*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_0&lt;x_1&lt;...&lt;x_n\)</span>. In the figure below, the cubic polynomials interpolating pairs of data are labeled as <span class="math notranslate nohighlight">\(S_{0},...,S_{n-1}\)</span> (we ignore the <span class="math notranslate nohighlight">\(y\)</span>-coordinates in the plot).</p>
+<p>where <span class="math notranslate nohighlight">\(x_0&lt;x_1&lt;\cdots&lt;x_n\)</span>. In the figure below, the cubic polynomials interpolating pairs of data are labeled as <span class="math notranslate nohighlight">\(S_{0},\ldots,S_{n-1}\)</span> (we ignore the <span class="math notranslate nohighlight">\(y\)</span>-coordinates in the plot).</p>
 <figure class="align-default" id="cubic-spline">
 <a class="reference internal image-reference" href="_images/cubic_spline_fig.png"><img alt="_images/cubic_spline_fig.png" src="_images/cubic_spline_fig.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Cubic spline</span><a class="headerlink" href="#cubic-spline" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Cubic spline.</span><a class="headerlink" href="#cubic-spline" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The polynomial <span class="math notranslate nohighlight">\(S_i\)</span> interpolates the nodes <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>. Let</p>
@@ -573,7 +571,7 @@ interpolation. It uses cubic polynomials to connect the nodes. Consider the data
 S_{i}(x)=a_{i}+b_{i}x+c_{i}x^{2}+d_{i}x^{3}
 \end{equation*}\]</div>
 <p>for <span class="math notranslate nohighlight">\(i=0,1,...,n-1.\)</span> There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns to determine: <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i\)</span>, as <span class="math notranslate nohighlight">\(i\)</span> takes on values from 0 to <span class="math notranslate nohighlight">\(n-1\)</span>. Let’s describe the
-equations <span class="math notranslate nohighlight">\(S_i\)</span> must satisfy. First, the interpolation conditions, that is, the requirement that <span class="math notranslate nohighlight">\(S_i\)</span> passes through the nodes <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>:</p>
+equations <span class="math notranslate nohighlight">\(S_i\)</span> must satisfy. First, the interpolation conditions, that is, the requirement that <span class="math notranslate nohighlight">\(S_i\)</span> pass through the nodes <span class="math notranslate nohighlight">\((x_i,y_i),(x_{i+1},y_{i+1})\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 S_{i}(x_{i}) &amp; =y_{i}\\
@@ -590,9 +588,9 @@ S''_{i-1}(x_{i}) &amp; =S''_{i}(x_{i})
 equations are called the boundary conditions. There are two choices:</p>
 <ul class="simple">
 <li><p>Free or natural boundary: <span class="math notranslate nohighlight">\(S_{0}''(x_{0})=S_{n-1}''(x_{n})=0\)</span></p></li>
-<li><p>Clamped boundary: <span class="math notranslate nohighlight">\(S_{0}'(x_{0})=f'(x_{0})\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}'(x_{n})=f'(x_{n})\)</span></p></li>
+<li><p>Clamped boundary: <span class="math notranslate nohighlight">\(S_{0}'(x_{0})=f'(x_{0})\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}'(x_{n})=f'(x_{n})\)</span>.</p></li>
 </ul>
-<p>Each boundary choice gives another two equations, bringing the total number of equations to <span class="math notranslate nohighlight">\(4n\)</span>. There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns as well. Do these systems of equations have a unique solution? The answer is yes, and a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The spline obtained from the first boundary choice is called a <strong>natural spline</strong>, and the other one is called a <strong>clamped spline</strong>.</p>
+<p>Each boundary choice gives another two equations, bringing the total number of equations to <span class="math notranslate nohighlight">\(4n\)</span>. There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns as well. Do these systems of equations have a unique solution? The answer is yes, and a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The spline obtained from the first boundary choice is called a <strong>natural spline</strong>, and the other one is called a <strong>clamped spline</strong>.</p>
 <div class="proof example admonition" id="chap3_exa64">
 <p class="admonition-title"><span class="caption-number">Example 41 </span></p>
 <section class="example-content" id="proof-content">
@@ -603,7 +601,7 @@ equations are called the boundary conditions. There are two choices:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 S_0(x)&amp;=a_0+b_0x+c_0x^2+d_0x^3\\
-S_1(x)&amp;=a_1+b_1x+c_1x^2+d_1x^3
+S_1(x)&amp;=a_1+b_1x+c_1x^2+d_1x^3.
 \end{align*}\]</div>
 <p>The interpolation equations are:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -611,7 +609,7 @@ S_1(x)&amp;=a_1+b_1x+c_1x^2+d_1x^3
 S_0(0)=0 &amp;\Rightarrow a_0=0\\
 S_0(1)=1 &amp;\Rightarrow a_0+b_0+c_0+d_0=1\\
 S_1(1)=1 &amp;\Rightarrow a_1+b_1+c_1+d_1=1\\
-S_1(2)=0 &amp;\Rightarrow a_1+2b_1+4c_1+8d_1=0
+S_1(2)=0 &amp;\Rightarrow a_1+2b_1+4c_1+8d_1=0.
 \end{align*}\]</div>
 <p>We need the derivatives of the polynomials for the other equations:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -619,19 +617,19 @@ S_1(2)=0 &amp;\Rightarrow a_1+2b_1+4c_1+8d_1=0
 S_0'(x)&amp;=b_0+2c_0x+3d_0x^2\\
 S_1'(x)&amp;=b_1+2c_1x+3d_1x^2\\
 S_0''(x)&amp;=2c_0+6d_0x\\
-S_1''(x)&amp;=2c_1+6d_1x
+S_1''(x)&amp;=2c_1+6d_1x.
 \end{align*}\]</div>
 <p>The smoothness conditions are:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 S_0'(1)=S_1'(1) &amp;\Rightarrow b_0+2c_0+3d_0=b_1+2c_1+3d_1\\
-S_0''(1)=S_1''(1) &amp;\Rightarrow 2c_0+6d_0=2c_1+6d_1
+S_0''(1)=S_1''(1) &amp;\Rightarrow 2c_0+6d_0=2c_1+6d_1.
 \end{align*}\]</div>
 <p>The natural boundary conditions are:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 S_0''(0)=0 &amp;\Rightarrow 2c_0=0\\
-S_1''(2)=0 &amp;\Rightarrow 2c_1+12d_1=0
+S_1''(2)=0 &amp;\Rightarrow 2c_1+12d_1=0.
 \end{align*}\]</div>
 <p>There are eight equations and eight unknowns. However, <span class="math notranslate nohighlight">\(a_0=c_0=0\)</span>, so that reduces the number of equations and unknowns to six. We rewrite the equations below, substituting <span class="math notranslate nohighlight">\(a_0=c_0=0\)</span>, and simplifying when possible:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -641,7 +639,7 @@ a_1+b_1+c_1+d_1&amp;=1\\
 a_1+2b_1+4c_1+8d_1&amp;=0\\
 b_0+3d_0&amp;=b_1+2c_1+3d_1\\
 3d_0&amp;=c_1+3d_1\\
-c_1+6d_1&amp;=0
+c_1+6d_1&amp;=0.
 \end{align*}\]</div>
 <p>We will use Python to solve this system of equations. To do that, we first rewrite the system of equations as a matrix equation</p>
 <div class="amsmath math notranslate nohighlight">
@@ -676,7 +674,7 @@ v=\begin{bmatrix}
 0
 \end{bmatrix}.
 \end{equation*}\]</div>
-<p>We enter the matrices <span class="math notranslate nohighlight">\(A,v\)</span> in Python and solve the equation <span class="math notranslate nohighlight">\(Ax=v\)</span> using the command <span class="math notranslate nohighlight">\(np.linalg.solve\)</span>.</p>
+<p>We enter the matrices <span class="math notranslate nohighlight">\(A,v\)</span> in Python and solve the equation <span class="math notranslate nohighlight">\(Ax=v\)</span> using the command <em>np.linalg.solve</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -733,7 +731,7 @@ v=\begin{bmatrix}
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 S_0(x)&amp;=1.5x-0.5x^3\\
-S_1(x)&amp;=-1+4.5x-3x^2+0.5x^3
+S_1(x)&amp;=-1+4.5x-3x^2+0.5x^3.
 \end{align*}\]</div>
 <p>Solving the equations of a spline even for three data points can be tedious. Fortunately, there is a general approach to solving the equations for natural and clamped splines, for any number of data points. We will use this approach when we write Python codes for splines next.</p>
 <p><strong>Exercise 4.4-1</strong></p>
@@ -772,8 +770,8 @@ s_{1}(x)=a+b(x-2)+c(x-2)^{2}+d(x-2)^{3} &amp; \text{if }2\leq x&lt;3.
 <p>The function <strong>CubicNatural</strong> takes the <span class="math notranslate nohighlight">\(x\)</span>- and
 <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data as input, and computes the natural cubic
 spline interpolating the data, by solving the resulting matrix equation.
-The code is based on Algorithm 3.4 of <span id="id2">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The output is the coefficients of the <span class="math notranslate nohighlight">\(m-1\)</span> cubic
-polynomials, <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i,i=0,...,m-2\)</span> where <span class="math notranslate nohighlight">\(m\)</span> is the number of
+The code is based on Algorithm 3.4 of <span id="id2">Burden <em>et al.</em> [<a class="reference internal" href="#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The output is the coefficients of the <span class="math notranslate nohighlight">\(m-1\)</span> cubic
+polynomials, <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i, i=0,...,m-2\)</span> where <span class="math notranslate nohighlight">\(m\)</span> is the number of
 data points. These coefficients are stored in the arrays <span class="math notranslate nohighlight">\(a,b,c,d\)</span> and returned at the end of the function, so that we can access these arrays later to
 evaluate the spline for a given value <span class="math notranslate nohighlight">\(w\)</span>.</p>
 <div class="cell docutils container">
@@ -821,7 +819,7 @@ polynomials are computed by <strong>CubicNatural</strong>, the next step is
 to evaluate the spline at a given value. This is done by the following
 function <strong>CubicNaturalEval</strong>. The inputs are the value at
 which the spline is evaluated, <span class="math notranslate nohighlight">\(w\)</span>, the <span class="math notranslate nohighlight">\(x\)</span>-coordinates of the
-data and the coefficients computed by <strong>CubicNatural</strong>. The function first finds the interval <span class="math notranslate nohighlight">\([x_i,x_{i+1}],i=0,...,m-2,\)</span>
+data and the coefficients computed by <strong>CubicNatural</strong>. The function first finds the interval <span class="math notranslate nohighlight">\([x_i,x_{i+1}],i\in\{0,\ldots,m-2\}\)</span>,
 <span class="math notranslate nohighlight">\(w\)</span> belongs to, and then evaluates the spline at <span class="math notranslate nohighlight">\(w\)</span> using the
 corresponding cubic polynomial.</p>
 <div class="cell docutils container">
@@ -851,7 +849,7 @@ corresponding cubic polynomial.</p>
 </div>
 </div>
 </div>
-<p>Next we will compare Newton and natural cubic spline interpolation when
+<p>Next we will compare Newton and natural cubic spline interpolations when
 applied to Runge’s function. We import the functions for Newton
 interpolation first.</p>
 <div class="cell docutils container">
@@ -886,7 +884,7 @@ interpolation first.</p>
 </div>
 </div>
 <p>Here is the code that computes the cubic spline, Newton interpolation,
-and plot them.</p>
+and plots them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xaxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -896,8 +894,7 @@ and plot them.</p>
 <span class="n">yi</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
 <span class="n">coeff</span> <span class="o">=</span> <span class="n">CubicNatural</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
 <span class="n">naturalspline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">CubicNaturalEval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">coeff</span><span class="p">),</span> <span class="n">xaxis</span><span class="p">)))</span>
-<span class="n">interp</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span> <span class="c1"># Interpolating polynomial for</span>
-<span class="c1"># the data</span>
+<span class="n">interp</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span> <span class="c1"># Interpolating polynomial for the data</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">runge</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$1/(1+x^2)$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolating poly&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">naturalspline</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural cubic spline&#39;</span><span class="p">)</span>
@@ -913,7 +910,7 @@ and plot them.</p>
 <p>The cubic spline gives an excellent fit to Runge’s function on this
 scale: we cannot visually separate it from the function itself.</p>
 <p>The following function <strong>CubicClamped</strong> computes the clamped
-cubic spline; the code is based on Algorithm 3.5 of <span id="id3">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The function
+cubic spline; the code is based on Algorithm 3.5 of <span id="id3">Burden <em>et al.</em> [<a class="reference internal" href="#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The function
 <strong>CubicClampedEval</strong> evaluates the spline at a given value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1052,7 +1049,7 @@ differences between the splines.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/NUH_sketch.png"><img alt="_images/NUH_sketch.png" src="_images/NUH_sketch.png" style="width: 126.3px; height: 201.6px;" /></a>
 </figure>
-<p>What Arya wants is a digitized version of the sketch; a figure that is smooth and can be manipulated using graphics software. The letter NUH is a little complicated to apply a spline interpolation directly, since it has some cusps.   For such planar curves, we can use their parametric representation, and use a cubic spline interpolation for <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates separately. To this end, Arya picks eight points on the letter NUH, and labels them as <span class="math notranslate nohighlight">\(t=1,2,...,8\)</span>; see the figure below.</p>
+<p>What Arya wants is a digitized version of the sketch; a figure that is smooth and can be manipulated using graphics software. The letter NUH is a little complicated to apply a spline interpolation directly, since it has some cusps.   For such planar curves, we can use their parametric representation, and use a cubic spline interpolation for <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates separately. To this end, Arya picks eight points on the letter NUH, and labels them as <span class="math notranslate nohighlight">\(t=1,2,\ldots,8\)</span>; see the figure below.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/NUHprime.png"><img alt="_images/NUHprime.png" src="_images/NUHprime.png" style="width: 157.2px; height: 272.7px;" /></a>
 </figure>
@@ -1067,7 +1064,7 @@ x &amp; 0 &amp; 0    &amp; -0.05 &amp; 0.1 &amp; 0.4 &amp; 0.65 &amp; 0.7   &amp
 y &amp; 0 &amp; 1.25 &amp; 2.5     &amp; 1   &amp; 0.3 &amp; 0.9  &amp; 1.5 &amp; 0\\
 \end{array}
 \end{equation*}\]</div>
-<p>The next step is to fit a cubic spline to the data <span class="math notranslate nohighlight">\((t_1,x_1),...,(t_8,x_8)\)</span>, and another cubic spline to the data <span class="math notranslate nohighlight">\((t_1,y_1),...,(t_8,y_8)\)</span>. Let’s call these splines <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span>, respectively, since they represent the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates as  functions of the parameter <span class="math notranslate nohighlight">\(t\)</span>. Plotting <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span> will produce the letter NUH, as we can see in the following Python codes.</p>
+<p>The next step is to fit a cubic spline to the data <span class="math notranslate nohighlight">\((t_1,x_1),\ldots,(t_8,x_8)\)</span>, and another cubic spline to the data <span class="math notranslate nohighlight">\((t_1,y_1),\ldots,(t_8,y_8)\)</span>. Let’s call these splines <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span>, respectively, since they represent the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates as  functions of the parameter <span class="math notranslate nohighlight">\(t\)</span>. Plotting <span class="math notranslate nohighlight">\(\text{xspline}(t),\text{yspline}(t)\)</span> will produce the letter NUH, as we can see in the following Python codes.</p>
 <p>First, load the NumPy and Matplotlib packages, and copy and evaluate the functions <strong>CubicNatural</strong> and <strong>CubicNaturalEval</strong> that we discussed earlier. Here is the letter NUH, obtained by spline interpolation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1091,15 +1088,10 @@ y &amp; 0 &amp; 1.25 &amp; 2.5     &amp; 1   &amp; 0.3 &amp; 0.9  &amp; 1.5 &amp
 </div>
 <p>This looks like it needs to be squeezed! Adjusting the aspect ratio
 gives a better image. In the following, we use the commands</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figaspect</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">));</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 288x576 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
