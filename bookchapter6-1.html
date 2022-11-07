@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -146,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter2-0.html">
-   Chapter 2 Solutions of equations: Root-finding
+   Chapter 2 Solutions of Equations: Root-finding
   </a>
  </li>
  <li class="toctree-l1">
@@ -186,7 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter3-0.html">
-   Chapter 3 Solutions to linear systems
+   Chapter 3 Solutions to Linear Systems
   </a>
  </li>
  <li class="toctree-l1">
@@ -231,7 +229,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bookchapter5-0.html">
-   Numerical Quadrature and Differentiation
+   Chapter 5 Numerical Quadrature and Differentiation
   </a>
  </li>
  <li class="toctree-l1">
@@ -547,13 +545,13 @@ title="Print to PDF"
 <figure class="align-default" id="id20">
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/scatter_plot.png"><img alt="_images/scatter_plot.png" class="bg-primary mb-1" src="_images/scatter_plot.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot of data</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot of data.</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Arya’s professor thinks the relationship between the variables should be
 linear, but we do not see data falling on a perfect line because of
 measurement error. The professor is not happy, professors are usually not happy when lab results act up, and asks Arya to come up with a linear formula,
-something like <span class="math notranslate nohighlight">\(y=ax+b,\)</span> to explain the relationship. Arya first thinks about interpolation, but quickly realizes it is not a good idea. (Why?). Let’s help Arya with her problem.</p>
+something like <span class="math notranslate nohighlight">\(y=ax+b,\)</span> to explain the relationship. Arya first thinks about interpolation, but quickly realizes it is not a good idea. (Why?) Let’s help Arya with her problem.</p>
 </section>
 <section id="analysis-of-the-problem">
 <h2>Analysis of the problem<a class="headerlink" href="#analysis-of-the-problem" title="Permalink to this headline">#</a></h2>
@@ -562,13 +560,13 @@ plots one such line, <span class="math notranslate nohighlight">\(y=3x-0.5\)</sp
 <figure class="align-default" id="data-with-line">
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/scatter_plot_line.png"><img alt="_images/scatter_plot_line.png" class="bg-primary mb-1" src="_images/scatter_plot_line.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Data with an approximating line</span><a class="headerlink" href="#data-with-line" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Data with an approximating line.</span><a class="headerlink" href="#data-with-line" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>There are certainly many other choices we have for the line: we could increase or decrease the slope a little, change the intercept a bit, and obtain multiple lines that have a visually good fit to the data. The crucial question is, how can we decide which line is the “best” line, among all the possible lines? If we can quantify how good the fit of a given line is to the data, and come up with a notion for error, perhaps then we can find the line that minimizes this error.</p>
 <p>Let’s generalize the problem a little. We have:</p>
 <ul class="simple">
-<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),...,(x_{m},y_{m})\)</span></p></li>
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),\ldots,(x_{m},y_{m})\)</span></p></li>
 </ul>
 <p>and we want to find a line that gives the “best” approximation to the data:</p>
 <ul class="simple">
@@ -577,7 +575,7 @@ plots one such line, <span class="math notranslate nohighlight">\(y=3x-0.5\)</sp
 <p>The questions we want to answer are:</p>
 <ol class="simple">
 <li><p>What does “best” approximation mean?</p></li>
-<li><p>How do we find <span class="math notranslate nohighlight">\(a,b\)</span> that gives the line with the “best” approximation?</p></li>
+<li><p>How do we find <span class="math notranslate nohighlight">\(a,b\)</span> that give the line with the “best” approximation?</p></li>
 </ol>
 <p>Observe that for each <span class="math notranslate nohighlight">\(x_{i}\)</span>, there is the corresponding <span class="math notranslate nohighlight">\(y_{i}\)</span>
 of the data point, and <span class="math notranslate nohighlight">\(f(x_{i})=ax_{i}+b,\)</span> which is the predicted
@@ -586,11 +584,11 @@ the deviations between the actual <span class="math notranslate nohighlight">\(y
 values:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-(y_{1}-ax_{1}-b),(y_{2}-ax_{2}-b),...,(y_{m}-ax_{m}-b)
+(y_{1}-ax_{1}-b),(y_{2}-ax_{2}-b),\ldots,(y_{m}-ax_{m}-b).
 \end{equation*}\]</div>
 <p>There are several ways we can form a measure of error using these
 deviations, and each approach gives a different line approximating the data. The best approximation means finding
-<span class="math notranslate nohighlight">\(a,b\)</span> that minimizes the error measured in one of the following ways:</p>
+<span class="math notranslate nohighlight">\(a,b\)</span> that minimize the error measured in one of the following ways:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(E=\max_{i}\left\{ |y_{i}-ax_{i}-b|\right\} \)</span> ; minimax problem</p></li>
 <li><p><span class="math notranslate nohighlight">\(E=\sum_{i=1}^{m}|y_{i}-ax_{i}-b|\)</span>; absolute deviations</p></li>
@@ -611,8 +609,8 @@ must have</p>
 <p>We have:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\frac{\partial E}{\partial a} &amp; =\sum_{i=1}^{m}\frac{\partial E}{\partial a}(y_{i}-ax_{i}-b)^{2}=\sum_{i=1}^{m}(-2x_{i})(y_{i}-ax_{i}-b)=0\\
-\frac{\partial E}{\partial b} &amp; =\sum_{i=1}^{m}\frac{\partial E}{\partial b}(y_{i}-ax_{i}-b)^{2}=\sum_{i=1}^{m}(-2)(y_{i}-ax_{i}-b)=0
+\frac{\partial E}{\partial a} &amp; =\sum_{i=1}^{m}\frac{\partial (y_{i}-ax_{i}-b)^{2}}{\partial a}=\sum_{i=1}^{m}(-2x_{i})(y_{i}-ax_{i}-b)=0\\
+\frac{\partial E}{\partial b} &amp; =\sum_{i=1}^{m}\frac{\partial (y_{i}-ax_{i}-b)^{2}}{\partial b}=\sum_{i=1}^{m}(-2)(y_{i}-ax_{i}-b)=0.
 \end{align*}\]</div>
 <p>Using algebra, these equations can be simplified as</p>
 <div class="amsmath math notranslate nohighlight">
@@ -629,11 +627,11 @@ b  =\frac{\sum_{i=1}^{m}x_{i}^{2}\sum_{i=1}^{m}y_{i}-\sum_{i=1}^{m}x_{i}y_{i}\su
 \end{align*}\]</div>
 <p>Let’s consider a slightly more general question. Given data</p>
 <ul class="simple">
-<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),...,(x_{m},y_{m})\)</span></p></li>
+<li><p>Data: <span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),\ldots,(x_{m},y_{m})\)</span></p></li>
 </ul>
 <p>can we find the best polynomial approximation</p>
 <ul class="simple">
-<li><p>Polynomial approximation: <span class="math notranslate nohighlight">\(P_{n}(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+...+a_{0}\)</span></p></li>
+<li><p>Polynomial approximation: <span class="math notranslate nohighlight">\(P_{n}(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+\cdots+a_{0}\)</span></p></li>
 </ul>
 <p>where <span class="math notranslate nohighlight">\(m\)</span> will be usually much larger than <span class="math notranslate nohighlight">\(n\)</span>.
 Similar to the above discussion, we want to minimize</p>
@@ -641,19 +639,19 @@ Similar to the above discussion, we want to minimize</p>
 \[\begin{equation*}
 E=\sum_{i=1}^{m}(y_{i}-P_{n}(x_{i}))^{2}=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}
 \end{equation*}\]</div>
-<p>with respect to the parameters <span class="math notranslate nohighlight">\(a_{n},a_{n-1},...,a_{0}\)</span>. For a minimum
+<p>with respect to the parameters <span class="math notranslate nohighlight">\(a_{n},a_{n-1},\ldots,a_{0}\)</span>. For a minimum
 to occur, the necessary conditions are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \frac{\partial E}{\partial a_{k}}=0\Rightarrow-\sum_{i=1}^{m}y_{i}x_{i}^{k}+\sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=0
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n\)</span>. (we are skipping some algebra here!) The <strong>normal
+<p>for <span class="math notranslate nohighlight">\(k=0,1,\ldots,n\)</span>. (we are skipping some algebra here!) The <strong>normal
 equations</strong> for polynomial approximation are</p>
 <div class="math notranslate nohighlight" id="equation-discrete-normal">
 <span class="eqno">(42)<a class="headerlink" href="#equation-discrete-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=\sum_{i=1}^{m}y_{i}x_{i}^{k}
 \end{equation}\]</div>
-<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> This is a system of <span class="math notranslate nohighlight">\((n+1)\)</span> equations and <span class="math notranslate nohighlight">\((n+1)\)</span>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,\ldots,n.\)</span> This is a system of <span class="math notranslate nohighlight">\((n+1)\)</span> equations and <span class="math notranslate nohighlight">\((n+1)\)</span>
 unknowns. We can write this system as a matrix equation</p>
 <div class="math notranslate nohighlight" id="equation-leastsqmatrixeq">
 <span class="eqno">(43)<a class="headerlink" href="#equation-leastsqmatrixeq" title="Permalink to this equation">#</a></span>\[\begin{equation}
@@ -675,7 +673,7 @@ a_n
 \sum_{i=1}^{m}y_{i}x_{i}^{n}
 \end{bmatrix}
 \end{equation*}\]</div>
-<p>and <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\((n+1)\)</span> by <span class="math notranslate nohighlight">\((n+1)\)</span> symmetric matrix with <span class="math notranslate nohighlight">\((k,j)\)</span>th entry <span class="math notranslate nohighlight">\(A_{kj}, k=1,...,n+1, j=1,2,...,n+1\)</span> given by</p>
+<p>and <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\((n+1)\)</span> by <span class="math notranslate nohighlight">\((n+1)\)</span> symmetric matrix with <span class="math notranslate nohighlight">\((k,j)\)</span>th entry <span class="math notranslate nohighlight">\(A_{kj}, k=1,\ldots,n+1, j=1,2,...,n+1\)</span> given by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 A_{kj}=\sum_{i=1}^m x_i^{k+j-2}.
@@ -1022,82 +1020,78 @@ a csv file in the same directory where the Python notebook is stored.
 Make sure the data has no missing entries. The function <strong>pd.read_csv</strong> imports the data into Python as a table (dataframe):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/WeatherData.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;WeatherData.csv&#39;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_21104</span><span class="o">/</span><span class="mf">4291634160.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;WeatherData.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\util\_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Temp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>28.7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>27.5</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28.2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>24.5</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>25.6</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1051</th>
-      <td>19.1</td>
-    </tr>
-    <tr>
-      <th>1052</th>
-      <td>27.1</td>
-    </tr>
-    <tr>
-      <th>1053</th>
-      <td>31.0</td>
-    </tr>
-    <tr>
-      <th>1054</th>
-      <td>27.0</td>
-    </tr>
-    <tr>
-      <th>1055</th>
-      <td>22.7</td>
-    </tr>
-  </tbody>
-</table>
-<p>1056 rows × 1 columns</p>
-</div></div></div>
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span> 
+<span class="ne">--&gt; </span><span class="mi">586</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span> 
+<span class="g g-Whitespace">    </span><span class="mi">588</span> 
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> 
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">482</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span> 
+<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">809</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">810</span> 
+<span class="ne">--&gt; </span><span class="mi">811</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span> 
+<span class="g g-Whitespace">    </span><span class="mi">813</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1038</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1040</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1041</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1042</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> 
+<span class="g g-Whitespace">     </span><span class="mi">50</span>         <span class="c1"># open handles</span>
+<span class="ne">---&gt; </span><span class="mi">51</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> 
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\parsers\base_parser.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHandles</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">222</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">D:\anaconda3\lib\site-packages\pandas\io\common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span><span class="s2">         if ioargs.encoding and &quot;b&quot; not in ioargs.mode:</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">702</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;WeatherData.csv&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>The next step is to store the part of the data we need as an array. In our table there is only one column named <strong>Temp</strong>.</p>
 <div class="cell docutils container">
@@ -1204,7 +1198,7 @@ the matrix is symmetric. The function <strong>np.sum(x)</strong> adds the entrie
 <p>Now we define the vector <strong>r</strong>. The function <strong>np.dot(x,y)</strong> takes the dot product of the arrays <span class="math notranslate nohighlight">\(x,y\)</span>. For example, <strong>np.dot</strong><span class="math notranslate nohighlight">\(([1,2,3],[4,5,6])=1\times 4+2\times 5+ 3\times 6 = 32\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">365</span><span class="p">))</span>
@@ -1220,10 +1214,7 @@ the matrix is symmetric. The function <strong>np.sum(x)</strong> adds the entrie
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.18615000e+04],
-       [1.13803102e+07],
-       [1.74207707e+03],
-       [2.78776127e+03]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.18615000e+04, 1.13803102e+07, 1.74207707e+03, 2.78776127e+03])
 </pre></div>
 </div>
 </div>
@@ -1236,10 +1227,7 @@ the matrix is symmetric. The function <strong>np.sum(x)</strong> adds the entrie
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.02897563e+01],
-       [1.16773021e-03],
-       [2.72116176e+00],
-       [6.88808561e+00]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.02897563e+01, 1.16773021e-03, 2.72116176e+00, 6.88808561e+00])
 </pre></div>
 </div>
 </div>
@@ -1248,8 +1236,8 @@ the matrix is symmetric. The function <strong>np.sum(x)</strong> adds the entrie
 definition of <span class="math notranslate nohighlight">\(f(t)\)</span>. Here is the best fitting function to the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">20.1393</span> <span class="o">+</span> <span class="mf">0.00144928</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mf">2.72174</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span> <span class="o">+</span> \
-<span class="mf">6.88460</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">20.2898</span> <span class="o">+</span> <span class="mf">0.00116773</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mf">2.72116</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span> <span class="o">+</span> \
+<span class="mf">6.88809</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1284,7 +1272,7 @@ E=\sum_{i=1}^{m}(y_{i}-be^{ax_{i}})^{2}.
 <p>The normal equations are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\frac{\partial E}{\partial a}=0\text{ and }\frac{\partial E}{\partial b}=0,
+\frac{\partial E}{\partial a}=0\text{ and }\frac{\partial E}{\partial b}=0;
 \end{equation*}\]</div>
 <p>however, unlike the previous example, this is not a system of linear equations in the unknowns <span class="math notranslate nohighlight">\(a,b\)</span>. In general, a root finding type method is needed to solve these equations.</p>
 <p>There is a simpler approach we can use when we suspect the data is
