@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -464,7 +462,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="golden-section-search">
 <span id="section7-1"></span><h1>7.1 Golden-section search<a class="headerlink" href="#golden-section-search" title="Permalink to this headline">#</a></h1>
-<p>Golden-section search (GSS) is a derivative-free univariate optimization method, which works in a similar fashion as the bisection method discussed in Chapter 2 for solving nonlinear equations. GSS starts with an initial interval where the minimizer (maximizer) is located and continuously reduces the range of the interval until it is small enough. GSS works for a particular type of cost function and we define the function below.</p>
+<p>Golden-section search (GSS) is a derivative-free univariate optimization method, which works in a similar fashion to the bisection method discussed in <a class="reference internal" href="bookchapter2-2.html#section2-2"><span class="std std-ref">2.2 Bisection method</span></a> for solving nonlinear equations. GSS starts with an initial interval where the minimizer (maximizer) is located and continuously reduces the range of the interval until it is small enough. GSS works for a particular type of cost function and we define the function below.</p>
 <div class="proof definition admonition" id="unimodal">
 <p class="admonition-title"><span class="caption-number">Definition 19 </span> (Unimodal function)</p>
 <section class="definition-content" id="proof-content">
@@ -841,42 +839,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgda3655ffad824e07a9f9c9e7960f2a03">
+  <img id="_anim_img3b506bb3a29549f5b0be151721e76e1a">
   <div class="anim-controls">
-    <input id="_anim_sliderda3655ffad824e07a9f9c9e7960f2a03" type="range" class="anim-slider"
+    <input id="_anim_slider3b506bb3a29549f5b0be151721e76e1a" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animda3655ffad824e07a9f9c9e7960f2a03.set_frame(parseInt(this.value));"></input>
+           oninput="anim3b506bb3a29549f5b0be151721e76e1a.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animda3655ffad824e07a9f9c9e7960f2a03.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim3b506bb3a29549f5b0be151721e76e1a.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animda3655ffad824e07a9f9c9e7960f2a03.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim3b506bb3a29549f5b0be151721e76e1a.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animda3655ffad824e07a9f9c9e7960f2a03.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim3b506bb3a29549f5b0be151721e76e1a.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animda3655ffad824e07a9f9c9e7960f2a03.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim3b506bb3a29549f5b0be151721e76e1a.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animda3655ffad824e07a9f9c9e7960f2a03.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim3b506bb3a29549f5b0be151721e76e1a.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animda3655ffad824e07a9f9c9e7960f2a03.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim3b506bb3a29549f5b0be151721e76e1a.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animda3655ffad824e07a9f9c9e7960f2a03.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim3b506bb3a29549f5b0be151721e76e1a.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animda3655ffad824e07a9f9c9e7960f2a03.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim3b506bb3a29549f5b0be151721e76e1a.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animda3655ffad824e07a9f9c9e7960f2a03.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim3b506bb3a29549f5b0be151721e76e1a.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectda3655ffad824e07a9f9c9e7960f2a03"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select3b506bb3a29549f5b0be151721e76e1a"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_da3655ffad824e07a9f9c9e7960f2a03"
+      <input type="radio" name="state" value="once" id="_anim_radio1_3b506bb3a29549f5b0be151721e76e1a"
              >
-      <label for="_anim_radio1_da3655ffad824e07a9f9c9e7960f2a03">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_da3655ffad824e07a9f9c9e7960f2a03"
+      <label for="_anim_radio1_3b506bb3a29549f5b0be151721e76e1a">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_3b506bb3a29549f5b0be151721e76e1a"
              checked>
-      <label for="_anim_radio2_da3655ffad824e07a9f9c9e7960f2a03">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_da3655ffad824e07a9f9c9e7960f2a03"
+      <label for="_anim_radio2_3b506bb3a29549f5b0be151721e76e1a">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_3b506bb3a29549f5b0be151721e76e1a"
              >
-      <label for="_anim_radio3_da3655ffad824e07a9f9c9e7960f2a03">Reflect</label>
+      <label for="_anim_radio3_3b506bb3a29549f5b0be151721e76e1a">Reflect</label>
     </form>
   </div>
 </div>
@@ -886,9 +884,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgda3655ffad824e07a9f9c9e7960f2a03";
-    var slider_id = "_anim_sliderda3655ffad824e07a9f9c9e7960f2a03";
-    var loop_select_id = "_anim_loop_selectda3655ffad824e07a9f9c9e7960f2a03";
+    var img_id = "_anim_img3b506bb3a29549f5b0be151721e76e1a";
+    var slider_id = "_anim_slider3b506bb3a29549f5b0be151721e76e1a";
+    var loop_select_id = "_anim_loop_select3b506bb3a29549f5b0be151721e76e1a";
     var frames = new Array(20);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -9930,7 +9928,7 @@ wERERERERDxECZiIiIiIiIiHKAETERERERHxECVgIiIiIiIiHqIETERERERExEOUgImIiIiIiHjI\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animda3655ffad824e07a9f9c9e7960f2a03 = new Animation(frames, img_id, slider_id, 2000.0,
+        anim3b506bb3a29549f5b0be151721e76e1a = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()

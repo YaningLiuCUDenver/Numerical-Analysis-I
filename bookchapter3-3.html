@@ -51,8 +51,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -1069,7 +1067,7 @@ V \times V \rightarrow \mathbb{F} \,\,(\mathbb{R} \text{ or } \mathbb{C})
 </div><p>Now consider solving the linear system</p>
 <div class="math notranslate nohighlight" id="equation-linearsystem">
 <span class="eqno">(23)<a class="headerlink" href="#equation-linearsystem" title="Permalink to this equation">#</a></span>\[A\boldsymbol{x} = \boldsymbol{b}\]</div>
-<p>where <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n \times n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\in\mathbb{R}^{n}\)</span>. Suppose <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\boldsymbol{u}_2, \dots, \boldsymbol{u}_n\)</span> is an A-orthogonal basis of <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> be the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Then <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> can be written as a linear combination of the basis as</p>
+<p>where <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n \times n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\in\mathbb{R}^{n}\)</span>. Suppose <span class="math notranslate nohighlight">\(\boldsymbol{u}_1,\boldsymbol{u}_2, \dots, \boldsymbol{u}_n\)</span> is an A-orthogonal basis of <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> be the solution to Eqn. <a class="reference internal" href="#equation-linearsystem">(23)</a>. Then <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> can be written as a linear combination of the basis as</p>
 <div class="math notranslate nohighlight" id="equation-linearcomb">
 <span class="eqno">(24)<a class="headerlink" href="#equation-linearcomb" title="Permalink to this equation">#</a></span>\[\boldsymbol{x}^* = a_1\boldsymbol{u}_1 + a_2\boldsymbol{u}_2 + \cdots + a_n\boldsymbol{u}_n.\]</div>
 <p>The coefficients <span class="math notranslate nohighlight">\(a_i\)</span>, <span class="math notranslate nohighlight">\(1\le i\le n\)</span>, can be obtained by</p>
@@ -1578,42 +1576,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgfecca1304f724f5dac57a6accbfa23aa">
+  <img id="_anim_img266add51e3a047abbf2c2a7abdcaa228">
   <div class="anim-controls">
-    <input id="_anim_sliderfecca1304f724f5dac57a6accbfa23aa" type="range" class="anim-slider"
+    <input id="_anim_slider266add51e3a047abbf2c2a7abdcaa228" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animfecca1304f724f5dac57a6accbfa23aa.set_frame(parseInt(this.value));"></input>
+           oninput="anim266add51e3a047abbf2c2a7abdcaa228.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animfecca1304f724f5dac57a6accbfa23aa.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim266add51e3a047abbf2c2a7abdcaa228.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animfecca1304f724f5dac57a6accbfa23aa.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim266add51e3a047abbf2c2a7abdcaa228.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animfecca1304f724f5dac57a6accbfa23aa.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim266add51e3a047abbf2c2a7abdcaa228.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animfecca1304f724f5dac57a6accbfa23aa.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim266add51e3a047abbf2c2a7abdcaa228.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animfecca1304f724f5dac57a6accbfa23aa.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim266add51e3a047abbf2c2a7abdcaa228.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animfecca1304f724f5dac57a6accbfa23aa.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim266add51e3a047abbf2c2a7abdcaa228.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animfecca1304f724f5dac57a6accbfa23aa.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim266add51e3a047abbf2c2a7abdcaa228.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animfecca1304f724f5dac57a6accbfa23aa.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim266add51e3a047abbf2c2a7abdcaa228.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animfecca1304f724f5dac57a6accbfa23aa.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim266add51e3a047abbf2c2a7abdcaa228.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectfecca1304f724f5dac57a6accbfa23aa"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select266add51e3a047abbf2c2a7abdcaa228"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_fecca1304f724f5dac57a6accbfa23aa"
+      <input type="radio" name="state" value="once" id="_anim_radio1_266add51e3a047abbf2c2a7abdcaa228"
              >
-      <label for="_anim_radio1_fecca1304f724f5dac57a6accbfa23aa">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_fecca1304f724f5dac57a6accbfa23aa"
+      <label for="_anim_radio1_266add51e3a047abbf2c2a7abdcaa228">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_266add51e3a047abbf2c2a7abdcaa228"
              checked>
-      <label for="_anim_radio2_fecca1304f724f5dac57a6accbfa23aa">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_fecca1304f724f5dac57a6accbfa23aa"
+      <label for="_anim_radio2_266add51e3a047abbf2c2a7abdcaa228">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_266add51e3a047abbf2c2a7abdcaa228"
              >
-      <label for="_anim_radio3_fecca1304f724f5dac57a6accbfa23aa">Reflect</label>
+      <label for="_anim_radio3_266add51e3a047abbf2c2a7abdcaa228">Reflect</label>
     </form>
   </div>
 </div>
@@ -1623,9 +1621,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgfecca1304f724f5dac57a6accbfa23aa";
-    var slider_id = "_anim_sliderfecca1304f724f5dac57a6accbfa23aa";
-    var loop_select_id = "_anim_loop_selectfecca1304f724f5dac57a6accbfa23aa";
+    var img_id = "_anim_img266add51e3a047abbf2c2a7abdcaa228";
+    var slider_id = "_anim_slider266add51e3a047abbf2c2a7abdcaa228";
+    var loop_select_id = "_anim_loop_select266add51e3a047abbf2c2a7abdcaa228";
     var frames = new Array(3);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -2331,7 +2329,7 @@ EZAAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animfecca1304f724f5dac57a6accbfa23aa = new Animation(frames, img_id, slider_id, 2000.0,
+        anim266add51e3a047abbf2c2a7abdcaa228 = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
