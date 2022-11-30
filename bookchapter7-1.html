@@ -839,42 +839,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgce8b364fbcea40aa9f8095364ff22919">
+  <img id="_anim_imgb76455ba06f649eebcc600d21cac3123">
   <div class="anim-controls">
-    <input id="_anim_sliderce8b364fbcea40aa9f8095364ff22919" type="range" class="anim-slider"
+    <input id="_anim_sliderb76455ba06f649eebcc600d21cac3123" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animce8b364fbcea40aa9f8095364ff22919.set_frame(parseInt(this.value));"></input>
+           oninput="animb76455ba06f649eebcc600d21cac3123.set_frame(parseInt(this.value));"></input>
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animce8b364fbcea40aa9f8095364ff22919.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animb76455ba06f649eebcc600d21cac3123.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animce8b364fbcea40aa9f8095364ff22919.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animb76455ba06f649eebcc600d21cac3123.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animce8b364fbcea40aa9f8095364ff22919.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animb76455ba06f649eebcc600d21cac3123.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animce8b364fbcea40aa9f8095364ff22919.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animb76455ba06f649eebcc600d21cac3123.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animce8b364fbcea40aa9f8095364ff22919.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animb76455ba06f649eebcc600d21cac3123.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animce8b364fbcea40aa9f8095364ff22919.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animb76455ba06f649eebcc600d21cac3123.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animce8b364fbcea40aa9f8095364ff22919.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animb76455ba06f649eebcc600d21cac3123.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animce8b364fbcea40aa9f8095364ff22919.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animb76455ba06f649eebcc600d21cac3123.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animce8b364fbcea40aa9f8095364ff22919.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animb76455ba06f649eebcc600d21cac3123.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectce8b364fbcea40aa9f8095364ff22919"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectb76455ba06f649eebcc600d21cac3123"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_ce8b364fbcea40aa9f8095364ff22919"
+      <input type="radio" name="state" value="once" id="_anim_radio1_b76455ba06f649eebcc600d21cac3123"
              >
-      <label for="_anim_radio1_ce8b364fbcea40aa9f8095364ff22919">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_ce8b364fbcea40aa9f8095364ff22919"
+      <label for="_anim_radio1_b76455ba06f649eebcc600d21cac3123">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_b76455ba06f649eebcc600d21cac3123"
              checked>
-      <label for="_anim_radio2_ce8b364fbcea40aa9f8095364ff22919">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_ce8b364fbcea40aa9f8095364ff22919"
+      <label for="_anim_radio2_b76455ba06f649eebcc600d21cac3123">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_b76455ba06f649eebcc600d21cac3123"
              >
-      <label for="_anim_radio3_ce8b364fbcea40aa9f8095364ff22919">Reflect</label>
+      <label for="_anim_radio3_b76455ba06f649eebcc600d21cac3123">Reflect</label>
     </form>
   </div>
 </div>
@@ -884,9 +884,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgce8b364fbcea40aa9f8095364ff22919";
-    var slider_id = "_anim_sliderce8b364fbcea40aa9f8095364ff22919";
-    var loop_select_id = "_anim_loop_selectce8b364fbcea40aa9f8095364ff22919";
+    var img_id = "_anim_imgb76455ba06f649eebcc600d21cac3123";
+    var slider_id = "_anim_sliderb76455ba06f649eebcc600d21cac3123";
+    var loop_select_id = "_anim_loop_selectb76455ba06f649eebcc600d21cac3123";
     var frames = new Array(20);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAFoCAYAAAAxXpjgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -9713,7 +9713,7 @@ f4Mwk7Fz2sKoAAAAAElFTkSuQmCC\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animce8b364fbcea40aa9f8095364ff22919 = new Animation(frames, img_id, slider_id, 2000.0,
+        animb76455ba06f649eebcc600d21cac3123 = new Animation(frames, img_id, slider_id, 2000.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -9733,7 +9733,7 @@ f4Mwk7Fz2sKoAAAAAElFTkSuQmCC\
     <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">golden_section</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function f has a minimum of &#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s1">&#39; at &#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
@@ -9741,7 +9741,7 @@ f4Mwk7Fz2sKoAAAAAElFTkSuQmCC\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The function f has a minimum of  -1.0  at  1.5707963267948966
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The function f has a minimum of  -0.9999999999936044  at  1.5707999032566926
 </pre></div>
 </div>
 </div>
@@ -9751,7 +9751,7 @@ f4Mwk7Fz2sKoAAAAAElFTkSuQmCC\
 <p>Use golden-section search to find the maximum of the following function:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-f(x) = -x^2+\cos{(2x)}
+f(x) = -x^2+\cos{(2x)}.
 \end{equation*}\]</div>
 </section>
 
