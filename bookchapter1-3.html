@@ -1,49 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>1.3 Computer arithmetic &#8212; First Semester in Numerical Analysis with Python</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -51,65 +62,95 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bookchapter1-3';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Chapter 2 Solutions of Equations: Root-finding" href="bookchapter2-0.html" />
     <link rel="prev" title="1.2 Python basics" href="bookchapter1-2.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="bookintro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">First Semester in Numerical Analysis with Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -119,506 +160,220 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="bookpreface.html">
-   Preface
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter1-0.html">
-   Chapter 1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter1-1.html">
-   1.1 Review of Calculus
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter1-2.html">
-   1.2 Python basics
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1.3 Computer arithmetic
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-0.html">
-   Chapter 2 Solutions of Equations: Root-finding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-1.html">
-   2.1 Error analysis for iterative methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-2.html">
-   2.2 Bisection method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-3.html">
-   2.3 Newton’s method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-4.html">
-   2.4 Secant method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-5.html">
-   2.5 Muller’s method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-6.html">
-   2.6 Fixed-point iteration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter2-7.html">
-   2.7 High-order fixed-point iteration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter3-0.html">
-   Chapter 3 Solutions to Linear Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter3-1.html">
-   3.1 Gaussian elimination
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter3-2.html">
-   3.2 Iterative methods for solving linear systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter3-3.html">
-   3.3 Cholesky decomposition
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter4-0.html">
-   Chapter 4 Interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter4-1.html">
-   4.1 Polynomial interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter4-2.html">
-   4.2 High degree polynomial interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter4-3.html">
-   4.3 Hermite interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter4-4.html">
-   4.4 Piecewise polynomials: spline interpolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-0.html">
-   Chapter 5 Numerical Quadrature and Differentiation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-1.html">
-   5.1 Newton-Cotes formulas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-2.html">
-   5.2 Composite Newton-Cotes formulas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-3.html">
-   5.3 Gaussian quadrature
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-4.html">
-   5.4 Multiple integrals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-5.html">
-   5.5 Improper integrals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter5-6.html">
-   5.6 Numerical differentiation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter6-0.html">
-   Chapter 6 Approximation Theory
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter6-1.html">
-   6.1 Discrete least squares
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter6-2.html">
-   6.2 Continuous least squares
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter6-3.html">
-   6.3 Orthogonal polynomials and least squares
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter7-0.html">
-   Chapter 7 Numerical Optimization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter7-1.html">
-   7.1 Golden-section search
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bookchapter7-2.html">
-   7.2 Derivative-based optimization
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="bookpreface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter1-0.html">Chapter 1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter1-1.html">1.1 Review of Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter1-2.html">1.2 Python basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.3 Computer arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-0.html">Chapter 2 Solutions of Equations: Root-finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-1.html">2.1 Error analysis for iterative methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-2.html">2.2 Bisection method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-3.html">2.3 Newton’s method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-4.html">2.4 Secant method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-5.html">2.5 Muller’s method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-6.html">2.6 Fixed-point iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter2-7.html">2.7 High-order fixed-point iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter3-0.html">Chapter 3 Solutions to Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter3-1.html">3.1 Gaussian elimination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter3-2.html">3.2 Iterative methods for solving linear systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter3-3.html">3.3 Cholesky decomposition</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="bookchapter4-0.html">Chapter 4 Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter4-1.html">4.1 Polynomial interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter4-2.html">4.2 High degree polynomial interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter4-3.html">4.3 Hermite interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter4-4.html">4.4 Piecewise polynomials: spline interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-0.html">Chapter 5 Numerical Quadrature and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-1.html">5.1 Newton-Cotes formulas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-2.html">5.2 Composite Newton-Cotes formulas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-3.html">5.3 Gaussian quadrature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-4.html">5.4 Multiple integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-5.html">5.5 Improper integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter5-6.html">5.6 Numerical differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter6-0.html">Chapter 6 Approximation Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter6-1.html">6.1 Discrete least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter6-2.html">6.2 Continuous least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter6-3.html">6.3 Orthogonal polynomials and least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter7-0.html">Chapter 7 Numerical Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter7-1.html">7.1 Golden-section search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookchapter7-2.html">7.2 Derivative-based optimization</a></li>
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bookchapter1-3.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bookchapter1-3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/bookchapter1-3.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#floating-point-representation-of-real-numbers">
-   Floating-point representation of real numbers
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#special-cases-zero-infinity-nan">
-     Special cases: zero, infinity, NAN
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#representation-of-integers">
-   Representation of integers
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chopping-rounding">
-   Chopping &amp; Rounding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#absolute-and-relative-error">
-   Absolute and relative error
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#machine-epsilon">
-   Machine epsilon
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#propagation-of-error">
-   Propagation of error
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits">
-     Subtraction of nearly equal quantities: Cancellation of leading digits
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#division-by-a-small-number">
-     Division by a small number
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ways-to-avoid-loss-of-accuracy">
-     Ways to avoid loss of accuracy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arya-and-the-unexpected-challenges-of-data-analysis">
-     Arya and the unexpected challenges of data analysis
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sources-of-error-in-applied-mathematics">
-   Sources of error in applied mathematics
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>1.3 Computer arithmetic</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#floating-point-representation-of-real-numbers">
-   Floating-point representation of real numbers
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#special-cases-zero-infinity-nan">
-     Special cases: zero, infinity, NAN
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#representation-of-integers">
-   Representation of integers
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chopping-rounding">
-   Chopping &amp; Rounding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#absolute-and-relative-error">
-   Absolute and relative error
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#machine-epsilon">
-   Machine epsilon
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#propagation-of-error">
-   Propagation of error
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits">
-     Subtraction of nearly equal quantities: Cancellation of leading digits
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#division-by-a-small-number">
-     Division by a small number
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ways-to-avoid-loss-of-accuracy">
-     Ways to avoid loss of accuracy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arya-and-the-unexpected-challenges-of-data-analysis">
-     Arya and the unexpected challenges of data analysis
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sources-of-error-in-applied-mathematics">
-   Sources of error in applied mathematics
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.3 Computer arithmetic</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-representation-of-real-numbers">Floating-point representation of real numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-cases-zero-infinity-nan">Special cases: zero, infinity, NAN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-integers">Representation of integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chopping-rounding">Chopping &amp; Rounding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-and-relative-error">Absolute and relative error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-epsilon">Machine epsilon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagation-of-error">Propagation of error</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits">Subtraction of nearly equal quantities: Cancellation of leading digits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division-by-a-small-number">Division by a small number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ways-to-avoid-loss-of-accuracy">Ways to avoid loss of accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arya-and-the-unexpected-challenges-of-data-analysis">Arya and the unexpected challenges of data analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error-in-applied-mathematics">Sources of error in applied mathematics</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="computer-arithmetic">
-<h1>1.3 Computer arithmetic<a class="headerlink" href="#computer-arithmetic" title="Permalink to this headline">#</a></h1>
+<h1>1.3 Computer arithmetic<a class="headerlink" href="#computer-arithmetic" title="Permalink to this heading">#</a></h1>
 <p>The way computers store numbers and perform computations could surprise
 the beginner. In Python if you type <span class="math notranslate nohighlight">\((\sqrt{3})^{2}\)</span> the result will
 be 2.9….96, where 9 is repeated 15 times. Here are two obvious
@@ -634,7 +389,7 @@ exactly in the computer, an approximation will replace the exact number.
 This is called the <em>roundoff error</em>: error produced when a computer
 is used to perform real number calculations.</p>
 <section id="floating-point-representation-of-real-numbers">
-<h2>Floating-point representation of real numbers<a class="headerlink" href="#floating-point-representation-of-real-numbers" title="Permalink to this headline">#</a></h2>
+<h2>Floating-point representation of real numbers<a class="headerlink" href="#floating-point-representation-of-real-numbers" title="Permalink to this heading">#</a></h2>
 <p>Here is a general model for representing real numbers in a computer:</p>
 <div class="math notranslate nohighlight" id="equation-float-pt-general">
 <span class="eqno">(1)<a class="headerlink" href="#equation-float-pt-general" title="Permalink to this equation">#</a></span>\[x=s(.a_{1}a_{2}...a_{t})_{\beta}\times\beta^{e}\]</div>
@@ -753,7 +508,7 @@ the bit by bit representation of a number, we can define the following function 
 </div>
 </div>
 <section id="special-cases-zero-infinity-nan">
-<h3>Special cases: zero, infinity, NAN<a class="headerlink" href="#special-cases-zero-infinity-nan" title="Permalink to this headline">#</a></h3>
+<h3>Special cases: zero, infinity, NAN<a class="headerlink" href="#special-cases-zero-infinity-nan" title="Permalink to this heading">#</a></h3>
 <p>In the floating-point arithmetic there are two zeros: <span class="math notranslate nohighlight">\(+0.0\)</span> and <span class="math notranslate nohighlight">\(-0.0\)</span>, and they have special representations. In the representation of zero, all exponent and mantissa bits are set to 0. The sign bit is 0 for <span class="math notranslate nohighlight">\(+0.0\)</span>, and 1, for <span class="math notranslate nohighlight">\(-0.0\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -829,7 +584,7 @@ on how the numbers are spaced.</p>
 </section>
 </section>
 <section id="representation-of-integers">
-<h2>Representation of integers<a class="headerlink" href="#representation-of-integers" title="Permalink to this headline">#</a></h2>
+<h2>Representation of integers<a class="headerlink" href="#representation-of-integers" title="Permalink to this heading">#</a></h2>
 <p>In the previous section, we discussed representing real numbers in a computer. Here we will give a brief discussion of representing integers. How does a computer represent an integer <span class="math notranslate nohighlight">\(n\)</span>? As in real numbers, we start with writing <span class="math notranslate nohighlight">\(n\)</span> in base 2. We have 64 bits to represent its digits and sign. As in the floating-point representation, we can allocate one bit for the sign, and use the rest, 63 bits, for the digits. This approach has some disadvantages when we start adding integers. Another approach, known as the <strong>two’s complement</strong>, is more commonly used, including in Python.</p>
 <p>For an example, assume we have 8 bits in our computer. To represent 12 in two’s complement (or any positive integer), we simply write it in its base 2 expansion: <span class="math notranslate nohighlight">\((00001100)_2\)</span>. To represent <span class="math notranslate nohighlight">\(-12\)</span>, we do the following: flip all digits, replacing 1 by 0, and 0 by 1, and then add 1 to the result. When we flip digits for 12, we get  <span class="math notranslate nohighlight">\((11110011)_2\)</span>, and adding 1 (in binary), gives <span class="math notranslate nohighlight">\((11110100)_2\)</span>. Therefore <span class="math notranslate nohighlight">\(-12\)</span> is represented as <span class="math notranslate nohighlight">\((11110100)_2\)</span> in two’s complement approach. It may seem mysterious to go through all this trouble to represent <span class="math notranslate nohighlight">\(-12\)</span>, until you add the representations of 12 and <span class="math notranslate nohighlight">\(-12\)</span>,</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1056,11 +811,11 @@ on how the numbers are spaced.</p>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_21880</span><span class="o">/</span><span class="mf">2742899509.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
 <span class="ne">----&gt; </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
-<span class="nn">~\AppData\Local\Temp/ipykernel_21880/1974136127.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
+<span class="nn">Cell In[6], line 2,</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(n)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -2147,7 +1902,7 @@ decimal floating-point representation</strong>:</p>
 Informally, we call these numbers <span class="math notranslate nohighlight">\(k-\)</span>digit decimal machine numbers.</p>
 </section>
 <section id="chopping-rounding">
-<h2>Chopping &amp; Rounding<a class="headerlink" href="#chopping-rounding" title="Permalink to this headline">#</a></h2>
+<h2>Chopping &amp; Rounding<a class="headerlink" href="#chopping-rounding" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(x\)</span> be a real number with more digits the computer can handle:
 <span class="math notranslate nohighlight">\(x=0.d_{1}d_{2}\ldots d_{k}d_{k+1}\ldots\times10^{n}\)</span>. How will the
 computer represent <span class="math notranslate nohighlight">\(x\)</span>? Let’s use the notation <span class="math notranslate nohighlight">\(fl(x)\)</span> for the floating-point
@@ -2172,7 +1927,7 @@ below:</p>
 </section>
 </div></section>
 <section id="absolute-and-relative-error">
-<h2>Absolute and relative error<a class="headerlink" href="#absolute-and-relative-error" title="Permalink to this headline">#</a></h2>
+<h2>Absolute and relative error<a class="headerlink" href="#absolute-and-relative-error" title="Permalink to this heading">#</a></h2>
 <p>Since computers only give approximations to real numbers, we need to be clear on how we measure the error of an approximation.</p>
 <div class="proof definition admonition" id="chap1_def12">
 <p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
@@ -2189,7 +1944,7 @@ to understand why.</p>
 <p class="admonition-title"><span class="caption-number">Example 5 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find absolute and relative errors of</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(x=0.20\times10^{1},x^{*}=0.21\times10^{1}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x=0.20\times10^{-2},x^{*}=0.21\times10^{-2}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x=0.20\times10^{5},x^{*}=0.21\times10^{5}\)</span></p></li>
@@ -2270,7 +2025,7 @@ bounds in the equation above we get</p>
 </section>
 </div></section>
 <section id="machine-epsilon">
-<h2>Machine epsilon<a class="headerlink" href="#machine-epsilon" title="Permalink to this headline">#</a></h2>
+<h2>Machine epsilon<a class="headerlink" href="#machine-epsilon" title="Permalink to this heading">#</a></h2>
 <p>Machine epsilon <span class="math notranslate nohighlight">\(\epsilon\)</span> is the smallest positive floating point
 number for which <span class="math notranslate nohighlight">\(fl(1+\epsilon)&gt;1.\)</span> This means, if we add to <span class="math notranslate nohighlight">\(1.0\)</span>
 any number less than <span class="math notranslate nohighlight">\(\epsilon\)</span>, the machine computes the sum as
@@ -2350,7 +2105,7 @@ for smaller values, and larger for larger values (see Exercise 1.3-1).</p>
 </section>
 </div></section>
 <section id="propagation-of-error">
-<h2>Propagation of error<a class="headerlink" href="#propagation-of-error" title="Permalink to this headline">#</a></h2>
+<h2>Propagation of error<a class="headerlink" href="#propagation-of-error" title="Permalink to this heading">#</a></h2>
 <p>We discussed the resulting error when chopping or rounding is used to approximate
 a real number by its machine version. Now imagine carrying out a long
 calculation with many arithmetical operations, and at each step there
@@ -2367,7 +2122,7 @@ Therefore the relative error in adding two numbers is:</p>
 <p>In this section, we will look at some specific examples where
 roundoff error can cause problems, and how we can avoid them.</p>
 <section id="subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits">
-<h3>Subtraction of nearly equal quantities: Cancellation of leading digits<a class="headerlink" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits" title="Permalink to this headline">#</a></h3>
+<h3>Subtraction of nearly equal quantities: Cancellation of leading digits<a class="headerlink" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits" title="Permalink to this heading">#</a></h3>
 <p>The best way to explain this phenomenon is by an example. Let <span class="math notranslate nohighlight">\(x=1.123456,y=1.123447\)</span>.
 We will compute <span class="math notranslate nohighlight">\(x-y\)</span> and the resulting roundoff error using rounding
 and 6-digit arithmetic. First, we find <span class="math notranslate nohighlight">\(fl(x),fl(y)\)</span>:</p>
@@ -2408,7 +2163,7 @@ digits of the numbers cancel, leaving a result close to the rounding
 error. In other words, the rounding error dominates the difference.</p>
 </section>
 <section id="division-by-a-small-number">
-<h3>Division by a small number<a class="headerlink" href="#division-by-a-small-number" title="Permalink to this headline">#</a></h3>
+<h3>Division by a small number<a class="headerlink" href="#division-by-a-small-number" title="Permalink to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(x=0.444446\)</span> and compute <span class="math notranslate nohighlight">\(\frac{x}{10^{-5}}\)</span> in a computer with
 5-digit arithmetic and rounding. We have <span class="math notranslate nohighlight">\(fl(x)=0.44445\)</span>, with an
 absolute error of <span class="math notranslate nohighlight">\(4\times10^{-6}\)</span> and relative error of <span class="math notranslate nohighlight">\(9\times10^{-6}\)</span>.
@@ -2432,7 +2187,7 @@ error but not the relative error.</p>
 <p>The exact result to 8 digits is 0.050041708, and the relative error of this computation is <span class="math notranslate nohighlight">\(8.5\times 10^{-4}\)</span>. Next we will see how to reduce this error using a simple algebraic identity.</p>
 </section>
 <section id="ways-to-avoid-loss-of-accuracy">
-<h3>Ways to avoid loss of accuracy<a class="headerlink" href="#ways-to-avoid-loss-of-accuracy" title="Permalink to this headline">#</a></h3>
+<h3>Ways to avoid loss of accuracy<a class="headerlink" href="#ways-to-avoid-loss-of-accuracy" title="Permalink to this heading">#</a></h3>
 <p>Here we will discuss some examples where a careful rewriting of the
 expression to compute can make the roundoff error much smaller.</p>
 <div class="proof example admonition" id="chap1_exa18">
@@ -2531,7 +2286,7 @@ fl\left( \frac{100.9+2.954}{2} \right) = fl\left( \frac{fl(103.854)}{2}\right)=f
 <p class="admonition-title"><span class="caption-number">Example 9 </span></p>
 <section class="example-content" id="proof-content">
 <p>There are two standard formulas given in textbooks to compute the sample variance <span class="math notranslate nohighlight">\(s^2\)</span> of the numbers <span class="math notranslate nohighlight">\(x_1,...,x_n\)</span>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \left[ \sum_{i=1}^n x_i^2 - \frac{1}{n} \left( \sum_{i=1}^n x_i \right)^2 \right]\)</span>,</p></li>
 <li><p>First compute <span class="math notranslate nohighlight">\(\bar{x}=\frac{1}{n} \sum_{i=1}^n x_i\)</span>, and then <span class="math notranslate nohighlight">\(s^2=\frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})^2\)</span>.</p></li>
 </ol>
@@ -2654,7 +2409,7 @@ standard form require? Can you generalize your answer to any <span class="math n
 degree polynomial?</p>
 </section>
 <section id="arya-and-the-unexpected-challenges-of-data-analysis">
-<h3>Arya and the unexpected challenges of data analysis<a class="headerlink" href="#arya-and-the-unexpected-challenges-of-data-analysis" title="Permalink to this headline">#</a></h3>
+<h3>Arya and the unexpected challenges of data analysis<a class="headerlink" href="#arya-and-the-unexpected-challenges-of-data-analysis" title="Permalink to this heading">#</a></h3>
 <p>Meet Arya! Arya is a college student interested in math, biology, literature, and acting. Like a typical college student, she texts while walking on campus, complains about demanding professors, and argues in her blogs that homework should be outlawed.</p>
 <p>Arya is taking a chemistry class, and she performs some experiments in the lab to find the weight of two substances. Due to difficulty in making precise measurements, she can only assess the weights to four-significant digits of accuracy: 2.312 grams and 0.003982 grams. Arya’s professor wants to know the product of these weights, which will be used in a formula.</p>
 <figure class="align-right">
@@ -2665,9 +2420,9 @@ degree polynomial?</p>
 </section>
 </section>
 <section id="sources-of-error-in-applied-mathematics">
-<h2>Sources of error in applied mathematics<a class="headerlink" href="#sources-of-error-in-applied-mathematics" title="Permalink to this headline">#</a></h2>
+<h2>Sources of error in applied mathematics<a class="headerlink" href="#sources-of-error-in-applied-mathematics" title="Permalink to this heading">#</a></h2>
 <p>Here is a list of potential sources of error when we solve a problem.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Error due to the simplifying assumptions made in the development of a mathematical model for the physical problem.</p></li>
 <li><p>Programming errors.</p></li>
 <li><p>Uncertainty in physical data: error in collecting and measuring data.</p></li>
@@ -2679,7 +2434,7 @@ degree polynomial?</p>
 <section class="example-content" id="proof-content">
 <p>The volume of the Earth could be computed using the formula for the volume of a sphere,
 <span class="math notranslate nohighlight">\(V=4/3 \pi r^{3}\)</span>, where <span class="math notranslate nohighlight">\(r\)</span> is the radius. This computation involves the following approximations:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The Earth is modeled as a sphere (modeling error)</p></li>
 <li><p>Radius <span class="math notranslate nohighlight">\(r\approx6370\)</span> km is based on empirical measurements (uncertainty in physical data)</p></li>
 <li><p>All the numerical computations are done in a computer (machine error)</p></li>
@@ -2730,7 +2485,7 @@ problem, and give a reference.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2738,50 +2493,120 @@ problem, and give a reference.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="bookchapter1-2.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">1.2 Python basics</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bookchapter1-2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.2 Python basics</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="bookchapter2-0.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="bookchapter2-0.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Chapter 2 Solutions of Equations: Root-finding</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Yaning Liu, Giray Okten<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-representation-of-real-numbers">Floating-point representation of real numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-cases-zero-infinity-nan">Special cases: zero, infinity, NAN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-integers">Representation of integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chopping-rounding">Chopping &amp; Rounding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-and-relative-error">Absolute and relative error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-epsilon">Machine epsilon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagation-of-error">Propagation of error</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtraction-of-nearly-equal-quantities-cancellation-of-leading-digits">Subtraction of nearly equal quantities: Cancellation of leading digits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division-by-a-small-number">Division by a small number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ways-to-avoid-loss-of-accuracy">Ways to avoid loss of accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arya-and-the-unexpected-challenges-of-data-analysis">Arya and the unexpected challenges of data analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error-in-applied-mathematics">Sources of error in applied mathematics</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yaning Liu, Giray Okten
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
