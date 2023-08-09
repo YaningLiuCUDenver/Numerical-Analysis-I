@@ -366,10 +366,10 @@ document.write(`
 <section id="arya-s-adventures-in-the-physics-lab">
 <h2>Arya’s adventures in the physics lab<a class="headerlink" href="#arya-s-adventures-in-the-physics-lab" title="Permalink to this heading">#</a></h2>
 <p>College life is expensive, and Arya is happy to land a job working at a physics lab for some extra cash. She does some experiments, some data analysis, and a little grading. In one experiment she conducted, where there is one independent variable <span class="math notranslate nohighlight">\(x\)</span>, and one dependent variable <span class="math notranslate nohighlight">\(y\)</span>, she was asked to plot <span class="math notranslate nohighlight">\(y\)</span> against <span class="math notranslate nohighlight">\(x\)</span> values. (There are a total of six data points.) She gets the following plot:</p>
-<figure class="align-default" id="id20">
+<figure class="align-default" id="id21">
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/scatter_plot.png"><img alt="_images/scatter_plot.png" class="bg-primary mb-1" src="_images/scatter_plot.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot of data.</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot of data.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Arya’s professor thinks the relationship between the variables should be
@@ -502,7 +502,7 @@ a_n
 \[\begin{equation*}
 A_{kj}=\sum_{i=1}^m x_i^{k+j-2}.
 \end{equation*}\]</div>
-<p>The equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> has a unique solution if the <span class="math notranslate nohighlight">\(x_{i}\)</span> are distinct, and <span class="math notranslate nohighlight">\(n\leq m-1\)</span>. Solving this equation by computing the inverse matrix <span class="math notranslate nohighlight">\(A^{-1}\)</span> is not advisable, since there could be significant roundoff error. Next, we will write a Python code for least squares approximation, and use the Python function <span class="math notranslate nohighlight">\(np.linalg.solve(A, b)\)</span> to solve the matrix equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> for <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span>. The <span class="math notranslate nohighlight">\(np.linalg.solve\)</span> function in Python uses numerically optimized matrix factorizations based on the LAPACK routine to solve the matrix equation. More details on this topic can be found in <span id="id1">Heath [<a class="reference internal" href="#id16" title="M.T. Heath. Scientific Computing: An introductory survey. McGraw-Hill, 1997.">1997</a>]</span> (Chapter 3).</p>
+<p>The equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> has a unique solution if the <span class="math notranslate nohighlight">\(x_{i}\)</span> are distinct, and <span class="math notranslate nohighlight">\(n\leq m-1\)</span>. Solving this equation by computing the inverse matrix <span class="math notranslate nohighlight">\(A^{-1}\)</span> is not advisable, since there could be significant roundoff error. Next, we will write a Python code for least squares approximation, and use the Python function <span class="math notranslate nohighlight">\(np.linalg.solve(A, b)\)</span> to solve the matrix equation <span class="math notranslate nohighlight">\(A\boldsymbol{a}=\boldsymbol{b}\)</span> for <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span>. The <span class="math notranslate nohighlight">\(np.linalg.solve\)</span> function in Python uses numerically optimized matrix factorizations based on the LAPACK routine to solve the matrix equation. More details on this topic can be found in <span id="id1">Heath [<a class="reference internal" href="#id17" title="M.T. Heath. Scientific Computing: An introductory survey. McGraw-Hill, 1997.">1997</a>]</span> (Chapter 3).</p>
 </section>
 <section id="python-code-for-least-squares-approximation">
 <h2>Python code for least squares approximation<a class="headerlink" href="#python-code-for-least-squares-approximation" title="Permalink to this heading">#</a></h2>
@@ -763,7 +763,7 @@ polynomial! What is the least squares error?</p>
 <span class="eqno">(44)<a class="headerlink" href="#equation-tempf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(t)=a+bt+c \sin(2\pi t/365)+d \cos (2\pi t/365)
 \end{equation}\]</div>
-<p>that has the best fit to some data <span class="math notranslate nohighlight">\((t_1,T_1),...,(t_m,T_m)\)</span> in the least-squares sense. This function is used in modeling weather temperature data, where <span class="math notranslate nohighlight">\(t\)</span> denotes time, and <span class="math notranslate nohighlight">\(T\)</span> denotes the temperature. The following figure plots the daily maximum temperature during a period of 1,056 days, from 2016 until November 21, 2018, as measured by a weather station at Melbourne airport, Australia<a class="footnote-reference brackets" href="#id18" id="id2">1</a>.</p>
+<p>that has the best fit to some data <span class="math notranslate nohighlight">\((t_1,T_1),...,(t_m,T_m)\)</span> in the least-squares sense. This function is used in modeling weather temperature data, where <span class="math notranslate nohighlight">\(t\)</span> denotes time, and <span class="math notranslate nohighlight">\(T\)</span> denotes the temperature. The following figure plots the daily maximum temperature during a period of 1,056 days, from 2016 until November 21, 2018, as measured by a weather station at Melbourne airport, Australia<a class="footnote-reference brackets" href="#id19" id="id2">1</a>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/tempdata.png"><img alt="_images/tempdata.png" src="_images/tempdata.png" style="width: 452.8px; height: 348.8px;" /></a>
 </figure>
@@ -1237,7 +1237,7 @@ Y=0.5x+1.1.
 </table>
 <p>Plot the function and the data together.</p>
 <p><strong>Exercise 6.1-2</strong></p>
-<p>Power-law type relationships are observed in many empirical data. Two variables <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(x\)</span> are said to be related via a power-law if <span class="math notranslate nohighlight">\(y=kx^\alpha\)</span>, where <span class="math notranslate nohighlight">\(k,\alpha\)</span> are some constants. The following data<a class="footnote-reference brackets" href="#id19" id="id3">2</a> lists the top 10 family names in the order of occurrence according to Census 2000. Investigate whether relative frequency of occurrences and the rank of the name are related via a power-law, by</p>
+<p>Power-law type relationships are observed in many empirical data. Two variables <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(x\)</span> are said to be related via a power-law if <span class="math notranslate nohighlight">\(y=kx^\alpha\)</span>, where <span class="math notranslate nohighlight">\(k,\alpha\)</span> are some constants. The following data<a class="footnote-reference brackets" href="#id20" id="id3">2</a> lists the top 10 family names in the order of occurrence according to Census 2000. Investigate whether relative frequency of occurrences and the rank of the name are related via a power-law, by</p>
 <p>a) Let <span class="math notranslate nohighlight">\(y\)</span> be the relative frequencies (number of occurrences divided by the total number of occurrences), and <span class="math notranslate nohighlight">\(x\)</span> be the rank, that is, 1 through 10.</p>
 <p>b) Use least squares to find a function of the form <span class="math notranslate nohighlight">\(y=kx^\alpha\)</span>. Use linearization.</p>
 <p>c) Plot the data together with the best fitting function found in part (b).</p>
@@ -1282,17 +1282,17 @@ Y=0.5x+1.1.
 </table>
 <div class="docutils container" id="id4">
 <dl class="citation">
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id1">Hea97</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id1">Hea97</a></span></dt>
 <dd><p>M.T. Heath. <em>Scientific Computing: An introductory survey</em>. McGraw-Hill, 1997.</p>
 </dd>
 </dl>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p><a class="reference external" href="https://www.census.gov/topics/population/genealogy/data/2000_surnames.html">https://www.census.gov/topics/population/genealogy/data/2000_surnames.html</a></p>
 </dd>
-<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
 <dd><p><a class="reference external" href="http://www.bom.gov.au/climate/data/">http://www.bom.gov.au/climate/data/</a></p>
 </dd>
 </dl>

@@ -494,7 +494,7 @@ rule for the same integral, <span class="math notranslate nohighlight">\(\int_{0
 <p>The Gauss-Legendre rule gives a slightly better estimate than Simpson’s rule, but using less than half the number of nodes.</p>
 <p>The approach we have discussed can be extended to regions that are
 not rectangular, and to higher dimensions. More details, including algorithms for double and triple integrals using Simpson’s and
-Gauss-Legendre rule, can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
+Gauss-Legendre rule, can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
 <p>There is however, an obvious disadvantage of the way we have generalized
 one-dimensional quadrature rules to higher dimensions. Imagine a numerical
 integration problem where the dimension is 360; such high dimensions
@@ -545,7 +545,7 @@ estimate is</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9737729028601251
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0117847719008468
 </pre></div>
 </div>
 </div>
@@ -564,7 +564,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 <div class="proof example admonition" id="chap4_exa81">
 <p class="admonition-title"><span class="caption-number">Example 49 </span></p>
 <section class="example-content" id="proof-content">
-<p><span id="id2">Capstick and Keister [<a class="reference internal" href="#id14" title="S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. Journal of Computational Physics, 123:267-273, 1996.">1996</a>]</span> discuss some high dimensional test integrals, some with analytical solutions, motivated by physical applications such as the calculation of quantum mechanical matrix elements in atomic, nuclear, and particle physics. One of the integrals with a known solution is</p>
+<p><span id="id2">Capstick and Keister [<a class="reference internal" href="#id15" title="S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. Journal of Computational Physics, 123:267-273, 1996.">1996</a>]</span> discuss some high dimensional test integrals, some with analytical solutions, motivated by physical applications such as the calculation of quantum mechanical matrix elements in atomic, nuclear, and particle physics. One of the integrals with a known solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{\mathbb{R}^s} \cos (||\boldsymbol{t}||)) e^{-||\boldsymbol{t}||^2} dt_1 dt_2 \dotsb dt_s
@@ -604,7 +604,7 @@ F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-w^2/2}dw.
 </div>
 </div>
 </div>
-<p>The following algorithm, known as the Beasley-Springer-Moro algorithm <span id="id3">Glasserman [<a class="reference internal" href="#id15" title="P. Glasserman. Monte Carlo methods in Financial Engineering. Springer, 2013.">2013</a>]</span>, gives
+<p>The following algorithm, known as the Beasley-Springer-Moro algorithm <span id="id3">Glasserman [<a class="reference internal" href="#id16" title="P. Glasserman. Monte Carlo methods in Financial Engineering. Springer, 2013.">2013</a>]</span>, gives
 an approximation to <span class="math notranslate nohighlight">\(F^{-1}(x)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -707,6 +707,13 @@ results.</p>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">est</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="nb">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">est</span><span class="o">/</span><span class="n">n</span>
 
+<span class="nn">Cell In[6], line 29,</span> in <span class="ni">invNormal</span><span class="nt">(u)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="k">if</span> <span class="n">y</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">u</span>
+<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">x</span> <span class="o">=</span> <span class="n">c0</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c1</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c2</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c3</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c4</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c5</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c6</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c7</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">c8</span><span class="p">)))))))</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">if</span> <span class="n">y</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
@@ -729,13 +736,13 @@ results.</p>
 </figure>
 <div class="docutils container" id="id4">
 <dl class="citation">
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
 <dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id2">CK96</a></span></dt>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id2">CK96</a></span></dt>
 <dd><p>S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. <em>Journal of Computational Physics</em>, 123:267–273, 1996.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id3">Gla13</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id3">Gla13</a></span></dt>
 <dd><p>P. Glasserman. <em>Monte Carlo methods in Financial Engineering</em>. Springer, 2013.</p>
 </dd>
 </dl>

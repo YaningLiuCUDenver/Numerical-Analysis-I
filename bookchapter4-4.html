@@ -437,7 +437,7 @@ equations are called the boundary conditions. There are two choices:</p>
 <li><p>Free or natural boundary: <span class="math notranslate nohighlight">\(S_{0}''(x_{0})=S_{n-1}''(x_{n})=0\)</span></p></li>
 <li><p>Clamped boundary: <span class="math notranslate nohighlight">\(S_{0}'(x_{0})=f'(x_{0})\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}'(x_{n})=f'(x_{n})\)</span>.</p></li>
 </ul>
-<p>Each boundary choice gives another two equations, bringing the total number of equations to <span class="math notranslate nohighlight">\(4n\)</span>. There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns as well. Do these systems of equations have a unique solution? The answer is yes, and a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The spline obtained from the first boundary choice is called a <strong>natural spline</strong>, and the other one is called a <strong>clamped spline</strong>.</p>
+<p>Each boundary choice gives another two equations, bringing the total number of equations to <span class="math notranslate nohighlight">\(4n\)</span>. There are <span class="math notranslate nohighlight">\(4n\)</span> unknowns as well. Do these systems of equations have a unique solution? The answer is yes, and a proof can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The spline obtained from the first boundary choice is called a <strong>natural spline</strong>, and the other one is called a <strong>clamped spline</strong>.</p>
 <div class="proof example admonition" id="chap3_exa64">
 <p class="admonition-title"><span class="caption-number">Example 41 </span></p>
 <section class="example-content" id="proof-content">
@@ -617,7 +617,7 @@ s_{1}(x)=a+b(x-2)+c(x-2)^{2}+d(x-2)^{3} &amp; \text{if }2\leq x&lt;3.
 <p>The function <strong>CubicNatural</strong> takes the <span class="math notranslate nohighlight">\(x\)</span>- and
 <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data as input, and computes the natural cubic
 spline interpolating the data, by solving the resulting matrix equation.
-The code is based on Algorithm 3.4 of <span id="id2">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The output is the coefficients of the <span class="math notranslate nohighlight">\(m-1\)</span> cubic
+The code is based on Algorithm 3.4 of <span id="id2">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The output is the coefficients of the <span class="math notranslate nohighlight">\(m-1\)</span> cubic
 polynomials, <span class="math notranslate nohighlight">\(a_i,b_i,c_i,d_i, i=0,...,m-2\)</span> where <span class="math notranslate nohighlight">\(m\)</span> is the number of
 data points. These coefficients are stored in the arrays <span class="math notranslate nohighlight">\(a,b,c,d\)</span> and returned at the end of the function, so that we can access these arrays later to
 evaluate the spline for a given value <span class="math notranslate nohighlight">\(w\)</span>.</p>
@@ -757,7 +757,7 @@ and plots them.</p>
 <p>The cubic spline gives an excellent fit to Runge’s function on this
 scale: we cannot visually separate it from the function itself.</p>
 <p>The following function <strong>CubicClamped</strong> computes the clamped
-cubic spline; the code is based on Algorithm 3.5 of <span id="id3">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id6" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The function
+cubic spline; the code is based on Algorithm 3.5 of <span id="id3">Burden <em>et al.</em> [<a class="reference internal" href="bookchapter5-4.html#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>. The function
 <strong>CubicClampedEval</strong> evaluates the spline at a given value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -882,7 +882,7 @@ differences between the splines.</p>
 </section>
 <section id="arya-and-the-letter-nuh">
 <h2>Arya and the letter NUH<a class="headerlink" href="#arya-and-the-letter-nuh" title="Permalink to this heading">#</a></h2>
-<p>Arya loves Dr. Seuss (who doesn’t?), and she is writing her term paper in an English class on <em>On Beyond Zebra!</em><a class="footnote-reference brackets" href="#id19" id="id4">1</a>. In this book Dr. Seuss invents new letters, one of which is called NUH. He writes:</p>
+<p>Arya loves Dr. Seuss (who doesn’t?), and she is writing her term paper in an English class on <em>On Beyond Zebra!</em><a class="footnote-reference brackets" href="#id20" id="id4">1</a>. In this book Dr. Seuss invents new letters, one of which is called NUH. He writes:</p>
 <figure class="align-right">
 <a class="reference internal image-reference" href="_images/Seuss.png"><img alt="_images/Seuss.png" src="_images/Seuss.png" style="width: 234.6px; height: 403.8px;" /></a>
 </figure>
@@ -983,14 +983,14 @@ y &amp; 0 &amp; -0.25 &amp; 0 &amp; 0.71 &amp; 2 &amp; 0.71 &amp; 0 &amp; -0.25 
 <p>Recreate the limacon above, by applying the spline interpolation for plane curves approach used in <em>Arya and the letter NUH</em> example to the points given in the table.</p>
 <div class="docutils container" id="id5">
 <dl class="citation">
-<dt class="label" id="id7"><span class="brackets">BFB16</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dt class="label" id="id8"><span class="brackets">BFB16</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
 <dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
 </dd>
 </dl>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
 <dd><p>Seuss, 1955. On Beyond Zebra! Random House for Young Readers.</p>
 </dd>
 </dl>

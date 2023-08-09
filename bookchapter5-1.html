@@ -443,7 +443,7 @@ P_{2}(x)=\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})+\frac{(x-
 \int_{a}^{b}f(x)dx &amp; =\int_{a}^{b}\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}f(x_{0})dx+\int_{a}^{b}\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}f(x_{1})dx+\\
  &amp; +\int_{a}^{b}\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}f(x_{2})dx+\frac{1}{6}\int_{a}^{b}(x-x_{0})(x-x_{1})(x-x_{2})f^{(3)}(\xi(x))dx.
 \end{align*}\]</div>
-<p>The sum of the first three integrals on the right-hand side simplify as: <span class="math notranslate nohighlight">\(\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]\)</span>. The last integral cannot be evaluated using <a class="reference internal" href="#chap4_thm65">Theorem 28</a> directly, like in the trapezoidal rule, since the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)(x-x_2)\)</span> changes sign on <span class="math notranslate nohighlight">\([a,b]\)</span>. However, a clever application of integration by parts transforms the integral to an integral where  <a class="reference internal" href="#chap4_thm65">Theorem 28</a> is applicable (see <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id10" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span> for details), and the integral simplifies as <span class="math notranslate nohighlight">\(-\frac{h^{5}}{90}f^{(4)}(\xi)\)</span> for some <span class="math notranslate nohighlight">\(\xi \in (a,b)\)</span>. In summary, we obtain</p>
+<p>The sum of the first three integrals on the right-hand side simplify as: <span class="math notranslate nohighlight">\(\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]\)</span>. The last integral cannot be evaluated using <a class="reference internal" href="#chap4_thm65">Theorem 28</a> directly, like in the trapezoidal rule, since the function <span class="math notranslate nohighlight">\((x-x_0)(x-x_1)(x-x_2)\)</span> changes sign on <span class="math notranslate nohighlight">\([a,b]\)</span>. However, a clever application of integration by parts transforms the integral to an integral where  <a class="reference internal" href="#chap4_thm65">Theorem 28</a> is applicable (see <span id="id1">Atkinson [<a class="reference internal" href="bookchapter5-3.html#id11" title="K.E. Atkinson. An Introduction to Numerical Analysis. John Wiley &amp; Sons, 2nd edition, 1989.">1989</a>]</span> for details), and the integral simplifies as <span class="math notranslate nohighlight">\(-\frac{h^{5}}{90}f^{(4)}(\xi)\)</span> for some <span class="math notranslate nohighlight">\(\xi \in (a,b)\)</span>. In summary, we obtain</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{a}^{b}f(x)dx=\frac{h}{3}\left[f(x_{0})+4f(x_{1})+f(x_{2})\right]-\frac{h^{5}}{90}f^{(4)}(\xi)
@@ -474,7 +474,7 @@ for <span class="math notranslate nohighlight">\(i=0,1,...,n,\)</span> where <sp
 w_{i}=\int_{x_{0}}^{x_{n}}l_{i}(x)dx=\int_{x_{0}}^{x_{n}}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x_{i}-x_{j}}dx.
 \end{equation*}\]</div>
 </section>
-</div><p>The following theorem provides an error formula for the closed Newton-Cotes formula. A proof can be found in <span id="id2">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
+</div><p>The following theorem provides an error formula for the closed Newton-Cotes formula. A proof can be found in <span id="id2">Isaacson and Keller [<a class="reference internal" href="#id14" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap4_thm68">
 <p class="admonition-title"><span class="caption-number">Theorem 29 </span></p>
 <section class="theorem-content" id="proof-content">
@@ -513,7 +513,7 @@ w_{i}=\int_{a}^{b}l_{i}(x)dx=\int_{a}^{b}\prod_{j=0,j\neq i}^{n}\frac{x-x_{j}}{x
 \end{equation*}\]</div>
 <p>We put <span class="math notranslate nohighlight">\(a=x_{-1}\)</span> and <span class="math notranslate nohighlight">\(b=x_{n+1}\)</span>.</p>
 </section>
-</div><p>The error formula for the open Newton-Cotes formula is given next; for a proof see Isaacson and <span id="id3">Isaacson and Keller [<a class="reference internal" href="#id13" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
+</div><p>The error formula for the open Newton-Cotes formula is given next; for a proof see Isaacson and <span id="id3">Isaacson and Keller [<a class="reference internal" href="#id14" title="Isaacson, E. and H.B. Keller. Analysis of Numerical Methods. John Wiley &amp; Sons, 1966.">1966</a>]</span>.</p>
 <div class="proof theorem admonition" id="chap4_thm70">
 <p class="admonition-title"><span class="caption-number">Theorem 30 </span></p>
 <section class="theorem-content" id="proof-content">
@@ -630,10 +630,10 @@ So the quadrature rule is of precision two and it is:</p>
 has degree of accuracy 2.</p>
 <div class="docutils container" id="id4">
 <dl class="citation">
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">Atk89</a></span></dt>
 <dd><p>K.E. Atkinson. <em>An Introduction to Numerical Analysis</em>. John Wiley &amp; Sons, 2nd edition, 1989.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets">IK66</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dt class="label" id="id14"><span class="brackets">IK66</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
 <dd><p>Isaacson, E. and H.B. Keller. <em>Analysis of Numerical Methods</em>. John Wiley &amp; Sons, 1966.</p>
 </dd>
 </dl>
