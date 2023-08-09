@@ -504,7 +504,7 @@ rule for the same integral, <span class="math notranslate nohighlight">\(\int_{0
 <p>The Gauss-Legendre rule gives a slightly better estimate than Simpson’s rule, but using less than half the number of nodes.</p>
 <p>The approach we have discussed can be extended to regions that are
 not rectangular, and to higher dimensions. More details, including algorithms for double and triple integrals using Simpson’s and
-Gauss-Legendre rule, can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id7" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
+Gauss-Legendre rule, can be found in <span id="id1">Burden <em>et al.</em> [<a class="reference internal" href="#id8" title="R.L. Burden, D. Faires, and A.M. Burden. Numerical Analysis. Cengate, 10th edition, 2016.">2016</a>]</span>.</p>
 <p>There is however, an obvious disadvantage of the way we have generalized
 one-dimensional quadrature rules to higher dimensions. Imagine a numerical
 integration problem where the dimension is 360; such high dimensions
@@ -514,7 +514,7 @@ which is about <span class="math notranslate nohighlight">\(10^{100},\)</span> a
 the only general method for numerical integration is the Monte Carlo method.</p>
 <section id="monte-carlo-method">
 <h2>Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permalink to this heading">#</a></h2>
-<p>The Monte Carlo method approximates the integral <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx\)</span> using the function average <span class="math notranslate nohighlight">\(\frac{1}{n} \sum_{i=1}^n f(x_i)\)</span>, where <span class="math notranslate nohighlight">\(x_i\)</span> are random numbers (from the uniform distribution) between 0 and 1. Most mathematical software have built-in functions that generate random numbers.\footnote {A better word is \textit{pseudorandom numbers}: numbers that look like a sequence of random numbers, but generated using a computer algorithm.} The generalization to higher dimensional integrals is straightforward:</p>
+<p>The Monte Carlo method approximates the integral <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx\)</span> using the function average <span class="math notranslate nohighlight">\(\frac{1}{n} \sum_{i=1}^n f(x_i)\)</span>, where <span class="math notranslate nohighlight">\(x_i\)</span> are random numbers (from the uniform distribution) between 0 and 1. Most mathematical software have built-in functions that generate random numbers <a class="footnote-reference brackets" href="#label" id="id2">1</a>. The generalization to higher dimensional integrals is straightforward:</p>
 <div class="math notranslate nohighlight" id="equation-mc-est-gen">
 <span class="eqno">(34)<a class="headerlink" href="#equation-mc-est-gen" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{(0,1)^s} f(x)dx\approx \frac{1}{n} \sum_{i=1}^{n}f(x_i),
@@ -569,7 +569,7 @@ u=\frac{x-a}{b-a}, du=\frac{dx}{b-a} \text{ and } v=\frac{y-c}{d-c}, dv=\frac{dy
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9695251706994813
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0101300939625086
 </pre></div>
 </div>
 </div>
@@ -584,7 +584,7 @@ u=\frac{x-a}{b-a}, du=\frac{dx}{b-a} \text{ and } v=\frac{y-c}{d-c}, dv=\frac{dy
 <div class="proof example admonition" id="chap4_exa81">
 <p class="admonition-title"><span class="caption-number">Example 49 </span></p>
 <section class="example-content" id="proof-content">
-<p><span id="id2">Capstick and Keister [<a class="reference internal" href="#id15" title="S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. Journal of Computational Physics, 123:267-273, 1996.">1996</a>]</span> discuss some high dimensional test integrals, some with analytical solutions, motivated by physical applications such as the calculation of quantum mechanical matrix elements in atomic, nuclear, and particle physics. One of the integrals with a known solution is</p>
+<p><span id="id3">Capstick and Keister [<a class="reference internal" href="#id16" title="S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. Journal of Computational Physics, 123:267-273, 1996.">1996</a>]</span> discuss some high dimensional test integrals, some with analytical solutions, motivated by physical applications such as the calculation of quantum mechanical matrix elements in atomic, nuclear, and particle physics. One of the integrals with a known solution is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \int_{\mathbb{R}^s} \cos (||\boldsymbol{t}||)) e^{-||\boldsymbol{t}||^2} dt_1 dt_2 \dotsb dt_s
@@ -624,7 +624,7 @@ F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-w^2/2}dw.
 </div>
 </div>
 </div>
-<p>The following algorithm, known as the Beasley-Springer-Moro algorithm <span id="id3">Glasserman [<a class="reference internal" href="#id16" title="P. Glasserman. Monte Carlo methods in Financial Engineering. Springer, 2013.">2013</a>]</span>, gives
+<p>The following algorithm, known as the Beasley-Springer-Moro algorithm <span id="id4">Glasserman [<a class="reference internal" href="#id17" title="P. Glasserman. Monte Carlo methods in Financial Engineering. Springer, 2013.">2013</a>]</span>, gives
 an approximation to <span class="math notranslate nohighlight">\(F^{-1}(x)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -759,19 +759,25 @@ results.</p>
 f(x_1,\ldots,x_s)=\prod_{i=1}^s \frac{|4x_i-2|+1}{2}.
 \end{equation*}\]</div>
 <p>The true value of the integral is one. Use Monte Carlo to estimate the integral when <span class="math notranslate nohighlight">\(s=10\)</span>, using sample sizes from 50,000 to 1,000,000, in increments of 50,000, and plot the absolute value of the error against the sample size.</p>
-<div class="docutils container" id="id4">
+<div class="docutils container" id="id5">
 <dl class="citation">
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
 <dd><p>R.L. Burden, D. Faires, and A.M. Burden. <em>Numerical Analysis</em>. Cengate, 10th edition, 2016.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id2">CK96</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id3">CK96</a></span></dt>
 <dd><p>S. Capstick and B.D. Keister. Multidimensional quadrature algorithms at higher degree and/or dimension. <em>Journal of Computational Physics</em>, 123:267–273, 1996.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id3">Gla13</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id4">Gla13</a></span></dt>
 <dd><p>P. Glasserman. <em>Monte Carlo methods in Financial Engineering</em>. Springer, 2013.</p>
 </dd>
 </dl>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="label"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>A better word is <em>pseudorandom numbers</em>: numbers that look like a sequence of random numbers, but generated using a computer algorithm.</p>
+</dd>
+</dl>
 </section>
 </section>
 
