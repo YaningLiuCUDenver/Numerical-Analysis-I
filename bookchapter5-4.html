@@ -507,7 +507,7 @@ domain, and evaluate the function average at those points. In other
 words,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-\int_{R}f(\boldsymbol{x})d\boldsymbol{x}\approx\frac{1}{n}\sum_{i=1}^{n}f(\boldsymbol{x}_{i})
+\int_{R}f(\boldsymbol{x})d\boldsymbol{x}\approx\frac{\text{Vol}(R)}{n}\sum_{i=1}^{n}f(\boldsymbol{x}_{i})
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{x}_{i}\)</span> are pseudorandom vectors uniformly distributed in <span class="math notranslate nohighlight">\(R\)</span>.
 For the two-dimensional integral we discussed before, the Monte Carlo
@@ -545,7 +545,7 @@ estimate is</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9556213639527062
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0425967344680753
 </pre></div>
 </div>
 </div>
@@ -578,7 +578,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 </div><p>where <span class="math notranslate nohighlight">\(F^{-1}\)</span> is the inverse of the cumulative distribution function of the standard normal distribution:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-s^2/2}ds.
+F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-w^2/2}dw.
 \end{equation*}\]</div>
 <p>We will estimate the integral <a class="reference internal" href="#equation-capstick-test">(35)</a> by Monte Carlo as</p>
 <div class="amsmath math notranslate nohighlight">
