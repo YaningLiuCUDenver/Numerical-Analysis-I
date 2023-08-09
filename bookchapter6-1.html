@@ -472,13 +472,13 @@ to occur, the necessary conditions are</p>
 <p>for <span class="math notranslate nohighlight">\(k=0,1,\ldots,n\)</span>. (we are skipping some algebra here!) The <strong>normal
 equations</strong> for polynomial approximation are</p>
 <div class="math notranslate nohighlight" id="equation-discrete-normal">
-<span class="eqno">(42)<a class="headerlink" href="#equation-discrete-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(43)<a class="headerlink" href="#equation-discrete-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{j=0}^{n}a_{j}\left(\sum_{i=1}^{m}x_{i}^{k+j}\right)=\sum_{i=1}^{m}y_{i}x_{i}^{k}
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(k=0,1,\ldots,n.\)</span> This is a system of <span class="math notranslate nohighlight">\((n+1)\)</span> equations and <span class="math notranslate nohighlight">\((n+1)\)</span>
 unknowns. We can write this system as a matrix equation</p>
 <div class="math notranslate nohighlight" id="equation-leastsqmatrixeq">
-<span class="eqno">(43)<a class="headerlink" href="#equation-leastsqmatrixeq" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(44)<a class="headerlink" href="#equation-leastsqmatrixeq" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A\boldsymbol{a}=\boldsymbol{b}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span> is the unknown vector we are trying to find, and <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> is the constant vector</p>
@@ -517,7 +517,7 @@ A_{kj}=\sum_{i=1}^m x_i^{k+j-2}.
 </div>
 <p>The function <strong>leastsqfit</strong> takes the <span class="math notranslate nohighlight">\(x\)</span>- and
 <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data, and the degree of the polynomial we want
-to use, <span class="math notranslate nohighlight">\(n\)</span>, as inputs. It solves the matrix Equation <a class="reference internal" href="#equation-leastsqmatrixeq">(43)</a>.</p>
+to use, <span class="math notranslate nohighlight">\(n\)</span>, as inputs. It solves the matrix Equation <a class="reference internal" href="#equation-leastsqmatrixeq">(44)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leastsqfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -760,40 +760,40 @@ polynomial! What is the least squares error?</p>
 <h2>Least squares with non-polynomials<a class="headerlink" href="#least-squares-with-non-polynomials" title="Permalink to this heading">#</a></h2>
 <p>The method of least squares is not only for polynomials. For example, suppose we want to find the function</p>
 <div class="math notranslate nohighlight" id="equation-tempf">
-<span class="eqno">(44)<a class="headerlink" href="#equation-tempf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(45)<a class="headerlink" href="#equation-tempf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(t)=a+bt+c \sin(2\pi t/365)+d \cos (2\pi t/365)
 \end{equation}\]</div>
 <p>that has the best fit to some data <span class="math notranslate nohighlight">\((t_1,T_1),...,(t_m,T_m)\)</span> in the least-squares sense. This function is used in modeling weather temperature data, where <span class="math notranslate nohighlight">\(t\)</span> denotes time, and <span class="math notranslate nohighlight">\(T\)</span> denotes the temperature. The following figure plots the daily maximum temperature during a period of 1,056 days, from 2016 until November 21, 2018, as measured by a weather station at Melbourne airport, Australia<a class="footnote-reference brackets" href="#id19" id="id2">1</a>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/tempdata.png"><img alt="_images/tempdata.png" src="_images/tempdata.png" style="width: 452.8px; height: 348.8px;" /></a>
 </figure>
-<p>To find the best fit function of the form <a class="reference internal" href="#equation-tempf">(44)</a>, we write the least squares error term</p>
+<p>To find the best fit function of the form <a class="reference internal" href="#equation-tempf">(45)</a>, we write the least squares error term</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 E=\sum_{i=1}^m (f(t_i)-T_i)^2=\sum_{i=1}^m \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)^2,
 \end{equation*}\]</div>
 <p>and set its partial derivatives with respect to the unknowns <span class="math notranslate nohighlight">\(a,b,c,d\)</span> to zero to obtain the normal equations:</p>
 <div class="math notranslate nohighlight" id="equation-n1">
-<span class="eqno">(45)<a class="headerlink" href="#equation-n1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(46)<a class="headerlink" href="#equation-n1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{\partial E}{\partial a}=0 &amp;\Rightarrow \sum_{i=1}^m 2\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
 &amp;\Rightarrow \sum_{i=1}^m \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
 \end{align}\end{split}\]</div>
 <div class="math notranslate nohighlight" id="equation-n2">
-<span class="eqno">(46)<a class="headerlink" href="#equation-n2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(47)<a class="headerlink" href="#equation-n2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{\partial E}{\partial b}=0 &amp;\Rightarrow \sum_{i=1}^m (2t_i)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
 &amp;\Rightarrow \sum_{i=1}^m t_i\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
 \end{align}\end{split}\]</div>
 <div class="math notranslate nohighlight" id="equation-n3">
-<span class="eqno">(47)<a class="headerlink" href="#equation-n3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(48)<a class="headerlink" href="#equation-n3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{\partial E}{\partial c}=0 &amp;\Rightarrow \sum_{i=1}^m \left(2\sin\left(\frac{2\pi t_i}{365}\right)\right)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
 &amp;\Rightarrow \sum_{i=1}^m \sin\left(\frac{2\pi t_i}{365}\right) \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0,
 \end{align}\end{split}\]</div>
 <div class="math notranslate nohighlight" id="equation-n4">
-<span class="eqno">(48)<a class="headerlink" href="#equation-n4" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(49)<a class="headerlink" href="#equation-n4" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 \frac{\partial E}{\partial d}=0 &amp;\Rightarrow \sum_{i=1}^m \left(2\cos\left(\frac{2\pi t_i}{365}\right)\right)\left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0\nonumber  \\
 &amp;\Rightarrow \sum_{i=1}^m \cos\left(\frac{2\pi t_i}{365}\right) \left(a+bt_i+c \sin\left(\frac{2\pi t_i}{365}\right)+d \cos \left(\frac{2\pi t_i}{365}\right)-T_i\right)=0.
 \end{align}\end{split}\]</div>
-<p>Rearranging terms in equations <a class="reference internal" href="#equation-n1">(45)</a>, <a class="reference internal" href="#equation-n2">(46)</a>, <a class="reference internal" href="#equation-n3">(47)</a>, <a class="reference internal" href="#equation-n4">(48)</a>, we get a system of four equations and four unknowns:</p>
+<p>Rearranging terms in equations <a class="reference internal" href="#equation-n1">(46)</a>, <a class="reference internal" href="#equation-n2">(47)</a>, <a class="reference internal" href="#equation-n3">(48)</a>, <a class="reference internal" href="#equation-n4">(49)</a>, we get a system of four equations and four unknowns:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 &amp;am+b \sum_{i=1}^m t_i + c \sum_{i=1}^m \sin\left(\frac{2\pi t_i}{365}\right) + d \sum_{i=1}^m \cos \left(\frac{2\pi t_i}{365}\right)=\sum_{i=1}^m T_i\\
@@ -1106,7 +1106,7 @@ E=\sum_{i=1}^{m}(y_{i}-be^{ax_{i}})^{2}.
 <p>There is a simpler approach we can use when we suspect the data is
 exponentially related. Consider again the function we want to fit:</p>
 <div class="math notranslate nohighlight" id="equation-exp-fit">
-<span class="eqno">(49)<a class="headerlink" href="#equation-exp-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(50)<a class="headerlink" href="#equation-exp-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
 y=be^{ax}.
 \end{equation}\]</div>
 <p>Take the logarithm of both sides:</p>
@@ -1117,13 +1117,13 @@ y=be^{ax}.
 <p>and rename the variables as <span class="math notranslate nohighlight">\(Y=\log y,B=\log b\)</span>. Then we obtain the
 expression</p>
 <div class="math notranslate nohighlight" id="equation-lin-fit">
-<span class="eqno">(50)<a class="headerlink" href="#equation-lin-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(51)<a class="headerlink" href="#equation-lin-fit" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y=ax+B
 \end{equation}\]</div>
 <p>which is a linear equation in the transformed variable. In other words,
-if the original variable <span class="math notranslate nohighlight">\(y\)</span> is related to <span class="math notranslate nohighlight">\(x\)</span> via Equation <a class="reference internal" href="#equation-exp-fit">(49)</a>,
+if the original variable <span class="math notranslate nohighlight">\(y\)</span> is related to <span class="math notranslate nohighlight">\(x\)</span> via Equation <a class="reference internal" href="#equation-exp-fit">(50)</a>,
 then <span class="math notranslate nohighlight">\(Y=\log y\)</span> is related to <span class="math notranslate nohighlight">\(x\)</span> via a linear relationship given
-by Equation <a class="reference internal" href="#equation-lin-fit">(50)</a>. So, the new approach is to fit the
+by Equation <a class="reference internal" href="#equation-lin-fit">(51)</a>. So, the new approach is to fit the
 least squares line <span class="math notranslate nohighlight">\(Y=ax+B\)</span> to the data</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
@@ -1209,7 +1209,7 @@ squares minimize are distorted in a non-linear way by the transformation.</p>
 \[\begin{equation*}
 Y=0.5x+1.1.
 \end{equation*}\]</div>
-<p>This equation corresponds to Equation <a class="reference internal" href="#equation-lin-fit">(50)</a>, with <span class="math notranslate nohighlight">\(a=0.5\)</span> and <span class="math notranslate nohighlight">\(B=1.1\)</span>. We want to obtain the corresponding exponential Equation <a class="reference internal" href="#equation-exp-fit">(49)</a>, where <span class="math notranslate nohighlight">\(b=e^B\)</span>. Since <span class="math notranslate nohighlight">\(e^{1.1}=3\)</span>, the best fitting exponential function to the data is <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span>. The following graph plots <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span> together with the data.</p>
+<p>This equation corresponds to Equation <a class="reference internal" href="#equation-lin-fit">(51)</a>, with <span class="math notranslate nohighlight">\(a=0.5\)</span> and <span class="math notranslate nohighlight">\(B=1.1\)</span>. We want to obtain the corresponding exponential Equation <a class="reference internal" href="#equation-exp-fit">(50)</a>, where <span class="math notranslate nohighlight">\(b=e^B\)</span>. Since <span class="math notranslate nohighlight">\(e^{1.1}=3\)</span>, the best fitting exponential function to the data is <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span>. The following graph plots <span class="math notranslate nohighlight">\(y=3e^{x/2}\)</span> together with the data.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/expdata_exp.png"><img alt="_images/expdata_exp.png" src="_images/expdata_exp.png" style="width: 436.8px; height: 332.8px;" /></a>
 </figure>

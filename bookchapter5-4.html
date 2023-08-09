@@ -322,7 +322,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -338,6 +340,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-method">Monte Carlo Method</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -501,22 +511,36 @@ integration problem where the dimension is 360; such high dimensions
 appear in some problems from financial engineering. Even if we used
 two nodes for each dimension, the total number of nodes would be <span class="math notranslate nohighlight">\(2^{360}\)</span>,
 which is about <span class="math notranslate nohighlight">\(10^{100},\)</span> a number too large. In very large dimensions,
-the only general method for numerical integration is the Monte Carlo
-method. In Monte Carlo, we generate pseudorandom numbers from the
-domain, and evaluate the function average at those points. In other
-words,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-\int_{R}f(\boldsymbol{x})d\boldsymbol{x}\approx\frac{\text{Vol}(R)}{n}\sum_{i=1}^{n}f(\boldsymbol{x}_{i})
-\end{equation*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{x}_{i}\)</span> are pseudorandom vectors uniformly distributed in <span class="math notranslate nohighlight">\(R\)</span>.
-For the two-dimensional integral we discussed before, the Monte Carlo
-estimate is</p>
-<div class="math notranslate nohighlight" id="equation-mc-est">
-<span class="eqno">(34)<a class="headerlink" href="#equation-mc-est" title="Permalink to this equation">#</a></span>\[\begin{align}
-\int_{a}^{b}\int_{c}^{d}f(x,y)dydx\approx\frac{(b-a)(d-c)}{n}\sum_{i=1}^{n}f(a+(b-a)x_{i},c+(d-c)y_{i})
+the only general method for numerical integration is the Monte Carlo method.</p>
+<section id="monte-carlo-method">
+<h2>Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permalink to this heading">#</a></h2>
+<p>The Monte Carlo method approximates the integral <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx\)</span> using the function average <span class="math notranslate nohighlight">\(\frac{1}{n} \sum_{i=1}^n f(x_i)\)</span>, where <span class="math notranslate nohighlight">\(x_i\)</span> are random numbers (from the uniform distribution) between 0 and 1. Most mathematical software have built-in functions that generate random numbers.\footnote {A better word is \textit{pseudorandom numbers}: numbers that look like a sequence of random numbers, but generated using a computer algorithm.} The generalization to higher dimensional integrals is straightforward:</p>
+<div class="math notranslate nohighlight" id="equation-mc-est-gen">
+<span class="eqno">(34)<a class="headerlink" href="#equation-mc-est-gen" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_{(0,1)^s} f(x)dx\approx \frac{1}{n} \sum_{i=1}^{n}f(x_i),
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_{i},y_{i}\)</span> are pseudorandom numbers from <span class="math notranslate nohighlight">\((0,1)\)</span>. In Python, the function <strong>np.random.rand()</strong> generates a pseudorandom number from the uniform distribution between 0 and 1. The following code takes the endpoints of the intervals <span class="math notranslate nohighlight">\(a,b,c,d\)</span>, and the number of nodes <span class="math notranslate nohighlight">\(n\)</span> (which is called the sample size in the Monte Carlo literature) as inputs, and returns the estimate for the integral using Equation <a class="reference internal" href="#equation-mc-est">(34)</a>.</p>
+<p>where the components of the <span class="math notranslate nohighlight">\(s\)</span>-dimensional vector <span class="math notranslate nohighlight">\(x_i=(x_{i,1},x_{i,2},\ldots,x_{i,s})\)</span> are pseudorandom numbers between 0 and 1.</p>
+<p>Consider the two-dimensional integral we discussed before</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{a}^{b}\int_{c}^{d}f(x,y)dydx.
+\end{align*}\]</div>
+<p>To use Monte Carlo to estimate this integral, we first have to transform the integration domain to <span class="math notranslate nohighlight">\((0,1)^2\)</span>. Using the substitution</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+u=\frac{x-a}{b-a}, du=\frac{dx}{b-a} \text{ and } v=\frac{y-c}{d-c}, dv=\frac{dy}{d-c},
+\end{align*}\]</div>
+<p>we obtain</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\int_{a}^{b}\int_{c}^{d}f(x,y)dydx = (b-a)(d-c) \int_{0}^{1}\int_{0}^{1}f(a+(b-a)u,c+(d-c)v)dvdu.
+\end{align*}\]</div>
+<p>We can now apply the Monte Carlo method to the integral with domain <span class="math notranslate nohighlight">\((0,1)^2\)</span> to obtain the estimate</p>
+<div class="math notranslate nohighlight" id="equation-mc-est">
+<span class="eqno">(35)<a class="headerlink" href="#equation-mc-est" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_{a}^{b}\int_{c}^{d}f(x,y)dydx\approx\frac{(b-a)(d-c)}{n}\sum_{i=1}^{n}f(a+(b-a)u_{i},c+(d-c)v_{i})
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_{i},v_{i}\)</span> are pseudorandom numbers from <span class="math notranslate nohighlight">\((0,1).\)</span> In Python, the function <strong>numpy.random.rand()</strong> generates a pseudorandom number from the uniform distribution between 0 and 1. The following code takes the endpoints of the intervals <span class="math notranslate nohighlight">\(a,b,c,d,\)</span> and the number of nodes <span class="math notranslate nohighlight">\(n\)</span> (which is called the sample size in the Monte Carlo literature) as inputs, and returns the estimate for the integral using <a class="reference internal" href="#equation-mc-est">(35)</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -536,7 +560,7 @@ estimate is</p>
 </div>
 </div>
 </div>
-<p>Now we use Monte Carlo to estimate the integral <span class="math notranslate nohighlight">\(\int_0^1 \int_0^1 \left(\frac{\pi}{2} \sin \pi x \right)\left(\frac{\pi}{2} \sin \pi y \right) dy dx\)</span>:</p>
+<p>Let’s use Monte Carlo to estimate the integral <span class="math notranslate nohighlight">\(\int_0^1 \int_0^1 \left(\frac{\pi}{2} \sin \pi x \right)\left(\frac{\pi}{2} \sin \pi y \right) dy dx\)</span>. Using a sample size of <span class="math notranslate nohighlight">\(n=500\)</span> we get:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">y</span><span class="p">),</span>
@@ -545,16 +569,12 @@ estimate is</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0117847719008468
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9695251706994813
 </pre></div>
 </div>
 </div>
 </div>
-<p>With <span class="math notranslate nohighlight">\(n=500\)</span>,
-we obtain a Monte Carlo estimate of 0.944178. An advantage of the Monte Carlo method is its simplicity: the above code can be easily generalized to higher dimensions.
-A disadvantage of Monte Carlo is its slow rate of convergence,
-which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a class="reference internal" href="#monte-carlo"><span class="std std-numref">Figure 14</span></a> displays
-500 pseudorandom vectors from the unit square.</p>
+<p>The convergence of the function averages to the integral in <a class="reference internal" href="#equation-mc-est-gen">(34)</a> is a consequence of the strong law of large numbers of probability theory. From the central limit theorem, it follows that the rate of convergence is <span class="math notranslate nohighlight">\(O(1/\sqrt{n})\)</span>, which is independent of the dimension <span class="math notranslate nohighlight">\(s\)</span>.  The only condition <span class="math notranslate nohighlight">\(f\)</span> has to satisfy for the convergence to hold is that the integral of <span class="math notranslate nohighlight">\(f^2\)</span> is finite. <a class="reference internal" href="#monte-carlo"><span class="std std-numref">Figure 14</span></a> displays 500 pseudorandom vectors from the unit square: these are the vectors at which Monte Carlo computes the function averages.</p>
 <figure class="align-default" id="monte-carlo">
 <a class="reference internal image-reference" href="_images/randomplot.png"><img alt="_images/randomplot.png" src="_images/randomplot.png" style="height: 450px;" /></a>
 <figcaption>
@@ -571,7 +591,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 \end{equation*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(||\boldsymbol{t}||=(t_1^2+\dotsc +t_s^2)^{1/2}\)</span>. This integral can be transformed to an integral over the <span class="math notranslate nohighlight">\(s\)</span>-dimensional unit cube as</p>
 <div class="math notranslate nohighlight" id="equation-capstick-test">
-<span class="eqno">(35)<a class="headerlink" href="#equation-capstick-test" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(36)<a class="headerlink" href="#equation-capstick-test" title="Permalink to this equation">#</a></span>\[\begin{align}
 \pi^{s/2} \int_{(0,1)^s} \cos \left[ \left( \frac{(F^{-1}(x_1))^2+\dotsc +(F^{-1}(x_s))^2}{2} \right)^{1/2} \right] dx_1 dx_2 \dotsb dx_s
 \end{align}\]</div>
 </section>
@@ -580,7 +600,7 @@ which is <span class="math notranslate nohighlight">\(O(1/\sqrt{n}\)</span>). <a
 \[\begin{equation*}
 F(x)=\frac{1}{(2\pi)^{1/2}} \int_{-\infty}^x e^{-w^2/2}dw.
 \end{equation*}\]</div>
-<p>We will estimate the integral <a class="reference internal" href="#equation-capstick-test">(35)</a> by Monte Carlo as</p>
+<p>We will estimate the integral <a class="reference internal" href="#equation-capstick-test">(36)</a> by Monte Carlo as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \frac{\pi^{s/2}}{n} \sum_{i=1}^n \cos \left[ \left( \frac{(F^{-1}(x^{(i)}_1))^2+\dotsc +(F^{-1}(x^{(i)}_s))^2}{2} \right)^{1/2} \right]
@@ -707,13 +727,6 @@ results.</p>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">est</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="nb">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">est</span><span class="o">/</span><span class="n">n</span>
 
-<span class="nn">Cell In[6], line 29,</span> in <span class="ni">invNormal</span><span class="nt">(u)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="k">if</span> <span class="n">y</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">u</span>
-<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">x</span> <span class="o">=</span> <span class="n">c0</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c1</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c2</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c3</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c4</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c5</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c6</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">c7</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">c8</span><span class="p">)))))))</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">if</span> <span class="n">y</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
-
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
@@ -731,9 +744,21 @@ results.</p>
 <figure class="align-default" id="mc-capstick">
 <a class="reference internal image-reference" href="_images/mc_capstick.png"><img alt="_images/mc_capstick.png" src="_images/mc_capstick.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Monte Carlo relative error for the integral <a class="reference internal" href="#equation-capstick-test">(35)</a>.</span><a class="headerlink" href="#mc-capstick" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Monte Carlo relative error for the integral <a class="reference internal" href="#equation-capstick-test">(36)</a>.</span><a class="headerlink" href="#mc-capstick" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p><strong>Exercise 4.4-1</strong></p>
+<p>A test integral used in comparing quadrature rules is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\int_{(0,1)^s} f(x_1,\ldots,x_s)dx_1\ldots dx_s
+\end{equation*}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+f(x_1,\ldots,x_s)=\prod_{i=1}^s \frac{|4x_i-2|+1}{2}.
+\end{equation*}\]</div>
+<p>The true value of the integral is one. Use Monte Carlo to estimate the integral when <span class="math notranslate nohighlight">\(s=10\)</span>, using sample sizes from 50,000 to 1,000,000, in increments of 50,000, and plot the absolute value of the error against the sample size.</p>
 <div class="docutils container" id="id4">
 <dl class="citation">
 <dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">BFB16</a></span></dt>
@@ -747,6 +772,7 @@ results.</p>
 </dd>
 </dl>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -807,6 +833,20 @@ results.</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-method">Monte Carlo Method</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

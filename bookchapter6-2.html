@@ -356,7 +356,7 @@ answer the following question: how can we find the “best” polynomial
 approximates <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]?\)</span> As before, “best” polynomial will mean the
 polynomial that minimizes the least squares error:</p>
 <div class="math notranslate nohighlight" id="equation-least-sq-error">
-<span class="eqno">(51)<a class="headerlink" href="#equation-least-sq-error" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(52)<a class="headerlink" href="#equation-least-sq-error" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E=\int_{a}^{b}\left(f(x)-\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx.
 \end{equation}\]</div>
 <p>Compare this expression with that of the <strong>discrete least squares</strong>:</p>
@@ -364,7 +364,7 @@ E=\int_{a}^{b}\left(f(x)-\sum_{j=0}^{n}a_{j}x^{j}\right)^{2}dx.
 \[\begin{equation*}
 E=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}.
 \end{equation*}\]</div>
-<p>To minimize <span class="math notranslate nohighlight">\(E\)</span> in <a class="reference internal" href="#equation-least-sq-error">(51)</a> we set <span class="math notranslate nohighlight">\(\frac{\partial E}{\partial a_{k}}=0\)</span>, for
+<p>To minimize <span class="math notranslate nohighlight">\(E\)</span> in <a class="reference internal" href="#equation-least-sq-error">(52)</a> we set <span class="math notranslate nohighlight">\(\frac{\partial E}{\partial a_{k}}=0\)</span>, for
 <span class="math notranslate nohighlight">\(k=0,1,...,n,\)</span> and observe</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -374,7 +374,7 @@ E=\sum_{i=1}^{m}\left(y_{i}-\sum_{j=0}^{n}a_{j}x_{i}^{j}\right)^{2}.
 <p>which gives the <span class="math notranslate nohighlight">\((n+1)\)</span> normal equations for the <strong>continuous
 least squares problem</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-cont-normal">
-<span class="eqno">(52)<a class="headerlink" href="#equation-cont-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(53)<a class="headerlink" href="#equation-cont-normal" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{j=0}^{n}a_{j}\int_{a}^{b}x^{j+k}dx=\int_{a}^{b}f(x)x^{k}dx
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> Note that the only unknowns in these equations
@@ -442,12 +442,12 @@ and Newton for the interpolation problem. So the idea is to write
 P_{n}(x)=\sum_{j=0}^{n}a_{j}\phi_{j}(x)
 \end{equation*}\]</div>
 <p>which would then update the normal equations for continuous least
-squares <a class="reference internal" href="#equation-cont-normal">(52)</a> as</p>
+squares <a class="reference internal" href="#equation-cont-normal">(53)</a> as</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 \sum_{j=0}^{n}a_{j}\int_{a}^{b}\phi_{j}(x)\phi_{k}(x)dx=\int_{a}^{b}f(x)\phi_{k}(x)dx
 \end{equation*}\]</div>
-<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> The normal equations for the discrete least squares <a class="reference internal" href="bookchapter6-1.html#equation-discrete-normal">(42)</a>
+<p>for <span class="math notranslate nohighlight">\(k=0,1,...,n.\)</span> The normal equations for the discrete least squares <a class="reference internal" href="bookchapter6-1.html#equation-discrete-normal">(43)</a>
 gets a similar update:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}

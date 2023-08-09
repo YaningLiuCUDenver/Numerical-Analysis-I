@@ -429,7 +429,7 @@ the following result</p>
 \end{equation*}\]</div>
 <p>we obtain</p>
 <div class="math notranslate nohighlight" id="equation-n-1-pt-formula">
-<span class="eqno">(36)<a class="headerlink" href="#equation-n-1-pt-formula" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(37)<a class="headerlink" href="#equation-n-1-pt-formula" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f'(x_{j})=\sum_{k=0}^{n}f(x_{k})l'_{k}(x_{j})+\frac{f^{(n+1)}(\xi(x_{j}))}{(n+1)!}\prod_{k=0,k\neq j}^{n}(x_{j}-x_{k})
 \end{equation}\]</div>
 <p>which is called the <span class="math notranslate nohighlight">\((n+1)\)</span>-point formula to approximate <span class="math notranslate nohighlight">\(f'(x_{j})\)</span>.
@@ -440,29 +440,29 @@ l_{0}(x) &amp; =\frac{(x-x_{1})(x-x_{2})}{(x_{0}-x_{1})(x_{0}-x_{2})}\Rightarrow
 l_{1}(x) &amp; =\frac{(x-x_{0})(x-x_{2})}{(x_{1}-x_{0})(x_{1}-x_{2})}\Rightarrow l'_{1}(x)=\frac{2x-x_{0}-x_{2}}{(x_{1}-x_{0})(x_{1}-x_{2})}\\
 l_{2}(x) &amp; =\frac{(x-x_{0})(x-x_{1})}{(x_{2}-x_{0})(x_{2}-x_{1})}\Rightarrow l_{2}'(x)=\frac{2x-x_{0}-x_{1}}{(x_{2}-x_{0})(x_{2}-x_{1})}
 \end{align*}\]</div>
-<p>These derivatives can be substituted in <a class="reference internal" href="#equation-n-1-pt-formula">(36)</a>
+<p>These derivatives can be substituted in <a class="reference internal" href="#equation-n-1-pt-formula">(37)</a>
 to obtain the three-point formula. We can simplify these formulas
 if the nodes are spaced equally, that is, <span class="math notranslate nohighlight">\(x_{1}=x_{0}+h,x_{2}=x_{1}+h=x_{0}+2h.\)</span>
 Then, we obtain</p>
 <div class="math notranslate nohighlight" id="equation-first-eq">
-<span class="eqno">(37)<a class="headerlink" href="#equation-first-eq" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(38)<a class="headerlink" href="#equation-first-eq" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f'(x_{0})  =\frac{1}{2h}\left[-3f(x_{0})+4f(x_{0}+h)-f(x_{0}+2h)\right]+\frac{h^{2}}{3}f^{(3)}(\xi_{0})
 \end{equation}\]</div>
 <div class="math notranslate nohighlight" id="equation-sec-eqn">
-<span class="eqno">(38)<a class="headerlink" href="#equation-sec-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(39)<a class="headerlink" href="#equation-sec-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f'(x_{0}+h)  =\frac{1}{2h}\left[-f(x_{0})+f(x_{0}+2h)\right]-\frac{h^{2}}{6}f^{(3)}(\xi_{1})
 \end{equation}\]</div>
 <div class="math notranslate nohighlight" id="equation-third-eqn">
-<span class="eqno">(39)<a class="headerlink" href="#equation-third-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(40)<a class="headerlink" href="#equation-third-eqn" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f'(x_{0}+2h)  =\frac{1}{2h}\left[f(x_{0})-4f(x_{0}+h)+3f(x_{0}+2h)\right]+\frac{h^{2}}{3}f^{(3)}(\xi_{2})
 \end{equation}\]</div>
-<p>It turns out that the first and third equations <a class="reference internal" href="#equation-first-eq">(37)</a> and <a class="reference internal" href="#equation-third-eqn">(39)</a> are equivalent. To see this, first substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-2h\)</span> in the third equation to get (ignoring the error term)</p>
+<p>It turns out that the first and third equations <a class="reference internal" href="#equation-first-eq">(38)</a> and <a class="reference internal" href="#equation-third-eqn">(40)</a> are equivalent. To see this, first substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-2h\)</span> in the third equation to get (ignoring the error term)</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 f'(x_{0})  =\frac{1}{2h}\left[f(x_{0}-2h)-4f(x_{0}-h)+3f(x_{0})\right],
 \end{equation*}\]</div>
 <p>and then set <span class="math notranslate nohighlight">\(h\)</span> to <span class="math notranslate nohighlight">\(-h\)</span> in the right-hand side to get  <span class="math notranslate nohighlight">\(\frac{1}{2h}\left[-f(x_{0}+2h)+4f(x_{0}+h)-3f(x_{0})\right]\)</span>, which gives us the first equation.</p>
-<p>Therefore we have only two distinct equations, <a class="reference internal" href="#equation-first-eq">(37)</a> and <a class="reference internal" href="#equation-sec-eqn">(38)</a>. We rewrite these equations below with one modification: in <a class="reference internal" href="#equation-sec-eqn">(38)</a>, we substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-h\)</span>. We then obtain two different
+<p>Therefore we have only two distinct equations, <a class="reference internal" href="#equation-first-eq">(38)</a> and <a class="reference internal" href="#equation-sec-eqn">(39)</a>. We rewrite these equations below with one modification: in <a class="reference internal" href="#equation-sec-eqn">(39)</a>, we substitute <span class="math notranslate nohighlight">\(x_{0}\)</span> by <span class="math notranslate nohighlight">\(x_{0}-h\)</span>. We then obtain two different
 formulas for <span class="math notranslate nohighlight">\(f'(x_{0})\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -688,7 +688,7 @@ related to the distribution function of the standard normal random
 variable, a very important distribution in probability and statistics.
 Often times we want to solve equations like</p>
 <div class="math notranslate nohighlight" id="equation-invert">
-<span class="eqno">(40)<a class="headerlink" href="#equation-invert" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(41)<a class="headerlink" href="#equation-invert" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt=z
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(x\)</span>, where <span class="math notranslate nohighlight">\(z\)</span> is some real number between 0 and 1. This can
@@ -700,16 +700,16 @@ f(x)=\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt-z.
 <p>Note that from Fundamental Theorem of Calculus, <span class="math notranslate nohighlight">\(f'(x)=\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}.\)</span>
 Newton’s method will require the calculation of</p>
 <div class="math notranslate nohighlight" id="equation-quad">
-<span class="eqno">(41)<a class="headerlink" href="#equation-quad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(42)<a class="headerlink" href="#equation-quad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_{0}^{p_{k}}\frac{1}{\sqrt{2\pi}}e^{-t^{2}/2}dt
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_{k}\)</span> is a Newton iterate. This integral can be computed
 using numerical quadrature. Write a Python code that takes <span class="math notranslate nohighlight">\(z\)</span> as
-its input, and outputs <span class="math notranslate nohighlight">\(x,\)</span> such that Equation <a class="reference internal" href="#equation-invert">(40)</a>
+its input, and outputs <span class="math notranslate nohighlight">\(x,\)</span> such that Equation <a class="reference internal" href="#equation-invert">(41)</a>
 holds. In your code, use the Python codes for Newton’s method and the
 composite Simpson’s rule you were given in class. For Newton’s method
 set tolerance to <span class="math notranslate nohighlight">\(10^{-5}\)</span> and <span class="math notranslate nohighlight">\(p_{0}=0.5,\)</span> and for composite Simpson’s
-rule take <span class="math notranslate nohighlight">\(n=10\)</span>, when computing the integrals <a class="reference internal" href="#equation-quad">(41)</a> that
+rule take <span class="math notranslate nohighlight">\(n=10\)</span>, when computing the integrals <a class="reference internal" href="#equation-quad">(42)</a> that
 appear in Newton iteration. Then run your code for <span class="math notranslate nohighlight">\(z=0.4\)</span> and <span class="math notranslate nohighlight">\(z=0.1\)</span>,
 and report your output.</p>
 </section>

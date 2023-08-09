@@ -374,7 +374,7 @@ vector spaces, the latter a subspace of the former, under the usual
 operations of function addition and multiplying by a scalar. An inner
 product on this space is defined as follows: given <span class="math notranslate nohighlight">\(f,g\in C^0[a,b]\)</span></p>
 <div class="math notranslate nohighlight" id="equation-inner-pr-def">
-<span class="eqno">(53)<a class="headerlink" href="#equation-inner-pr-def" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(54)<a class="headerlink" href="#equation-inner-pr-def" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\langle f,g\right\rangle =\int_{a}^{b}w(x)f(x)g(x)dx
 \end{equation}\]</div>
 <p>and the norm of a vector under this inner product is</p>
@@ -390,7 +390,7 @@ function with the following properties:</p>
 <li><p><span class="math notranslate nohighlight">\(\left\langle \beta f,g\right\rangle =\beta\left\langle f,g\right\rangle \)</span> for all real numbers <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\left\langle f_{1}+f_{2},g\right\rangle =\left\langle f_{1},g\right\rangle +\left\langle f_{2},g\right\rangle \)</span></p></li>
 </ol>
-<p>The mysterious function <span class="math notranslate nohighlight">\(w(x)\)</span> in <a class="reference internal" href="#equation-inner-pr-def">(53)</a> is called
+<p>The mysterious function <span class="math notranslate nohighlight">\(w(x)\)</span> in <a class="reference internal" href="#equation-inner-pr-def">(54)</a> is called
 a <strong>weight function</strong>. Its job is to assign different importance to different
 regions of the interval <span class="math notranslate nohighlight">\([a,b]\)</span>. The weight function is not arbitrary;
 it has to satisfy some properties.</p>
@@ -556,7 +556,7 @@ so that the last summation in the above equation, <span class="math notranslate 
 solved the least squares problem! The polynomial that minimizes the
 error <span class="math notranslate nohighlight">\(E\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-least-sq-poly-orthonormal">
-<span class="eqno">(54)<a class="headerlink" href="#equation-least-sq-poly-orthonormal" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(55)<a class="headerlink" href="#equation-least-sq-poly-orthonormal" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P_{n}(x)=\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_{j}=\left\langle \phi_{j},\phi_{j}\right\rangle\)</span>.
@@ -568,11 +568,11 @@ E=\textcolor{blue}{\left\Vert f\right\Vert ^{2}-\sum_{j=0}^{n}\frac{\left\langle
 <p>If the polynomials <span class="math notranslate nohighlight">\(\phi_{0},...,\phi_{n}\)</span> are orthonormal, then
 these equations simplify by setting <span class="math notranslate nohighlight">\(\alpha_{j}=1\)</span>.</p>
 <p>We will appreciate the ease at which <span class="math notranslate nohighlight">\(P_{n}(x)\)</span> can be computed using
-this approach, via formula <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a>,
-as opposed to solving the normal equations of <a class="reference internal" href="bookchapter6-2.html#equation-cont-normal">(52)</a>
+this approach, via formula <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(55)</a>,
+as opposed to solving the normal equations of <a class="reference internal" href="bookchapter6-2.html#equation-cont-normal">(53)</a>
 when we discuss some examples. But first let’s see the other advantage
 of this approach: how <span class="math notranslate nohighlight">\(P_{n+1}(x)\)</span> can be computed from <span class="math notranslate nohighlight">\(P_{n}(x)\)</span>.
-In Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a>, replace <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n+1\)</span> to get</p>
+In Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(55)</a>, replace <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n+1\)</span> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 P_{n+1}(x)  =\sum_{j=0}^{n+1}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)&amp;=\underbrace{\sum_{j=0}^{n}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x)}_{P_n(x)}+\frac{\left\langle f,\phi_{n+1}\right\rangle }{\alpha_{n+1}}\phi_{n+1}(x)\\
@@ -586,7 +586,7 @@ P_{n+1}(x)  =\sum_{j=0}^{n+1}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha
 on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Legendre polynomials.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>Put <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a> and let <span class="math notranslate nohighlight">\(\phi_j\)</span> be <span class="math notranslate nohighlight">\(L_j\)</span> to get</p>
+<p>Put <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(55)</a> and let <span class="math notranslate nohighlight">\(\phi_j\)</span> be <span class="math notranslate nohighlight">\(L_j\)</span> to get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 P_{3}(x)&amp;
@@ -616,7 +616,7 @@ P_{3}(x) &amp; =\frac{2.35}{2}+\frac{3(0.7358)}{2}x+\frac{5(0.1431)}{2}\left(\fr
 on <span class="math notranslate nohighlight">\((-1,1)\)</span> using Chebyshev polynomials.</p>
 </section>
 </div><p><strong>Solution.</strong></p>
-<p>As in the previous example solution, we take <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(54)</a></p>
+<p>As in the previous example solution, we take <span class="math notranslate nohighlight">\(n=3\)</span> in Equation <a class="reference internal" href="#equation-least-sq-poly-orthonormal">(55)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
 P_{3}(x)=\sum_{j=0}^{3}\frac{\left\langle f,\phi_{j}\right\rangle }{\alpha_{j}}\phi_{j}(x),

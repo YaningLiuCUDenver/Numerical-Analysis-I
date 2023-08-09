@@ -357,7 +357,7 @@ document.write(`
 </section>
 </div><p>So a unimodal function has a unique minimum (or maximum) on the given interval. GSS applies to unimodal functions. To illustrate the algorithm, we use the following simple degree 4 polynomial:</p>
 <div class="math notranslate nohighlight" id="equation-golden-exa1">
-<span class="eqno">(55)<a class="headerlink" href="#equation-golden-exa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(56)<a class="headerlink" href="#equation-golden-exa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(x) = 3x^4+2x^2-x-1
 \end{equation}\]</div>
 <p>of which the plot is shown below.</p>
@@ -391,25 +391,25 @@ f(x) = 3x^4+2x^2-x-1
 <ol class="arabic">
 <li><p>The distance between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(a\)</span> is the same as that between <span class="math notranslate nohighlight">\(x_2\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, so that the new intervals in both cases have the same length. Let <span class="math notranslate nohighlight">\(l_1=x_1-a\)</span>, <span class="math notranslate nohighlight">\(l_2=x_2-x_1\)</span>, and <span class="math notranslate nohighlight">\(l_3=b-x_2\)</span>. Then we have</p>
 <div class="math notranslate nohighlight" id="equation-golden1">
-<span class="eqno">(56)<a class="headerlink" href="#equation-golden1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(57)<a class="headerlink" href="#equation-golden1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 l_1=l_3.
 \end{equation}\]</div>
 </li>
 <li><p>If the interval <span class="math notranslate nohighlight">\([a, x_2]\)</span> becomes the new interval, the spacing of the three points <span class="math notranslate nohighlight">\(a, x_1, x_2\)</span> is the same as that of <span class="math notranslate nohighlight">\(a, x_1, b\)</span>. Mathematically, it means</p>
 <div class="math notranslate nohighlight" id="equation-golden2">
-<span class="eqno">(57)<a class="headerlink" href="#equation-golden2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(58)<a class="headerlink" href="#equation-golden2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{l_1}{l_2+l_3} = \frac{l_2}{l_1}.
 \end{equation}\]</div>
 <p>Note that this also ensures if the interval <span class="math notranslate nohighlight">\([x_1, b]\)</span> becomes the new interval, the spacing of the three points <span class="math notranslate nohighlight">\(x_1, x_2, b\)</span> is the same as that of <span class="math notranslate nohighlight">\(a, x_1, b\)</span>, in which case, we have</p>
 <div class="math notranslate nohighlight" id="equation-golden3">
-<span class="eqno">(58)<a class="headerlink" href="#equation-golden3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(59)<a class="headerlink" href="#equation-golden3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{l_1}{l_2+l_3} = \frac{l_2}{l_3}.
 \end{equation}\]</div>
 </li>
 </ol>
-<p>Rewriting <span class="math notranslate nohighlight">\(l_2\)</span> and <span class="math notranslate nohighlight">\(l_1\)</span> on the right hand side of Eqn. <a class="reference internal" href="#equation-golden2">(57)</a> by <span class="math notranslate nohighlight">\((l_2+l_3)-l_3\)</span> and <span class="math notranslate nohighlight">\((l_2+l_3)-l_2\)</span> respectively, and reorganizing, an equation of <span class="math notranslate nohighlight">\(\frac{l_2+l_3}{l_1}\)</span> can be obtained:</p>
+<p>Rewriting <span class="math notranslate nohighlight">\(l_2\)</span> and <span class="math notranslate nohighlight">\(l_1\)</span> on the right hand side of Eqn. <a class="reference internal" href="#equation-golden2">(58)</a> by <span class="math notranslate nohighlight">\((l_2+l_3)-l_3\)</span> and <span class="math notranslate nohighlight">\((l_2+l_3)-l_2\)</span> respectively, and reorganizing, an equation of <span class="math notranslate nohighlight">\(\frac{l_2+l_3}{l_1}\)</span> can be obtained:</p>
 <div class="math notranslate nohighlight" id="equation-golden-eqn">
-<span class="eqno">(59)<a class="headerlink" href="#equation-golden-eqn" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(60)<a class="headerlink" href="#equation-golden-eqn" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
 &amp;\frac{l_1}{l_2+l_3} = \frac{(l_2+l_3)-l_3}{(l_2+l_3)-l_2} \nonumber \\
 &amp;\Rightarrow (l_2+l_3)^2-l_3(l_2+l_3) = l_1(l_2+l_3)-l_1l_2 \nonumber \\
 &amp;\Rightarrow (l_2+l_3)^2-2l_1(l_2+l_3) + l_1l_2 = 0 \nonumber \\
@@ -419,7 +419,7 @@ l_1=l_3.
 \end{align}\end{split}\]</div>
 <p>So</p>
 <div class="math notranslate nohighlight" id="equation-golden-ratio">
-<span class="eqno">(60)<a class="headerlink" href="#equation-golden-ratio" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(61)<a class="headerlink" href="#equation-golden-ratio" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{l_2+l_3}{l_1} = r = \frac{\sqrt{5}+1}{2}
 \end{equation}\]</div>
 <p>which is the <strong>golden ratio</strong>.</p>
@@ -467,7 +467,7 @@ x_2&amp;=b-\frac{l_3}{l_1+(l_2+l_3)}(b-a) = b-\frac{l_1}{l_1+(l_2+l_3)}(b-a) \\
 </div>
 </div>
 </div>
-<p>We now apply <em>golden_section</em> to locate the minimizer of the function in Eqn. <a class="reference internal" href="#equation-golden-exa1">(55)</a>.</p>
+<p>We now apply <em>golden_section</em> to locate the minimizer of the function in Eqn. <a class="reference internal" href="#equation-golden-exa1">(56)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
