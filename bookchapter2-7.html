@@ -450,6 +450,7 @@ Newton’s method has quadratic convergence with</p>
 \end{equation*}\]</div>
 <p>which was proved earlier in <a class="reference internal" href="bookchapter2-3.html#chap2_thm32">Theorem 7</a>.</p>
 <p><strong>Exercise 2.7-1</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(g(x)=3^{-x}\)</span>.</p>
 <p>a. Prove that <span class="math notranslate nohighlight">\(g(x)\)</span> has a unique fixed-point on <span class="math notranslate nohighlight">\([1/4,1].\)</span> (Hint: Use <a class="reference internal" href="bookchapter2-6.html#chap2_thm38">Theorem 9</a> and <a class="reference internal" href="bookchapter2-6.html#chap2_rem39">Remark 6</a>.)</p>
 <p>b. Prove that the fixed-point iteration <span class="math notranslate nohighlight">\(p_n=g(p_{n-1})\)</span> converges to the unique fixed-point of <span class="math notranslate nohighlight">\(g\)</span> for any starting point <span class="math notranslate nohighlight">\(p_0 \in [1/4,1]\)</span>. (Hint: Use <a class="reference internal" href="bookchapter2-6.html#chap2_thm40">Theorem 10</a> and <a class="reference internal" href="bookchapter2-6.html#chap2_rem41">Remark 7</a>.)</p>
 <p>c. Pick some <span class="math notranslate nohighlight">\(p_0 \in [1/4,1]\)</span>, and use <a class="reference internal" href="bookchapter2-6.html#chap2_cor42">Corollary 3</a>, part 4, to find the number of iterations necessary to achieve <span class="math notranslate nohighlight">\(10^{-10}\)</span> accuracy. Call this number <span class="math notranslate nohighlight">\(N\)</span>.</p>
@@ -457,12 +458,19 @@ Newton’s method has quadratic convergence with</p>
 <p><strong>Exercise 2.7-2</strong></p>
 <p>Let <span class="math notranslate nohighlight">\(g(x)=2x-cx^{2}\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a positive constant. Prove that if the fixed-point iteration <span class="math notranslate nohighlight">\(p_n=g(p_{n-1})\)</span> converges to a non-zero limit, then the limit is <span class="math notranslate nohighlight">\(1/c\)</span>.</p>
 <p><strong>Exercise 2.7-3</strong></p>
-<p>Leonardo of Pisa (1175-1250), also known as Fibonacci, showed that the only real root of the cubic polynomial <span class="math notranslate nohighlight">\(x^3 + 2 x^2 + 10x − 20\)</span> is <span id="id1"></span></p>
+<p>Leonardo of Pisa (1175-1250), also known as Fibonacci, showed that the only real root of the cubic polynomial <span class="math notranslate nohighlight">\(x^3 + 2 x^2 + 10x − 20\)</span> is <span id="id1">Brown and Brunson [<a class="reference internal" href="#id4" title="E. Brown and J.C. Brunson. Fibonacci's forgotten number. The College Mathematics Journal, 39:112-120, 2008.">2008</a>]</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     1+\frac{22}{60}+\frac{7}{60^2} + \frac{42}{60^3} + \frac{33}{60^4} + \frac{4}{60^5} + \frac{40}{60^6}.
 \end{equation*}\]</div>
 <p>Use any one of the methods of this chapter to find how good Fibonacci’s approximation was.</p>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">BB08</a></span></dt>
+<dd><p>E. Brown and J.C. Brunson. Fibonacci's forgotten number. <em>The College Mathematics Journal</em>, 39:112–120, 2008.</p>
+</dd>
+</dl>
+</div>
 </section>
 </section>
 
